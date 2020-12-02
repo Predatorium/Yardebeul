@@ -183,6 +183,7 @@ void Menu::Update_Main(World& _world)
 					if (Selection == 1)
 					{
 						Menu_Load = true;
+						Selection = 0;
 						Emplacement.clear();
 						Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Load 1", 1));
 						Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Load 2", 2));
