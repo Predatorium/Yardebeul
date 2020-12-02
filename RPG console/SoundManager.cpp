@@ -5,23 +5,20 @@ std::list<Musics*> MusicList;
 int MusicMultip = 100;
 int SoundMultip = 100;
 
-void LoadSounds(State _state)
+void LoadSounds()
 {
 	for (RessourcesManager& ActualRessource : RessourcesList)
 	{
-		if (ActualRessource.Get_state() == _state)
+		if (ActualRessource.Get_Type() == RessourceType::SOUNDFX)
 		{
-			if (ActualRessource.Get_Type() == RessourceType::SOUNDFX)
-			{
-				SoundList.push_back(Sounds(ActualRessource.Get_Name(), ActualRessource.Get_state(), ActualRessource.Get_Path(), ActualRessource.Get_Sound()));
-			}
-			else if (ActualRessource.Get_Type() == RessourceType::MUSIC)
-			{
-				Musics* ConstructMusic = new Musics;
-				ConstructMusic->Construct(ActualRessource.Get_Name(), ActualRessource.Get_state(), ActualRessource.Get_Path(), ActualRessource.Get_Sound());
+			SoundList.push_back(Sounds(ActualRessource.Get_Name(), ActualRessource.Get_Path(), ActualRessource.Get_Sound()));
+		}
+		else if (ActualRessource.Get_Type() == RessourceType::MUSIC)
+		{
+			Musics* ConstructMusic = new Musics;
+			ConstructMusic->Construct(ActualRessource.Get_Name(), ActualRessource.Get_Path(), ActualRessource.Get_Sound());
 
-				MusicList.push_back(ConstructMusic);
-			}
+			MusicList.push_back(ConstructMusic);
 		}
 	}
 }
@@ -44,64 +41,6 @@ sf::Music& getMusic(std::string Name)
 		if (ActualMusic->getName() == Name)
 		{
 			return ActualMusic->getMusic();
-		}
-	}
-}
-
-void RemoveStateSounds(State _state)
-{
-	bool Removed = true;
-	while (Removed)
-	{
-		Removed = false;
-		for (Sounds& ActualSound : SoundList)
-		{
-			if (ActualSound.getState() == _state && _state != State::ALL)
-			{
-				SoundList.remove(ActualSound);
-				Removed = true;
-				break;
-			}
-		}
-
-		for (Musics* ActualMusic : MusicList)
-		{
-			if (ActualMusic->getState() == _state && _state != State::ALL)
-			{
-				delete ActualMusic;
-				MusicList.remove(ActualMusic);
-				Removed = true;
-				break;
-			}
-		}
-	}
-}
-
-void RemoveAllSounds()
-{
-	bool Removed = true;
-	while (Removed)
-	{
-		Removed = false;
-		for (Sounds& ActualSound : SoundList)
-		{
-			if (ActualSound.getState() != State::ALL)
-			{
-				SoundList.remove(ActualSound);
-				Removed = true;
-				break;
-			}
-		}
-
-		for (Musics* ActualMusic : MusicList)
-		{
-			if (ActualMusic->getState() != State::ALL)
-			{
-				delete ActualMusic;
-				MusicList.remove(ActualMusic);
-				Removed = true;
-				break;
-			}
 		}
 	}
 }

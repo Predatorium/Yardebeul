@@ -1,8 +1,6 @@
 #pragma once
 #include "Tools.h"
 
-#define Taille_tile 32
-
 class Maps
 {
 protected :

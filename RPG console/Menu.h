@@ -9,6 +9,8 @@ class Bouton_Load
 private:
 	RectangleShape Shape;
 	list<Text> texte;
+	Texture texture;
+	Sprite sprite;
 	string Name;
 	string Time;
 	string Niveau;
@@ -36,6 +38,8 @@ private :
 	Bouton Titre;
 	int Selection;
 	float timer;
+	bool Option;
+	bool Menu_Load;
 	Views Vue;
 
 public :
@@ -44,6 +48,7 @@ public :
 	~Menu() = default;
 
 	void Update_Select();
+	void Switch_Mode();
 	void Update_Main(World& _world);
 	void Update_Pause(World& _world, bool& _pause);
 	void Display_Main();

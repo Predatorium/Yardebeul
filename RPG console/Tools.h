@@ -11,6 +11,7 @@
 #include "Erreur.h"
 
 #define pi 3.141592653589793238462643383279502884197169399375105820974944592307816406286
+#define Taille_tile 32
 
 using namespace std;
 using namespace sf;

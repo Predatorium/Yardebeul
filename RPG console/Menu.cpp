@@ -11,6 +11,8 @@ Menu::Menu(int _menutype)
 	{
 		Selection = 0;
 		timer = 0;
+		Option = false;
+		Menu_Load = false;
 
 		if (_menutype == 0)
 		{
@@ -57,30 +59,80 @@ Menu::Menu(int _menutype)
 
 void Menu::Update_Select()
 {
-	int i = 0;
-	for (Bouton& Current_Button : Button)
+	if (!Menu_Load && !Option)
 	{
-		if (Selection == i)
-			Current_Button.Set_Color(Color::Blue);
-		else
-			Current_Button.Set_Color(Color(50, 120, 255, 255));
+		int i = 0;
+		for (Bouton& Current_Button : Button)
+		{
+			if (Selection == i)
+				Current_Button.Set_Color(Color::Blue);
+			else
+				Current_Button.Set_Color(Color(50, 120, 255, 255));
 
-		i++;
+			i++;
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Up) && timer > 0.2f)
+		{
+			Selection--;
+			if (Selection < 0)
+				Selection = Button.size() - 1;
+			timer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Down) && timer > 0.2f)
+		{
+			Selection++;
+			if (Selection >= Button.size())
+				Selection = 0;
+			timer = 0;
+		}
+	}
+	else if (Menu_Load)
+	{
+		int i = 0;
+		for (Bouton_Load& Current_Button : Emplacement)
+		{
+			if (Selection == i)
+				Current_Button.Get_Shape().setOutlineColor(Color::Blue);
+			else
+				Current_Button.Get_Shape().setOutlineColor(Color(50, 120, 255, 255));
+
+			i++;
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Up) && timer > 0.2f)
+		{
+			Selection--;
+			if (Selection < 0)
+				Selection = Emplacement.size() - 1;
+			timer = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Down) && timer > 0.2f)
+		{
+			Selection++;
+			if (Selection >= Emplacement.size())
+				Selection = 0;
+			timer = 0;
+		}
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Up) && timer > 0.2f)
+}
+
+void Menu::Switch_Mode()
+{
+	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
-		Selection--;
-		if (Selection < 0)
-			Selection = Button.size() - 1;
-		timer = 0;
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Down) && timer > 0.2f)
-	{
-		Selection++;
-		if (Selection >= Button.size())
+		if (Menu_Load)
+		{
+			Menu_Load = false;
 			Selection = 0;
-		timer = 0;
+			Emplacement.clear();
+		}
+		if (Option)
+		{
+			Option = false;
+			Selection = 0;
+		}
 	}
 }
 
@@ -89,133 +141,193 @@ void Menu::Update_Main(World& _world)
 	timer += MainTime.GetTimeDeltaF();
 
 	Update_Select();
+	Switch_Mode();
 
-	if (Selection != 1)
-		Emplacement.clear();
-
-	for (Bouton_Load& Current_Button : Emplacement)
-		if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f && Current_Button.Get_Name() != "Name : ----")
+	if (!Menu_Load && !Option)
+	{
+		if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
+		{
+			if (Selection == 0)
 			{
-				_world = World(Current_Button.Get_Num());
+				_world = World();
 				MState.ChangeState(State::GAME);
 			}
-
-	if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
-	{
-		if (Selection == 0)
-		{
-			_world = World();
-			MState.ChangeState(State::GAME);
-		}
-		if (Selection == 1)
-		{
-			Emplacement.clear();
-			Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Load 1", 1));
-			Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Load 2", 2));
-			Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Load 3", 3));
-		}
-		if (Selection == 2)
-			MState.ChangeState(State::EDITEUR);
-		if (Selection == 5)
-			App.Get_Window().close();
-
-		if (Selection != 1)
-			Emplacement.clear();
-	}
-
-	int i = 0;
-	for (Bouton& Current_Button : Button)
-	{
-		if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-		{
-			Selection = i;
-			if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
+			if (Selection == 1)
 			{
-				if (Selection == 0)
+				Menu_Load = true;
+				Selection = 0;
+				Emplacement.clear();
+				Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Load 1", 1));
+				Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Load 2", 2));
+				Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Load 3", 3));
+			}
+			if (Selection == 2)
+				MState.ChangeState(State::EDITEUR);
+			if (Selection == 5)
+				App.Get_Window().close();
+		}
+
+		int i = 0;
+		for (Bouton& Current_Button : Button)
+		{
+			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+			{
+				Selection = i;
+				if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
 				{
-					_world = World();
+					if (Selection == 0)
+					{
+						_world = World();
+						MState.ChangeState(State::GAME);
+					}
+					if (Selection == 1)
+					{
+						Menu_Load = true;
+						Emplacement.clear();
+						Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Load 1", 1));
+						Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Load 2", 2));
+						Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Load 3", 3));
+					}
+					if (Selection == 2)
+						MState.ChangeState(State::EDITEUR);
+					if (Selection == 5)
+						App.Get_Window().close();
+				}
+			}
+			i++;
+		}
+	}
+	else if (Menu_Load)
+	{
+		for (Bouton_Load& Current_Button : Emplacement)
+			if (Selection + 1 == Current_Button.Get_Num())
+				if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f && Current_Button.Get_Name() != "Name : ----")
+				{
+					_world = World(Current_Button.Get_Num());
 					MState.ChangeState(State::GAME);
 				}
-				if (Selection == 1)
+
+		int i = 0;
+		for (Bouton_Load& Current_Button : Emplacement)
+		{
+			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+			{
+				Selection = i;
+				if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f && Current_Button.Get_Name() != "Name : ----")
 				{
-					Emplacement.clear();
-					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Load 1", 1));
-					Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Load 2", 2));
-					Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Load 3", 3));
+					_world = World(Current_Button.Get_Num());
+					MState.ChangeState(State::GAME);
 				}
-				if (Selection == 2)
-					MState.ChangeState(State::EDITEUR);
-				if (Selection == 5)
-					App.Get_Window().close();
 			}
+			else if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
+			{
+				Menu_Load = false;
+				Selection = 0;
+				Emplacement.clear();
+				break;
+			}
+			i++;
 		}
-		i++;
 	}
 }
 
 void Menu::Update_Pause(World& _world, bool& _pause)
 {
 	timer += MainTime.GetTimeDeltaF();
+
 	Update_Select();
+	Switch_Mode();
 
-	if (Selection != 1)
-		Emplacement.clear();
-
-	int y = 1;
-	for (Bouton_Load& Current_Button : Emplacement)
+	if (!Menu_Load && !Option)
 	{
-		if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
+		if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
+		{
+			if (Selection == 0)
 			{
-				Data::Save_Player(y, MState.Get_World().Get_Hero());
-				_world.ScreenShot(y);
+				App.Get_Window().setMouseCursorVisible(false);
+				_pause = false;
+			}
+			if (Selection == 1)
+			{
+				Menu_Load = true;
+				Selection = 0;
 				Emplacement.clear();
 				Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
 				Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
 				Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
 			}
-
-		y++;
-	}
-
-	if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
-	{
-		if (Selection == 0)
-			_pause = false;
-		if (Selection == 1)
-		{
-			Emplacement.clear();
-			Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
-			Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
-			Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
+			if (Selection == 2)
+				MState.ChangeState(State::MENU);
 		}
-		if (Selection == 2)
-			MState.ChangeState(State::MENU);
-	}
 
-	int i = 0;
-	for (Bouton& Current_Button : Button)
-	{
-		if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+		int i = 0;
+		for (Bouton& Current_Button : Button)
 		{
-			Selection = i;
-			if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
+			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
 			{
-				if (Selection == 0)
-					_pause = false;
-				if (Selection == 1)
+				Selection = i;
+				if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
 				{
+					if (Selection == 0)
+					{
+						App.Get_Window().setMouseCursorVisible(false);
+						_pause = false;
+					}
+					if (Selection == 1)
+					{
+						Menu_Load = true;
+						Selection = 0;
+						Emplacement.clear();
+						Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
+						Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
+						Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
+					}
+					if (Selection == 2)
+						MState.ChangeState(State::MENU);
+				}
+			}
+			i++;
+		}
+	}
+	else if (Menu_Load)
+	{
+		for (Bouton_Load& Current_Button : Emplacement)
+			if (Selection + 1 == Current_Button.Get_Num())
+				if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
+				{
+					Data::Save_Player(Selection + 1, MState.Get_World().Get_Hero());
+					_world.ScreenShot(Selection + 1);
 					Emplacement.clear();
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
 				}
-				if (Selection == 2)
-					MState.ChangeState(State::MENU);
+
+		int i = 0;
+		for (Bouton_Load& Current_Button : Emplacement)
+		{
+			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+			{
+				Selection = i;
+				if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
+				{
+					Data::Save_Player(Selection + 1, MState.Get_World().Get_Hero());
+					_world.ScreenShot(Selection + 1);
+					Emplacement.clear();
+					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
+					Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
+					Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
+				}
 			}
+			else if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
+			{
+				Menu_Load = false;
+				Selection = 0;
+				Emplacement.clear();
+				break;
+			}
+			i++;
 		}
-		i++;
 	}
 }
 
@@ -255,6 +367,20 @@ Bouton_Load::Bouton_Load(Vector2f _position, string _name, int _num)
 		Shape = RectangleShape(Vector2f(800, 150));
 		Shape.setPosition(_position);
 		Shape.setFillColor(Color(150, 150, 150, 100));
+		Shape.setOutlineThickness(3);
+		Shape.setOutlineColor(Color(50, 120, 255, 255));
+
+		if (texture.loadFromFile("../Ressources/Infos/Screen" + to_string(Numero) + ".png"))
+		{
+			sprite.setTexture(texture);
+			sprite.setScale(0.139f, 0.139f);
+			sprite.setPosition(_position);
+		}
+		else if (texture.loadFromFile("../Ressources/Infos/No_Screen.png"))
+		{
+			sprite.setTexture(texture);
+			sprite.setPosition(_position);
+		}
 
 		texte.push_back(Text(Name, getFont("Times"), 30));
 		texte.back().setPosition(Vector2f(_position.x + 350, _position.y + 10));
@@ -305,6 +431,12 @@ void Bouton_Load::Load()
 void Bouton_Load::Display()
 {
 	App.Get_Window().draw(Shape);
+
+	if (sprite.getGlobalBounds().width != 0)
+	{
+		sprite.setTexture(texture);
+		App.Get_Window().draw(sprite);
+	}
 
 	for (Text& Current_Text : texte)
 		App.Get_Window().draw(Current_Text);

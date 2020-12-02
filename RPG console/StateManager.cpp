@@ -13,18 +13,9 @@ bool Pause = false;
 StateManager::StateManager()
 {
 	RessourcesLoad("../Ressources/Infos/Ressources.load");
-	LoadSprite(State::ALL);
-	LoadFont(State::ALL);
-	LoadMap(State::ALL);
-}
-
-void StateManager::load_state(State NextState)
-{
-	if (NextState == State::MENU)
-		Game_Menu = Menu(0);
-
-	if (NextState == State::EDITEUR)
-		Edit_Niveau = Editeur();
+	LoadSprite();
+	LoadFont();
+	LoadMap();
 }
 
 void StateManager::KeyboardEnter()
@@ -98,12 +89,11 @@ void StateManager::DisplayManager()
 
 void StateManager::ChangeState(State NextState)
 {
-	RemoveAllFonts();
-	RemoveAllSprites();
-
 	state = NextState;
 
-	LoadFont(NextState);
-	LoadSprite(NextState);
-	MState.load_state(NextState);
+	if (NextState == State::MENU)
+		Game_Menu = Menu(0);
+
+	if (NextState == State::EDITEUR)
+		Edit_Niveau = Editeur();
 }

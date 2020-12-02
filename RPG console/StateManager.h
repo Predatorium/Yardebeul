@@ -29,7 +29,6 @@ public:
 	inline string Get_TextReceived() { return Text_Received; };
 	inline World Get_World() { return Monde; };
 
-	void load_state(State NextState);
 	void KeyboardEnter();
 	void EventsManager();
 	void UpdateManager();

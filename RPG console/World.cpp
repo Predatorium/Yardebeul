@@ -14,6 +14,8 @@ World::World()
 
 		Menu_Pause = new Menu(1);
 
+		App.Get_Window().setMouseCursorVisible(false);
+
 		Save = false;
 		Load = true;
 		Pause = false;
@@ -32,6 +34,8 @@ World::World(int _load)
 
 		Menu_Pause = new Menu(1);
 
+		App.Get_Window().setMouseCursorVisible(false);
+
 		Save = false;
 		Load = false;
 		Pause = false;
@@ -45,9 +49,12 @@ void World::ScreenShot(int _party)
 {
 	RenderTexture texture;
 	string path = "../Ressources/Infos/Screen" + to_string(_party) + ".png";
+	View view(Player.Get_Position(), Vector2f(1920, 1080));
 	texture.create(1920, 1080);
 
 	texture.clear(Color::Black);
+	view.setCenter(Player.Get_Position());
+	texture.setView(view);
 	for (Maps Current_Maps : Back_Layer)
 	{
 		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
@@ -83,7 +90,10 @@ void World::Update()
 		Player.Update(Range_Niveau);
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
+		{
+			App.Get_Window().setMouseCursorVisible(true);
 			Pause = true;
+		}
 	}
 
 	if (Pause == true)

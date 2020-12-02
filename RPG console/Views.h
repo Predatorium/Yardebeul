@@ -9,8 +9,8 @@ private :
 	View view;
 	Vector2f Position;
 	Vector2f last_Past;
-	bool Move;
 	Vector2f Size;
+	bool Move;
 	bool Zoom;
 	bool Dezoom;
 

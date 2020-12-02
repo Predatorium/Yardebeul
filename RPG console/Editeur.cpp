@@ -1,4 +1,5 @@
 #include "Editeur.h"
+#include "StateManager.h"
 #include "SpriteManager.h"
 #include "FontManager.h"
 #include "Map_Manager.h"
@@ -61,7 +62,7 @@ void Editeur::SaveNewMap()
 
 	if (Keyboard::isKeyPressed(Keyboard::Enter) && Save_New_Map && Save)
 	{
-		Map_List.push_back(new Map_Manager(MState.Get_TextReceived(), State::ALL, "../Ressources/Map/" + MState.Get_TextReceived() + ".txt"));
+		Map_List.push_back(new Map_Manager(MState.Get_TextReceived(), "../Ressources/Map/" + MState.Get_TextReceived() + ".txt"));
 		SaveMap(Get_Map(MState.Get_TextReceived()));
 		Save_Map(Get_PathMap(MState.Get_TextReceived()));
 		Dispo_Map.clear();

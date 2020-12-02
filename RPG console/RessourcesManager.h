@@ -1,6 +1,5 @@
 #pragma once
 #include "Tools.h"
-#include "StateManager.h"
 
 enum class RessourceType
 {
@@ -16,7 +15,6 @@ enum class RessourceType
 class RessourcesManager
 {
 private:
-	State state;
 	RessourceType type;
 	string name;
 	string path;
@@ -24,10 +22,9 @@ private:
 
 public:
 	RessourcesManager() = default;
-	RessourcesManager(State _state, RessourceType _type, string _name, string _path, float _soundmultiplier);
+	RessourcesManager(RessourceType _type, string _name, string _path, float _soundmultiplier);
 	~RessourcesManager() = default;
 
-	inline State Get_state() { return state; };
 	inline RessourceType Get_Type() { return type; };
 	inline string Get_Name() { return name; };
 	inline string Get_Path() { return path; };
