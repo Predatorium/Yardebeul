@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Events" Collapsed="true">
+    <Position X="5.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAACABAgAAAEgAAIAAQAAgAAAAAAAQAAIAABAAA=</HashCode>
+      <FileName>Event.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Event_Type" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Event_Type.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Niveau" Collapsed="true">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAgAAAIABAAAAAAAIAAAAAABAAAAAACCAAAA=</HashCode>
+      <FileName>Niveau.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Erreur" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAgAAAACAAAAAAAAAAAAAECAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Erreur.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Times" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAABAAAAAAAAAAIgAAAAAEAEAAE=</HashCode>
+      <FileName>Tools.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RecShape" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAYAAAAACAAgAAAAAQAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Tools.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fonts" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBIAAAAAAAAAAAAAAAAAAQAAAAAEAAAMAAAEAAAAAAE=</HashCode>
+      <FileName>FontManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RessourcesManager" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQAAAAAAAAASAAAAgAACAAAACACFAAAEAAAAAAIAAAE=</HashCode>
+      <FileName>RessourcesManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sprites" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAAAQAAAAABAgAAABAAAQAhAAAAAAAAAIAEAAAAAAA=</HashCode>
+      <FileName>SpriteManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateManager" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAgAAAIAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StateManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Editeur" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQgAAAgAAAAAAAAAAgCJQACAAgoACAAQAICCAgUQAA=</HashCode>
+      <FileName>Editeur.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maps" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAACABAAAAAoggAEAAygAAkAgAAAAAAgAECABQQ=</HashCode>
+      <FileName>Map.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Views" Collapsed="true">
+    <Position X="19.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgwAAAAAAAAAgAAokkAAAYgAIIAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>Views.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chest" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQgCAAABAAABAAAIAgAAAAACAEAAAAAA=</HashCode>
+      <FileName>Chest.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAgAAEgAAAAAwCAAAAAAABAAgAAAAAAgA=</HashCode>
+      <FileName>Dungeon.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABCABAgAAAEgBAAABwAAAAAAEAAAAAAIAAAAAA=</HashCode>
+      <FileName>Room.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCAAAAAgAACAAAAAAAEAAAAAAAQAAAgAAAAAAABAAAE=</HashCode>
+      <FileName>Weapon.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Armor" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEAAAAABAAAA=</HashCode>
+      <FileName>Armor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Consumable" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAgAA=</HashCode>
+      <FileName>Consumable.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Effect" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>NAADABAAAUgACAAIgAAAAAQAAAAAgQAIAAIEAABAAAE=</HashCode>
+      <FileName>Effect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAgAAIIgAAAAAQEAAAAAAAAAQAAAABBABE=</HashCode>
+      <FileName>Item.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hero" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAACBACAACAIAgAEAICAABAERQCggEBAA=</HashCode>
+      <FileName>Hero.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggAAAAAAIAAICAAMyIACABQABAAAAAAAAEAAoACgKAE=</HashCode>
+      <FileName>Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Npc" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAAAAAAAAAAACAAAAAAAAAAAAAEAAAAAAEAA=</HashCode>
+      <FileName>Npc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Armors_Container" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQACAAAAAAAAAAAAAAAAAAAAEAAAAAIAAAAAAA=</HashCode>
+      <FileName>Armors_Container.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Consumables_Container" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQEAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Consumables_Container.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dungeon_Container" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Dungeon_Container.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Npcs_Container" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAEABAA=</HashCode>
+      <FileName>Npcs_Container.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rooms_Container" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAIAAAAAAAAAAAAACAAAAAAACA=</HashCode>
+      <FileName>Rooms_Container.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Effects_Container" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAgAAAAAAAAAAAAAIAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Effects_Container.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapons_Container" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAASAAAAAAAAAAAAAAAAAAAAACAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Weapons_Container.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Menu" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAQAABAAAAAAAAQAQAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Menu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Controle" Collapsed="true">
+    <Position X="12.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAJBAAAAAAAAAAAAAAAAAAEAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Controle.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="gamepad" Collapsed="true">
+    <Position X="14.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAQAABAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>GamePad.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Biomes" Collapsed="true">
+    <Position X="16.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAEEAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Tools.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="State_Event" Collapsed="true">
+    <Position X="14.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACCQAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tools.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Element" Collapsed="true">
+    <Position X="19.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAgAQAAEgoAAAAAAAAAAQAIAAAAAAA=</HashCode>
+      <FileName>Tools.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Action" Collapsed="true">
+    <Position X="12.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAIAAAAAAAAAAAAAAIAIAAAAACACAAAAAAAA=</HashCode>
+      <FileName>Controle.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="gamepadPS4" Collapsed="true">
+    <Position X="12.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAagAAKAAAABAABBAAAAgAAgAAAAAYAHA4AA=</HashCode>
+      <FileName>GamePad.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PadButton" Collapsed="true">
+    <Position X="16.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAABAAQAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>GamePad.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PadAxis" Collapsed="true">
+    <Position X="14.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAEAAAAAgAIAAAAAAQBAAAAAABAA=</HashCode>
+      <FileName>GamePad.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RessourceType" Collapsed="true">
+    <Position X="19.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAABAAABAAAAAAAAIAAAAAAAAAAABAAQAAAAAAgAA=</HashCode>
+      <FileName>RessourcesManager.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="State" Collapsed="true">
+    <Position X="12.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIACACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>StateManager.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Range_Effect" Collapsed="true">
+    <Position X="18" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAABAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Effect.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Affect_Stat" Collapsed="true">
+    <Position X="14.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQACAAAAAACEAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Effect.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Comportement" Collapsed="true">
+    <Position X="18" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAgAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Npc.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

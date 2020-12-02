@@ -1,0 +1,12 @@
+Name : Francis
+Niveau : 1
+Time : 4.01271
+Position : 646.512|574.6
+Point de vie : 20
+Mana : 50
+Sante Mental : 100
+Vitesse : 20
+XpTotal : 0
+XpNiveau : 0
+Capacité : 1
+Argent : 0

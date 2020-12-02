@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Event">
+      <UniqueIdentifier>{2a14ca07-20ed-47de-87b7-2155e011f02d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Event">
+      <UniqueIdentifier>{12a7e8fc-378f-4af7-83d5-ef10b76c5a95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\_Global">
+      <UniqueIdentifier>{224ba843-33a6-4cf7-be0d-09bff200cd69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\_Global">
+      <UniqueIdentifier>{b612af8c-3b7f-4213-9174-e92bf42fe2f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Manager">
+      <UniqueIdentifier>{a6e8d220-1970-42ee-99af-853fa92a563c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Manager">
+      <UniqueIdentifier>{281ba836-f011-41d7-be63-093b1aa00d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Editeur">
+      <UniqueIdentifier>{21b3f720-96b2-4776-a76d-c7cffb0bc1be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Editeur">
+      <UniqueIdentifier>{36b22500-cf27-4d82-b881-817182ec540d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Dungeon">
+      <UniqueIdentifier>{9ded3268-c72d-4cbc-8f5d-b5b0f78b1cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Dungeon">
+      <UniqueIdentifier>{f324d2b0-349c-4dcc-a662-3a60d4fbc024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Item">
+      <UniqueIdentifier>{d32c760b-a25c-439b-b0d9-b4e8a5ea868e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Item">
+      <UniqueIdentifier>{1cdceccc-3f57-46d7-8ffd-5f54bc309dbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Character">
+      <UniqueIdentifier>{e92d9236-b580-4fa6-8ae4-6f58be78422b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Character">
+      <UniqueIdentifier>{d80de8c4-c4bb-4d25-8a17-421893c79ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Containers">
+      <UniqueIdentifier>{c61ec4d8-e574-4db5-bd53-524a30977ef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Containers">
+      <UniqueIdentifier>{4da488cf-1409-425d-8f3d-b1ef3c529fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Menu">
+      <UniqueIdentifier>{a6dae019-5a66-4953-bf13-af6be4d34d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Menu">
+      <UniqueIdentifier>{e9e19652-4e2b-45d9-ac38-b883493b2605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Game">
+      <UniqueIdentifier>{f216b26b-5c17-433b-8f9e-532245256748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game">
+      <UniqueIdentifier>{e294a76b-093b-4ed8-b6e9-01b342ac9dcf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Room.h">
+      <Filter>Fichiers d%27en-tête\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Fichiers d%27en-tête\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Erreur.h">
+      <Filter>Fichiers d%27en-tête\_Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools.h">
+      <Filter>Fichiers d%27en-tête\_Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Event_Type.h">
+      <Filter>Fichiers d%27en-tête\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Controle.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="RessourcesManager.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Editeur.h">
+      <Filter>Fichiers d%27en-tête\Editeur</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Fichiers d%27en-tête\Editeur</Filter>
+    </ClInclude>
+    <ClInclude Include="Chest.h">
+      <Filter>Fichiers d%27en-tête\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>Fichiers d%27en-tête\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Consumable.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Fichiers d%27en-tête\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Fichiers d%27en-tête\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Fichiers d%27en-tête\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Fichiers d%27en-tête\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapons_Container.h">
+      <Filter>Fichiers d%27en-tête\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Armors_Container.h">
+      <Filter>Fichiers d%27en-tête\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Consumables_Container.h">
+      <Filter>Fichiers d%27en-tête\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Effects_Container.h">
+      <Filter>Fichiers d%27en-tête\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Npcs_Container.h">
+      <Filter>Fichiers d%27en-tête\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon_Container.h">
+      <Filter>Fichiers d%27en-tête\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Niveau.h">
+      <Filter>Fichiers d%27en-tête\_Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Fichiers d%27en-tête\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Bouton.h">
+      <Filter>Fichiers d%27en-tête\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Fichiers d%27en-tête\_Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Map_Manager.h">
+      <Filter>Fichiers d%27en-tête\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD_Editor.h">
+      <Filter>Fichiers d%27en-tête\Editeur</Filter>
+    </ClInclude>
+    <ClInclude Include="Views.h">
+      <Filter>Fichiers d%27en-tête\_Global</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Fichiers d%27en-tête\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Fichiers d%27en-tête\_Global</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Room.cpp">
+      <Filter>Fichiers sources\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Fichiers sources\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Erreur.cpp">
+      <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools.cpp">
+      <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Event_Type.cpp">
+      <Filter>Fichiers sources\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Controle.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RessourcesManager.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Editeur.cpp">
+      <Filter>Fichiers sources\Editeur</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Fichiers sources\Editeur</Filter>
+    </ClCompile>
+    <ClCompile Include="Chest.cpp">
+      <Filter>Fichiers sources\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>Fichiers sources\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Consumable.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Fichiers sources\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Fichiers sources\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Fichiers sources\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Fichiers sources\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapons_Container.cpp">
+      <Filter>Fichiers sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Consumables_Container.cpp">
+      <Filter>Fichiers sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Effects_Container.cpp">
+      <Filter>Fichiers sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Armors_Container.cpp">
+      <Filter>Fichiers sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Npcs_Container.cpp">
+      <Filter>Fichiers sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon_Container.cpp">
+      <Filter>Fichiers sources\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Niveau.cpp">
+      <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Fichiers sources\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Bouton.cpp">
+      <Filter>Fichiers sources\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Map_Manager.cpp">
+      <Filter>Fichiers sources\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD_Editor.cpp">
+      <Filter>Fichiers sources\Editeur</Filter>
+    </ClCompile>
+    <ClCompile Include="Views.cpp">
+      <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd">
+      <Filter>Fichiers d%27en-tête\_Global</Filter>
+    </None>
+  </ItemGroup>
+</Project>
