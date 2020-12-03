@@ -13,60 +13,60 @@ bool Niveau::Get_MapsPos(Vector2i _position)
 	return false;
 }
 
-void Niveau::Collision()
+void Niveau::Collision(Character& _Character)
 {
 	Vector2i NextPosOnMap;
 
-	NextPosOnMap.x = (int)Player.Get_Position().x / Taille_tile;
-	NextPosOnMap.y = (int)Player.Get_Position().y / Taille_tile;
+	NextPosOnMap.x = (int)_Character.Get_Position().x / Taille_tile;
+	NextPosOnMap.y = (int)_Character.Get_Position().y / Taille_tile;
 
-	if (Player.Get_Droite() == true)
+	if (_Character.Get_Droite() == true)
 	{
-		NextPosOnMap.x = (int)((Player.Get_Position().x + (Player.Get_ColisionRect().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(Player.Get_Position().y) / Taille_tile;
+		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
-			Player.Set_Droite(false);
+			_Character.Set_Droite(false);
 
-		NextPosOnMap.x = (int)((Player.Get_Position().x + (Player.Get_ColisionRect().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(Player.Get_Position().y + Player.Get_ColisionRect().height) / Taille_tile;
+		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.y = (int)(_Character.Get_Position().y + _Character.Get_ColisionRect().height) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
-			Player.Set_Droite(false);
+			_Character.Set_Droite(false);
 	}
-	if (Player.Get_Gauche() == true)
+	if (_Character.Get_Gauche() == true)
 	{
-		NextPosOnMap.x = (int)((Player.Get_Position().x - (Player.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(Player.Get_Position().y) / Taille_tile;
+		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
-			Player.Set_Gauche(false);
+			_Character.Set_Gauche(false);
 
-		NextPosOnMap.x = (int)((Player.Get_Position().x - (Player.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(Player.Get_Position().y + Player.Get_ColisionRect().height) / Taille_tile;
+		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.y = (int)(_Character.Get_Position().y + _Character.Get_ColisionRect().height) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
-			Player.Set_Gauche(false);
+			_Character.Set_Gauche(false);
 	}
-	if (Player.Get_Bas() == true)
+	if (_Character.Get_Bas() == true)
 	{
-		NextPosOnMap.x = (int)(Player.Get_Position().x - (Player.Get_ColisionRect().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((Player.Get_Position().y + Player.Get_ColisionRect().height + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
+		NextPosOnMap.y = (int)((_Character.Get_Position().y + _Character.Get_ColisionRect().height + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
-			Player.Set_Bas(false);
+			_Character.Set_Bas(false);
 
-		NextPosOnMap.x = (int)(Player.Get_Position().x + (Player.Get_ColisionRect().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((Player.Get_Position().y + Player.Get_ColisionRect().height + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
+		NextPosOnMap.y = (int)((_Character.Get_Position().y + _Character.Get_ColisionRect().height + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
-			Player.Set_Bas(false);
+			_Character.Set_Bas(false);
 	}
-	if (Player.Get_Haut() == true)
+	if (_Character.Get_Haut() == true)
 	{
-		NextPosOnMap.x = (int)(Player.Get_Position().x - (Player.Get_ColisionRect().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((Player.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
+		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
-			Player.Set_Haut(false);
+			_Character.Set_Haut(false);
 
-		NextPosOnMap.x = (int)(Player.Get_Position().x + (Player.Get_ColisionRect().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((Player.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
+		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
-			Player.Set_Haut(false);
+			_Character.Set_Haut(false);
 	}
 }
 
@@ -194,8 +194,12 @@ void Niveau::display()
 
 	for (Maps& Current_Map : Player_Layer)
 		Current_Map.display();
-
+	
 	Player.Display();
+
+	for (Npc& Current_Npc : NpcList)
+		Current_Npc.Display();
+
 	for (Maps& Current_Map : Front_Layer)
 		Current_Map.display();
 }

@@ -2,6 +2,7 @@
 #include "Dungeon_Container.h"
 #include "Map_Manager.h"
 #include "SpriteManager.h"
+#include "StateManager.h"
 #include "Menu.h"
 #include "Data.h"
 
@@ -15,6 +16,10 @@ World::World()
 		Menu_Pause = new Menu(1);
 
 		App.Get_Window().setMouseCursorVisible(false);
+
+		Nbr_Enemy = 0;
+		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), Nbr_Enemy, 7, 20, 25, Comportement::Agressif));
+		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), Nbr_Enemy, 7, 20, 25, Comportement::Agressif));
 
 		Save = false;
 		Load = true;
@@ -34,7 +39,10 @@ World::World(int _load)
 
 		Menu_Pause = new Menu(1);
 
+		Nbr_Enemy = 0;
 		App.Get_Window().setMouseCursorVisible(false);
+		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), Nbr_Enemy, 7, 20, 25, Comportement::Agressif));
+		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), Nbr_Enemy, 7, 20, 25, Comportement::Agressif));
 
 		Save = false;
 		Load = false;
@@ -84,10 +92,22 @@ void World::ScreenShot(int _party)
 
 void World::Update()
 {
-	Collision();
 	if (Pause == false)
 	{
+		Collision(Player);
 		Player.Update(Range_Niveau);
+
+		for (Npc& Current_Npc : NpcList)
+		{
+			Collision(Current_Npc);
+
+			if (Current_Npc.Get_Attitude() == Comportement::Agressif)
+			{
+				Current_Npc.Update_Attack(Player.Get_Position());
+				if (Circle_Collision(Current_Npc.Get_Position(), Player.Get_Position(), getSprite(Current_Npc.Get_Name()).getGlobalBounds().width / 2, getSprite("Hero").getGlobalBounds().width / 2))
+					MState.State_Fight(Player, Current_Npc);
+			}
+		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{

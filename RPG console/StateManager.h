@@ -2,14 +2,16 @@
 #include "Tools.h"
 #include "Menu.h"
 #include "Editeur.h"
+#include "Fight_System.h"
 
 enum class State
 {
 	RTNULL,
 	ALL,
 	MENU,
-	EDITEUR,
+	EDITOR,
 	GAME,
+	FIGHT,
 	OPTION,
 };
 
@@ -19,6 +21,7 @@ private:
 	Menu Game_Menu;
 	Editeur Edit_Niveau;
 	World Monde;
+	Fight_System Fight;
 	State state;
 	string Text_Received;
 
@@ -34,6 +37,7 @@ public:
 	void UpdateManager();
 	void DisplayManager();
 	void ChangeState(State NextState);
+	void State_Fight(Hero _player, Npc _enemy);
 };
 extern StateManager MState;
 

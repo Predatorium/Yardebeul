@@ -27,7 +27,7 @@ void CinNumberCheck(string _message)
 
 int irandom(int Min, int Max)
 {
-	return rand() % (Max - Min) + Min;
+	return rand() % (Max - Min) + Min + 1;
 }
 
 double frandom(float Min, float Max)
@@ -47,6 +47,8 @@ bool Circle_Collision(Vector2f Pos1, Vector2f Pos2, float Rayon1, float Rayon2)
 float Angle_calc(Vector2f pointA, Vector2f pointB)
 {
 	float angle;
+
+
 	if (pointA.y < pointB.y)
 		angle = (float)acos(((double)pointB.x - pointA.x) / (sqrt(pow((double)pointB.x - pointA.x, 2) + pow((double)pointB.y - pointA.y, 2))));
 	else

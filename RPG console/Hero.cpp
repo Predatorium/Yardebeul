@@ -26,7 +26,7 @@ Hero::Hero(Vector2f _position)
 
 		Position = _position;
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 11; i++)
 		{
 			if (i == 0)
 				Tableau_Niveau[i] = 0;
@@ -168,11 +168,7 @@ void Hero::Update(Vector2i _limitMap)
 {
 	//Passage_Niveau();
 	//Amelioration_stat();
-	//static float timer = 0;
-	//timer += MainTime.GetTimeDeltaF();
-	//float trueTimer = sinf(timer) / 2.f + 0.5f;
 
-	//Position = lerp(Vector2f(50.f, 50.f), Vector2f(100.f, 100.f), trueTimer);
 	Time += MainTime.GetTimeDeltaF();
 
 	if (Gauche == true)

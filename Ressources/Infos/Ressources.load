@@ -4,6 +4,7 @@ Sprite Desert ../Ressources/Sprite/Monde/Desert_Tiles.png
 Sprite Montagne ../Ressources/Sprite/Monde/Mountain_Tiles.png
 Sprite Font ../Ressources/Sprite/Menu/menu_main.jpg
 Sprite Hero ../Ressources/Sprite/Joueur/Hero.png
+Sprite Knucles ../Ressources/Sprite/Npc/Knucles.png
 Sprite Fleche ../Ressources/Sprite/Menu/Fleche.png
 Sprite Save ../Ressources/Sprite/Menu/Save.png
 Sprite Load ../Ressources/Sprite/Menu/Load.png

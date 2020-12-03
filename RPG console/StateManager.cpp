@@ -54,11 +54,14 @@ void StateManager::UpdateManager()
 	case State::MENU:
 		Game_Menu.Update_Main(Monde);
 		break;
-	case State::EDITEUR:
+	case State::EDITOR:
 		Edit_Niveau.Update();
 		break;
 	case State::GAME:
 		Monde.Update();
+		break;
+	case State::FIGHT:
+		Fight.Update();
 		break;
 	default:
 		break;
@@ -74,11 +77,14 @@ void StateManager::DisplayManager()
 	case State::MENU:
 		Game_Menu.Display_Main();
 		break;
-	case State::EDITEUR:
+	case State::EDITOR:
 		Edit_Niveau.Display();
 		break;
 	case State::GAME:
 		Monde.Display();
+		break;
+	case State::FIGHT:
+		Fight.Display();
 		break;
 	default:
 		break;
@@ -94,6 +100,12 @@ void StateManager::ChangeState(State NextState)
 	if (NextState == State::MENU)
 		Game_Menu = Menu(0);
 
-	if (NextState == State::EDITEUR)
+	if (NextState == State::EDITOR)
 		Edit_Niveau = Editeur();
+}
+
+void StateManager::State_Fight(Hero _player, Npc _enemy)
+{
+	Fight = Fight_System(_player, _enemy);
+	state = State::FIGHT;
 }

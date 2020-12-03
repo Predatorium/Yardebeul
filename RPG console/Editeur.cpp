@@ -319,7 +319,7 @@ void Editeur::Update()
 		position = Vector2i(Mouse_Position.x / Taille_tile, Mouse_Position.y / Taille_tile);
 
 
-		Collision();
+		Collision(Player);
 		Player.Update(Range_Niveau);
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
 	}

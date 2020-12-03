@@ -162,7 +162,7 @@ void Menu::Update_Main(World& _world)
 				Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Load 3", 3));
 			}
 			if (Selection == 2)
-				MState.ChangeState(State::EDITEUR);
+				MState.ChangeState(State::EDITOR);
 			if (Selection == 5)
 				App.Get_Window().close();
 		}
@@ -190,7 +190,7 @@ void Menu::Update_Main(World& _world)
 						Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Load 3", 3));
 					}
 					if (Selection == 2)
-						MState.ChangeState(State::EDITEUR);
+						MState.ChangeState(State::EDITOR);
 					if (Selection == 5)
 						App.Get_Window().close();
 				}

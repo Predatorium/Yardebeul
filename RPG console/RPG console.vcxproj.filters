@@ -189,6 +189,9 @@
     <ClInclude Include="Data.h">
       <Filter>Fichiers d%27en-tête\_Global</Filter>
     </ClInclude>
+    <ClInclude Include="Fight_System.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Room.cpp">
@@ -307,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="Data.cpp">
       <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Fight_System.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

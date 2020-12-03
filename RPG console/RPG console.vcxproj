@@ -24,6 +24,7 @@
     <ClInclude Include="Bouton.h" />
     <ClInclude Include="Consumables_Container.h" />
     <ClInclude Include="Dungeon_Container.h" />
+    <ClInclude Include="Fight_System.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="HUD_Editor.h" />
     <ClInclude Include="Map_Manager.h" />
@@ -64,6 +65,7 @@
     <ClCompile Include="Bouton.cpp" />
     <ClCompile Include="Consumables_Container.cpp" />
     <ClCompile Include="Dungeon_Container.cpp" />
+    <ClCompile Include="Fight_System.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="HUD_Editor.cpp" />
     <ClCompile Include="Map_Manager.cpp" />
