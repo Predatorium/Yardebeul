@@ -32,7 +32,7 @@ Menu::Menu(int _menutype)
 				if (i == 5)
 					name = "Quit";
 
-				Button.push_back(Bouton(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, (1010 - (120 * 5)) + (i * 120)), Color(50, 120, 255, 255)));
+				Button.push_back(Button_Text(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, (1010 - (120 * 5)) + (i * 120)), Color(50, 120, 255, 255)));
 			}
 		}
 
@@ -48,11 +48,11 @@ Menu::Menu(int _menutype)
 				if (i == 2)
 					name = "Quit";
 
-				Button.push_back(Bouton(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, (1010 - (120 * 5)) + (i * 120)), Color(50, 120, 255, 255)));
+				Button.push_back(Button_Text(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, (1010 - (120 * 5)) + (i * 120)), Color(50, 120, 255, 255)));
 			}
 		}
 
-		Titre = Bouton("Yardebeul Of Gardebeul", "Ethnocentric", 90, Vector2f(1910, 90), 5, Vector2f(960, 50), Color(50, 120, 255, 255));
+		Titre = Button_Text("Yardebeul Of Gardebeul", "Ethnocentric", 90, Vector2f(1910, 90), 5, Vector2f(960, 50), Color(50, 120, 255, 255));
 		Vue = Views();
 	}
 }
@@ -62,7 +62,7 @@ void Menu::Update_Select()
 	if (!Menu_Load && !Option)
 	{
 		int i = 0;
-		for (Bouton& Current_Button : Button)
+		for (Button_Text& Current_Button : Button)
 		{
 			if (Selection == i)
 				Current_Button.Set_Color(Color::Blue);
@@ -115,7 +115,6 @@ void Menu::Update_Select()
 			timer = 0;
 		}
 	}
-
 }
 
 void Menu::Switch_Mode()
@@ -168,7 +167,7 @@ void Menu::Update_Main(World& _world)
 		}
 
 		int i = 0;
-		for (Bouton& Current_Button : Button)
+		for (Button_Text& Current_Button : Button)
 		{
 			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
 			{
@@ -262,7 +261,7 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 		}
 
 		int i = 0;
-		for (Bouton& Current_Button : Button)
+		for (Button_Text& Current_Button : Button)
 		{
 			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
 			{
@@ -341,7 +340,7 @@ void Menu::Display_Main()
 	for (Bouton_Load& Current_Button : Emplacement)
 		Current_Button.Display();
 
-	for (Bouton& Current_Button : Button)
+	for (Button_Text& Current_Button : Button)
 		Current_Button.Display();
 
 	Titre.Display();
@@ -354,7 +353,7 @@ void Menu::Display_Pause()
 	for (Bouton_Load& Current_Button : Emplacement)
 		Current_Button.Display();
 
-	for (Bouton& Current_Button : Button)
+	for (Button_Text& Current_Button : Button)
 		Current_Button.Display();
 }
 

@@ -8,10 +8,13 @@
 class Fight_System
 {
 private :
+	RectangleShape Menu;
+	Box Pv_Joueur;
+	Box Pv_Enemy;
 	Hero Player;
-	Npc Enemy;
+	Npc* Enemy;
 
-	list<Bouton> Button;
+	list<Button_Text> Button;
 	float timer;
 	Views FixView;
 	Text PvPerdu;
@@ -22,8 +25,12 @@ private :
 
 public :
 	Fight_System() = default;
-	Fight_System(Hero _player, Npc _enemy);
+	Fight_System(Hero _player, Npc* _enemy);
 	~Fight_System() = default;
+
+	void Capacity_Select();
+	void Hud_Update();
+	void Hud_Display();
 
 	void Update();
 	void Display();

@@ -10,8 +10,8 @@ class Editeur : public Niveau
 private :
 	HUD_Editor Hud;
 
-	list<Bouton> Dispo_Map;
-	Bouton New_map;
+	list<Button_Text> Dispo_Map;
+	Button_Text New_map;
 
 	RectangleShape Grille;
 

@@ -104,7 +104,7 @@ void StateManager::ChangeState(State NextState)
 		Edit_Niveau = Editeur();
 }
 
-void StateManager::State_Fight(Hero _player, Npc _enemy)
+void StateManager::State_Fight(Hero _player, Npc *_enemy)
 {
 	Fight = Fight_System(_player, _enemy);
 	state = State::FIGHT;

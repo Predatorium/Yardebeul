@@ -10,12 +10,12 @@ private :
 	RectangleShape Menu;
 
 	list<Interface_Maps> Tile_menu;
-	list<RShape> Move;
-	list<RShape> Change_Rank;
+	list<Button_Sprite> Move;
+	list<Button_Sprite> Change_Rank;
 	Maps Selection;
 	RectangleShape Tile_Select;
-	list<Bouton> Button;
-	list<RShape> sButton;
+	list<Button_Text> Button;
+	list<Button_Sprite> sButton;
 	Biomes Current_Biome;
 
 	bool TileIsSelect;
@@ -29,7 +29,7 @@ public :
 	~HUD_Editor() = default;
 
 	inline Maps& Get_Selection() { return Selection; };
-	inline list<RShape>& Get_Move() { return Move; };
+	inline list<Button_Sprite>& Get_Move() { return Move; };
 	inline RectangleShape Get_MenuShape() { return Menu; };
 	inline int Get_Rank() { return Current_Rank; };
 	inline int Get_Layer() { return Current_Layer; };

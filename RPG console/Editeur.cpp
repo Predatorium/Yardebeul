@@ -28,10 +28,10 @@ Editeur::Editeur()
 		int i = 0;
 		for (Map_Manager* Current_Map : Map_List)
 		{
-			Dispo_Map.push_back(Bouton(Current_Map->Get_Name(), "Times", 50, Vector2f(200, 100), 5, Vector2f(960,540 - (110 * (Map_List.size() / 2)) + ((i - 1) * 110)),Color::White));
+			Dispo_Map.push_back(Button_Text(Current_Map->Get_Name(), "Times", 50, Vector2f(200, 100), 5, Vector2f(960,540 - (110 * (Map_List.size() / 2)) + ((i - 1) * 110)),Color::White));
 			i++;
 		}
-		New_map = Bouton("New", "Times", 50, Vector2f(200, 100), 5, Vector2f(960, 1025), Color::White);
+		New_map = Button_Text("New", "Times", 50, Vector2f(200, 100), 5, Vector2f(960, 1025), Color::White);
 
 		Vue = Views(Vector2f(840, 420), Vector2f(1920, 1080), FloatRect(0.f, 0.f, 1.f, 1.f));
 				
@@ -44,7 +44,7 @@ void Editeur::SaveNewMap()
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)) && !Save_New_Map && Save)
 	{
-		for (Bouton& Current_Button : Dispo_Map)
+		for (Button_Text& Current_Button : Dispo_Map)
 			if (Current_Button.Get_Shape().getGlobalBounds().contains(Mouse_Position))
 			{
 				SaveMap(Get_Map(Current_Button.Get_Name()));
@@ -70,7 +70,7 @@ void Editeur::SaveNewMap()
 		int i = 0;
 		for (Map_Manager* Current_Map : Map_List)
 		{
-			Dispo_Map.push_back(Bouton(Current_Map->Get_Name(), "Times", 50, Vector2f(200, 100), 5, Vector2f(960, 540 - (110 * (Map_List.size() / 2)) + ((i - 1) * 110)), Color::White));
+			Dispo_Map.push_back(Button_Text(Current_Map->Get_Name(), "Times", 50, Vector2f(200, 100), 5, Vector2f(960, 540 - (110 * (Map_List.size() / 2)) + ((i - 1) * 110)), Color::White));
 			i++;
 		}
 
@@ -84,7 +84,7 @@ void Editeur::LoadNewMap()
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)) && Load)
 	{
-		for (Bouton& Current_Button : Dispo_Map)
+		for (Button_Text& Current_Button : Dispo_Map)
 			if (Current_Button.Get_Shape().getGlobalBounds().contains(Mouse_Position))
 			{
 				Load_Map(Get_PathMap(Current_Button.Get_Name()));
@@ -330,7 +330,7 @@ void Editeur::Update()
 
 void Editeur::Display_SaveAndLoad()
 {
-	for (Bouton& CurrentBouton : Dispo_Map)
+	for (Button_Text& CurrentBouton : Dispo_Map)
 		CurrentBouton.Display();
 
 	if(!Load)

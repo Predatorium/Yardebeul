@@ -33,9 +33,9 @@ public:
 class Menu
 {
 private :
-	list<Bouton> Button;
+	list<Button_Text> Button;
 	list<Bouton_Load> Emplacement;
-	Bouton Titre;
+	Button_Text Titre;
 	int Selection;
 	float timer;
 	bool Option;

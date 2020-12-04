@@ -90,12 +90,24 @@ void World::ScreenShot(int _party)
 	texture.getTexture().copyToImage().saveToFile(path);
 }
 
+void World::Destroy_Npc()
+{
+	for (Npc& Current_Npc : NpcList)
+		if (Current_Npc.Get_HP() == 0)
+		{
+			NpcList.remove(Current_Npc);
+			break;
+		}
+}
+
 void World::Update()
 {
 	if (Pause == false)
 	{
 		Collision(Player);
 		Player.Update(Range_Niveau);
+
+		Destroy_Npc();
 
 		for (Npc& Current_Npc : NpcList)
 		{
@@ -105,7 +117,7 @@ void World::Update()
 			{
 				Current_Npc.Update_Attack(Player.Get_Position());
 				if (Circle_Collision(Current_Npc.Get_Position(), Player.Get_Position(), getSprite(Current_Npc.Get_Name()).getGlobalBounds().width / 2, getSprite("Hero").getGlobalBounds().width / 2))
-					MState.State_Fight(Player, Current_Npc);
+					MState.State_Fight(Player, &Current_Npc);
 			}
 		}
 

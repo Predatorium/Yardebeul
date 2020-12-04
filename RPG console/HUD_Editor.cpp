@@ -20,23 +20,23 @@ HUD_Editor::HUD_Editor()
 		Menu.setSize(Vector2f(1920, 64));
 		Menu.setFillColor(Color::Color(100, 100, 100, 255));
 
-		Button.push_back(Bouton("Back_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1416, 34), Color::White));
-		Button.push_back(Bouton("Player_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1556, 34), Color::White));
-		Button.push_back(Bouton("Front_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1696, 34), Color::White));
-		Button.push_back(Bouton("Prev Biome", "Times", 20, Vector2f(126, 26), 2, Vector2f(1260, 16), Color::White));
-		Button.push_back(Bouton("Next Biome", "Times", 20, Vector2f(126, 26), 2, Vector2f(1260, 49), Color::White));
-		Button.push_back(Bouton("Test", "Times", 20, Vector2f(62, 26), 2, Vector2f(1887, 49), Color::White));
-		Button.push_back(Bouton("Menu", "Times", 20, Vector2f(62, 26), 2, Vector2f(1887, 16), Color::White));
-		sButton.push_back(RShape("Save", 0, Vector2f(62, 26), 2, Vector2f(1820, 16), Color::White));
-		sButton.push_back(RShape("Load", 0, Vector2f(62, 26), 2, Vector2f(1820, 49), Color::White));
+		Button.push_back(Button_Text("Back_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1416, 34), Color::White));
+		Button.push_back(Button_Text("Player_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1556, 34), Color::White));
+		Button.push_back(Button_Text("Front_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1696, 34), Color::White));
+		Button.push_back(Button_Text("Prev Biome", "Times", 20, Vector2f(126, 26), 2, Vector2f(1260, 16), Color::White));
+		Button.push_back(Button_Text("Next Biome", "Times", 20, Vector2f(126, 26), 2, Vector2f(1260, 49), Color::White));
+		Button.push_back(Button_Text("Test", "Times", 20, Vector2f(62, 26), 2, Vector2f(1887, 49), Color::White));
+		Button.push_back(Button_Text("Menu", "Times", 20, Vector2f(62, 26), 2, Vector2f(1887, 16), Color::White));
+		sButton.push_back(Button_Sprite("Save", 0, Vector2f(62, 26), 2, Vector2f(1820, 16), Color::White));
+		sButton.push_back(Button_Sprite("Load", 0, Vector2f(62, 26), 2, Vector2f(1820, 49), Color::White));
 
-		Change_Rank.push_back(RShape("Fleche", 0, Vector2f(50, 26), 2, Vector2f(27, 16), Color::White));
-		Change_Rank.push_back(RShape("Fleche", 180, Vector2f(50, 26), 2, Vector2f(27, 49), Color::White));
+		Change_Rank.push_back(Button_Sprite("Fleche", 0, Vector2f(50, 26), 2, Vector2f(27, 16), Color::White));
+		Change_Rank.push_back(Button_Sprite("Fleche", 180, Vector2f(50, 26), 2, Vector2f(27, 49), Color::White));
 
-		Move.push_back(RShape("Fleche", 0, Vector2f(1916, 36), 2, Vector2f(960, 84), Color::White));
-		Move.push_back(RShape("Fleche", 270, Vector2f(36, 1012), 2, Vector2f(20, 572), Color::White));
-		Move.push_back(RShape("Fleche", 180, Vector2f(1916, 36), 2, Vector2f(960, 1060), Color::White));
-		Move.push_back(RShape("Fleche", 90, Vector2f(36, 1012), 2, Vector2f(1900, 572), Color::White));
+		Move.push_back(Button_Sprite("Fleche", 0, Vector2f(1916, 36), 2, Vector2f(960, 84), Color::White));
+		Move.push_back(Button_Sprite("Fleche", 270, Vector2f(36, 1012), 2, Vector2f(20, 572), Color::White));
+		Move.push_back(Button_Sprite("Fleche", 180, Vector2f(1916, 36), 2, Vector2f(960, 1060), Color::White));
+		Move.push_back(Button_Sprite("Fleche", 90, Vector2f(36, 1012), 2, Vector2f(1900, 572), Color::White));
 
 		Selection = Maps(Vector2f(Mouse::getPosition(App.Get_Window())), Vector2i(0, 0), "Rien", Current_Biome);
 		Load_MenuBiome();
@@ -121,7 +121,7 @@ void HUD_Editor::Interaction_Biome(Vector2f _mouse)
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
 		if (Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			for (Bouton& Current_Button : Button)
+			for (Button_Text& Current_Button : Button)
 				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
 				{
 					if (Current_Button.Get_Name() == "Next Biome" && Timer > 0.2f)
@@ -164,7 +164,7 @@ void HUD_Editor::Interaction_SaveAndLoad(Vector2f _mouse, bool& _save, bool& _lo
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
 		if (Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			for (RShape& Current_Button : sButton)
+			for (Button_Sprite& Current_Button : sButton)
 				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
 				{
 					if (Current_Button.Get_Name() == "Save" && Timer > 0.2f)
@@ -176,7 +176,7 @@ void HUD_Editor::Interaction_SaveAndLoad(Vector2f _mouse, bool& _save, bool& _lo
 
 void HUD_Editor::Interaction_Layer(Vector2f _mouse)
 {
-	for (Bouton& Current_Button : Button)
+	for (Button_Text& Current_Button : Button)
 	{
 		if (Current_Button.Get_Name() == "Back_Layer" && Current_Layer == 1)
 			Current_Button.Set_Color(Color::Red);
@@ -190,7 +190,7 @@ void HUD_Editor::Interaction_Layer(Vector2f _mouse)
 
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
 		if (Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			for (Bouton& Current_Button : Button)
+			for (Button_Text& Current_Button : Button)
 				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
 				{
 					if (Current_Button.Get_Name() == "Back_Layer")
@@ -222,7 +222,7 @@ void HUD_Editor::Interaction_MenuAndTest(Vector2f _mouse, bool& _player)
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
 		if (Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			for (Bouton& Current_Button : Button)
+			for (Button_Text& Current_Button : Button)
 				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
 				{
 					if (Current_Button.Get_Name() == "Menu" && Timer > 0.2f && !_player)
@@ -264,7 +264,7 @@ void HUD_Editor::Interaction_Tile(Vector2f _mouse, bool& _grille)
 					TileIsSelect = true;
 				}
 
-			for (RShape& Current_Shape : Change_Rank)
+			for (Button_Sprite& Current_Shape : Change_Rank)
 				if (Current_Shape.Get_Shape().getGlobalBounds().contains(_mouse) && Timer > 0.2f)
 				{
 					Selection.Set_Name("Rien");
@@ -333,26 +333,26 @@ void HUD_Editor::Display_MenuShape()
 
 void HUD_Editor::Display_Move()
 {
-	for (RShape& Current_Shape : Move)
+	for (Button_Sprite& Current_Shape : Move)
 		if (Current_Shape.Get_Color() == Color::Red)
 			Current_Shape.Display();
 }
 
 void HUD_Editor::Display_LoadAndSave()
 {
-	for (RShape& Current_Button : sButton)
+	for (Button_Sprite& Current_Button : sButton)
 		Current_Button.Display();
 }
 
 void HUD_Editor::Display_ButtonRank()
 {
-	for (RShape& Current_Button : Change_Rank)
+	for (Button_Sprite& Current_Button : Change_Rank)
 		Current_Button.Display();
 }
 
 void HUD_Editor::Display_ButtonMenuAndTest(bool _player)
 {
-	for (Bouton& Current_Button : Button)
+	for (Button_Text& Current_Button : Button)
 	{
 		if (!_player)
 			Current_Button.Display();

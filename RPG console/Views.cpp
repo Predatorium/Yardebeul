@@ -25,9 +25,9 @@ Views::Views(Vector2f _position, Vector2f _size, FloatRect _viewport)
 	view.setViewport(_viewport);
 }
 
-void Views::Update_Editor(Vector2i _limit, list<RShape> &_move, Vector2f _position)
+void Views::Update_Editor(Vector2i _limit, list<Button_Sprite> &_move, Vector2f _position)
 {
-	for (RShape& Current_Shape : _move)
+	for (Button_Sprite& Current_Shape : _move)
 	{
 		if (Current_Shape.Get_Shape().getGlobalBounds().contains(_position))
 		{

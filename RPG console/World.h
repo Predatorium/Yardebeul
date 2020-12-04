@@ -24,6 +24,8 @@ public :
 
 	void ScreenShot(int _party);
 
+	void Destroy_Npc();
+
 	void Update();
 	void Display();
 };

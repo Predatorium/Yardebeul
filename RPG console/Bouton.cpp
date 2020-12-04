@@ -2,7 +2,7 @@
 #include "FontManager.h"
 #include "SpriteManager.h"
 
-Bouton::Bouton(string _name, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
+Button_Text::Button_Text(string _name, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
 {
 	Name = _name;
 
@@ -11,15 +11,15 @@ Bouton::Bouton(string _name, string _nameFont, float _sizeTexte, Vector2f _sizeS
 	Texte.setPosition(Vector2f(_Position));
 	Texte.setFillColor(_color);
 
-	RShape = RectangleShape(_sizeShape);
-	RShape.setOrigin(getMidle(RShape));
-	RShape.setPosition(_Position);
-	RShape.setFillColor(Color::Transparent);
-	RShape.setOutlineThickness(_outlinesize);
-	RShape.setOutlineColor(_color);
+	Shape = RectangleShape(_sizeShape);
+	Shape.setOrigin(getMidle(Shape));
+	Shape.setPosition(_Position);
+	Shape.setFillColor(Color::Transparent);
+	Shape.setOutlineThickness(_outlinesize);
+	Shape.setOutlineColor(_color);
 }
 
-RShape::RShape(string _name, float _rotate, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
+Button_Sprite::Button_Sprite(string _name, float _rotate, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
 {
 	Name = _name;
 	Rotate = _rotate;
@@ -34,19 +34,41 @@ RShape::RShape(string _name, float _rotate, Vector2f _sizeShape, float _outlines
 	SetSmooth(Name);
 }
 
-void Bouton::Set_Color(Color _color)
+Box::Box(string _max, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
 {
+	Texte = Text(_max, getFont(_nameFont), _sizeTexte);
+	Texte.setOrigin(getMidle(Texte));
+	Texte.setPosition(Vector2f(_Position));
 	Texte.setFillColor(_color);
-	RShape.setOutlineColor(_color);
+
+	Shape = RectangleShape(_sizeShape);
+	Shape.setOrigin(getMidle(Shape));
+	Shape.setPosition(_Position);
+	Shape.setFillColor(_color);
+	Shape.setOutlineThickness(_outlinesize);
+	Shape.setOutlineColor(Color::Transparent);
 }
 
-void Bouton::Display()
+void Box::Display(string _currentstat)
 {
-	App.Get_Window().draw(RShape);
+	Texte.setString(_currentstat + "/" + Texte.getString());
+	App.Get_Window().draw(Shape);
 	App.Get_Window().draw(Texte);
 }
 
-void RShape::Display()
+void Button_Text::Set_Color(Color _color)
+{
+	Texte.setFillColor(_color);
+	Shape.setOutlineColor(_color);
+}
+
+void Button_Text::Display()
+{
+	App.Get_Window().draw(Shape);
+	App.Get_Window().draw(Texte);
+}
+
+void Button_Sprite::Display()
 {
 
 	Shape.setOutlineColor(color);

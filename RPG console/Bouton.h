@@ -1,30 +1,30 @@
 #pragma once
 #include "Tools.h"
 
-class Bouton
+class Button_Text
 {
 private :
-	RectangleShape RShape;
+	RectangleShape Shape;
 	Text Texte;
 	string Name;
 
 public :
-	Bouton() = default;
-	Bouton(string _name, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color);
-	~Bouton() = default;
+	Button_Text() = default;
+	Button_Text(string _name, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color);
+	~Button_Text() = default;
 
 	inline string Get_Name() { return Name; };
 	inline Text& Get_Texte() { return Texte; };
-	inline RectangleShape& Get_Shape() { return RShape; };
+	inline RectangleShape& Get_Shape() { return Shape; };
 
 	void Set_Color(Color _color);
 	void Set_ColorText(Color _color) { Texte.setFillColor(_color); };
-	void Set_ColorShape(Color _color) { RShape.setOutlineColor(_color); };
+	void Set_ColorShape(Color _color) { Shape.setOutlineColor(_color); };
 
 	void Display();
 };
 
-class RShape
+class Button_Sprite
 {
 private:
 	RectangleShape Shape;
@@ -34,9 +34,9 @@ private:
 	float Rotate;
 
 public:
-	RShape() = default;
-	RShape(string _name, float _rotate, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color);
-	~RShape() = default;
+	Button_Sprite() = default;
+	Button_Sprite(string _name, float _rotate, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color);
+	~Button_Sprite() = default;
 
 	inline string Get_Name() { return Name; };
 	inline RectangleShape& Get_Shape() { return Shape; };
@@ -46,4 +46,19 @@ public:
 	void Set_ColorShape(Color _color) { color = _color; };
 
 	void Display();
+};
+
+class Box
+{
+private:
+	RectangleShape Outline;
+	RectangleShape Rod;
+	Text Texte;
+
+public:
+	Box() = default;
+	Box(string _max, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color);
+	~Box() = default;
+
+	void Display(string _currentstat);
 };

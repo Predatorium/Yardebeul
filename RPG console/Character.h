@@ -49,7 +49,7 @@ public :
 	inline Direction Get_Orientation() { return Orientation; };
 	inline string Get_Name() { return Name; };
 	inline int Get_Niveau() { return Niveau; };
-	inline int& Get_Vie() { return Point_de_vie; };
+	inline int& Get_HP() { return Point_de_vie; };
 	inline int Get_Mana() { return Mana; };
 	inline int Get_Endurance() { return Endurance; };
 	inline int Get_SanteMental() { return Santé_mentale; };

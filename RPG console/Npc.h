@@ -34,6 +34,8 @@ public :
 	void Affichage_Type();
 	void Affichage_Stat();
 
+	bool operator == (const Npc& n) const { return Name == n.Name && Point_de_vie == n.Point_de_vie; }
+
 	void Update_Attack(Vector2f _playerpos);
 	void Display_Fight(Vector2f _scale);
 	void Display();

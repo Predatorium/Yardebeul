@@ -21,7 +21,7 @@ void Data::Save_Player(int _party, Hero _joueur)
 		Save_Hero << "Niveau : " << _joueur.Get_Niveau() << endl;
 		Save_Hero << "Time : " << _joueur.Get_Time() << endl;
 		Save_Hero << "Position : " << _joueur.Get_Position().x << "|" << _joueur.Get_Position().y << endl;
-		Save_Hero << "Point de vie : " << _joueur.Get_Vie() << endl;
+		Save_Hero << "Point de vie : " << _joueur.Get_HP() << endl;
 		Save_Hero << "Mana : " << _joueur.Get_Mana() << endl;
 		Save_Hero << "Sante Mental : " << _joueur.Get_SanteMental() << endl;
 		Save_Hero << "Vitesse : " << _joueur.Get_Vitesse() << endl;
