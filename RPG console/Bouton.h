@@ -4,7 +4,7 @@
 class Button_Text
 {
 private :
-	RectangleShape Shape;
+	RectangleShape shape;
 	Text Texte;
 	string Name;
 
@@ -15,11 +15,11 @@ public :
 
 	inline string Get_Name() { return Name; };
 	inline Text& Get_Texte() { return Texte; };
-	inline RectangleShape& Get_Shape() { return Shape; };
+	inline RectangleShape& Get_Shape() { return shape; };
 
 	void Set_Color(Color _color);
 	void Set_ColorText(Color _color) { Texte.setFillColor(_color); };
-	void Set_ColorShape(Color _color) { Shape.setOutlineColor(_color); };
+	void Set_ColorShape(Color _color) { shape.setOutlineColor(_color); };
 
 	void Display();
 };
@@ -27,7 +27,7 @@ public :
 class Button_Sprite
 {
 private:
-	RectangleShape Shape;
+	RectangleShape shape;
 	string Name;
 	Color color;
 	
@@ -39,7 +39,7 @@ public:
 	~Button_Sprite() = default;
 
 	inline string Get_Name() { return Name; };
-	inline RectangleShape& Get_Shape() { return Shape; };
+	inline RectangleShape& Get_Shape() { return shape; };
 	inline Color Get_Color() { return color; };
 	inline float Get_Rotate() { return Rotate; };
 
@@ -53,6 +53,9 @@ class Box
 private:
 	RectangleShape Outline;
 	RectangleShape Rod;
+	Vector2f Position;
+	Vector2f Size;
+	int Max;
 	Text Texte;
 
 public:

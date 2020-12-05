@@ -117,7 +117,7 @@ void World::Update()
 			{
 				Current_Npc.Update_Attack(Player.Get_Position());
 				if (Circle_Collision(Current_Npc.Get_Position(), Player.Get_Position(), getSprite(Current_Npc.Get_Name()).getGlobalBounds().width / 2, getSprite("Hero").getGlobalBounds().width / 2))
-					MState.State_Fight(Player, &Current_Npc);
+					MState.State_Fight(&Player, &Current_Npc);
 			}
 		}
 

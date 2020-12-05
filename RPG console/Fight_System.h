@@ -11,13 +11,13 @@ private :
 	RectangleShape Menu;
 	Box Pv_Joueur;
 	Box Pv_Enemy;
-	Hero Player;
+	Hero* Player;
 	Npc* Enemy;
 
 	list<Button_Text> Button;
 	float timer;
 	Views FixView;
-	Text PvPerdu;
+	Text Texte;
 
 	bool Turn_Player;
 	bool Turn_Enemy;
@@ -25,7 +25,7 @@ private :
 
 public :
 	Fight_System() = default;
-	Fight_System(Hero _player, Npc* _enemy);
+	Fight_System(Hero* _player, Npc* _enemy);
 	~Fight_System() = default;
 
 	void Capacity_Select();

@@ -32,8 +32,8 @@ Npc::Npc(string _name, Vector2f _position, int& _numero, int _niveau, int _pv, i
 		Walk_Right = Animator(IntRect(348, 189, 40, 44), 3, 0.15f);
 		Walk_Top = Animator(IntRect(5, 189, 50, 42), 3, 0.15f);
 
-		Damage_Min = 3;
-		Damage_Max = 6;
+		Damage_Min = 1;
+		Damage_Max = 3;
 
 		Defense = 10;
 

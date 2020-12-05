@@ -27,7 +27,7 @@ void CinNumberCheck(string _message)
 
 int irandom(int Min, int Max)
 {
-	return rand() % (Max - Min) + Min + 1;
+	return rand() % (Max) + Min;
 }
 
 double frandom(float Min, float Max)

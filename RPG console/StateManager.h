@@ -37,7 +37,7 @@ public:
 	void UpdateManager();
 	void DisplayManager();
 	void ChangeState(State NextState);
-	void State_Fight(Hero _player, Npc* _enemy);
+	void State_Fight(Hero* _player, Npc* _enemy);
 };
 extern StateManager MState;
 

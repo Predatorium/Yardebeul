@@ -2,6 +2,7 @@
 #include "SpriteManager.h"
 #include "Controle.h"
 #include "Effects_Container.h"
+#include "Weapons_Container.h"
 
 Hero::Hero(Vector2f _position)
 {
@@ -19,7 +20,7 @@ Hero::Hero(Vector2f _position)
 		Xp_Total = 0;
 		Xp_Niveau = 0;
 		Next_Niveau = 0;
-		Arme = NULL;
+		Arme = new Weapon(Weapons.Get_Weapon("Epee de feu"));
 		Armure = NULL;
 		Argent = 0;
 		Time = 0;
