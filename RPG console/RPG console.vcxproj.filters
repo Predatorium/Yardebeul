@@ -19,29 +19,11 @@
     <Filter Include="Fichiers d%27en-tête\_Global">
       <UniqueIdentifier>{b612af8c-3b7f-4213-9174-e92bf42fe2f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Manager">
-      <UniqueIdentifier>{a6e8d220-1970-42ee-99af-853fa92a563c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Manager">
-      <UniqueIdentifier>{281ba836-f011-41d7-be63-093b1aa00d93}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\Editeur">
       <UniqueIdentifier>{21b3f720-96b2-4776-a76d-c7cffb0bc1be}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers sources\Editeur">
       <UniqueIdentifier>{36b22500-cf27-4d82-b881-817182ec540d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Containers">
-      <UniqueIdentifier>{c61ec4d8-e574-4db5-bd53-524a30977ef8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Containers">
-      <UniqueIdentifier>{4da488cf-1409-425d-8f3d-b1ef3c529fc8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Menu">
-      <UniqueIdentifier>{a6dae019-5a66-4953-bf13-af6be4d34d9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Menu">
-      <UniqueIdentifier>{e9e19652-4e2b-45d9-ac38-b883493b2605}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\Game">
       <UniqueIdentifier>{f216b26b-5c17-433b-8f9e-532245256748}</UniqueIdentifier>
@@ -73,6 +55,24 @@
     <Filter Include="Fichiers d%27en-tête\Game\Item">
       <UniqueIdentifier>{d32c760b-a25c-439b-b0d9-b4e8a5ea868e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\_Global\Containers">
+      <UniqueIdentifier>{4da488cf-1409-425d-8f3d-b1ef3c529fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\_Global\Containers">
+      <UniqueIdentifier>{c61ec4d8-e574-4db5-bd53-524a30977ef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\_Global\Manager">
+      <UniqueIdentifier>{281ba836-f011-41d7-be63-093b1aa00d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\_Global\Menu">
+      <UniqueIdentifier>{e9e19652-4e2b-45d9-ac38-b883493b2605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\_Global\Manager">
+      <UniqueIdentifier>{a6e8d220-1970-42ee-99af-853fa92a563c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\_Global\Menu">
+      <UniqueIdentifier>{a6dae019-5a66-4953-bf13-af6be4d34d9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Room.h">
@@ -91,19 +91,19 @@
       <Filter>Fichiers d%27en-tête\Game\Event</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.h">
-      <Filter>Fichiers d%27en-tête\Manager</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Controle.h">
-      <Filter>Fichiers d%27en-tête\Manager</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="RessourcesManager.h">
-      <Filter>Fichiers d%27en-tête\Manager</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
-      <Filter>Fichiers d%27en-tête\Manager</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="SpriteManager.h">
-      <Filter>Fichiers d%27en-tête\Manager</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Editeur.h">
       <Filter>Fichiers d%27en-tête\Editeur</Filter>
@@ -142,40 +142,40 @@
       <Filter>Fichiers d%27en-tête\Game\Character</Filter>
     </ClInclude>
     <ClInclude Include="Weapons_Container.h">
-      <Filter>Fichiers d%27en-tête\Containers</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Armors_Container.h">
-      <Filter>Fichiers d%27en-tête\Containers</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Consumables_Container.h">
-      <Filter>Fichiers d%27en-tête\Containers</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Effects_Container.h">
-      <Filter>Fichiers d%27en-tête\Containers</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Npcs_Container.h">
-      <Filter>Fichiers d%27en-tête\Containers</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Dungeon_Container.h">
-      <Filter>Fichiers d%27en-tête\Containers</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
     <ClInclude Include="FontManager.h">
-      <Filter>Fichiers d%27en-tête\Manager</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Niveau.h">
       <Filter>Fichiers d%27en-tête\_Global</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Fichiers d%27en-tête\Menu</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Bouton.h">
-      <Filter>Fichiers d%27en-tête\Menu</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Animator.h">
       <Filter>Fichiers d%27en-tête\_Global</Filter>
     </ClInclude>
     <ClInclude Include="Map_Manager.h">
-      <Filter>Fichiers d%27en-tête\Manager</Filter>
+      <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="HUD_Editor.h">
       <Filter>Fichiers d%27en-tête\Editeur</Filter>
@@ -213,19 +213,19 @@
       <Filter>Fichiers sources\Game\Event</Filter>
     </ClCompile>
     <ClCompile Include="StateManager.cpp">
-      <Filter>Fichiers sources\Manager</Filter>
+      <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Controle.cpp">
-      <Filter>Fichiers sources\Manager</Filter>
+      <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
     <ClCompile Include="RessourcesManager.cpp">
-      <Filter>Fichiers sources\Manager</Filter>
+      <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>Fichiers sources\Manager</Filter>
+      <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
     <ClCompile Include="SpriteManager.cpp">
-      <Filter>Fichiers sources\Manager</Filter>
+      <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Editeur.cpp">
       <Filter>Fichiers sources\Editeur</Filter>
@@ -264,40 +264,40 @@
       <Filter>Fichiers sources\Game\Character</Filter>
     </ClCompile>
     <ClCompile Include="Weapons_Container.cpp">
-      <Filter>Fichiers sources\Containers</Filter>
+      <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Consumables_Container.cpp">
-      <Filter>Fichiers sources\Containers</Filter>
+      <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Effects_Container.cpp">
-      <Filter>Fichiers sources\Containers</Filter>
+      <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Armors_Container.cpp">
-      <Filter>Fichiers sources\Containers</Filter>
+      <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Npcs_Container.cpp">
-      <Filter>Fichiers sources\Containers</Filter>
+      <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Dungeon_Container.cpp">
-      <Filter>Fichiers sources\Containers</Filter>
+      <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="FontManager.cpp">
-      <Filter>Fichiers sources\Manager</Filter>
+      <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Niveau.cpp">
       <Filter>Fichiers sources\_Global</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Fichiers sources\Menu</Filter>
+      <Filter>Fichiers sources\_Global\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Bouton.cpp">
-      <Filter>Fichiers sources\Menu</Filter>
+      <Filter>Fichiers sources\_Global\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>Fichiers sources\_Global</Filter>
     </ClCompile>
     <ClCompile Include="Map_Manager.cpp">
-      <Filter>Fichiers sources\Manager</Filter>
+      <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
     <ClCompile Include="HUD_Editor.cpp">
       <Filter>Fichiers sources\Editeur</Filter>
