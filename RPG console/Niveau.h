@@ -8,6 +8,8 @@
 #include "Map.h"
 #include "Views.h"
 
+class Menu;
+
 class Niveau
 {
 protected :
@@ -22,12 +24,15 @@ protected :
 	list<Armor> ArmorList;
 	list<Consumable> ConsumableList;
 
+	Menu* Menu_Pause;
+
 	Views Vue;
 	Views Screen;
 
-	int Nbr_Enemy;
 	bool Save;
 	bool Load;
+	bool Pause;
+	bool IsDialogue;
 
 public :
 	Niveau() = default;
@@ -39,6 +44,9 @@ public :
 	inline Vector2i Get_RangeNiveau() { return Range_Niveau; };
 	inline bool Get_Save() { return Save; };
 	inline bool Get_Load() { return Load; };
+	inline Hero Get_Hero() { return Player; };
+
+	inline void Set_Hero(Hero _hero) { Player = _hero; };
 
 	bool Get_MapsPos(Vector2i _position);
 	void Collision(Character& _Character);

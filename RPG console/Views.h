@@ -1,6 +1,6 @@
 #pragma once
 #include "Tools.h"
-#include "Bouton.h"
+#include "Button.h"
 #include "Hero.h"
 
 class Views

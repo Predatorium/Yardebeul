@@ -21,8 +21,10 @@
   <ItemGroup>
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Armors_Container.h" />
-    <ClInclude Include="Bouton.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Consumables_Container.h" />
+    <ClInclude Include="Dialogue.h" />
+    <ClInclude Include="Dialogue_Container.h" />
     <ClInclude Include="Dungeon_Container.h" />
     <ClInclude Include="Fight_System.h" />
     <ClInclude Include="FontManager.h" />
@@ -62,8 +64,10 @@
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Armors_Container.cpp" />
-    <ClCompile Include="Bouton.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Consumables_Container.cpp" />
+    <ClCompile Include="Dialogue.cpp" />
+    <ClCompile Include="Dialogue_Container.cpp" />
     <ClCompile Include="Dungeon_Container.cpp" />
     <ClCompile Include="Fight_System.cpp" />
     <ClCompile Include="FontManager.cpp" />

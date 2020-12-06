@@ -1,7 +1,7 @@
 #pragma once
 #include "Tools.h"
 #include "Map.h"
-#include "Bouton.h"
+#include "Button.h"
 #include "Views.h"
 
 class HUD_Editor

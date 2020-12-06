@@ -41,6 +41,7 @@ Hero::Hero(Vector2f _position)
 		Gauche = false;
 		Bas = false;
 		Haut = false;
+		Interaction = false;
 
 		Orientation = Direction::Droite;
 
@@ -170,8 +171,6 @@ void Hero::Update(Vector2i _limitMap)
 	//Passage_Niveau();
 	//Amelioration_stat();
 
-	Time += MainTime.GetTimeDeltaF();
-
 	if (Gauche == true)
 	{
 		Position.x -= 200 * MainTime.GetTimeDeltaF();
@@ -192,6 +191,45 @@ void Hero::Update(Vector2i _limitMap)
 		Position.y += 200 * MainTime.GetTimeDeltaF();
 		Orientation = Direction::Bas;
 	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Q) && Position.x > Colision_Rect.width)
+		Gauche = true;
+	else
+		Gauche = false;
+
+	if (Keyboard::isKeyPressed(Keyboard::D) && Position.x < (_limitMap.x * Taille_tile) - Colision_Rect.width)
+		Droite = true;
+	else
+		Droite = false;
+
+	if (Keyboard::isKeyPressed(Keyboard::S) && Position.y < ((_limitMap.y - 1) * Taille_tile) - Colision_Rect.height)
+		Bas = true;
+	else
+		Bas = false;
+
+	if (Keyboard::isKeyPressed(Keyboard::Z) && Position.y > Colision_Rect.height / 2)
+		Haut = true;
+	else
+		Haut = false;
+
+	if (Keyboard::isKeyPressed(Keyboard::E))
+		Interaction = true;
+	else
+		Interaction = false;
+
+	Colision_Rect = IntRect(Vector2i(Position.x, Position.y - Colision_Rect.height), Vector2i(Colision_Rect.width, Colision_Rect.height));
+	getSprite("Hero").setPosition(Position);
+}
+
+void Hero::Display_Fight(Vector2f _scale)
+{
+	getSprite("Hero").setScale(_scale);
+	App.Get_Window().draw(getSprite("Hero"));
+}
+
+void Hero::Display()
+{
+	Time += MainTime.GetTimeDeltaF();
 
 	if (Droite == false && Gauche == false && Haut == false && Bas == false)
 	{
@@ -244,50 +282,5 @@ void Hero::Update(Vector2i _limitMap)
 		}
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Q) && Position.x > Colision_Rect.width)
-		Gauche = true;
-	else
-		Gauche = false;
-
-	if (Keyboard::isKeyPressed(Keyboard::D) && Position.x < (_limitMap.x * Taille_tile) - Colision_Rect.width)
-		Droite = true;
-	else
-		Droite = false;
-
-	if (Keyboard::isKeyPressed(Keyboard::S) && Position.y < ((_limitMap.y - 1) * Taille_tile) - Colision_Rect.height)
-		Bas = true;
-	else
-		Bas = false;
-
-	if (Keyboard::isKeyPressed(Keyboard::Z) && Position.y > Colision_Rect.height / 2)
-		Haut = true;
-	else
-		Haut = false;
-
-	Colision_Rect = IntRect(Vector2i(Position.x, Position.y - Colision_Rect.height), Vector2i(Colision_Rect.width, Colision_Rect.height));
-	getSprite("Hero").setPosition(Position);
-}
-
-void Hero::Affichage_Type()
-{
-	cout << "Je suis le Hero" << endl;
-}
-
-void Hero::Affichage_Stat()
-{
-	cout << "Mon nom est : " << Name << endl;
-	cout << "Mon niveau est : " << Niveau << endl;
-	cout << "Mes pv sont a : " << Point_de_vie << endl;
-	cout << "Mon mana est a : " << Mana << endl;
-	cout << "Mon endurance est a : " << Endurance << endl;
-	cout << "Ma sante mental est a : " << Santé_mentale << endl;
-	cout << "Ma vitesse est de : " << Vitesse << endl << endl;
-
-	cout << endl;
-	Display_StatFull(*Arme);
-}
-
-void Hero::Display()
-{
 	App.Get_Window().draw(getSprite("Hero"));
 }

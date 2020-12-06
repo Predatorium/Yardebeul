@@ -1,9 +1,11 @@
 #include "Npc.h"
 #include "SpriteManager.h"
+#include "Dialogue_Container.h"
+#include "StateManager.h"
 
-Npc::Npc(string _name, Vector2f _position, int& _numero, int _niveau, int _pv, int vitesse, Comportement _attitude)
+Npc::Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Comportement _attitude)
+	: Character(_name)
 {
-	Name = _name;
 	Position = _position;
 	Niveau = _niveau;
 	Point_de_vie = _pv;
@@ -13,9 +15,8 @@ Npc::Npc(string _name, Vector2f _position, int& _numero, int _niveau, int _pv, i
 	Vitesse = vitesse;
 	Attitude = _attitude;
 	Orientation = Direction::Gauche;
-	_numero++;
-	Numero = _numero;
-	IsDead = false;
+	IsDialogue = false;
+	dial = Dialogues.Get_Dialogue("1_1");
 
 	Droite = false;
 	Gauche = false;
@@ -45,33 +46,17 @@ Npc::Npc(string _name, Vector2f _position, int& _numero, int _niveau, int _pv, i
 
 }
 
-void Npc::Affichage_Type()
-{
-	cout << "Je suis un Pnj." << endl;
-}
-
-void Npc::Affichage_Stat()
-{
-	cout << "Mon nom est : " << Name << endl;
-	cout << "Mon niveau est : " << Niveau << endl;
-	cout << "Mes pv sont a : " << Point_de_vie << endl;
-	cout << "Mon mana est a : " << Mana << endl;
-	cout << "Mon endurance est a : " << Endurance << endl;
-	cout << "Ma sante mental est  a : " << Santé_mentale << endl;
-	cout << "Ma vitesse est  de : " << Vitesse << endl << endl;
-}
-
-void Npc::Update_Attack(Vector2f _playerpos)
+void Npc::Update_Attack(Hero& _player)
 {
 	if (Gauche == true || Droite == true)
 		Position.x += 5 * Delta.x * MainTime.GetTimeDeltaF();
 	if (Haut == true || Bas == true)
 		Position.y += 5 * Delta.y * MainTime.GetTimeDeltaF();
 
-	if (Circle_Collision(Position, _playerpos, getSprite(Name).getGlobalBounds().width * 4, getSprite("Hero").getGlobalBounds().width * 4))
+	if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width * 4, getSprite("Hero").getGlobalBounds().width * 4))
 	{
-		Delta.x = 20 * cos(Angle_calc(Position, _playerpos));
-		Delta.y = 20 * sin(Angle_calc(Position, _playerpos));
+		Delta.x = 20 * cos(Angle_calc(Position, _player.Get_Position()));
+		Delta.y = 20 * sin(Angle_calc(Position, _player.Get_Position()));
 
 		if (Delta.x >= 0 && Delta.y >= 0)
 		{
@@ -123,6 +108,8 @@ void Npc::Update_Attack(Vector2f _playerpos)
 			Haut = false;
 			Bas = true;
 		}
+		if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width / 2, getSprite("Hero").getGlobalBounds().width / 2))
+			MState.State_Fight(&_player, this);
 	}
 	else
 	{
@@ -135,10 +122,28 @@ void Npc::Update_Attack(Vector2f _playerpos)
 	Colision_Rect = IntRect(Vector2i(Position.x, Position.y - Colision_Rect.height), Vector2i(Colision_Rect.width, Colision_Rect.height));
 }
 
+void Npc::Update_Dialogue(bool& _dial, Hero _player)
+{
+	if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width, getSprite("Hero").getGlobalBounds().width)
+		&& _player.Get_Interact() == true && &dial != nullptr)
+		_dial = true;
+
+	if (IsDialogue)
+		dial.Update(_dial);
+
+	IsDialogue = _dial;
+}
+
 void Npc::Display_Fight(Vector2f _scale)
 {
 	getSprite(Name).setScale(_scale);
 	App.Get_Window().draw(getSprite(Name));
+}
+
+void Npc::Display_Dialogue()
+{
+	if (IsDialogue)
+		dial.Display();
 }
 
 void Npc::Display()
@@ -192,6 +197,7 @@ void Npc::Display()
 				getSprite(Name).setScale(Vector2f(1, 1));
 		}
 	}
+
 	getSprite(Name).setPosition(Position);
 	App.Get_Window().draw(getSprite(Name));
 }

@@ -7,7 +7,6 @@ Fight_System::Fight_System(Hero* _player, Npc* _enemy)
 {
 	Player = _player;
 	Player->Set_Orientation(Direction::Droite);
-	getSprite("Hero").setScale(Vector2f(10,10));
 	getSprite("Hero").setPosition(200, 700);
 	Enemy = _enemy;
 	Enemy->Set_Orientation(Direction::Bas);
@@ -156,7 +155,7 @@ void Fight_System::Display()
 {
 	FixView.Display();
 
-	Player->Display();
+	Player->Display_Fight(Vector2f(10, 10));
 	Enemy->Display_Fight(Vector2f(-10,10));
 
 	if (Texte.getString() != "")

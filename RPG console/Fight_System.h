@@ -2,7 +2,7 @@
 #include "Tools.h"
 #include "Hero.h"
 #include "Npc.h"
-#include "Bouton.h"
+#include "Button.h"
 #include "Views.h"
 
 class Fight_System

@@ -4,6 +4,7 @@
 #include "FontManager.h"
 #include "Map_Manager.h"
 #include "Controle.h"
+#include "Dialogue_Container.h"
 #include "Views.h"
 
 State state = State::RTNULL;
@@ -16,6 +17,7 @@ StateManager::StateManager()
 	LoadSprite();
 	LoadFont();
 	LoadMap();
+	Dialogues = Dialogue_Container();
 }
 
 void StateManager::KeyboardEnter()

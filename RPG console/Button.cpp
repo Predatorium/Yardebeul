@@ -1,4 +1,4 @@
-#include "Bouton.h"
+#include "Button.h"
 #include "FontManager.h"
 #include "SpriteManager.h"
 
@@ -11,9 +11,9 @@ Button_Text::Button_Text(string _name, string _nameFont, float _sizeTexte, Vecto
 	Texte.setPosition(Vector2f(_Position));
 	Texte.setFillColor(_color);
 
-	shape = RectangleShape(_sizeShape);
+	shape = RectangleShape(Vector2f(_sizeShape));
 	shape.setOrigin(getMidle(shape));
-	shape.setPosition(_Position);
+	shape.setPosition(Vector2f(_Position));
 	shape.setFillColor(Color::Transparent);
 	shape.setOutlineThickness(_outlinesize);
 	shape.setOutlineColor(_color);

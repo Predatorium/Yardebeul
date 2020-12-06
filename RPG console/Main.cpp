@@ -1,13 +1,5 @@
 #include "Tools.h"
 #include "StateManager.h"
-#include "RessourcesManager.h"
-#include "SoundManager.h"
-#include "SpriteManager.h"
-#include "FontManager.h"
-#include "Controle.h"
-#include "Hero.h"
-#include "Weapon.h"
-#include "Chest.h"
 
 Global App;
 

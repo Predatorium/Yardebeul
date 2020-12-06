@@ -17,13 +17,13 @@ World::World()
 
 		App.Get_Window().setMouseCursorVisible(false);
 
-		Nbr_Enemy = 0;
-		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), Nbr_Enemy, 7, 20, 25, Comportement::Agressif));
-		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), Nbr_Enemy, 7, 20, 25, Comportement::Agressif));
+		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), 7, 20, 25, Comportement::Amical));
+		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), 7, 20, 25, Comportement::Agressif));
 
 		Save = false;
 		Load = true;
 		Pause = false;
+		IsDialogue = false;
 
 		Vue = Views(Vector2f(960, 540), Vector2f(1920, 1080), FloatRect(0.f, 0.f, 1.f, 1.f));
 		Screen = Views();
@@ -39,14 +39,14 @@ World::World(int _load)
 
 		Menu_Pause = new Menu(1);
 
-		Nbr_Enemy = 0;
 		App.Get_Window().setMouseCursorVisible(false);
-		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), Nbr_Enemy, 7, 20, 25, Comportement::Agressif));
-		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), Nbr_Enemy, 7, 20, 25, Comportement::Agressif));
+		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), 7, 20, 25, Comportement::Amical));
+		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), 7, 20, 25, Comportement::Agressif));
 
 		Save = false;
 		Load = false;
 		Pause = false;
+		IsDialogue = false;
 
 		Vue = Views(Vector2f(960, 540), Vector2f(1920, 1080), FloatRect(0.f, 0.f, 1.f, 1.f));
 		Screen = Views();
@@ -105,7 +105,8 @@ void World::Update()
 	if (Pause == false)
 	{
 		Collision(Player);
-		Player.Update(Range_Niveau);
+		if (IsDialogue == false)
+			Player.Update(Range_Niveau);
 
 		Destroy_Npc();
 
@@ -113,12 +114,11 @@ void World::Update()
 		{
 			Collision(Current_Npc);
 
-			if (Current_Npc.Get_Attitude() == Comportement::Agressif)
-			{
-				Current_Npc.Update_Attack(Player.Get_Position());
-				if (Circle_Collision(Current_Npc.Get_Position(), Player.Get_Position(), getSprite(Current_Npc.Get_Name()).getGlobalBounds().width / 2, getSprite("Hero").getGlobalBounds().width / 2))
-					MState.State_Fight(&Player, &Current_Npc);
-			}
+			if (Current_Npc.Get_Attitude() == Comportement::Agressif && IsDialogue == false)
+				Current_Npc.Update_Attack(Player);
+
+			if (Current_Npc.Get_Attitude() == Comportement::Amical)
+				Current_Npc.Update_Dialogue(IsDialogue, Player);
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
@@ -141,4 +141,9 @@ void World::Display()
 
 	if (Pause == true)
 		Menu_Pause->Display_Pause();
+
+	Screen.Display();
+
+	for (Npc& Current : NpcList)
+		Current.Display_Dialogue();
 }

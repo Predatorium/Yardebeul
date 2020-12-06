@@ -21,13 +21,3 @@ Character::Character(string _name)
 	Endurance = 50;
 	Santé_mentale = 100;
 }
-
-void Affichage_TypePerso(Character& p)
-{
-	p.Affichage_Type();
-}
-
-void Affichage_TypeStat(Character& p)
-{
-	p.Affichage_Stat();
-}

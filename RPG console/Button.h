@@ -3,7 +3,7 @@
 
 class Button_Text
 {
-private :
+protected :
 	RectangleShape shape;
 	Text Texte;
 	string Name;

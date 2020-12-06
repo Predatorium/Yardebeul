@@ -28,21 +28,6 @@
     <Filter Include="Fichiers d%27en-tête\Game">
       <UniqueIdentifier>{f216b26b-5c17-433b-8f9e-532245256748}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\Game">
-      <UniqueIdentifier>{e294a76b-093b-4ed8-b6e9-01b342ac9dcf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Game\Character">
-      <UniqueIdentifier>{d80de8c4-c4bb-4d25-8a17-421893c79ae7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Game\Dungeon">
-      <UniqueIdentifier>{f324d2b0-349c-4dcc-a662-3a60d4fbc024}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Game\Item">
-      <UniqueIdentifier>{1cdceccc-3f57-46d7-8ffd-5f54bc309dbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Game\Event">
-      <UniqueIdentifier>{12a7e8fc-378f-4af7-83d5-ef10b76c5a95}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\Game\Character">
       <UniqueIdentifier>{e92d9236-b580-4fa6-8ae4-6f58be78422b}</UniqueIdentifier>
     </Filter>
@@ -73,6 +58,27 @@
     <Filter Include="Fichiers d%27en-tête\_Global\Menu">
       <UniqueIdentifier>{a6dae019-5a66-4953-bf13-af6be4d34d9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\_Global\Utility">
+      <UniqueIdentifier>{d90ca840-d4b0-4c1c-b7b9-b1a6a2f4d0aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\_Global\Utility">
+      <UniqueIdentifier>{07f0dc42-3b4e-4430-a1e8-5ceb5c99254e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game">
+      <UniqueIdentifier>{e294a76b-093b-4ed8-b6e9-01b342ac9dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\Character">
+      <UniqueIdentifier>{d80de8c4-c4bb-4d25-8a17-421893c79ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\Dungeon">
+      <UniqueIdentifier>{f324d2b0-349c-4dcc-a662-3a60d4fbc024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\Item">
+      <UniqueIdentifier>{1cdceccc-3f57-46d7-8ffd-5f54bc309dbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\Event">
+      <UniqueIdentifier>{12a7e8fc-378f-4af7-83d5-ef10b76c5a95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Room.h">
@@ -80,12 +86,6 @@
     </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Fichiers d%27en-tête\Game\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Erreur.h">
-      <Filter>Fichiers d%27en-tête\_Global</Filter>
-    </ClInclude>
-    <ClInclude Include="Tools.h">
-      <Filter>Fichiers d%27en-tête\_Global</Filter>
     </ClInclude>
     <ClInclude Include="Event_Type.h">
       <Filter>Fichiers d%27en-tête\Game\Event</Filter>
@@ -162,17 +162,8 @@
     <ClInclude Include="FontManager.h">
       <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Niveau.h">
-      <Filter>Fichiers d%27en-tête\_Global</Filter>
-    </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>Fichiers d%27en-tête\_Global\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Bouton.h">
-      <Filter>Fichiers d%27en-tête\_Global\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Fichiers d%27en-tête\_Global</Filter>
     </ClInclude>
     <ClInclude Include="Map_Manager.h">
       <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
@@ -180,16 +171,37 @@
     <ClInclude Include="HUD_Editor.h">
       <Filter>Fichiers d%27en-tête\Editeur</Filter>
     </ClInclude>
-    <ClInclude Include="Views.h">
-      <Filter>Fichiers d%27en-tête\_Global</Filter>
-    </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Fichiers d%27en-tête\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Data.h">
-      <Filter>Fichiers d%27en-tête\_Global</Filter>
-    </ClInclude>
     <ClInclude Include="Fight_System.h">
+      <Filter>Fichiers d%27en-tête\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Erreur.h">
+      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Niveau.h">
+      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools.h">
+      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Views.h">
+      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Fichiers d%27en-tête\_Global\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogue_Container.h">
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogue.h">
       <Filter>Fichiers d%27en-tête\Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -200,13 +212,7 @@
     <ClCompile Include="Event.cpp">
       <Filter>Fichiers sources\Game\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Erreur.cpp">
-      <Filter>Fichiers sources\_Global</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Fichiers sources\_Global</Filter>
-    </ClCompile>
-    <ClCompile Include="Tools.cpp">
       <Filter>Fichiers sources\_Global</Filter>
     </ClCompile>
     <ClCompile Include="Event_Type.cpp">
@@ -284,17 +290,8 @@
     <ClCompile Include="FontManager.cpp">
       <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Niveau.cpp">
-      <Filter>Fichiers sources\_Global</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Fichiers sources\_Global\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Bouton.cpp">
-      <Filter>Fichiers sources\_Global\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Fichiers sources\_Global</Filter>
     </ClCompile>
     <ClCompile Include="Map_Manager.cpp">
       <Filter>Fichiers sources\_Global\Manager</Filter>
@@ -302,16 +299,37 @@
     <ClCompile Include="HUD_Editor.cpp">
       <Filter>Fichiers sources\Editeur</Filter>
     </ClCompile>
-    <ClCompile Include="Views.cpp">
-      <Filter>Fichiers sources\_Global</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Data.cpp">
-      <Filter>Fichiers sources\_Global</Filter>
-    </ClCompile>
     <ClCompile Include="Fight_System.cpp">
+      <Filter>Fichiers sources\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Fichiers sources\_Global\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>Fichiers sources\_Global\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Erreur.cpp">
+      <Filter>Fichiers sources\_Global\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Niveau.cpp">
+      <Filter>Fichiers sources\_Global\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools.cpp">
+      <Filter>Fichiers sources\_Global\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Views.cpp">
+      <Filter>Fichiers sources\_Global\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Fichiers sources\_Global\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogue_Container.cpp">
+      <Filter>Fichiers sources\_Global\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogue.cpp">
       <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
   </ItemGroup>

@@ -16,6 +16,7 @@ private :
 	int Point_Capacité;
 	int Argent;
 	float Time;
+	bool Interaction;
 
 	Weapon* Arme;
 	Armor* Armure;
@@ -31,13 +32,13 @@ public :
 	void Passage_Niveau();
 	void Affectation_Stat(Effect _effet);
 	void Amelioration_stat();
-	void Update(Vector2i _limitMap);
 
 	inline int Get_Xptotal() { return Xp_Total; };
 	inline int Get_XpNiveau() { return Xp_Niveau; };
 	inline int Get_PointCapacity() { return Point_Capacité; };
 	inline int Get_Argent() { return Argent; };
 	inline float Get_Time() { return Time; };
+	inline bool Get_Interact() { return Interaction; };
 	inline Weapon* Get_Weapon() { return Arme; };
 	inline Armor* Get_Armor() { return Armure; };
 	inline list<Consumable*> Get_Consumable() { return consommables; };
@@ -51,8 +52,7 @@ public :
 	inline void Set_Argent(int _argent) { Argent = _argent; };
 	inline void Set_Time(float _time) { Time = _time; };
 
-	virtual void Affichage_Type();
-	virtual void Affichage_Stat();
-
+	void Update(Vector2i _limitMap);
+	void Display_Fight(Vector2f _scale);
 	void Display();
 };

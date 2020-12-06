@@ -75,9 +75,5 @@ public :
 	inline void Set_SanteMental(int _santémental) { Santé_mentale = _santémental; };
 	inline void Set_Vitesse(int _vitesse) { Vitesse = _vitesse; };
 
-	virtual void Affichage_Type() = 0;
-	virtual void Affichage_Stat() = 0;
+	virtual void Display() = 0;
 };
-
-void Affichage_TypePerso(Character& p);
-void Affichage_TypeStat(Character& p);

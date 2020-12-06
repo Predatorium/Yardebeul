@@ -8,11 +8,11 @@ Sprite Knucles ../Ressources/Sprite/Npc/Knucles.png
 Sprite Fleche ../Ressources/Sprite/Menu/Fleche.png
 Sprite Save ../Ressources/Sprite/Menu/Save.png
 Sprite Load ../Ressources/Sprite/Menu/Load.png
+
 Font Times ../Ressources/Fonts/times.ttf
 Font Ethnocentric ../Ressources/Fonts/Ethnocentric_rg.ttf
-Font Full_Pack ../Ressources/Fonts/full_Pack_2025.ttf
-Font PressStart ../Ressources/Fonts/PressStart2P.ttf
-Font Square ../Ressources/Fonts/Square.ttf
+Font Macabre ../Ressources/Fonts/MetalMacabre.ttf
+
 Map Map ../Ressources/Map/Map.txt
 Map Map2 ../Ressources/Map/Map2.txt
 Map Map ../Ressources/Map/Map.txt
