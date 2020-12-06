@@ -16,6 +16,7 @@ Hero::Hero(Vector2f _position)
 		Mental_Health = 100;
 		Speed = 30;
 		Capacity_Point = 1;
+		Life_Max = Life_Point;
 
 		Xp_Total = 0;
 		Xp_Level = 0;

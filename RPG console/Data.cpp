@@ -33,19 +33,19 @@ void Data::Save_Player(int _party, Hero _joueur)
 		if (_joueur.Get_Weapon() != nullptr)
 		{
 			Save_Hero << endl;
-			Save_Hero << "Weapon : " << _joueur.Get_Weapon()->Get_Name() << " ";
+			Save_Hero << "Weapon : " << _joueur.Get_Weapon()->Get_Name();
 		}
 
 		if (_joueur.Get_Armor() != nullptr)
 		{
 			Save_Hero << endl;
-			Save_Hero << "Armor : " << _joueur.Get_Armor()->Get_Name() << " ";
+			Save_Hero << "Armor : " << _joueur.Get_Armor()->Get_Name();
 		}
 
 		for (Consumable* Current_Consu : _joueur.Get_Consumable())
 		{
 			Save_Hero << endl;
-			Save_Hero << "Consumable : " << Current_Consu->Get_Name() << "|";
+			Save_Hero << "Consumable : " << Current_Consu->Get_Name();
 		}
 
 		Save_Hero.close();

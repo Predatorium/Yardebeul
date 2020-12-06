@@ -9,6 +9,7 @@ Npc::Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Co
 	Position = _position;
 	Level = _niveau;
 	Life_Point = _pv;
+	Life_Max = Life_Point;
 	Mana = 50;
 	Endurance = 25;
 	Mental_Health = 100;

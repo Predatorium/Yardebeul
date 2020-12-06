@@ -21,8 +21,8 @@ Fight_System::Fight_System(Hero* _player, Npc* _enemy)
 	Menu.setOutlineThickness(3);
 	Menu.setOutlineColor(Color(50, 120, 255, 255));
 
-	Pv_Joueur = Box(to_string(Player->Get_LifePoint()), "Times", 50, Vector2f(500, 50), 5, Vector2f(255, 30), Color::Red);
-	Pv_Enemy = Box(to_string(Enemy->Get_LifePoint()), "Times", 50, Vector2f(500, 50), 5, Vector2f(1665, 873), Color::Red);
+	Pv_Joueur = Box(to_string(Player->Get_LifeMax()), "Times", 50, Vector2f(500, 50), 5, Vector2f(255, 30), Color::Red);
+	Pv_Enemy = Box(to_string(Enemy->Get_LifeMax()), "Times", 50, Vector2f(500, 50), 5, Vector2f(1665, 873), Color::Red);
 
 	if (Player->Get_Speed() > Enemy->Get_Speed())
 		Turn_Player = true;
@@ -76,13 +76,13 @@ void Fight_System::Hud_Update()
 		{
 			Texte.setString(to_string(-Player->Get_Weapon()->Get_Damage()));
 			Texte.setPosition(Vector2f(getSprite(Enemy->Get_Name()).getPosition().x, getSprite(Enemy->Get_Name()).getPosition().y + 300));
-			Enemy->Get_LifePoint() -= Player->Get_Weapon()->Get_Damage();
+			Enemy->Set_Life(Enemy->Get_LifePoint() - Player->Get_Weapon()->Get_Damage());
 		}
 		if (Selection == 1)
 		{
-			Texte.setString(to_string(+5));
+			Texte.setString("+" + to_string(5));
 			Texte.setPosition(Vector2f(getSprite("Hero").getPosition().x, getSprite("Hero").getPosition().y - 300));
-			Player->Get_LifePoint() += 5;
+			Player->Set_Life(Player->Get_LifePoint() + 5);
 		}
 		if (Selection == 2)
 		{
@@ -117,7 +117,7 @@ void Fight_System::Update()
 			int Rand_Damage = irandom(Enemy->Get_MinDamage(), Enemy->Get_MaxDamage());
 			Texte.setString(to_string(-Rand_Damage));
 			Texte.setPosition(Vector2f(getSprite("Hero").getPosition().x, getSprite("Hero").getPosition().y - 300));
-			Player->Get_LifePoint() -= Rand_Damage;
+			Player->Set_Life(Player->Get_LifePoint() - Rand_Damage);
 			timer = 0;
 		}
 		if (timer > 2.f && Texte.getString() != "")

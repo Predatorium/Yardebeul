@@ -67,7 +67,6 @@ void Chest::display_coffre()
 		{
 			cout << "Consommable :" << endl;
 		}
-		Objet_actuel->Display_Stat();
 		cout << endl;
 	}
 	system("pause");

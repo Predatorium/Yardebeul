@@ -1,12 +1,13 @@
 Name : Francis
-Niveau : 1
-Time : 9.21762
-Position : 1229.87|673.218
-Point de vie : 20
+Level : 1
+Time : 68.9758
+Position : 427.253|452.058
+Life Point : 5
 Mana : 50
-Sante Mental : 100
-Vitesse : 20
+Mental Health : 100
+Speed : 30
 XpTotal : 0
-XpNiveau : 0
-Capacité : 1
-Argent : 0
+XpLevel : 0
+Capacity : 1
+Gold : 0
+Weapon : Epee de feu

@@ -10,3 +10,10 @@ Character::Character(string _name)
 	Endurance = 50;
 	Mental_Health = 100;
 }
+
+void Character::Set_Life(int _life)
+{
+	Life_Point = _life;
+	if (Life_Point > Life_Max)
+		Life_Point = Life_Max;
+}

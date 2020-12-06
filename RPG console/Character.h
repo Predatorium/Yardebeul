@@ -34,6 +34,7 @@ protected :
 	string Name;
 	int Level;
 	int Life_Point;
+	int Life_Max;
 	int Mana;
 	int Endurance;
 	int Mental_Health;
@@ -49,7 +50,8 @@ public :
 	inline Direction Get_Orientation() { return Orientation; };
 	inline string Get_Name() { return Name; };
 	inline int Get_Level() { return Level; };
-	inline int& Get_LifePoint() { return Life_Point; };
+	inline int Get_LifePoint() { return Life_Point; };
+	inline int Get_LifeMax() { return Life_Max; };
 	inline int Get_Mana() { return Mana; };
 	inline int Get_Endurance() { return Endurance; };
 	inline int Get_MentalHealth() { return Mental_Health; };
@@ -69,7 +71,8 @@ public :
 	inline void Set_Position(Vector2f _position) { Position = _position; };
 	inline void Set_Name(string _name) { Name = _name; };
 	inline void Set_Level(int _level) { Level = _level; };
-	inline void Set_Life(int _life) { Life_Point = _life; };
+	void Set_Life(int _life);
+	inline void Set_LifeMax(int _lifemax) { Life_Max = _lifemax; };
 	inline void Set_Mana(int _mana) { Mana = _mana; };
 	inline void Set_Endurance(int _endurance) { Endurance = _endurance; };
 	inline void Set_MentalHealth(int _mentalhealth) { Mental_Health = _mentalhealth; };
