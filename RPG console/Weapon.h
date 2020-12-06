@@ -4,22 +4,23 @@
 class Weapon : public Item
 {
 private : 
-	int Dégats;
-	int Durabilités;
+	int Damage;
+	int Durability;
 
 public :
-	Weapon();
-	Weapon(int _dégat, int _durabilité, string _name, int _prix, Effect _effet);
-	~Weapon();
+	Weapon() = default;
+	Weapon(int _damage, int _durability, string _name, int _price, Effect _effect);
+	Weapon(const Weapon& _weapon, Vector2f _position);
+	~Weapon() = default;
 
-	inline int get_degat() { return Dégats; };
-	inline int get_durabitlité() { return Durabilités; };
+	inline int Get_Damage() { return Damage; };
+	inline int Get_Durability() { return Durability; };
 
-	inline void Set_Degat(int _degat) { Dégats = _degat; };
-	inline void Set_Durabilité(int _durabilité) { Durabilités = _durabilité; };
+	inline void Set_Damage(int _damage) { Damage = _damage; };
+	inline void Set_Durability(int _durability) { Durability = _durability; };
 
 	bool operator == (const Weapon& _w) const { return Name == _w.Name; }
 	bool operator != (const Weapon& _w) const { return !operator==(_w); }
 
-	virtual void Display_Stat();
+	virtual void Display();
 };

@@ -17,18 +17,18 @@ Armor Armors_Container::Get_Armor(string _name)
 
 void Armors_Container::Save()
 {
-	ofstream Save_Armor("../Ressources/Containers/Armor.txt");
+	ofstream Save_Armor("../Ressources/Container/Armor.txt");
 	if (Save_Armor.is_open())
 	{
-		for (list<Armor>::iterator Current_Weapon = Container.begin(); Current_Weapon != Container.end(); Current_Weapon++)
+		for (list<Armor>::iterator Current = Container.begin(); Current != Container.end(); Current++)
 		{
-			Save_Armor << Current_Weapon->Get_Name() << " ";
-			Save_Armor << to_string(Current_Weapon->Get_Prix()) << " ";
-			Save_Armor << to_string(Current_Weapon->Get_Defenses()) << " ";
-			Save_Armor << to_string(Current_Weapon->Get_Durabilité()) << " ";
-			Save_Armor << Current_Weapon->Get_Effet().Get_Name();
+			Save_Armor << Current->Get_Name() << " ";
+			Save_Armor << to_string(Current->Get_Price()) << " ";
+			Save_Armor << to_string(Current->Get_Defense()) << " ";
+			Save_Armor << to_string(Current->Get_Durability()) << " ";
+			Save_Armor << Current->Get_Effect().Get_Name();
 
-			if (Current_Weapon != Container.end())
+			if (Current != Container.end())
 				Save_Armor << endl;
 		}
 		Save_Armor.close();
@@ -37,7 +37,7 @@ void Armors_Container::Save()
 
 void Armors_Container::Load()
 {
-	ifstream Load_Armor("../Ressources/Containers/Armor.txt");
+	ifstream Load_Armor("../Ressources/Container/Armor.txt");
 	if (Load_Armor.is_open())
 	{
 		string line = "0";
@@ -64,7 +64,7 @@ void Armors_Container::Load()
 			tmpname_effect = line;
 			line.erase(0, line.size());
 
-			Container.push_back(Armor(tmpdefense, tmpdurabilite, tmpname, tmpprix, Effects.Get_Effet(tmpname_effect)));
+			Container.push_back(Armor(tmpdefense, tmpdurabilite, tmpname, tmpprix, Effects.Get_Effect(tmpname_effect)));
 		}
 
 		Load_Armor.close();

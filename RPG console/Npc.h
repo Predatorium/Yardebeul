@@ -19,7 +19,7 @@ private :
 	int Damage_Max;
 	int Defense;
 	bool IsDialogue;
-	Dialogue dial;
+	Dialogue dialogue;
 
 public :
 	Npc() = default;
@@ -31,7 +31,7 @@ public :
 	inline int Get_MaxDamage() { return Damage_Max; };
 	inline int Get_Defense() { return Defense; };
 
-	bool operator == (const Npc& n) const { return Name == n.Name && Point_de_vie == n.Point_de_vie; }
+	bool operator == (const Npc& n) const { return Name == n.Name && Life_Point == n.Life_Point; }
 
 	void Update_Attack(Hero& _player);
 	void Update_Dialogue(bool& _dial, Hero _player);

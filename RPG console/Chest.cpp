@@ -19,7 +19,7 @@ void Chest::Take_Objet(Hero& _hero, int x)
 				if (Objet_actuel == NULL)
 					throw Erreur(1, "L'objet est Null", 1);
 				else
-					_hero.Set_Arme(*tmpweapon);
+					_hero.Set_Weapon(*tmpweapon);
 			}
 
 			Armor* tmpArmor = dynamic_cast<Armor*>(Objet_actuel);
@@ -28,7 +28,7 @@ void Chest::Take_Objet(Hero& _hero, int x)
 				if (Objet_actuel == NULL)
 					throw Erreur(1, "L'objet est Null", 1);
 				else
-					_hero.Set_Armure(*tmpArmor);
+					_hero.Set_Armor(*tmpArmor);
 			}
 
 			Consumable* tmpConsumable = dynamic_cast<Consumable*>(Objet_actuel);
@@ -37,7 +37,7 @@ void Chest::Take_Objet(Hero& _hero, int x)
 				if (Objet_actuel == NULL)
 					throw Erreur(1, "L'objet est Null", 1);
 				else
-					_hero.Set_Consommable(*tmpConsumable);
+					_hero.Set_Consumable(*tmpConsumable);
 			}
 
 			break;
@@ -59,7 +59,7 @@ void Chest::display_coffre()
 		Armor* tmpArmor = dynamic_cast<Armor*>(Objet_actuel);
 		if (tmpArmor)
 		{
-			cout << "Armure :" << endl;
+			cout << "armor :" << endl;
 		}
 
 		Consumable* tmpConsumable = dynamic_cast<Consumable*>(Objet_actuel);

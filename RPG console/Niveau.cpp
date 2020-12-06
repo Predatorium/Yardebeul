@@ -1,7 +1,7 @@
 #include "Niveau.h"
 #include "SpriteManager.h"
 
-bool Niveau::Get_MapsPos(Vector2i _position)
+bool Level::Get_MapsPos(Vector2i _position)
 {
 	for (Maps& Current_Map : Player_Layer)
 	{
@@ -13,64 +13,64 @@ bool Niveau::Get_MapsPos(Vector2i _position)
 	return false;
 }
 
-void Niveau::Collision(Character& _Character)
+void Level::Collision(Character& _Character)
 {
 	Vector2i NextPosOnMap;
 
 	NextPosOnMap.x = (int)_Character.Get_Position().x / Taille_tile;
 	NextPosOnMap.y = (int)_Character.Get_Position().y / Taille_tile;
 
-	if (_Character.Get_Droite() == true)
+	if (_Character.Get_Right() == true)
 	{
 		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
-			_Character.Set_Droite(false);
+			_Character.Set_Right(false);
 
 		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		NextPosOnMap.y = (int)(_Character.Get_Position().y + _Character.Get_ColisionRect().height) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
-			_Character.Set_Droite(false);
+			_Character.Set_Right(false);
 	}
-	if (_Character.Get_Gauche() == true)
+	if (_Character.Get_Left() == true)
 	{
 		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
-			_Character.Set_Gauche(false);
+			_Character.Set_Left(false);
 
 		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		NextPosOnMap.y = (int)(_Character.Get_Position().y + _Character.Get_ColisionRect().height) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
-			_Character.Set_Gauche(false);
+			_Character.Set_Left(false);
 	}
-	if (_Character.Get_Bas() == true)
+	if (_Character.Get_Down() == true)
 	{
 		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
 		NextPosOnMap.y = (int)((_Character.Get_Position().y + _Character.Get_ColisionRect().height + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
-			_Character.Set_Bas(false);
+			_Character.Set_Down(false);
 
 		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
 		NextPosOnMap.y = (int)((_Character.Get_Position().y + _Character.Get_ColisionRect().height + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
-			_Character.Set_Bas(false);
+			_Character.Set_Down(false);
 	}
-	if (_Character.Get_Haut() == true)
+	if (_Character.Get_Up() == true)
 	{
 		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
 		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
-			_Character.Set_Haut(false);
+			_Character.Set_Up(false);
 
 		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
 		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
-			_Character.Set_Haut(false);
+			_Character.Set_Up(false);
 	}
 }
 
-void Niveau::Load_Map(string _file)
+void Level::Load_Map(string _file)
 {
 	Back_Layer.clear();
 	Player_Layer.clear();
@@ -131,7 +131,7 @@ void Niveau::Load_Map(string _file)
 	}
 }
 
-void Niveau::Save_Map(string _file)
+void Level::Save_Map(string _file)
 {
 	ofstream Write_Map(_file);
 	if (Write_Map.is_open())
@@ -187,7 +187,7 @@ void Niveau::Save_Map(string _file)
 	}
 }
 
-void Niveau::display()
+void Level::display()
 {
 	for (Maps& Current_Map : Back_Layer)
 		Current_Map.display();

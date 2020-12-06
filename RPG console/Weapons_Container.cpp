@@ -5,14 +5,14 @@ Weapons_Container Weapons;
 
 Weapons_Container::Weapons_Container()
 {
-	Container.push_back(Weapon(2, 10, "Epee de feu", 100, Effects.Get_Effet("Embrassement")));
-	Container.push_back(Weapon(4, 20, "Epee de lave", 200, Effects.Get_Effet("Volcan")));
-	Container.push_back(Weapon(2, 10, "Epee d eau", 100, Effects.Get_Effet("Eclaboussure")));
-	Container.push_back(Weapon(4, 20, "Epee de glace", 200, Effects.Get_Effet("Engelure")));
-	Container.push_back(Weapon(2, 10, "Epee d air", 100, Effects.Get_Effet("Rafale")));
-	Container.push_back(Weapon(4, 20, "Epee de foudre", 200, Effects.Get_Effet("Electrocution")));
-	Container.push_back(Weapon(2, 10, "Epee de terre", 100, Effects.Get_Effet("Seisme")));
-	Container.push_back(Weapon(4, 20, "Epee de gravité", 200, Effects.Get_Effet("Trou noir")));
+	Container.push_back(Weapon(2, 10, "Epee de feu", 100, Effects.Get_Effect("Embrassement")));
+	Container.push_back(Weapon(4, 20, "Epee de lave", 200, Effects.Get_Effect("Volcan")));
+	Container.push_back(Weapon(2, 10, "Epee d eau", 100, Effects.Get_Effect("Eclaboussure")));
+	Container.push_back(Weapon(4, 20, "Epee de glace", 200, Effects.Get_Effect("Engelure")));
+	Container.push_back(Weapon(2, 10, "Epee d air", 100, Effects.Get_Effect("Rafale")));
+	Container.push_back(Weapon(4, 20, "Epee de foudre", 200, Effects.Get_Effect("Electrocution")));
+	Container.push_back(Weapon(2, 10, "Epee de terre", 100, Effects.Get_Effect("Seisme")));
+	Container.push_back(Weapon(4, 20, "Epee de gravité", 200, Effects.Get_Effect("Trou noir")));
 }
 
 Weapon Weapons_Container::Get_Weapon(string _name)
@@ -24,18 +24,18 @@ Weapon Weapons_Container::Get_Weapon(string _name)
 
 void Weapons_Container::Save()
 {
-	ofstream Save_Weapon("../Ressources/Containers/Weapon.txt");
+	ofstream Save_Weapon("../Ressources/Container/Weapon.txt");
 	if (Save_Weapon.is_open())
 	{
-		for (list<Weapon>::iterator Current_Weapon=Container.begin(); Current_Weapon != Container.end(); Current_Weapon++)
+		for (list<Weapon>::iterator Current = Container.begin(); Current != Container.end(); Current++)
 		{
-			Save_Weapon << Current_Weapon->Get_Name() << " ";
-			Save_Weapon << to_string(Current_Weapon->Get_Prix()) << " ";
-			Save_Weapon << to_string(Current_Weapon->get_degat()) << " ";
-			Save_Weapon << to_string(Current_Weapon->get_durabitlité()) << " ";
-			Save_Weapon << Current_Weapon->Get_Effet().Get_Name();
+			Save_Weapon << Current->Get_Name() << " ";
+			Save_Weapon << to_string(Current->Get_Price()) << " ";
+			Save_Weapon << to_string(Current->Get_Damage()) << " ";
+			Save_Weapon << to_string(Current->Get_Durability()) << " ";
+			Save_Weapon << Current->Get_Effect().Get_Name();
 
-			if (Current_Weapon != Container.end())
+			if (Current != Container.end())
 				Save_Weapon << endl;
 		}
 		Save_Weapon.close();
@@ -45,7 +45,7 @@ void Weapons_Container::Save()
 
 void Weapons_Container::Load()
 {
-	ifstream Load_Weapon("../Ressources/Containers/Weapon.txt");
+	ifstream Load_Weapon("../Ressources/Container/Weapon.txt");
 	if (Load_Weapon.is_open())
 	{
 		string line = "0";
@@ -72,7 +72,7 @@ void Weapons_Container::Load()
 			tmpname_effect = line;
 			line.erase(0, line.size());
 
-			Container.push_back(Weapon(tmpdegat, tmpdurabilite, tmpname, tmpprix, Effects.Get_Effet(tmpname_effect)));
+			Container.push_back(Weapon(tmpdegat, tmpdurabilite, tmpname, tmpprix, Effects.Get_Effect(tmpname_effect)));
 		}
 
 		Load_Weapon.close();

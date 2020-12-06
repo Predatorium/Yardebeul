@@ -1,32 +1,21 @@
 #include "Weapon.h"
+#include "SpriteManager.h"
 
-Weapon::Weapon()
+Weapon::Weapon(int _damage, int _durability, string _name, int _price, Effect _effect)
+	: Item(_name, _price, _effect)
 {
-	Dégats = 0;
-	Durabilités = 0;
+	Damage = _damage;
+	Durability = _durability;
 }
 
-Weapon::Weapon(int _dégat, int _durabilité, string _name, int _prix, Effect _effet)
+Weapon::Weapon(const Weapon& _weapon, Vector2f _position)
 {
-	Dégats = _dégat;
-	Durabilités = _durabilité;
-	Name = _name;
-	Prix = _prix;
-	effet = _effet;
+	*this = _weapon;
+	Position = _position;
 }
 
-Weapon::~Weapon()
+void Weapon::Display()
 {
-
-}
-
-void Weapon::Display_Stat()
-{
-	cout << "Le nom de mon epee est " << Name << endl;
-	cout << "Le prix de mon epee est " << Prix << endl;
-	cout << "Les degats de mon epee sont de " << Dégats << endl;
-	cout << "La durabilite de mon epee est de " << Durabilités << endl;
-	cout << endl;
-
-	effet.Display_Stat();
+	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
+	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
 }

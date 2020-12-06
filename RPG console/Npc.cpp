@@ -7,21 +7,21 @@ Npc::Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Co
 	: Character(_name)
 {
 	Position = _position;
-	Niveau = _niveau;
-	Point_de_vie = _pv;
+	Level = _niveau;
+	Life_Point = _pv;
 	Mana = 50;
 	Endurance = 25;
-	Santé_mentale = 100;
-	Vitesse = vitesse;
+	Mental_Health = 100;
+	Speed = vitesse;
 	Attitude = _attitude;
-	Orientation = Direction::Gauche;
+	Orientation = Direction::Left;
 	IsDialogue = false;
-	dial = Dialogues.Get_Dialogue("1_1");
+	dialogue = Dialogues.Get_Dialogue("1_1");
 
-	Droite = false;
-	Gauche = false;
-	Bas = false;
-	Haut = false;
+	Right = false;
+	Left = false;
+	Down = false;
+	Up = false;
 
 	if (Name == "Knucles")
 	{
@@ -48,9 +48,9 @@ Npc::Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Co
 
 void Npc::Update_Attack(Hero& _player)
 {
-	if (Gauche == true || Droite == true)
+	if (Left == true || Right == true)
 		Position.x += 5 * Delta.x * MainTime.GetTimeDeltaF();
-	if (Haut == true || Bas == true)
+	if (Up == true || Down == true)
 		Position.y += 5 * Delta.y * MainTime.GetTimeDeltaF();
 
 	if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width * 4, getSprite("Hero").getGlobalBounds().width * 4))
@@ -61,62 +61,62 @@ void Npc::Update_Attack(Hero& _player)
 		if (Delta.x >= 0 && Delta.y >= 0)
 		{
 			if (Delta.x > Delta.y)
-				Orientation = Direction::Droite;
+				Orientation = Direction::Right;
 			else
-				Orientation = Direction::Bas;
+				Orientation = Direction::Down;
 		}
 		else if (Delta.x < 0 && Delta.y < 0)
 		{
 			if (Delta.x < Delta.y)
-				Orientation = Direction::Gauche;
+				Orientation = Direction::Left;
 			else
-				Orientation = Direction::Haut;
+				Orientation = Direction::Up;
 		}
 		else if (Delta.x >= 0 && Delta.y < 0)
 		{
 			if (Delta.x > -(Delta.y))
-				Orientation = Direction::Droite;
+				Orientation = Direction::Right;
 			else
-				Orientation = Direction::Haut;
+				Orientation = Direction::Up;
 		}
 		else if (Delta.x < 0 && Delta.y >= 0)
 		{
 			if (-(Delta.x) > Delta.y)
-				Orientation = Direction::Gauche;
+				Orientation = Direction::Left;
 			else
-				Orientation = Direction::Bas;
+				Orientation = Direction::Down;
 		}
 
 		if (Delta.x < 0)
 		{
-			Gauche = true;
-			Droite = false;
+			Left = true;
+			Right = false;
 		}
 		else if (Delta.x > 0)
 		{
-			Gauche = false;
-			Droite = true;
+			Left = false;
+			Right = true;
 		}
 
 		if (Delta.y < 0)
 		{
-			Haut = true;
-			Bas = false;
+			Up = true;
+			Down = false;
 		}
 		else if (Delta.y > 0)
 		{
-			Haut = false;
-			Bas = true;
+			Up = false;
+			Down = true;
 		}
 		if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width / 2, getSprite("Hero").getGlobalBounds().width / 2))
 			MState.State_Fight(&_player, this);
 	}
 	else
 	{
-		Gauche = false;
-		Droite = false;
-		Haut = false;
-		Bas = false;
+		Left = false;
+		Right = false;
+		Up = false;
+		Down = false;
 	}
 	
 	Colision_Rect = IntRect(Vector2i(Position.x, Position.y - Colision_Rect.height), Vector2i(Colision_Rect.width, Colision_Rect.height));
@@ -125,11 +125,11 @@ void Npc::Update_Attack(Hero& _player)
 void Npc::Update_Dialogue(bool& _dial, Hero _player)
 {
 	if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width, getSprite("Hero").getGlobalBounds().width)
-		&& _player.Get_Interact() == true && &dial != nullptr)
+		&& _player.Get_Interact() == true && &dialogue != nullptr)
 		_dial = true;
 
 	if (IsDialogue)
-		dial.Update(_dial);
+		dialogue.Update(_dial);
 
 	IsDialogue = _dial;
 }
@@ -143,29 +143,29 @@ void Npc::Display_Fight(Vector2f _scale)
 void Npc::Display_Dialogue()
 {
 	if (IsDialogue)
-		dial.Display();
+		dialogue.Display();
 }
 
 void Npc::Display()
 {
-	if (Droite == false && Gauche == false && Haut == false && Bas == false)
+	if (Right == false && Left == false && Up == false && Down == false)
 	{
-		if (Orientation == Direction::Droite)
+		if (Orientation == Direction::Right)
 		{
 			Beat_Right.Animation(getSprite(Name));
 			getSprite(Name).setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Gauche)
+		else if (Orientation == Direction::Left)
 		{
 			Beat_Right.Animation(getSprite(Name));
 			getSprite(Name).setScale(Vector2f(-1, 1));
 		}
-		else if (Orientation == Direction::Bas)
+		else if (Orientation == Direction::Down)
 		{
 			Beat_Down.Animation(getSprite(Name));
 			getSprite(Name).setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Haut)
+		else if (Orientation == Direction::Up)
 		{
 			Beat_Top.Animation(getSprite(Name));
 			getSprite(Name).setScale(Vector2f(1, 1));
@@ -173,22 +173,22 @@ void Npc::Display()
 	}
 	else
 	{
-		if (Orientation == Direction::Droite)
+		if (Orientation == Direction::Right)
 		{
 			Walk_Right.Animation(getSprite(Name));
 			getSprite(Name).setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Gauche)
+		else if (Orientation == Direction::Left)
 		{
 			Walk_Right.Animation(getSprite(Name));
 			getSprite(Name).setScale(Vector2f(-1, 1));
 		}
-		else if (Orientation == Direction::Bas)
+		else if (Orientation == Direction::Down)
 		{
 			Walk_Down.Animation(getSprite(Name));
 			getSprite(Name).setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Haut)
+		else if (Orientation == Direction::Up)
 		{
 			Walk_Top.Animation(getSprite(Name));
 			if (Delta.x > 0)

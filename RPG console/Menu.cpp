@@ -385,7 +385,7 @@ Bouton_Load::Bouton_Load(Vector2f _position, string _name, int _num)
 		texte.push_back(Text(Name, getFont("Times"), 30));
 		texte.back().setPosition(Vector2f(_position.x + 350, _position.y + 10));
 
-		texte.push_back(Text(Niveau, getFont("Times"), 30));
+		texte.push_back(Text(Level, getFont("Times"), 30));
 		texte.back().setPosition(Vector2f(_position.x + 600, _position.y + 10));
 
 		texte.push_back(Text(Time, getFont("Times"), 30));
@@ -398,7 +398,7 @@ void Bouton_Load::Load()
 	string line = "0";
 
 	Name = "Name : ----";
-	Niveau = "Niveau : --";
+	Level = "Level : --";
 	Time = "Time : --h --m";
 
 	ifstream Load("../Ressources/Infos/Save" + to_string(Numero) + ".txt");
@@ -409,8 +409,8 @@ void Bouton_Load::Load()
 			if (line.substr(0, line.find(" : ")) == "Name")
 				Name = line;
 
-			if (line.substr(0, line.find(" : ")) == "Niveau")
-				Niveau = line;
+			if (line.substr(0, line.find(" : ")) == "Level")
+				Level = line;
 
 			if (line.substr(0, line.find(" : ")) == "Time")
 			{

@@ -17,7 +17,7 @@ StateManager::StateManager()
 	LoadSprite();
 	LoadFont();
 	LoadMap();
-	Dialogues = Dialogue_Container();
+	Dialogues.init();
 }
 
 void StateManager::KeyboardEnter()

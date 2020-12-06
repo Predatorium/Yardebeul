@@ -1,4 +1,5 @@
 #include "Dialogue.h"
+#include "Dialogue_Container.h"
 #include "FontManager.h"
 
 Dialogue::Dialogue(string _id, string _dialogue, float _sizeTexte, list<Dialogue_Button> &_answer)
@@ -76,11 +77,16 @@ void Dialogue::Update(bool& _dialogue)
 			if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
 			{
 				if (Current_Button.Get_Dial() == nullptr)
+				{
+					Id.pop_back();
+					*this = Dialogues.Get_Dialogue(Id + to_string(1));
 					_dialogue = false;
+				}
 				else
 					*this = *Current_Button.Get_Dial();
 
 				timer = 0;
+				break;
 			}
 		}
 		else

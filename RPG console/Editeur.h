@@ -5,7 +5,7 @@
 #include "Views.h"
 #include "HUD_Editor.h"
 
-class Editeur : public Niveau
+class Editeur : public Level
 {
 private :
 	HUD_Editor Hud;

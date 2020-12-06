@@ -9,20 +9,20 @@ Hero::Hero(Vector2f _position)
 	if (SpriteList.size() > 0)
 	{
 		Name = "Francis";
-		Niveau = 1;
-		Point_de_vie = 20;
+		Level = 1;
+		Life_Point = 20;
 		Mana = 50;
 		Endurance = 20;
-		Santé_mentale = 100;
-		Vitesse = 20;
-		Point_Capacité = 1;
+		Mental_Health = 100;
+		Speed = 30;
+		Capacity_Point = 1;
 
 		Xp_Total = 0;
-		Xp_Niveau = 0;
+		Xp_Level = 0;
 		Next_Niveau = 0;
-		Arme = new Weapon(Weapons.Get_Weapon("Epee de feu"));
-		Armure = NULL;
-		Argent = 0;
+		weapon = new Weapon(Weapons.Get_Weapon("Epee de feu"));
+		armor = NULL;
+		Gold = 0;
 		Time = 0;
 
 		Position = _position;
@@ -35,15 +35,15 @@ Hero::Hero(Vector2f _position)
 				Tableau_Niveau[i] = (log(i) * ((double)5 * i) + 5);
 		}
 
-		Next_Niveau = Tableau_Niveau[Niveau] - Xp_Niveau;
+		Next_Niveau = Tableau_Niveau[Level] - Xp_Level;
 
-		Droite = false;
-		Gauche = false;
-		Bas = false;
-		Haut = false;
+		Right = false;
+		Left = false;
+		Down = false;
+		Up = false;
 		Interaction = false;
 
-		Orientation = Direction::Droite;
+		Orientation = Direction::Right;
 
 		Walk_Down = Animator(IntRect(331, 21, 23, 35), 6, 0.15f);
 		Walk_Right = Animator(IntRect(331, 57, 24, 33), 6, 0.15f);
@@ -65,51 +65,51 @@ int Hero::Pourcentage_Niveau()
 {
 	float Resultat_pourcentage = 0;
 
-	if (Niveau == 10)
+	if (Level == 10)
 		Resultat_pourcentage = 100;
 	
 	else
-		Resultat_pourcentage = (Xp_Niveau / Next_Niveau) * 100;
+		Resultat_pourcentage = (Xp_Level / Next_Niveau) * 100;
 
 	return Resultat_pourcentage;
 }
 
 void Hero::Gain_Xp(float _gainxp)
 {
-	if (Niveau < 10)
+	if (Level < 10)
 	{
-		Xp_Niveau += _gainxp;
+		Xp_Level += _gainxp;
 		Xp_Total += _gainxp;
 	}
 }
 
 void Hero::Passage_Niveau()
 {
-	if (Xp_Niveau >= Tableau_Niveau[Niveau] && Niveau < 10)
+	if (Xp_Level >= Tableau_Niveau[Level] && Level < 10)
 	{
-		while (Xp_Niveau >= Tableau_Niveau[Niveau] && Niveau < 10)
+		while (Xp_Level >= Tableau_Niveau[Level] && Level < 10)
 		{
-			Xp_Niveau -= Tableau_Niveau[Niveau];
-			Niveau++;
-			Point_Capacité++;
+			Xp_Level -= Tableau_Niveau[Level];
+			Level++;
+			Capacity_Point++;
 		}
 
-		if (Niveau >= 10)
+		if (Level >= 10)
 		{
-			Niveau = 10;
-			Xp_Niveau = 0;
+			Level = 10;
+			Xp_Level = 0;
 			Next_Niveau = 0;
 		}
 		else
-			Next_Niveau = Tableau_Niveau[Niveau] - Xp_Niveau;
+			Next_Niveau = Tableau_Niveau[Level] - Xp_Level;
 	}
 
-	if (Niveau < 10)
+	if (Level < 10)
 	{
-		cout << "Experience du niveau actuel "<< Xp_Niveau << "/" << Tableau_Niveau[Niveau] << " xp." << endl;
+		cout << "Experience du niveau actuel "<< Xp_Level << "/" << Tableau_Niveau[Level] << " xp." << endl;
 		cout << "Il reste : " << Next_Niveau << " Xp pour passer au niveau suivant." << endl;
 	}
-	cout << "Niveau Actuel : " << Get_Niveau() << " ." << endl;
+	cout << "Level Actuel : " << Get_Level() << " ." << endl;
 	cout << Pourcentage_Niveau() << " %." << endl << endl;
 
 	system("pause");
@@ -117,20 +117,20 @@ void Hero::Passage_Niveau()
 
 void Hero::Affectation_Stat(Effect _effet)
 {
-	if (_effet.Get_Affectation() == Affect_Stat::PV)
-		Point_de_vie += _effet.Get_Puissance();
+	if (_effet.Get_Affectation() == Affect_Stat::LIFE_POINT)
+		Life_Point += _effet.Get_Power();
 
 	if (_effet.Get_Affectation() == Affect_Stat::MANA)
-		Mana += _effet.Get_Puissance();
+		Mana += _effet.Get_Power();
 
-	if (_effet.Get_Affectation() == Affect_Stat::SANTE_MENTAL)
-		Santé_mentale += _effet.Get_Puissance();
+	if (_effet.Get_Affectation() == Affect_Stat::MENTAL_HEALTH)
+		Mental_Health += _effet.Get_Power();
 
-	if (_effet.Get_Affectation() == Affect_Stat::VITESSE)
-		Vitesse += _effet.Get_Puissance();
+	if (_effet.Get_Affectation() == Affect_Stat::SPEED)
+		Speed += _effet.Get_Power();
 
 	if (_effet.Get_Affectation() == Affect_Stat::ENDURANCE)
-		Endurance += _effet.Get_Puissance();
+		Endurance += _effet.Get_Power();
 
 }
 
@@ -138,29 +138,29 @@ void Hero::Amelioration_stat()
 {
 	int Choix = 0;
 	system("CLS");
-	cout << "Tu as " << Point_Capacité << " point de capacite." << endl;
-	cout << "Souhaite-tu en depense dans" << endl << "1 : Point de vie" << endl << "2 : Mana" << endl << "3 : Endurance" << endl << "4 : Vitesse" << endl;
+	cout << "Tu as " << Capacity_Point << " point de capacite." << endl;
+	cout << "Souhaite-tu en depense dans" << endl << "1 : Point de vie" << endl << "2 : Mana" << endl << "3 : Endurance" << endl << "4 : Speed" << endl;
 	cin >> Choix;
 
 	if (Choix == 1)
 	{
-		Point_de_vie += 1 * 5;
-		Point_Capacité--;
+		Life_Point += 1 * 5;
+		Capacity_Point--;
 	}
 	else if (Choix == 2)
 	{
 		Mana += 1 * 5;
-		Point_Capacité--;
+		Capacity_Point--;
 	}
 	else if (Choix == 3)
 	{
 		Endurance += 1 * 3;
-		Point_Capacité--;
+		Capacity_Point--;
 	}
 	else if (Choix == 4)
 	{
-		Vitesse += 1 * 2;
-		Point_Capacité--;
+		Speed += 1 * 2;
+		Capacity_Point--;
 	}
 	else
 		CinNumberCheck("Fait un effort");
@@ -171,46 +171,46 @@ void Hero::Update(Vector2i _limitMap)
 	//Passage_Niveau();
 	//Amelioration_stat();
 
-	if (Gauche == true)
+	if (Left == true)
 	{
 		Position.x -= 200 * MainTime.GetTimeDeltaF();
-		Orientation = Direction::Gauche;
+		Orientation = Direction::Left;
 	}
-	if (Droite == true)
+	if (Right == true)
 	{
 		Position.x += 200 * MainTime.GetTimeDeltaF();
-		Orientation = Direction::Droite;
+		Orientation = Direction::Right;
 	}
-	if (Haut == true)
+	if (Up == true)
 	{
 		Position.y -= 200 * MainTime.GetTimeDeltaF();
-		Orientation = Direction::Haut;
+		Orientation = Direction::Up;
 	}
-	if (Bas == true)
+	if (Down == true)
 	{
 		Position.y += 200 * MainTime.GetTimeDeltaF();
-		Orientation = Direction::Bas;
+		Orientation = Direction::Down;
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Q) && Position.x > Colision_Rect.width)
-		Gauche = true;
+		Left = true;
 	else
-		Gauche = false;
+		Left = false;
 
 	if (Keyboard::isKeyPressed(Keyboard::D) && Position.x < (_limitMap.x * Taille_tile) - Colision_Rect.width)
-		Droite = true;
+		Right = true;
 	else
-		Droite = false;
+		Right = false;
 
 	if (Keyboard::isKeyPressed(Keyboard::S) && Position.y < ((_limitMap.y - 1) * Taille_tile) - Colision_Rect.height)
-		Bas = true;
+		Down = true;
 	else
-		Bas = false;
+		Down = false;
 
 	if (Keyboard::isKeyPressed(Keyboard::Z) && Position.y > Colision_Rect.height / 2)
-		Haut = true;
+		Up = true;
 	else
-		Haut = false;
+		Up = false;
 
 	if (Keyboard::isKeyPressed(Keyboard::E))
 		Interaction = true;
@@ -231,24 +231,24 @@ void Hero::Display()
 {
 	Time += MainTime.GetTimeDeltaF();
 
-	if (Droite == false && Gauche == false && Haut == false && Bas == false)
+	if (Right == false && Left == false && Up == false && Down == false)
 	{
-		if (Orientation == Direction::Droite)
+		if (Orientation == Direction::Right)
 		{
 			Beat_Right.Animation(getSprite("Hero"));
 			getSprite("Hero").setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Gauche)
+		else if (Orientation == Direction::Left)
 		{
 			Beat_Right.Animation(getSprite("Hero"));
 			getSprite("Hero").setScale(Vector2f(-1, 1));
 		}
-		else if (Orientation == Direction::Bas)
+		else if (Orientation == Direction::Down)
 		{
 			Beat_Down.Animation(getSprite("Hero"));
 			getSprite("Hero").setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Haut)
+		else if (Orientation == Direction::Up)
 		{
 			Beat_Top.Animation(getSprite("Hero"));
 			getSprite("Hero").setScale(Vector2f(1, 1));
@@ -256,25 +256,25 @@ void Hero::Display()
 	}
 	else
 	{
-		if (Orientation == Direction::Droite)
+		if (Orientation == Direction::Right)
 		{
 			Walk_Right.Animation(getSprite("Hero"));
 			getSprite("Hero").setScale(Vector2f(1, 1));
 			getSprite("Hero").setOrigin(Vector2f(12, 16.5));
 		}
-		else if (Orientation == Direction::Gauche)
+		else if (Orientation == Direction::Left)
 		{
 			Walk_Right.Animation(getSprite("Hero"));
 			getSprite("Hero").setScale(Vector2f(-1, 1));
 			getSprite("Hero").setOrigin(Vector2f(12, 16.5));
 		}
-		else if (Orientation == Direction::Bas)
+		else if (Orientation == Direction::Down)
 		{
 			Walk_Down.Animation(getSprite("Hero"));
 			getSprite("Hero").setScale(Vector2f(1, 1));
 			getSprite("Hero").setOrigin(Vector2f(10.5, 17.5));
 		}
-		else if (Orientation == Direction::Haut)
+		else if (Orientation == Direction::Up)
 		{
 			Walk_Top.Animation(getSprite("Hero"));
 			getSprite("Hero").setScale(Vector2f(1, 1));

@@ -1,31 +1,21 @@
 #include "Armor.h"
+#include "SpriteManager.h"
 
-Armor::Armor()
+Armor::Armor(int _defense, int _durability, string _name, int _price, Effect _effect)
+	: Item(_name, _price, _effect)
 {
-	Defenses = 0;
-	Durabilités = 0;
+	Defense = _defense;
+	Durability = _durability;
 }
 
-Armor::Armor(int _defense, int _durabilité, string _name, int _prix, Effect _effet)
+Armor::Armor(const Armor& _armor, Vector2f _position)
 {
-	Name = _name;
-	Prix = _prix;
-	effet = _effet;
-	Defenses = _defense;
-	Durabilités = _durabilité;
+	*this = _armor;
+	Position = _position;
 }
 
-Armor::~Armor()
+void Armor::Display()
 {
-}
-
-void Armor::Display_Stat()
-{
-	cout << Name << endl;
-	cout << Prix << endl;
-
-	cout << Defenses << endl;
-	cout << Durabilités << endl;
-
-	effet.Display_Stat();
+	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
+	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(""))));
 }

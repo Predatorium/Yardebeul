@@ -17,16 +17,16 @@ Consumable Consumables_Container::Get_Consumable(string _name)
 
 void Consumables_Container::Save()
 {
-	ofstream Save_Consumable("../Ressources/Containers/Consumable.txt");
+	ofstream Save_Consumable("../Ressources/Container/Consumable.txt");
 	if (Save_Consumable.is_open())
 	{
-		for (list<Consumable>::iterator Current_Weapon = Container.begin(); Current_Weapon != Container.end(); Current_Weapon++)
+		for (list<Consumable>::iterator Current = Container.begin(); Current != Container.end(); Current++)
 		{
-			Save_Consumable << Current_Weapon->Get_Name() << " ";
-			Save_Consumable << to_string(Current_Weapon->Get_Prix()) << " ";
-			Save_Consumable << Current_Weapon->Get_Effet().Get_Name();
+			Save_Consumable << Current->Get_Name() << " ";
+			Save_Consumable << to_string(Current->Get_Price()) << " ";
+			Save_Consumable << Current->Get_Effect().Get_Name();
 
-			if (Current_Weapon != Container.end())
+			if (Current != Container.end())
 				Save_Consumable << endl;
 		}
 		Save_Consumable.close();
@@ -36,7 +36,7 @@ void Consumables_Container::Save()
 
 void Consumables_Container::Load()
 {
-	ifstream Load_Consumable("../Ressources/Containers/Consumable.txt");
+	ifstream Load_Consumable("../Ressources/Container/Consumable.txt");
 	if (Load_Consumable.is_open())
 	{
 		string line = "0";
@@ -55,7 +55,7 @@ void Consumables_Container::Load()
 			tmpname_effect = line;
 			line.erase(0, line.size());
 
-			Container.push_back(Consumable(tmpname, tmpprix, Effects.Get_Effet(tmpname_effect)));
+			Container.push_back(Consumable(tmpname, tmpprix, Effects.Get_Effect(tmpname_effect)));
 		}
 
 		Load_Consumable.close();

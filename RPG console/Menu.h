@@ -13,7 +13,7 @@ private:
 	Sprite sprite;
 	string Name;
 	string Time;
-	string Niveau;
+	string Level;
 	int Numero;
 
 public:

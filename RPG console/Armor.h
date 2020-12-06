@@ -4,16 +4,20 @@
 class Armor : public Item
 {
 private : 
-	int Defenses;
-	int Durabilités;
+	int Defense;
+	int Durability;
 
 public :
-	Armor();
-	Armor(int _defense, int _durabilité, string _name, int _prix, Effect _effet);
-	~Armor();
+	Armor() = default;
+	Armor(int _defense, int _durability, string _name, int _price, Effect _effect);
+	Armor(const Armor& _armor, Vector2f _position);
+	~Armor() = default;
 
-	inline int Get_Defenses() { return Defenses; };
-	inline int Get_Durabilité() { return Durabilités; };
+	inline int Get_Defense() { return Defense; };
+	inline int Get_Durability() { return Durability; };
 
-	virtual void Display_Stat();
+	bool operator == (const Armor& _a) const { return Name == _a.Name; }
+	bool operator != (const Armor& _a) const { return !operator==(_a); }
+
+	virtual void Display();
 };

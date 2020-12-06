@@ -5,24 +5,25 @@
 class Item
 {
 protected :
-	Effect effet;
+	Effect effect;
+	Vector2f Position;
 	string Name;
-	int Prix;
+	int Price;
 
 public :
-	Item();
-	Item(string _name, int _prix, Effect _effet);
-	~Item();
+	Item() = default;
+	Item(string _name, int _price, Effect _effect);
+	~Item() = default;
 	
+	inline Effect Get_Effect() { return effect; };
+	inline Vector2f Get_Position() { return Position; };
 	inline string Get_Name() { return Name; };
-	inline int Get_Prix() { return Prix; };
-	inline Effect Get_Effet() { return effet; };
+	inline int Get_Price() { return Price; };
 
+	inline void Set_Effect(Effect _effect) { effect = _effect; };
+	inline void Set_Position(Vector2f _position) { Position = _position; };
 	inline void Set_Name(string _name) { Name = _name; };
-	inline void Set_Prix(int _prix) { Prix = _prix; };
-	inline void Set_Effet(Effect _effet) { effet = _effet; };
+	inline void Set_Price(int _price) { Price = _price; };
 
-	virtual void Display_Stat() = 0;
+	virtual void Display() = 0;
 };
-
-void Display_StatFull(Item& _o);

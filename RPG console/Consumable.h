@@ -6,9 +6,13 @@ class Consumable : public Item
 protected :
 
 public :
-	Consumable();
-	Consumable(string _name, int _prix, Effect _effet);
-	~Consumable();
+	Consumable() = default;
+	Consumable(string _name, int _price, Effect _effect);
+	Consumable(const Consumable& _consumable, Vector2f _position);
+	~Consumable() = default;
 
-	virtual void Display_Stat();
+	bool operator == (const Consumable& _c) const { return Name == _c.Name; }
+	bool operator != (const Consumable& _c) const { return !operator==(_c); }
+
+	virtual void Display();
 };

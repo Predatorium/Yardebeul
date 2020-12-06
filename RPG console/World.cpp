@@ -19,6 +19,7 @@ World::World()
 
 		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), 7, 20, 25, Comportement::Amical));
 		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), 7, 20, 25, Comportement::Agressif));
+		NpcList.push_back(Npc("Knucles", Vector2f(800, 200), 7, 20, 25, Comportement::Agressif));
 
 		Save = false;
 		Load = true;
@@ -93,7 +94,7 @@ void World::ScreenShot(int _party)
 void World::Destroy_Npc()
 {
 	for (Npc& Current_Npc : NpcList)
-		if (Current_Npc.Get_HP() == 0)
+		if (Current_Npc.Get_LifePoint() == 0)
 		{
 			NpcList.remove(Current_Npc);
 			break;

@@ -10,7 +10,7 @@ public :
 	Effects_Container();
 	~Effects_Container() = default;
 
-	Effect Get_Effet(string _name);
+	Effect Get_Effect(string _name);
 	
 	void Save();
 	void Load();

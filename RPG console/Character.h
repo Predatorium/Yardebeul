@@ -4,10 +4,10 @@
 
 enum class Direction
 {
-	Haut,
-	Bas,
-	Gauche,
-	Droite,
+	Up,
+	Down,
+	Left,
+	Right,
 };
 
 class Character
@@ -16,10 +16,10 @@ protected :
 	Vector2f Position;
 	Direction Orientation;
 
-	bool Droite;
-	bool Gauche;
-	bool Bas;
-	bool Haut;
+	bool Right;
+	bool Left;
+	bool Down;
+	bool Up;
 
 	Animator Walk_Right;
 	Animator Walk_Top;
@@ -32,15 +32,15 @@ protected :
 	IntRect Colision_Rect;
 
 	string Name;
-	int Niveau;
-	int Point_de_vie;
+	int Level;
+	int Life_Point;
 	int Mana;
 	int Endurance;
-	int Santé_mentale;
-	int Vitesse;
+	int Mental_Health;
+	int Speed;
 
 public :
-	Character();
+	Character() = default;
 	Character(string _name);
 	~Character() = default;
 
@@ -48,32 +48,32 @@ public :
 	inline Vector2f Get_Position() { return Position; };
 	inline Direction Get_Orientation() { return Orientation; };
 	inline string Get_Name() { return Name; };
-	inline int Get_Niveau() { return Niveau; };
-	inline int& Get_HP() { return Point_de_vie; };
+	inline int Get_Level() { return Level; };
+	inline int& Get_LifePoint() { return Life_Point; };
 	inline int Get_Mana() { return Mana; };
 	inline int Get_Endurance() { return Endurance; };
-	inline int Get_SanteMental() { return Santé_mentale; };
-	inline int Get_Vitesse() { return Vitesse; };
-	inline bool Get_Gauche() { return Gauche; };
-	inline bool Get_Droite() { return Droite; };
-	inline bool Get_Haut() { return Haut; };
-	inline bool Get_Bas() { return Bas; };
+	inline int Get_MentalHealth() { return Mental_Health; };
+	inline int Get_Speed() { return Speed; };
+	inline bool Get_Left() { return Left; };
+	inline bool Get_Right() { return Right; };
+	inline bool Get_Up() { return Up; };
+	inline bool Get_Down() { return Down; };
 	inline Animator& Get_BeatRight() { return Beat_Right; };
 	inline Animator& Get_BeatDown() { return Beat_Down; };
 
-	inline void Set_Gauche(bool _bool) { Gauche = _bool; };
-	inline void Set_Droite(bool _bool) { Droite = _bool; };
-	inline void Set_Haut(bool _bool) { Haut = _bool; };
-	inline void Set_Bas(bool _bool) { Bas = _bool; };
+	inline void Set_Left(bool _bool) { Left = _bool; };
+	inline void Set_Right(bool _bool) { Right = _bool; };
+	inline void Set_Up(bool _bool) { Up = _bool; };
+	inline void Set_Down(bool _bool) { Down = _bool; };
 	inline void Set_Orientation(Direction _orientation) { Orientation = _orientation; };
 	inline void Set_Position(Vector2f _position) { Position = _position; };
 	inline void Set_Name(string _name) { Name = _name; };
-	inline void Set_Niveau(int _niveau) { Niveau = _niveau; };
-	inline void Set_Vie(int _vie) { Point_de_vie = _vie; };
+	inline void Set_Level(int _level) { Level = _level; };
+	inline void Set_Life(int _life) { Life_Point = _life; };
 	inline void Set_Mana(int _mana) { Mana = _mana; };
 	inline void Set_Endurance(int _endurance) { Endurance = _endurance; };
-	inline void Set_SanteMental(int _santémental) { Santé_mentale = _santémental; };
-	inline void Set_Vitesse(int _vitesse) { Vitesse = _vitesse; };
+	inline void Set_MentalHealth(int _mentalhealth) { Mental_Health = _mentalhealth; };
+	inline void Set_Speed(int _speed) { Speed = _speed; };
 
 	virtual void Display() = 0;
 };

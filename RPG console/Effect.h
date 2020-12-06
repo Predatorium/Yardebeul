@@ -10,10 +10,10 @@ enum class Range_Effect : int
 
 enum class Affect_Stat : int
 {
-	PV,
+	LIFE_POINT,
 	MANA,
-	SANTE_MENTAL,
-	VITESSE,
+	MENTAL_HEALTH,
+	SPEED,
 	ENDURANCE
 };
 
@@ -24,27 +24,25 @@ private:
 	Range_Effect Range;
 	Affect_Stat Stat;
 	string Name;
-	int Puissance;
-	float Durée;
+	int Power;
+	int Duration;
 
 public :
-	Effect();
+	Effect() = default;
 	Effect(string _name, Element _element, Range_Effect _range, Affect_Stat _state, int _puissance, float _durée);
-	~Effect();
+	~Effect() = default;
 
 	inline Element Get_Element() { return Type_Element; };
 	inline Range_Effect Get_Range() { return Range; };
 	inline Affect_Stat Get_Affectation() { return Stat; };
 	inline string Get_Name() { return Name; };
-	inline int Get_Puissance() { return Puissance; };
-	inline float Get_Durée() { return Durée; };
+	inline int Get_Power() { return Power; };
+	inline int Get_Duration() { return Duration; };
 
 	inline void Set_Element(Element _element) { Type_Element = _element; };
 	inline void Set_Range(Range_Effect _range) { Range = _range; };
 	inline void Set_Affectation(Affect_Stat _affectation) { Stat = _affectation; };
 	inline void Set_Name(string _name) { Name = _name; };
-	inline void Set_Puissance(int _puissance) { Puissance = _puissance; };
-	inline void Set_Durée(float _durée) { Durée = _durée; };
-
-	void Display_Stat();
+	inline void Set_Power(int _power) { Power = _power; };
+	inline void Set_Duration(float _duration) { Duration = _duration; };
 };

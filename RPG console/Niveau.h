@@ -10,7 +10,7 @@
 
 class Menu;
 
-class Niveau
+class Level
 {
 protected :
 	vector<Maps> Back_Layer;
@@ -35,8 +35,8 @@ protected :
 	bool IsDialogue;
 
 public :
-	Niveau() = default;
-	~Niveau() = default;
+	Level() = default;
+	~Level() = default;
 
 	inline vector<Maps> Get_BaLayer() { return Back_Layer; };
 	inline vector<Maps> Get_PlLayer() { return Player_Layer; };
