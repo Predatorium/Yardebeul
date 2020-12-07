@@ -73,6 +73,7 @@ void Level::Collision(Character& _Character)
 void Level::Load_Map(string _file)
 {
 	Back_Layer.clear();
+	Deco_Layer.clear();
 	Player_Layer.clear();
  	Front_Layer.clear();
 	NpcList.clear();

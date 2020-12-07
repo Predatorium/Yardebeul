@@ -1,6 +1,7 @@
 #include "HUD_Editor.h"
 #include "StateManager.h"
 #include "FontManager.h"
+#include "SpriteManager.h"
 
 HUD_Editor::HUD_Editor()
 {
@@ -12,6 +13,7 @@ HUD_Editor::HUD_Editor()
 		Current_Rank = 1;
 		Timer = 0;
 		Current_Biome = Biomes::Prairie;
+		Current_Npc = 0;
 
 		Tile_Select.setSize(Vector2f(28, 28));
 		Tile_Select.setFillColor(Color::Transparent);
@@ -136,15 +138,60 @@ void HUD_Editor::Interaction_NPC(Vector2f _mouse)
 			for (Button_Text& Current_Button : Button)
 				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
 				{
-					if (Current_Button.Get_Name() == "NPC" && Timer > 0.2f)
+					if (Current_Button.Get_Name() == "NPC")
 					{
-						NPC_Select = true;
-						Selection.Set_Name("NPC");
 						IsSelect = false;
+						Selection.Set_Name("NPC");
 						Current_Layer = 3;
-						Timer = 0;
+					}
+					else
+					{
+						NpcSelect = false;
+						IsSelect = false;
+						Selection.Set_Name("Rien");
 					}
 				}
+}
+
+void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, View _view)
+{
+	bool findNpc = false;
+	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
+	{
+		if (!(Menu.getGlobalBounds().contains(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), _view))))
+		{
+			int i = 0;
+			for (Npc& Current : _npc)
+			{
+				if (FloatRect(Current.Get_Position().x - Current.Get_ColisionRect().width / 2, Current.Get_Position().y - Current.Get_ColisionRect().height, Current.Get_ColisionRect().width, Current.Get_ColisionRect().height * 2).contains(_mouse))
+				{
+					Current_Npc = i;
+					Modi_Npc.clear();
+					Modi_Npc.push_back(Button_Text("Name", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 50), Color::White));
+					Modi_Npc.push_back(Button_Text("Life", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 100), Color::White));
+					Modi_Npc.push_back(Button_Text("Level", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 150), Color::White));
+					Modi_Npc.push_back(Button_Text("Attitude", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 200), Color::White));
+					Modi_Npc.push_back(Button_Text("Dialogue", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 250), Color::White));
+					NpcSelect = true;
+					findNpc = true;
+				}
+				i++;
+			}
+		}
+		else if (Modi_Npc.size() > 0 && !Menu_Npc.getGlobalBounds().contains(Vector2f(_mouse)))
+			Modi_Npc.clear();
+
+		if (!findNpc && Selection.Get_Name() == "NPC" && Timer > 0.2f)
+		{
+			_npc.push_back(Npc("Fairy", _mouse, 1, 10, 20, Comportement::Neutre));
+			Timer = 0;
+		}
+	}
+
+	for (Button_Text& Current : Modi_Npc)
+	{
+
+	}
 }
 
 void HUD_Editor::Interaction_Biome(Vector2f _mouse)
@@ -275,6 +322,9 @@ void HUD_Editor::Interaction_Tile(Vector2f _mouse)
 				if (FloatRect(Actual_Select.Get_Position().x, Actual_Select.Get_Position().y, Taille_tile, Taille_tile).contains(_mouse) &&
 					(Actual_Select.Get_Rank() == Current_Rank || Actual_Select.Get_Rank() == Current_Rank + 1))
 				{
+					if (Selection.Get_Name() == "NPC")
+						Modi_Npc.clear();
+
 					Selection.Set_Biome(Actual_Select.Get_Biome());
 					Selection.Set_Name(Actual_Select.Get_Name());
 					Selection.Set_Tile(Actual_Select.Get_Tile());
@@ -327,9 +377,19 @@ void HUD_Editor::Display_Tilemenu()
 			Current_Tile.display();
 }
 
+void HUD_Editor::Display_NpcModif()
+{
+	if (NpcSelect)
+		for (Button_Text& Current : Modi_Npc)
+			Current.Display();
+}
+
 void HUD_Editor::Display_MenuShape()
 {
 	App.Get_Window().draw(Menu);
+
+	if (NpcSelect)
+		App.Get_Window().draw(Menu_Npc);
 }
 
 void HUD_Editor::Display_Move()
@@ -351,7 +411,7 @@ void HUD_Editor::Display_ButtonRank()
 		Current_Button.Display();
 }
 
-void HUD_Editor::Display_ButtonMenuAndTest(bool _player)
+void HUD_Editor::Display_ButtonText(bool _player)
 {
 	for (Button_Text& Current_Button : Button)
 	{

@@ -16,7 +16,6 @@ private :
 	RectangleShape Grille;
 
 	Vector2f Mouse_Position;
-	Vector2i position;
 
 	bool Save_New_Map;
 	bool App_Grille;

@@ -103,11 +103,10 @@ void Editeur::LoadNewMap()
 void Editeur::Set_MousePos(Vector2f _position)
 {
 	Mouse_Position = _position;
-	position = Vector2i(Mouse_Position.x / Taille_tile, Mouse_Position.y / Taille_tile);
-	if (Mouse_Position.x < 0)
-		position.x--;
-	if (Mouse_Position.y < 0)
-		position.y--;
+	if (_position.x < 0)
+		Mouse_Position.x -= 32;
+	if (_position.y < 0)
+		Mouse_Position.y -= 32;
 }
 
 void Editeur::Move_Map(int _coloulig, int _ajoures)
@@ -233,12 +232,6 @@ void Editeur::Interaction_Map()
 				Set_Map(Player_Layer);
 			if (Hud.Get_Layer() == 4)
 				Set_Map(Front_Layer);
-
-			if (position.y == -1)
-				Range_Niveau.y++;
-
-			if (position.x == -1)
-				Range_Niveau.x++;
 		}
 
 	if (Keyboard::isKeyPressed(Keyboard::G) && Timer > 0.2f)
@@ -260,7 +253,6 @@ void Editeur::Set_Map(vector<Maps> &_layer)
 			{
 				Current_Map.Set_Actif(false);
 				Erase_Map();
-				Resize_Map();
 				FindMap = true;
 			}
 			else if (Hud.Get_Selection().Get_Name() != "NPC")
@@ -272,25 +264,11 @@ void Editeur::Set_Map(vector<Maps> &_layer)
 			}
 		}
 
-	for (Npc& Current : NpcList)
-	{
-		if (FloatRect(Current_Map.Get_Position().x, Current_Map.Get_Position().y, Taille_tile, Taille_tile).contains(Mouse_Position))
-		{
-			FindMap = true;
-		}
-	}
-
 	if (Hud.Get_Selection().Get_Name() != "Rien" && Mouse_Position.x <= (Range_Niveau.x + 1) * Taille_tile &&
-		Mouse_Position.y <= (Range_Niveau.y + 1) * Taille_tile && Mouse_Position.x >= -32 && Mouse_Position.y >= -32)
-	{
+		Mouse_Position.y <= (Range_Niveau.y + 1) * Taille_tile && Mouse_Position.x >= -64 && Mouse_Position.y >= -64)
 		if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC")
-			_layer.push_back(Maps(Vector2f(position.x * Taille_tile, position.y * Taille_tile), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
-		if (!FindMap && Hud.Get_Selection().Get_Name() == "NPC" && Timer > 0.2f)
-		{
-			NpcList.push_back(Npc("Fairy", Mouse_Position, 1, 10, 20, Comportement::Neutre));
-			Timer = 0;
-		}
-	}
+			_layer.push_back(Maps(Vector2f(static_cast<int>(Mouse_Position.x / Taille_tile) * Taille_tile, (static_cast<int>(Mouse_Position.y / Taille_tile) * Taille_tile)), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
+
 }
 
 void Editeur::Erase_Map()
@@ -334,12 +312,12 @@ void Editeur::Update()
 		Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue.Get_View()));
 
 		Interaction_Map();
+		Hud.Set_Npc(Mouse_Position, NpcList, Screen.Get_View());
 
 		Set_MousePos(Vector2f(Mouse::getPosition(App.Get_Window())));
 
 		Hud.Interaction_Biome(Mouse_Position);
 		Hud.Interaction_Tile(Mouse_Position);
-
 		Hud.Interaction_NPC(Mouse_Position);
 		Hud.Interaction_SaveAndLoad(Mouse_Position, Save, Load);
 		Hud.Interaction_Layer(Mouse_Position);
@@ -361,8 +339,6 @@ void Editeur::Update()
 	else
 	{
 		Mouse_Position = Vector2f(Mouse::getPosition(App.Get_Window()));
-		position = Vector2i(Mouse_Position.x / Taille_tile, Mouse_Position.y / Taille_tile);
-
 
 		Collision(Player);
 		if (IsDialogue == false)
@@ -418,9 +394,10 @@ void Editeur::Display_HUD()
 		Hud.Display_LoadAndSave();
 		Hud.Display_Move();
 		Hud.Display_Tilemenu();
+		Hud.Display_NpcModif();
 	}
 
-	Hud.Display_ButtonMenuAndTest(PlayerIsPresent);
+	Hud.Display_ButtonText(PlayerIsPresent);
 
 	if (!PlayerIsPresent && !Load && !Save)
 	{

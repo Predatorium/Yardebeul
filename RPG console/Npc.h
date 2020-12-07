@@ -23,7 +23,7 @@ private :
 
 public :
 	Npc() = default;
-	Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Comportement _attitude);
+	Npc(string _name, Vector2f _position, int _level, int _hp, int _speed, Comportement _attitude);
 	~Npc() = default;
 
 	inline Comportement Get_Attitude() { return Attitude; };

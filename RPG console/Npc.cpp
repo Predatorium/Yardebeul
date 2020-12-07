@@ -3,22 +3,20 @@
 #include "Dialogue_Container.h"
 #include "StateManager.h"
 
-Npc::Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Comportement _attitude)
+Npc::Npc(string _name, Vector2f _position, int _level, int _hp, int _speed, Comportement _attitude)
 	: Character(_name)
 {
 	Position = _position;
-	Level = _niveau;
-	Life_Point = _pv;
+	Level = _level;
+	Life_Point = _hp;
 	Life_Max = Life_Point;
 	Mana = 50;
 	Endurance = 25;
 	Mental_Health = 100;
-	Speed = vitesse;
+	Speed = _speed;
 	Attitude = _attitude;
 	Orientation = Direction::Left;
 	IsDialogue = false;
-	dialogue = Dialogues.Get_Dialogue("1_1");
-
 	Right = false;
 	Left = false;
 	Down = false;
@@ -44,7 +42,6 @@ Npc::Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Co
 
 		Colision_Rect = IntRect(0, 0, 45, 22.5);
 	}
-
 	if (Name == "Fairy")
 	{
 		Beat_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
@@ -54,8 +51,8 @@ Npc::Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Co
 		Walk_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
 		Walk_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
 
-		Damage_Min = 0;
-		Damage_Max = 0;
+		Damage_Min = 1;
+		Damage_Max = 1;
 
 		Defense = 0;
 
