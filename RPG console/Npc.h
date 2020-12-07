@@ -31,6 +31,8 @@ public :
 	inline int Get_MaxDamage() { return Damage_Max; };
 	inline int Get_Defense() { return Defense; };
 
+	inline void Set_Dialogue(Dialogue _dial) { dialogue = _dial; };
+
 	bool operator == (const Npc& n) const { return Name == n.Name && Life_Point == n.Life_Point; }
 
 	void Update_Attack(Hero& _player);

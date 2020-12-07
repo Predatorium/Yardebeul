@@ -258,6 +258,8 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 			}
 			if (Selection == 2)
 				MState.ChangeState(State::MENU);
+
+			timer = 0;
 		}
 
 		int i = 0;
@@ -284,6 +286,8 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 					}
 					if (Selection == 2)
 						MState.ChangeState(State::MENU);
+
+					timer = 0;
 				}
 			}
 			i++;
@@ -301,6 +305,8 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
+
+					timer = 0;
 				}
 
 		int i = 0;
@@ -317,14 +323,9 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
+					timer = 0;
+					break;
 				}
-			}
-			else if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
-			{
-				Menu_Load = false;
-				Selection = 0;
-				Emplacement.clear();
-				break;
 			}
 			i++;
 		}

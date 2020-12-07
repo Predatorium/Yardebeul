@@ -8,7 +8,6 @@ Global::Global()
 	isVSync = true;
 	event;
 
-	window.setFramerateLimit(240);
 	window.setVerticalSyncEnabled(isVSync);
 }
 

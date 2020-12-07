@@ -5,6 +5,7 @@ Sprite Montagne ../Ressources/Sprite/Monde/Mountain_Tiles.png
 Sprite Font ../Ressources/Sprite/Menu/menu_main.jpg
 Sprite Hero ../Ressources/Sprite/Joueur/Hero.png
 Sprite Knucles ../Ressources/Sprite/Npc/Knucles.png
+Sprite Fairy ../Ressources/Sprite/Npc/Fairy.png
 Sprite Fleche ../Ressources/Sprite/Menu/Fleche.png
 Sprite Save ../Ressources/Sprite/Menu/Save.png
 Sprite Load ../Ressources/Sprite/Menu/Load.png
@@ -13,6 +14,4 @@ Font Times ../Ressources/Fonts/times.ttf
 Font Ethnocentric ../Ressources/Fonts/Ethnocentric_rg.ttf
 Font Macabre ../Ressources/Fonts/MetalMacabre.ttf
 
-Map Map ../Ressources/Map/Map.txt
-Map Map2 ../Ressources/Map/Map2.txt
 Map Map ../Ressources/Map/Map.txt

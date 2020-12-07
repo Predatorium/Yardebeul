@@ -13,10 +13,10 @@ Editeur::Editeur()
 
 		App_Grille = true;
 		PlayerIsPresent = false;
+		IsDialogue = false;
 
 		Save = false;
 		Save_New_Map = false;
-		Load = true;
 
 		Grille.setSize(Vector2f(30, 30));
 		Grille.setFillColor(Color::Transparent);
@@ -25,12 +25,19 @@ Editeur::Editeur()
 
 		Hud = HUD_Editor();
 
-		int i = 0;
-		for (Map_Manager* Current_Map : Map_List)
+		if (Map_List.size() > 0)
 		{
-			Dispo_Map.push_back(Button_Text(Current_Map->Get_Name(), "Times", 50, Vector2f(200, 100), 5, Vector2f(960,540 - (110 * (Map_List.size() / 2)) + ((i - 1) * 110)),Color::White));
-			i++;
+			Load = true;
+			int i = 0;
+			for (Map_Manager* Current_Map : Map_List)
+			{
+				Dispo_Map.push_back(Button_Text(Current_Map->Get_Name(), "Times", 50, Vector2f(200, 100), 5, Vector2f(960, 540 - (110 * (Map_List.size() / 2)) + ((i - 1) * 110)), Color::White));
+				i++;
+			}
 		}
+		else
+			Load = false;
+
 		New_map = Button_Text("New", "Times", 50, Vector2f(200, 100), 5, Vector2f(960, 1025), Color::White);
 
 		Vue = Views(Vector2f(840, 420), Vector2f(1920, 1080), FloatRect(0.f, 0.f, 1.f, 1.f));
@@ -47,7 +54,6 @@ void Editeur::SaveNewMap()
 		for (Button_Text& Current_Button : Dispo_Map)
 			if (Current_Button.Get_Shape().getGlobalBounds().contains(Mouse_Position))
 			{
-				SaveMap(Get_Map(Current_Button.Get_Name()));
 				Save_Map(Get_PathMap(Current_Button.Get_Name()));
 				Save = false;
 				break;
@@ -177,6 +183,20 @@ void Editeur::Resize_Map()
 		if ((int)Current_Map.Get_Position().y / Taille_tile >= Max.y)
 			Max.y = ((int)Current_Map.Get_Position().y / Taille_tile) + 1;
 	}
+	for (Maps& Current_Map : Player_Layer)
+	{
+		if ((int)Current_Map.Get_Position().x / Taille_tile < Min.x)
+			Min.x = ((int)Current_Map.Get_Position().x / Taille_tile);
+
+		if ((int)Current_Map.Get_Position().y / Taille_tile < Min.y)
+			Min.y = ((int)Current_Map.Get_Position().y / Taille_tile);
+
+		if ((int)Current_Map.Get_Position().x / Taille_tile >= Max.x)
+			Max.x = ((int)Current_Map.Get_Position().x / Taille_tile) + 1;
+
+		if ((int)Current_Map.Get_Position().y / Taille_tile >= Max.y)
+			Max.y = ((int)Current_Map.Get_Position().y / Taille_tile) + 1;
+	}
 
 	if (Min.x > 0)
 		for (int i = 0; i < Min.x; i++)
@@ -208,25 +228,26 @@ void Editeur::Interaction_Map()
 			if (Hud.Get_Layer() == 1)
 				Set_Map(Back_Layer);
 			if (Hud.Get_Layer() == 2)
-				Set_Map(Player_Layer);
+				Set_Map(Deco_Layer);
 			if (Hud.Get_Layer() == 3)
+				Set_Map(Player_Layer);
+			if (Hud.Get_Layer() == 4)
 				Set_Map(Front_Layer);
 
 			if (position.y == -1)
-			{
-				Resize_Map();
 				Range_Niveau.y++;
-			}
 
 			if (position.x == -1)
-			{
-				Resize_Map();
 				Range_Niveau.x++;
-			}
-
-			if (position.y >= Range_Niveau.y || position.x >= Range_Niveau.x)
-				Resize_Map();
 		}
+
+	if (Keyboard::isKeyPressed(Keyboard::G) && Timer > 0.2f)
+	{
+		App_Grille = !App_Grille;
+		Timer = 0;
+	}
+
+	Resize_Map();
 }
 
 void Editeur::Set_Map(vector<Maps> &_layer)
@@ -242,7 +263,7 @@ void Editeur::Set_Map(vector<Maps> &_layer)
 				Resize_Map();
 				FindMap = true;
 			}
-			else
+			else if (Hud.Get_Selection().Get_Name() != "NPC")
 			{
 				Current_Map.Set_Biome(Hud.Get_Selection().Get_Biome());
 				Current_Map.Set_Name(Hud.Get_Selection().Get_Name());
@@ -251,9 +272,25 @@ void Editeur::Set_Map(vector<Maps> &_layer)
 			}
 		}
 
-	if (!FindMap && Hud.Get_Selection().Get_Name() != "Rien" && Mouse_Position.x <= (Range_Niveau.x + 1) * Taille_tile &&
+	for (Npc& Current : NpcList)
+	{
+		if (FloatRect(Current_Map.Get_Position().x, Current_Map.Get_Position().y, Taille_tile, Taille_tile).contains(Mouse_Position))
+		{
+			FindMap = true;
+		}
+	}
+
+	if (Hud.Get_Selection().Get_Name() != "Rien" && Mouse_Position.x <= (Range_Niveau.x + 1) * Taille_tile &&
 		Mouse_Position.y <= (Range_Niveau.y + 1) * Taille_tile && Mouse_Position.x >= -32 && Mouse_Position.y >= -32)
-		_layer.push_back(Maps(Vector2f(position.x * Taille_tile, position.y * Taille_tile), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
+	{
+		if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC")
+			_layer.push_back(Maps(Vector2f(position.x * Taille_tile, position.y * Taille_tile), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
+		if (!FindMap && Hud.Get_Selection().Get_Name() == "NPC" && Timer > 0.2f)
+		{
+			NpcList.push_back(Npc("Fairy", Mouse_Position, 1, 10, 20, Comportement::Neutre));
+			Timer = 0;
+		}
+	}
 }
 
 void Editeur::Erase_Map()
@@ -263,6 +300,13 @@ void Editeur::Erase_Map()
 		{
 			Back_Layer.erase(Back_Layer.begin() + i);
 				i--;
+		}
+
+	for (int i = 0; i < Deco_Layer.size(); i++)
+		if (Deco_Layer[i].Get_Actif() == false)
+		{
+			Deco_Layer.erase(Deco_Layer.begin() + i);
+			i--;
 		}
 
 	for (int i = 0; i < Player_Layer.size(); i++)
@@ -294,11 +338,12 @@ void Editeur::Update()
 		Set_MousePos(Vector2f(Mouse::getPosition(App.Get_Window())));
 
 		Hud.Interaction_Biome(Mouse_Position);
+		Hud.Interaction_Tile(Mouse_Position);
+
+		Hud.Interaction_NPC(Mouse_Position);
 		Hud.Interaction_SaveAndLoad(Mouse_Position, Save, Load);
 		Hud.Interaction_Layer(Mouse_Position);
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
-		Hud.Interaction_Tile(Mouse_Position, App_Grille);
-		Hud.Update_TileSelect();
 		
 		Hud.Get_Selection().Set_Position(Vector2f(Mouse::getPosition(App.Get_Window())));
 		Vue.Update_Editor(Range_Niveau, Hud.Get_Move(), Mouse_Position);
@@ -320,8 +365,22 @@ void Editeur::Update()
 
 
 		Collision(Player);
-		Player.Update(Range_Niveau);
+		if (IsDialogue == false)
+			Player.Update(Range_Niveau);
+
+		for (Npc& Current_Npc : NpcList)
+		{
+			Collision(Current_Npc);
+
+			if (Current_Npc.Get_Attitude() == Comportement::Agressif && IsDialogue == false)
+				Current_Npc.Update_Attack(Player);
+
+			if (Current_Npc.Get_Attitude() == Comportement::Amical)
+				Current_Npc.Update_Dialogue(IsDialogue, Player);
+		}
+
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
+		Vue.Update_Game(Range_Niveau, Player);
 	}
 
 	if(!Save && !Load)
@@ -376,7 +435,12 @@ void Editeur::Display_Map()
 	if (!PlayerIsPresent)
 	{
 		display_Etage(Back_Layer);
+		display_Etage(Deco_Layer);
 		display_Etage(Player_Layer);
+
+		for (Npc& Current : NpcList)
+			Current.Display();
+
 		display_Etage(Front_Layer);
 
 		if (App_Grille)

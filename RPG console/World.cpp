@@ -91,16 +91,6 @@ void World::ScreenShot(int _party)
 	texture.getTexture().copyToImage().saveToFile(path);
 }
 
-void World::Destroy_Npc()
-{
-	for (Npc& Current_Npc : NpcList)
-		if (Current_Npc.Get_LifePoint() == 0)
-		{
-			NpcList.remove(Current_Npc);
-			break;
-		}
-}
-
 void World::Update()
 {
 	if (Pause == false)

@@ -1,8 +1,8 @@
 Name : Francis
 Level : 1
-Time : 68.9758
-Position : 427.253|452.058
-Life Point : 5
+Time : 7.44683
+Position : 626.097|556.299
+Life Point : 20
 Mana : 50
 Mental Health : 100
 Speed : 30

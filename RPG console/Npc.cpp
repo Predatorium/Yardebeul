@@ -45,6 +45,26 @@ Npc::Npc(string _name, Vector2f _position, int _niveau, int _pv, int vitesse, Co
 		Colision_Rect = IntRect(0, 0, 45, 22.5);
 	}
 
+	if (Name == "Fairy")
+	{
+		Beat_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Beat_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Beat_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Walk_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Walk_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Walk_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+
+		Damage_Min = 0;
+		Damage_Max = 0;
+
+		Defense = 0;
+
+		getSprite(Name).setOrigin(Vector2f(22, 23));
+		getSprite(Name).setTextureRect(IntRect(5, 99, 44, 46));
+
+		Colision_Rect = IntRect(0, 0, 44, 23);
+	}
+
 }
 
 void Npc::Update_Attack(Hero& _player)

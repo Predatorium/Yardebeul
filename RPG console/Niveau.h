@@ -14,6 +14,7 @@ class Level
 {
 protected :
 	vector<Maps> Back_Layer;
+	vector<Maps> Deco_Layer;
 	vector<Maps> Player_Layer;
 	vector<Maps> Front_Layer;
 	Vector2i Range_Niveau;
@@ -52,6 +53,8 @@ public :
 	void Collision(Character& _Character);
 	void Load_Map(string _file);
 	void Save_Map(string _file);
+
+	void Destroy_Npc();
 
 	void display();
 };

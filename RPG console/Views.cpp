@@ -32,19 +32,19 @@ void Views::Update_Editor(Vector2i _limit, list<Button_Sprite> &_move, Vector2f 
 		if (Current_Shape.Get_Shape().getGlobalBounds().contains(_position))
 		{
 			if ((int)Current_Shape.Get_Rotate() == 90 &&
-				view.getCenter().x < (_limit.x * Taille_tile) - ((view.getSize().x / 2) - 120))
+				view.getCenter().x < (_limit.x * Taille_tile) - ((view.getSize().x / 2) - 180))
 				Position.x += 200 * MainTime.GetTimeDeltaF();
 
 			if ((int)Current_Shape.Get_Rotate() == 270 &&
-				view.getCenter().x > view.getSize().x / 2 - 120)
+				view.getCenter().x > view.getSize().x / 2 - 180)
 				Position.x -= 200 * MainTime.GetTimeDeltaF();
 
 			if ((int)Current_Shape.Get_Rotate() == 180 &&
-				view.getCenter().y < (_limit.y * Taille_tile) - ((view.getSize().y / 2) - 120))
+				view.getCenter().y < (_limit.y * Taille_tile) - ((view.getSize().y / 2) - 180))
 				Position.y += 200 * MainTime.GetTimeDeltaF();
 
 			if ((int)Current_Shape.Get_Rotate() == 0 &&
-				view.getCenter().y > view.getSize().y / 2 - 120)
+				view.getCenter().y > view.getSize().y / 2 - 180)
 				Position.y -= 200 * MainTime.GetTimeDeltaF();
 
 			Current_Shape.Set_ColorShape(Color::Red);

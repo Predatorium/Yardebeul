@@ -7,7 +7,8 @@ HUD_Editor::HUD_Editor()
 	if (FontList.size() > 0)
 	{
 		Current_Layer = 1;
-		TileIsSelect = false;
+		IsSelect = false;
+		NpcSelect = false;
 		Current_Rank = 1;
 		Timer = 0;
 		Current_Biome = Biomes::Prairie;
@@ -18,17 +19,27 @@ HUD_Editor::HUD_Editor()
 		Tile_Select.setOutlineColor(Color::Blue);
 
 		Menu.setSize(Vector2f(1920, 64));
-		Menu.setFillColor(Color::Color(100, 100, 100, 255));
+		Menu.setFillColor(Color(100, 100, 100, 255));
 
-		Button.push_back(Button_Text("Back_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1416, 34), Color::White));
-		Button.push_back(Button_Text("Player_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1556, 34), Color::White));
-		Button.push_back(Button_Text("Front_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1696, 34), Color::White));
-		Button.push_back(Button_Text("Prev Biome", "Times", 20, Vector2f(126, 26), 2, Vector2f(1260, 16), Color::White));
-		Button.push_back(Button_Text("Next Biome", "Times", 20, Vector2f(126, 26), 2, Vector2f(1260, 49), Color::White));
+		Menu_Npc.setSize(Vector2f(200, 700));
+		Menu_Npc.setFillColor(Color(100, 100, 100, 255));
+		Menu_Npc.setPosition(Vector2f(200, 200));
+
+		Button.push_back(Button_Text("Back_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1556, 16), Color::White));
+		Button.push_back(Button_Text("Deco_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1696, 16), Color::White));
+		Button.push_back(Button_Text("Player_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1556, 49), Color::White));
+		Button.push_back(Button_Text("Front_Layer", "Times", 20, Vector2f(126, 26), 2, Vector2f(1696, 49), Color::White));
+
+		Button.push_back(Button_Text("NPC", "Times", 20, Vector2f(62, 26), 2, Vector2f(1426, 34), Color::White));
+
 		Button.push_back(Button_Text("Test", "Times", 20, Vector2f(62, 26), 2, Vector2f(1887, 49), Color::White));
 		Button.push_back(Button_Text("Menu", "Times", 20, Vector2f(62, 26), 2, Vector2f(1887, 16), Color::White));
+
 		sButton.push_back(Button_Sprite("Save", 0, Vector2f(62, 26), 2, Vector2f(1820, 16), Color::White));
 		sButton.push_back(Button_Sprite("Load", 0, Vector2f(62, 26), 2, Vector2f(1820, 49), Color::White));
+
+		Button.push_back(Button_Text("Prev Biome", "Times", 20, Vector2f(126, 26), 2, Vector2f(1083, 16), Color::White));
+		Button.push_back(Button_Text("Next Biome", "Times", 20, Vector2f(126, 26), 2, Vector2f(1083, 49), Color::White));
 
 		Change_Rank.push_back(Button_Sprite("Fleche", 0, Vector2f(50, 26), 2, Vector2f(27, 16), Color::White));
 		Change_Rank.push_back(Button_Sprite("Fleche", 180, Vector2f(50, 26), 2, Vector2f(27, 49), Color::White));
@@ -39,6 +50,7 @@ HUD_Editor::HUD_Editor()
 		Move.push_back(Button_Sprite("Fleche", 90, Vector2f(36, 1012), 2, Vector2f(1900, 572), Color::White));
 
 		Selection = Maps(Vector2f(Mouse::getPosition(App.Get_Window())), Vector2i(0, 0), "Rien", Current_Biome);
+
 		Load_MenuBiome();
 	}
 }
@@ -48,7 +60,7 @@ void HUD_Editor::Load_MenuBiome()
 	Tile_menu.clear();
 
 	Selection.Set_Name("Rien");
-	TileIsSelect = false;
+	IsSelect = false;
 
 	Current_Rank = 1;
 
@@ -56,7 +68,7 @@ void HUD_Editor::Load_MenuBiome()
 	string name;
 	if (Current_Biome == Biomes::Prairie)
 	{
-		Max = Vector2i(4, 27);
+		Max = Vector2i(3, 27);
 		name = "Grass_lands";
 	}
 	else if (Current_Biome == Biomes::Caverne)
@@ -85,16 +97,16 @@ void HUD_Editor::Load_MenuBiome()
 		done = false;
 
 		if (j < 3)
-			Tile_menu.push_back(Interface_Maps(j, Vector2f(64 + i * Taille_tile, (j - 1) * Taille_tile), Vector2i(x, y), name, Current_Biome));
+			Tile_menu.push_back(Interface_Maps(j, Vector2f(56 + i * Taille_tile, (j - 1) * Taille_tile), Vector2i(x, y), name, Current_Biome));
 		else if (j >= 3 && j < 5)
-			Tile_menu.push_back(Interface_Maps(j, Vector2f(64 + i * Taille_tile, (j - 3) * Taille_tile), Vector2i(x, y), name, Current_Biome));
+			Tile_menu.push_back(Interface_Maps(j, Vector2f(56 + i * Taille_tile, (j - 3) * Taille_tile), Vector2i(x, y), name, Current_Biome));
 		else if (j >= 5 && j < 7)
-			Tile_menu.push_back(Interface_Maps(j, Vector2f(64 + i * Taille_tile, (j - 5) * Taille_tile), Vector2i(x, y), name, Current_Biome));
+			Tile_menu.push_back(Interface_Maps(j, Vector2f(56 + i * Taille_tile, (j - 5) * Taille_tile), Vector2i(x, y), name, Current_Biome));
 
 		x++;
 		i++;
 
-		if (i == 35)
+		if (i == 30)
 		{
 			i = 0;
 			j++;
@@ -115,6 +127,24 @@ void HUD_Editor::Load_MenuBiome()
 			y++;
 		}
 	}
+}
+
+void HUD_Editor::Interaction_NPC(Vector2f _mouse)
+{
+	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
+		if (Menu.getGlobalBounds().contains(Vector2f(_mouse)))
+			for (Button_Text& Current_Button : Button)
+				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
+				{
+					if (Current_Button.Get_Name() == "NPC" && Timer > 0.2f)
+					{
+						NPC_Select = true;
+						Selection.Set_Name("NPC");
+						IsSelect = false;
+						Current_Layer = 3;
+						Timer = 0;
+					}
+				}
 }
 
 void HUD_Editor::Interaction_Biome(Vector2f _mouse)
@@ -141,29 +171,12 @@ void HUD_Editor::Interaction_Biome(Vector2f _mouse)
 						Timer = 0;
 					}
 				}
-
-	if (Keyboard::isKeyPressed(Keyboard::Add) && Timer > 0.2f)
-	{
-		Current_Biome = Biomes((int)Current_Biome + 1);
-		if ((int)Current_Biome > 3)
-			Current_Biome = Biomes(0);
-		Load_MenuBiome();
-		Timer = 0;
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Subtract) && Timer > 0.2f)
-	{
-		Current_Biome = Biomes((int)Current_Biome - 1);
-		if ((int)Current_Biome < 0)
-			Current_Biome = Biomes(3);
-		Load_MenuBiome();
-		Timer = 0;
-	}
 }
 
 void HUD_Editor::Interaction_SaveAndLoad(Vector2f _mouse, bool& _save, bool& _load)
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
-		if (Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+		if (Menu.getGlobalBounds().contains(Vector2f(_mouse)))
 			for (Button_Sprite& Current_Button : sButton)
 				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
 				{
@@ -180,25 +193,29 @@ void HUD_Editor::Interaction_Layer(Vector2f _mouse)
 	{
 		if (Current_Button.Get_Name() == "Back_Layer" && Current_Layer == 1)
 			Current_Button.Set_Color(Color::Red);
-		else if (Current_Button.Get_Name() == "Player_Layer" && Current_Layer == 2)
+		else if (Current_Button.Get_Name() == "Deco_Layer" && Current_Layer == 2)
 			Current_Button.Set_Color(Color::Red);
-		else if (Current_Button.Get_Name() == "Front_Layer" && Current_Layer == 3)
+		else if (Current_Button.Get_Name() == "Player_Layer" && Current_Layer == 3)
+			Current_Button.Set_Color(Color::Red);
+		else if (Current_Button.Get_Name() == "Front_Layer" && Current_Layer == 4)
 			Current_Button.Set_Color(Color::Red);
 		else
 			Current_Button.Set_Color(Color::White);
 	}
 
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
-		if (Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+		if (Menu.getGlobalBounds().contains(Vector2f(_mouse)))
 			for (Button_Text& Current_Button : Button)
 				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
 				{
 					if (Current_Button.Get_Name() == "Back_Layer")
 						Current_Layer = 1;
-					if (Current_Button.Get_Name() == "Player_Layer")
+					if (Current_Button.Get_Name() == "Deco_Layer")
 						Current_Layer = 2;
-					if (Current_Button.Get_Name() == "Front_Layer")
+					if (Current_Button.Get_Name() == "Player_Layer")
 						Current_Layer = 3;
+					if (Current_Button.Get_Name() == "Front_Layer")
+						Current_Layer = 4;
 				}
 
 	if (Keyboard::isKeyPressed(Keyboard::Num1) && Timer > 0.2f)
@@ -221,7 +238,7 @@ void HUD_Editor::Interaction_Layer(Vector2f _mouse)
 void HUD_Editor::Interaction_MenuAndTest(Vector2f _mouse, bool& _player)
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
-		if (Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+		if (Menu.getGlobalBounds().contains(Vector2f(_mouse)))
 			for (Button_Text& Current_Button : Button)
 				if (Current_Button.Get_Shape().getGlobalBounds().contains(_mouse))
 				{
@@ -249,10 +266,10 @@ void HUD_Editor::Interaction_MenuAndTest(Vector2f _mouse, bool& _player)
 	}
 }
 
-void HUD_Editor::Interaction_Tile(Vector2f _mouse, bool& _grille)
+void HUD_Editor::Interaction_Tile(Vector2f _mouse)
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
-		if (Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+		if (Menu.getGlobalBounds().contains(Vector2f(_mouse)))
 		{
 			for (Interface_Maps& Actual_Select : Tile_menu)
 				if (FloatRect(Actual_Select.Get_Position().x, Actual_Select.Get_Position().y, Taille_tile, Taille_tile).contains(_mouse) &&
@@ -261,14 +278,15 @@ void HUD_Editor::Interaction_Tile(Vector2f _mouse, bool& _grille)
 					Selection.Set_Biome(Actual_Select.Get_Biome());
 					Selection.Set_Name(Actual_Select.Get_Name());
 					Selection.Set_Tile(Actual_Select.Get_Tile());
-					TileIsSelect = true;
+					Tile_Select.setPosition(Vector2f(Actual_Select.Get_Position().x + 2, Actual_Select.Get_Position().y + 2));
+					IsSelect = true;
 				}
 
 			for (Button_Sprite& Current_Shape : Change_Rank)
 				if (Current_Shape.Get_Shape().getGlobalBounds().contains(_mouse) && Timer > 0.2f)
 				{
 					Selection.Set_Name("Rien");
-					TileIsSelect = false;
+					IsSelect = false;
 
 					if (Current_Shape.Get_Rotate() == 0)
 					{
@@ -298,25 +316,8 @@ void HUD_Editor::Interaction_Tile(Vector2f _mouse, bool& _grille)
 	if (Mouse::isButtonPressed(Mouse::Right))
 	{
 		Selection.Set_Name("Rien");
-		TileIsSelect = false;
+		IsSelect = false;
 	}
-
-	if (Keyboard::isKeyPressed(Keyboard::G) && Timer > 0.2f)
-	{
-		if (_grille == false)
-			_grille = true;
-		else if (_grille == true)
-			_grille = false;
-
-		Timer = 0;
-	}
-}
-
-void HUD_Editor::Update_TileSelect()
-{
-	for (Interface_Maps& Current_Tile : Tile_menu)
-		if (Current_Tile.Get_Tile() == Selection.Get_Tile() && Current_Tile.Get_Biome() == Selection.Get_Biome())
-			Tile_Select.setPosition(Vector2f(Current_Tile.Get_Position().x + 2, Current_Tile.Get_Position().y + 2));
 }
 
 void HUD_Editor::Display_Tilemenu()
@@ -369,9 +370,9 @@ void HUD_Editor::Display_Selection(RectangleShape& _grille)
 		_grille.setPosition(Selection.Get_Position());
 		App.Get_Window().draw(_grille);
 	}
-	else
+	else if (Selection.Get_Name() != "NPC")
 		Selection.display();
 
-	if (TileIsSelect)
+	if (IsSelect)
 		App.Get_Window().draw(Tile_Select);
 }

@@ -6,8 +6,9 @@
 
 class HUD_Editor
 {
-private :
+private:
 	RectangleShape Menu;
+	RectangleShape Menu_Npc;
 
 	list<Interface_Maps> Tile_menu;
 	list<Button_Sprite> Move;
@@ -18,13 +19,15 @@ private :
 	list<Button_Sprite> sButton;
 	Biomes Current_Biome;
 
-	bool TileIsSelect;
+	bool IsSelect;
+	bool NpcSelect;
 	float Timer;
 	int Current_Layer;
 	int Current_Rank;
+	bool NPC_Select;
 	int Max_Rank;
 
-public :
+public:
 	HUD_Editor();
 	~HUD_Editor() = default;
 
@@ -33,16 +36,16 @@ public :
 	inline RectangleShape Get_MenuShape() { return Menu; };
 	inline int Get_Rank() { return Current_Rank; };
 	inline int Get_Layer() { return Current_Layer; };
-
+	
 	inline void Add_Timer(float _timer) { Timer += _timer; };
 
 	void Load_MenuBiome();
+	void Interaction_NPC(Vector2f _mouse);
 	void Interaction_Biome(Vector2f _mouse);
 	void Interaction_SaveAndLoad(Vector2f _mouse, bool& _save, bool& _load);
 	void Interaction_Layer(Vector2f _mouse);
 	void Interaction_MenuAndTest(Vector2f _mouse, bool& _player);
-	void Interaction_Tile(Vector2f _mouse, bool& _grille);
-	void Update_TileSelect();
+	void Interaction_Tile(Vector2f _mouse);
 
 	void Display_Tilemenu();
 	void Display_MenuShape();
@@ -50,5 +53,5 @@ public :
 	void Display_LoadAndSave();
 	void Display_ButtonRank();
 	void Display_ButtonMenuAndTest(bool _player);
-	void Display_Selection(RectangleShape& _grille);
+	void Display_Selection(RectangleShape & _grille);
 };

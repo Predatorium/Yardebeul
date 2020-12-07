@@ -34,9 +34,6 @@
     <Filter Include="Fichiers d%27en-tête\Game\Dungeon">
       <UniqueIdentifier>{9ded3268-c72d-4cbc-8f5d-b5b0f78b1cc0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Game\Event">
-      <UniqueIdentifier>{2a14ca07-20ed-47de-87b7-2155e011f02d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\Game\Item">
       <UniqueIdentifier>{d32c760b-a25c-439b-b0d9-b4e8a5ea868e}</UniqueIdentifier>
     </Filter>
@@ -79,16 +76,19 @@
     <Filter Include="Fichiers sources\Game\Event">
       <UniqueIdentifier>{12a7e8fc-378f-4af7-83d5-ef10b76c5a95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Game\Dungeon\Event">
+      <UniqueIdentifier>{2a14ca07-20ed-47de-87b7-2155e011f02d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Room.h">
       <Filter>Fichiers d%27en-tête\Game\Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
-      <Filter>Fichiers d%27en-tête\Game\Event</Filter>
+      <Filter>Fichiers d%27en-tête\Game\Dungeon\Event</Filter>
     </ClInclude>
     <ClInclude Include="Event_Type.h">
-      <Filter>Fichiers d%27en-tête\Game\Event</Filter>
+      <Filter>Fichiers d%27en-tête\Game\Dungeon\Event</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.h">
       <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>

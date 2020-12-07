@@ -29,7 +29,7 @@ public:
 	StateManager();
 	~StateManager() = default;
 
-	inline string Get_TextReceived() { return Text_Received; };
+	inline string& Get_TextReceived() { return Text_Received; };
 	inline World Get_World() { return Monde; };
 
 	void KeyboardEnter();
