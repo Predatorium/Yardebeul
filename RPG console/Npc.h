@@ -3,7 +3,7 @@
 #include "Hero.h"
 #include "Dialogue.h"
 
-enum class Comportement
+enum class Comportement : int
 {
 	Amical,
 	Neutre,
@@ -32,6 +32,8 @@ public :
 	inline int Get_Defense() { return Defense; };
 
 	inline void Set_Dialogue(Dialogue _dial) { dialogue = _dial; };
+	inline void Set_Attitude(Comportement _attitude) { Attitude = _attitude; };
+	void Set_Name(string _name);
 
 	bool operator == (const Npc& n) const { return Name == n.Name && Life_Point == n.Life_Point; }
 

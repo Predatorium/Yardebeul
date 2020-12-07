@@ -82,7 +82,7 @@ void Fight_System::Hud_Update()
 		{
 			Texte.setString("+" + to_string(5));
 			Texte.setPosition(Vector2f(getSprite("Hero").getPosition().x, getSprite("Hero").getPosition().y - 300));
-			Player->Set_Life(Player->Get_LifePoint() + 5);
+			Player->Add_Life(5);
 		}
 		if (Selection == 2)
 		{

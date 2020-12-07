@@ -2,6 +2,7 @@
 #include "StateManager.h"
 #include "FontManager.h"
 #include "SpriteManager.h"
+#include "Dialogue_Container.h"
 
 HUD_Editor::HUD_Editor()
 {
@@ -23,7 +24,7 @@ HUD_Editor::HUD_Editor()
 		Menu.setSize(Vector2f(1920, 64));
 		Menu.setFillColor(Color(100, 100, 100, 255));
 
-		Menu_Npc.setSize(Vector2f(200, 700));
+		Menu_Npc.setSize(Vector2f(130, 230));
 		Menu_Npc.setFillColor(Color(100, 100, 100, 255));
 		Menu_Npc.setPosition(Vector2f(200, 200));
 
@@ -153,12 +154,12 @@ void HUD_Editor::Interaction_NPC(Vector2f _mouse)
 				}
 }
 
-void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, View _view)
+void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc)
 {
 	bool findNpc = false;
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
 	{
-		if (!(Menu.getGlobalBounds().contains(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), _view))))
+		if (!(Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window())))) && !(Menu_Npc.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window())))))
 		{
 			int i = 0;
 			for (Npc& Current : _npc)
@@ -166,31 +167,149 @@ void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, View _view)
 				if (FloatRect(Current.Get_Position().x - Current.Get_ColisionRect().width / 2, Current.Get_Position().y - Current.Get_ColisionRect().height, Current.Get_ColisionRect().width, Current.Get_ColisionRect().height * 2).contains(_mouse))
 				{
 					Current_Npc = i;
-					Modi_Npc.clear();
-					Modi_Npc.push_back(Button_Text("Name", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 50), Color::White));
-					Modi_Npc.push_back(Button_Text("Life", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 100), Color::White));
-					Modi_Npc.push_back(Button_Text("Level", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 150), Color::White));
-					Modi_Npc.push_back(Button_Text("Attitude", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 200), Color::White));
-					Modi_Npc.push_back(Button_Text("Dialogue", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 100, Menu_Npc.getPosition().y + 250), Color::White));
+					Modif_Npc.clear();
+					Modif_Npc.push_back(Button_Text("Name", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 15), Color::White));
+					Modif_Npc.push_back(Button_Text("Life", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 65), Color::White));
+					Modif_Npc.push_back(Button_Text("Level", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 115), Color::White));
+					Modif_Npc.push_back(Button_Text("Attitude", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 165), Color::White));
+					Modif_Npc.push_back(Button_Text("Dialogue", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 215), Color::White));
 					NpcSelect = true;
 					findNpc = true;
 				}
 				i++;
 			}
-		}
-		else if (Modi_Npc.size() > 0 && !Menu_Npc.getGlobalBounds().contains(Vector2f(_mouse)))
-			Modi_Npc.clear();
 
-		if (!findNpc && Selection.Get_Name() == "NPC" && Timer > 0.2f)
-		{
-			_npc.push_back(Npc("Fairy", _mouse, 1, 10, 20, Comportement::Neutre));
-			Timer = 0;
+			if (!findNpc && Selection.Get_Name() == "NPC")
+				_npc.push_back(Npc("Fairy", _mouse, 1, 10, 20, Comportement::Neutre));
 		}
+		else if (Modif_Npc.size() > 0 && !Menu_Npc.getGlobalBounds().contains(Vector2f(Vector2f(Mouse::getPosition(App.Get_Window())))))
+			Modif_Npc.clear();
 	}
 
-	for (Button_Text& Current : Modi_Npc)
-	{
+	
+	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
+		for (Button_Text& Current : Modif_Npc)
+			if (Current.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+			{
+				if (Menu_Npc.getSize().x == 130)
+					Menu_Npc.setSize(Vector2f(260, 230));
 
+				if (Current.Get_Name() == "Name")
+				{
+					Select_Stat.clear();
+					Modif = stat_modif::NAME;
+					Select_Stat.push_back(Button_Text("Knucles", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 195, Menu_Npc.getPosition().y + 15), Color::White));
+					Select_Stat.push_back(Button_Text("Fairy", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 195, Menu_Npc.getPosition().y + 65), Color::White));
+				}
+				if (Current.Get_Name() == "Attitude")
+				{
+					Select_Stat.clear();
+					Modif = stat_modif::ATTITUDE;
+					Select_Stat.push_back(Button_Text("Neutre", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 195, Menu_Npc.getPosition().y + 15), Color::White));
+					Select_Stat.push_back(Button_Text("Amical", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 195, Menu_Npc.getPosition().y + 65), Color::White));
+					Select_Stat.push_back(Button_Text("Agressif", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 195, Menu_Npc.getPosition().y + 115), Color::White));
+				}
+				if (Current.Get_Name() == "Dialogue")
+				{
+					Select_Stat.clear();
+					Modif = stat_modif::DIALOGUE;
+					Select_Stat.push_back(Button_Text("1_1", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 195, Menu_Npc.getPosition().y + 15), Color::White));
+				}
+				if (Current.Get_Name() == "Life")
+				{
+					Select_Stat.clear();
+					MState.Get_TextReceived().clear();
+					Modif = stat_modif::LIFE;
+					Select_Stat.push_back(Button_Text("Life", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 195, Menu_Npc.getPosition().y + 65), Color::White));
+				}
+				if (Current.Get_Name() == "Level")
+				{
+					Select_Stat.clear();
+					MState.Get_TextReceived().clear();
+					Modif = stat_modif::LEVEL;
+					Select_Stat.push_back(Button_Text("Level", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 195, Menu_Npc.getPosition().y + 115), Color::White));
+				}
+			}
+	if (Modif == stat_modif::NAME || Modif == stat_modif::ATTITUDE || Modif == stat_modif::DIALOGUE)
+		if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
+			for (Button_Text& Current_Button : Select_Stat)
+				if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
+				{
+					if (Modif == stat_modif::NAME)
+					{
+						int i = 0;
+						for (Npc& Current : _npc)
+						{
+							if (Current_Npc == i)
+								Current.Set_Name(Current_Button.Get_Name());
+
+							i++;
+						}
+					}
+					if (Modif == stat_modif::ATTITUDE)
+					{
+						int i = 0;
+						for (Npc& Current : _npc)
+						{
+							if (Current_Npc == i)
+							{
+								if (Current_Button.Get_Name() == "Amical")
+									Current.Set_Attitude(Comportement::Amical);
+								if (Current_Button.Get_Name() == "Neutre")
+									Current.Set_Attitude(Comportement::Neutre);
+								if (Current_Button.Get_Name() == "Agressif")
+									Current.Set_Attitude(Comportement::Agressif);
+							}
+
+							i++;
+						}
+					}
+					if (Modif == stat_modif::DIALOGUE)
+					{
+						int i = 0;
+						for (Npc& Current : _npc)
+						{
+							if (Current_Npc == i)
+								Current.Set_Dialogue(Dialogues.Get_Dialogue(Current_Button.Get_Name()));
+
+							i++;
+						}
+					}
+
+				}
+
+	if (Modif == stat_modif::LIFE || Modif == stat_modif::LEVEL)
+	{
+		if (Modif == stat_modif::LIFE)
+		{
+			Select_Stat.begin()->Set_String(Select_Stat.begin()->Get_Name() + " : " + MState.Get_TextReceived());
+			if (Keyboard::isKeyPressed(Keyboard::Enter))
+			{
+				int i = 0;
+				for (Npc& Current : _npc)
+				{
+					if (Current_Npc == i)
+						Current.Set_Life(stoi(MState.Get_TextReceived()));
+
+					i++;
+				}
+			}
+		}
+		if (Modif == stat_modif::LEVEL)
+		{
+			Select_Stat.begin()->Set_String(Select_Stat.begin()->Get_Name() + " : " + MState.Get_TextReceived());
+			if (Keyboard::isKeyPressed(Keyboard::Enter))
+			{
+				int i = 0;
+				for (Npc& Current : _npc)
+				{
+					if (Current_Npc == i)
+						Current.Set_Level(stoi(MState.Get_TextReceived()));
+
+					i++;
+				}
+			}
+		}
 	}
 }
 
@@ -323,7 +442,7 @@ void HUD_Editor::Interaction_Tile(Vector2f _mouse)
 					(Actual_Select.Get_Rank() == Current_Rank || Actual_Select.Get_Rank() == Current_Rank + 1))
 				{
 					if (Selection.Get_Name() == "NPC")
-						Modi_Npc.clear();
+						Modif_Npc.clear();
 
 					Selection.Set_Biome(Actual_Select.Get_Biome());
 					Selection.Set_Name(Actual_Select.Get_Name());
@@ -380,8 +499,12 @@ void HUD_Editor::Display_Tilemenu()
 void HUD_Editor::Display_NpcModif()
 {
 	if (NpcSelect)
-		for (Button_Text& Current : Modi_Npc)
+	{
+		for (Button_Text& Current : Modif_Npc)
 			Current.Display();
+		for (Button_Text& Current : Select_Stat)
+			Current.Display();
+	}
 }
 
 void HUD_Editor::Display_MenuShape()

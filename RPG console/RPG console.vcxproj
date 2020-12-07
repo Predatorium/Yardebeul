@@ -32,7 +32,6 @@
     <ClInclude Include="Map_Manager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Niveau.h" />
-    <ClInclude Include="Npcs_Container.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Armor.h" />
@@ -75,7 +74,6 @@
     <ClCompile Include="Map_Manager.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Niveau.cpp" />
-    <ClCompile Include="Npcs_Container.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Armor.cpp" />

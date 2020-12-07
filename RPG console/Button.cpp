@@ -71,6 +71,12 @@ void Box::Display(string _currentstat)
 	App.Get_Window().draw(Texte);
 }
 
+void Button_Text::Set_String(string _string)
+{
+	Texte.setString(_string);
+	Texte.setOrigin(getMidle(Texte));
+}
+
 void Button_Text::Set_Color(Color _color)
 {
 	Texte.setFillColor(_color);

@@ -11,7 +11,7 @@ Character::Character(string _name)
 	Mental_Health = 100;
 }
 
-void Character::Set_Life(int _life)
+void Character::Add_Life(int _life)
 {
 	Life_Point = _life;
 	if (Life_Point > Life_Max)

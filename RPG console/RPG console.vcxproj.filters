@@ -153,9 +153,6 @@
     <ClInclude Include="Effects_Container.h">
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Npcs_Container.h">
-      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
-    </ClInclude>
     <ClInclude Include="Dungeon_Container.h">
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
@@ -279,9 +276,6 @@
       <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Armors_Container.cpp">
-      <Filter>Fichiers sources\_Global\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Npcs_Container.cpp">
       <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Dungeon_Container.cpp">

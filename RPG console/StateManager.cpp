@@ -24,7 +24,9 @@ void StateManager::KeyboardEnter()
 {
 	if (App.Get_Event().text.unicode > 64 && App.Get_Event().text.unicode < 91 || App.Get_Event().text.unicode > 96 && App.Get_Event().text.unicode < 123)
 		Text_Received += App.Get_Event().text.unicode;
-	if (App.Get_Event().text.unicode == 8 && Text_Received.size() > 0)
+	if (App.Get_Event().text.unicode > 47 && App.Get_Event().text.unicode < 58)
+		Text_Received += App.Get_Event().text.unicode;
+	else if (App.Get_Event().text.unicode == 8 && Text_Received.size() > 0)
 		Text_Received.pop_back();
 }
 

@@ -143,20 +143,20 @@ void Level::Load_Map(string _file)
 				int tmpvitesse = 0;
 				Comportement tmpcomp;
 
-				name = line.substr(0, line.find("|"));
-				line.erase(0, line.find("|") + 1);
+				name = line.substr(0, line.find(" "));
+				line.erase(0, line.find(" ") + 1);
 
 				tmpposX = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find("|") + 1);
+				line.erase(0, line.find(" ") + 1);
 
 				tmpposY = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find("|") + 1);
+				line.erase(0, line.find(" ") + 1);
 
 				tmpniveau = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find("|") + 1);
+				line.erase(0, line.find(" ") + 1);
 
 				tmppv = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find("|") + 1);
+				line.erase(0, line.find(" ") + 1);
 
 				tmpvitesse = stoi(line.substr(0, line.find(" ")));
 				line.erase(0, line.find(" ") + 1);
@@ -181,6 +181,7 @@ void Level::Save_Map(string _file)
 		Write_Map << Range_Niveau.y << endl;
 		int i = 0;
 		Write_Map << "Back_Layer";
+		string tmp = "Back_Layer";
 		bool done = true;
 		while (done)
 		{
@@ -207,25 +208,28 @@ void Level::Save_Map(string _file)
 				if (Actual_Map.Get_Biome() == Biomes::Montagne)
 					Write_Map << "4";
 			}
-			if (i == Back_Layer.size())
+			if (i == Back_Layer.size() && tmp == "Back_Layer")
 			{
 				Write_Map << endl;
 				Write_Map << "Player_Layer";
+				tmp = "Player_Layer";
 				tmpMaps = Player_Layer;
 			}
-			if (i == Back_Layer.size() + Deco_Layer.size())
+			if (i == Back_Layer.size() + Deco_Layer.size() && tmp == "Deco_Layer")
 			{
 				Write_Map << endl;
 				Write_Map << "Deco_Layer";
+				tmp = "Deco_Layer";
 				tmpMaps = Deco_Layer;
 			}
-			if (i == Back_Layer.size() + Deco_Layer.size() + Player_Layer.size())
+			if (i == Back_Layer.size() + Deco_Layer.size() + Player_Layer.size() && tmp == "Player_Layer")
 			{
 				Write_Map << endl;
 				Write_Map << "Front_Layer";
+				tmp = "Front_Layer";
 				tmpMaps = Front_Layer;
 			}
-			if (i == Back_Layer.size() + Deco_Layer.size() + Player_Layer.size() + Front_Layer.size())
+			if (i == Back_Layer.size() + Deco_Layer.size() + Player_Layer.size() + Front_Layer.size() && tmp == "Front_Layer")
 			{
 				Write_Map << endl;
 				Write_Map << "Npc_List";

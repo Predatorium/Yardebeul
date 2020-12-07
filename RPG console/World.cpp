@@ -17,10 +17,6 @@ World::World()
 
 		App.Get_Window().setMouseCursorVisible(false);
 
-		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), 7, 20, 25, Comportement::Amical));
-		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), 7, 20, 25, Comportement::Agressif));
-		NpcList.push_back(Npc("Knucles", Vector2f(800, 200), 7, 20, 25, Comportement::Agressif));
-
 		Save = false;
 		Load = true;
 		Pause = false;
@@ -41,8 +37,6 @@ World::World(int _load)
 		Menu_Pause = new Menu(1);
 
 		App.Get_Window().setMouseCursorVisible(false);
-		NpcList.push_back(Npc("Knucles", Vector2f(500, 500), 7, 20, 25, Comportement::Amical));
-		NpcList.push_back(Npc("Knucles", Vector2f(200, 600), 7, 20, 25, Comportement::Agressif));
 
 		Save = false;
 		Load = false;

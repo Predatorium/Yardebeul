@@ -69,9 +69,10 @@ public :
 	inline void Set_Down(bool _bool) { Down = _bool; };
 	inline void Set_Orientation(Direction _orientation) { Orientation = _orientation; };
 	inline void Set_Position(Vector2f _position) { Position = _position; };
-	inline void Set_Name(string _name) { Name = _name; };
+	inline virtual void Set_Name(string _name) { Name = _name; };
 	inline void Set_Level(int _level) { Level = _level; };
-	void Set_Life(int _life);
+	void Add_Life(int _life);
+	inline void Set_Life(int _life) { Life_Point = _life; };
 	inline void Set_LifeMax(int _lifemax) { Life_Max = _lifemax; };
 	inline void Set_Mana(int _mana) { Mana = _mana; };
 	inline void Set_Endurance(int _endurance) { Endurance = _endurance; };

@@ -7,6 +7,16 @@
 class HUD_Editor
 {
 private:
+	enum class stat_modif
+	{
+		NAME,
+		LIFE,
+		LEVEL,
+		ATTITUDE,
+		DIALOGUE,
+	};
+	stat_modif Modif;
+
 	RectangleShape Menu;
 	RectangleShape Menu_Npc;
 
@@ -17,7 +27,8 @@ private:
 	list<Button_Sprite> sButton;
 
 	list<Button_Text> Button;
-	list<Button_Text> Modi_Npc;
+	list<Button_Text> Modif_Npc;
+	list<Button_Text> Select_Stat;
 
 	Maps Selection;
 	RectangleShape Tile_Select;
@@ -46,7 +57,7 @@ public:
 
 	void Load_MenuBiome();
 	void Interaction_NPC(Vector2f _mouse);
-	void Set_Npc(Vector2f _mouse, list<Npc>& _npc, View _view);
+	void Set_Npc(Vector2f _mouse, list<Npc>& _npc);
 	void Interaction_Biome(Vector2f _mouse);
 	void Interaction_SaveAndLoad(Vector2f _mouse, bool& _save, bool& _load);
 	void Interaction_Layer(Vector2f _mouse);

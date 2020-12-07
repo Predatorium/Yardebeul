@@ -16,7 +16,7 @@ public :
 	inline string Get_Name() { return Name; };
 	inline Text& Get_Texte() { return Texte; };
 	inline RectangleShape& Get_Shape() { return shape; };
-	inline void Set_String(string _string) { Texte.setString(_string); };
+	void Set_String(string _string);
 
 	void Set_Color(Color _color);
 	void Set_ColorText(Color _color) { Texte.setFillColor(_color); };

@@ -312,7 +312,7 @@ void Editeur::Update()
 		Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue.Get_View()));
 
 		Interaction_Map();
-		Hud.Set_Npc(Mouse_Position, NpcList, Screen.Get_View());
+		Hud.Set_Npc(Mouse_Position, NpcList);
 
 		Set_MousePos(Vector2f(Mouse::getPosition(App.Get_Window())));
 
@@ -403,6 +403,10 @@ void Editeur::Display_HUD()
 	{
 		Hud.Display_Selection(Grille);
 	}
+
+	if (PlayerIsPresent)
+		for (Npc& Current : NpcList)
+			Current.Display_Dialogue();
 }
 
 void Editeur::Display_Map()
