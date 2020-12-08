@@ -15,8 +15,6 @@ World::World()
 
 		Menu_Pause = new Menu(1);
 
-		App.Get_Window().setMouseCursorVisible(false);
-
 		Save = false;
 		Load = true;
 		Pause = false;
@@ -91,7 +89,7 @@ void World::Update()
 	{
 		Collision(Player);
 		if (IsDialogue == false)
-			Player.Update(Range_Niveau);
+			Player.Update();
 
 		Destroy_Npc();
 
@@ -107,10 +105,7 @@ void World::Update()
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
-		{
-			App.Get_Window().setMouseCursorVisible(true);
 			Pause = true;
-		}
 	}
 
 	if (Pause == true)

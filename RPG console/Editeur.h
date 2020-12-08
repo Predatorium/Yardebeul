@@ -41,6 +41,6 @@ public :
 	void Display_NewSave();
 	void Display_HUD();
 	void Display_Map();
-	void display_Etage(vector<Maps> _etage);
+	void display_Etage();
 	void Display();
 };

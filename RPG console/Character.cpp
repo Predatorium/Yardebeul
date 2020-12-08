@@ -13,7 +13,13 @@ Character::Character(string _name)
 
 void Character::Add_Life(int _life)
 {
-	Life_Point = _life;
+	Life_Point += _life;
 	if (Life_Point > Life_Max)
 		Life_Point = Life_Max;
+}
+
+void Character::Set_Life(int _life)
+{
+	Life_Point = _life;
+	Life_Max = _life;
 }

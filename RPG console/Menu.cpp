@@ -165,37 +165,6 @@ void Menu::Update_Main(World& _world)
 			if (Selection == 5)
 				App.Get_Window().close();
 		}
-
-		int i = 0;
-		for (Button_Text& Current_Button : Button)
-		{
-			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			{
-				Selection = i;
-				if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
-				{
-					if (Selection == 0)
-					{
-						_world = World();
-						MState.ChangeState(State::GAME);
-					}
-					if (Selection == 1)
-					{
-						Menu_Load = true;
-						Selection = 0;
-						Emplacement.clear();
-						Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Load 1", 1));
-						Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Load 2", 2));
-						Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Load 3", 3));
-					}
-					if (Selection == 2)
-						MState.ChangeState(State::EDITOR);
-					if (Selection == 5)
-						App.Get_Window().close();
-				}
-			}
-			i++;
-		}
 	}
 	else if (Menu_Load)
 	{
@@ -206,28 +175,6 @@ void Menu::Update_Main(World& _world)
 					_world = World(Current_Button.Get_Num());
 					MState.ChangeState(State::GAME);
 				}
-
-		int i = 0;
-		for (Bouton_Load& Current_Button : Emplacement)
-		{
-			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			{
-				Selection = i;
-				if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f && Current_Button.Get_Name() != "Name : ----")
-				{
-					_world = World(Current_Button.Get_Num());
-					MState.ChangeState(State::GAME);
-				}
-			}
-			else if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
-			{
-				Menu_Load = false;
-				Selection = 0;
-				Emplacement.clear();
-				break;
-			}
-			i++;
-		}
 	}
 }
 
@@ -243,10 +190,7 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 		if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
 		{
 			if (Selection == 0)
-			{
-				App.Get_Window().setMouseCursorVisible(false);
 				_pause = false;
-			}
 			if (Selection == 1)
 			{
 				Menu_Load = true;
@@ -260,37 +204,6 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 				MState.ChangeState(State::MENU);
 
 			timer = 0;
-		}
-
-		int i = 0;
-		for (Button_Text& Current_Button : Button)
-		{
-			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			{
-				Selection = i;
-				if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
-				{
-					if (Selection == 0)
-					{
-						App.Get_Window().setMouseCursorVisible(false);
-						_pause = false;
-					}
-					if (Selection == 1)
-					{
-						Menu_Load = true;
-						Selection = 0;
-						Emplacement.clear();
-						Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
-						Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
-						Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
-					}
-					if (Selection == 2)
-						MState.ChangeState(State::MENU);
-
-					timer = 0;
-				}
-			}
-			i++;
 		}
 	}
 	else if (Menu_Load)
@@ -308,27 +221,6 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 
 					timer = 0;
 				}
-
-		int i = 0;
-		for (Bouton_Load& Current_Button : Emplacement)
-		{
-			if (Current_Button.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
-			{
-				Selection = i;
-				if (Mouse::isButtonPressed(Mouse::Left) && timer > 0.2f)
-				{
-					Data::Save_Player(Selection + 1, MState.Get_World().Get_Hero());
-					_world.ScreenShot(Selection + 1);
-					Emplacement.clear();
-					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
-					Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));
-					Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
-					timer = 0;
-					break;
-				}
-			}
-			i++;
-		}
 	}
 }
 

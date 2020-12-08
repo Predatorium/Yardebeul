@@ -24,9 +24,11 @@ private :
 public :
 	Npc() = default;
 	Npc(string _name, Vector2f _position, int _level, int _hp, int _speed, Comportement _attitude);
+	Npc(string _name, Vector2f _position, int _level, int _hp, int _speed, Comportement _attitude, Dialogue &_dial);
 	~Npc() = default;
 
 	inline Comportement Get_Attitude() { return Attitude; };
+	inline Dialogue Get_Dialogue() { return dialogue; };
 	inline int Get_MinDamage() { return Damage_Min; };
 	inline int Get_MaxDamage() { return Damage_Max; };
 	inline int Get_Defense() { return Defense; };
@@ -35,7 +37,7 @@ public :
 	inline void Set_Attitude(Comportement _attitude) { Attitude = _attitude; };
 	void Set_Name(string _name);
 
-	bool operator == (const Npc& n) const { return Name == n.Name && Life_Point == n.Life_Point; }
+	bool operator == (const Npc& n) const { return Name == n.Name && Life_Point == n.Life_Point && Position.x == n.Position.x && Position.y == n.Position.y; }
 
 	void Update_Attack(Hero& _player);
 	void Update_Dialogue(bool& _dial, Hero _player);

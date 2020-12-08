@@ -312,7 +312,7 @@ void Editeur::Update()
 		Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue.Get_View()));
 
 		Interaction_Map();
-		Hud.Set_Npc(Mouse_Position, NpcList);
+		Hud.Set_Npc(Mouse_Position, NpcList, Range_Niveau);
 
 		Set_MousePos(Vector2f(Mouse::getPosition(App.Get_Window())));
 
@@ -342,7 +342,7 @@ void Editeur::Update()
 
 		Collision(Player);
 		if (IsDialogue == false)
-			Player.Update(Range_Niveau);
+			Player.Update();
 
 		for (Npc& Current_Npc : NpcList)
 		{
@@ -415,14 +415,7 @@ void Editeur::Display_Map()
 
 	if (!PlayerIsPresent)
 	{
-		display_Etage(Back_Layer);
-		display_Etage(Deco_Layer);
-		display_Etage(Player_Layer);
-
-		for (Npc& Current : NpcList)
-			Current.Display();
-
-		display_Etage(Front_Layer);
+		display_Etage();
 
 		if (App_Grille)
 			for (int y = 0; y < Range_Niveau.y; y++)
@@ -436,10 +429,58 @@ void Editeur::Display_Map()
 		display();
 }
 
-void Editeur::display_Etage(vector<Maps> _etage)
+void Editeur::display_Etage()
 {
-	for (Maps& Current_Map : _etage)
+	for (Maps& Current_Map : Back_Layer)
+	{
+		if (Hud.Get_Layer() != 1)
+			getSprite(Current_Map.Get_Name()).setColor(Color(150, 150, 150, 160));
+		else
+			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+
 		Current_Map.display();
+
+		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+	}
+
+	for (Maps& Current_Map : Deco_Layer)
+	{
+		if (Hud.Get_Layer() != 2)
+			getSprite(Current_Map.Get_Name()).setColor(Color(150, 150, 150, 160));
+		else
+			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+
+		Current_Map.display();
+
+		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+	}
+
+	for (Maps& Current_Map : Player_Layer)
+	{
+		if (Hud.Get_Layer() != 3)
+			getSprite(Current_Map.Get_Name()).setColor(Color(150, 150, 150, 160));
+		else
+			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+
+		Current_Map.display();
+
+		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+	}
+
+	for (Npc& Current : NpcList)
+		Current.Display();
+
+	for (Maps& Current_Map : Front_Layer)
+	{
+		if (Hud.Get_Layer() != 4)
+			getSprite(Current_Map.Get_Name()).setColor(Color(150, 150, 150, 160));
+		else
+			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+
+		Current_Map.display();
+
+		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+	}
 }
 
 void Editeur::Display()

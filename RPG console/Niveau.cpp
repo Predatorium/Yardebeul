@@ -1,5 +1,18 @@
 #include "Niveau.h"
 #include "SpriteManager.h"
+#include "Dialogue_Container.h"
+
+bool Level::Get_Void(vector<Maps> _Layer, Vector2i _position)
+{
+	for (Maps& Current_Map : _Layer)
+	{
+		if ((int)Current_Map.Get_Position().x / Taille_tile == _position.x &&
+			(int)Current_Map.Get_Position().y / Taille_tile == _position.y)
+			return false;
+	}
+
+	return true;
+}
 
 bool Level::Get_MapsPos(Vector2i _position)
 {
@@ -10,7 +23,10 @@ bool Level::Get_MapsPos(Vector2i _position)
 			return true;
 	}
 
-	return false;
+	if (Get_Void(Back_Layer, _position) == false)
+		return false;
+	else
+		return true;
 }
 
 void Level::Collision(Character& _Character)
@@ -36,11 +52,15 @@ void Level::Collision(Character& _Character)
 	{
 		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
+		if ((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) < 0)
+			NextPosOnMap.x--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Left(false);
 
 		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		NextPosOnMap.y = (int)(_Character.Get_Position().y + _Character.Get_ColisionRect().height) / Taille_tile;
+		if ((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) < 0)
+			NextPosOnMap.x--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Left(false);
 	}
@@ -60,11 +80,15 @@ void Level::Collision(Character& _Character)
 	{
 		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
 		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		if ((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) < 0)
+			NextPosOnMap.y--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Up(false);
 
 		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
 		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		if ((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) < 0)
+			NextPosOnMap.y--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Up(false);
 	}
@@ -142,6 +166,7 @@ void Level::Load_Map(string _file)
 				int tmppv = 0;
 				int tmpvitesse = 0;
 				Comportement tmpcomp;
+				string tmpIdDialogue;
 
 				name = line.substr(0, line.find(" "));
 				line.erase(0, line.find(" ") + 1);
@@ -161,10 +186,22 @@ void Level::Load_Map(string _file)
 				tmpvitesse = stoi(line.substr(0, line.find(" ")));
 				line.erase(0, line.find(" ") + 1);
 
-				tmpcomp = static_cast<Comportement>(stoi(line));
-				line.erase(0, line.size());
+				if (line.size() > 1)
+				{
+					tmpcomp = static_cast<Comportement>(stoi(line.substr(0, line.find(" "))));
+					line.erase(0, line.find(" ") + 1);
 
-				NpcList.push_back(Npc(name, Vector2f(tmpposX, tmpposY), tmpniveau, tmppv, tmpvitesse, tmpcomp));
+					tmpIdDialogue = line.substr(0, line.find(" "));
+					line.erase(0, line.size());
+
+					NpcList.push_back(Npc(name, Vector2f(tmpposX, tmpposY), tmpniveau, tmppv, tmpvitesse, tmpcomp, Dialogues.Get_Dialogue(tmpIdDialogue)));
+				}
+				else
+				{
+					tmpcomp = static_cast<Comportement>(stoi(line));
+					line.erase(0, line.size());
+					NpcList.push_back(Npc(name, Vector2f(tmpposX, tmpposY), tmpniveau, tmppv, tmpvitesse, tmpcomp));
+				}
 			}
 		}
 		Read_Map.close();
@@ -200,27 +237,27 @@ void Level::Save_Map(string _file)
 				Write_Map << to_string(Actual_Map.Get_Tile().y) << " ";
 
 				if (Actual_Map.Get_Biome() == Biomes::Prairie)
-					Write_Map << "1";
+					Write_Map << "0";
 				if (Actual_Map.Get_Biome() == Biomes::Desert)
-					Write_Map << "2";
+					Write_Map << "1";
 				if (Actual_Map.Get_Biome() == Biomes::Caverne)
-					Write_Map << "3";
+					Write_Map << "2";
 				if (Actual_Map.Get_Biome() == Biomes::Montagne)
-					Write_Map << "4";
+					Write_Map << "3";
 			}
 			if (i == Back_Layer.size() && tmp == "Back_Layer")
-			{
-				Write_Map << endl;
-				Write_Map << "Player_Layer";
-				tmp = "Player_Layer";
-				tmpMaps = Player_Layer;
-			}
-			if (i == Back_Layer.size() + Deco_Layer.size() && tmp == "Deco_Layer")
 			{
 				Write_Map << endl;
 				Write_Map << "Deco_Layer";
 				tmp = "Deco_Layer";
 				tmpMaps = Deco_Layer;
+			}
+			if (i == Back_Layer.size() + Deco_Layer.size() && tmp == "Deco_Layer")
+			{
+				Write_Map << endl;
+				Write_Map << "Player_Layer";
+				tmp = "Player_Layer";
+				tmpMaps = Player_Layer;
 			}
 			if (i == Back_Layer.size() + Deco_Layer.size() + Player_Layer.size() && tmp == "Player_Layer")
 			{
@@ -246,8 +283,13 @@ void Level::Save_Map(string _file)
 			Write_Map << to_string(Current.Get_Level()) << " ";
 			Write_Map << to_string(Current.Get_LifePoint()) << " ";
 			Write_Map << to_string(Current.Get_Speed()) << " ";
-			Write_Map << to_string(static_cast<int>(Current.Get_Attitude()));
-
+			if (Current.Get_Dialogue().Get_Id() != "")
+			{
+				Write_Map << to_string(static_cast<int>(Current.Get_Attitude())) << " ";
+				Write_Map << Current.Get_Dialogue().Get_Id();
+			}
+			else
+				Write_Map << to_string(static_cast<int>(Current.Get_Attitude()));
 		}
 		Write_Map.close();
 	}
@@ -281,7 +323,9 @@ void Level::display()
 
 	for (Maps& Current_Map : Front_Layer)
 	{
-		if (FloatRect(Current_Map.Get_Position().x, Current_Map.Get_Position().y,32,32).intersects(getSprite("Hero").getGlobalBounds()))
+
+		if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_ColisionRect().height / 2.1f),
+			Vector2f(Current_Map.Get_Position().x + 16, Current_Map.Get_Position().y + 16), 30, Player.Get_ColisionRect().width))
 			getSprite(Current_Map.Get_Name()).setColor(Color(255,255,255,100));
 		else
 			getSprite(Current_Map.Get_Name()).setColor(Color::White);

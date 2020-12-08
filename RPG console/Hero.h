@@ -52,7 +52,7 @@ public :
 	inline void Set_Gold(int _argent) { Gold = _argent; };
 	inline void Set_Time(float _time) { Time = _time; };
 
-	void Update(Vector2i _limitMap);
+	void Update();
 	void Display_Fight(Vector2f _scale);
 	void Display();
 };

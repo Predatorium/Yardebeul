@@ -46,6 +46,7 @@ public :
 	inline bool Get_Save() { return Save; };
 	inline bool Get_Load() { return Load; };
 	inline Hero Get_Hero() { return Player; };
+	bool Get_Void(vector<Maps> _Layer, Vector2i _position);
 
 	inline void Set_Hero(Hero _hero) { Player = _hero; };
 

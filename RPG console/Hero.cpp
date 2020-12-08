@@ -167,7 +167,7 @@ void Hero::Amelioration_stat()
 		CinNumberCheck("Fait un effort");
 }
 
-void Hero::Update(Vector2i _limitMap)
+void Hero::Update()
 {
 	//Passage_Niveau();
 	//Amelioration_stat();
@@ -193,22 +193,22 @@ void Hero::Update(Vector2i _limitMap)
 		Orientation = Direction::Down;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Q) && Position.x > Colision_Rect.width)
+	if (Keyboard::isKeyPressed(Keyboard::Q))
 		Left = true;
 	else
 		Left = false;
 
-	if (Keyboard::isKeyPressed(Keyboard::D) && Position.x < (_limitMap.x * Taille_tile) - Colision_Rect.width)
+	if (Keyboard::isKeyPressed(Keyboard::D))
 		Right = true;
 	else
 		Right = false;
 
-	if (Keyboard::isKeyPressed(Keyboard::S) && Position.y < ((_limitMap.y - 1) * Taille_tile) - Colision_Rect.height)
+	if (Keyboard::isKeyPressed(Keyboard::S))
 		Down = true;
 	else
 		Down = false;
 
-	if (Keyboard::isKeyPressed(Keyboard::Z) && Position.y > Colision_Rect.height / 2)
+	if (Keyboard::isKeyPressed(Keyboard::Z))
 		Up = true;
 	else
 		Up = false;

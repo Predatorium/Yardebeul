@@ -85,7 +85,7 @@ void Views::Update_Editor(Vector2i _limit, list<Button_Sprite> &_move, Vector2f 
 	else
 		Move = true;
 
-	if (Keyboard::isKeyPressed(Keyboard::Return))
+	if (Keyboard::isKeyPressed(Keyboard::BackSpace))
 		Position = Vector2f(840, 420);
 
 	if (Zoom)

@@ -105,7 +105,12 @@ void StateManager::ChangeState(State NextState)
 		Game_Menu = Menu(0);
 
 	if (NextState == State::EDITOR)
+	{
 		Edit_Niveau = Editeur();
+		App.Get_Window().setMouseCursorVisible(true);
+	}
+	else
+		App.Get_Window().setMouseCursorVisible(false);
 }
 
 void StateManager::State_Fight(Hero* _player, Npc *_enemy)

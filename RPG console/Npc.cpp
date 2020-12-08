@@ -61,7 +61,67 @@ Npc::Npc(string _name, Vector2f _position, int _level, int _hp, int _speed, Comp
 
 		Colision_Rect = IntRect(0, 0, 44, 23);
 	}
+}
 
+Npc::Npc(string _name, Vector2f _position, int _level, int _hp, int _speed, Comportement _attitude, Dialogue &_dial)
+	: Character(_name)
+{
+	Position = _position;
+	Level = _level;
+	Life_Point = _hp;
+	Life_Max = Life_Point;
+	Mana = 50;
+	Endurance = 25;
+	Mental_Health = 100;
+	Speed = _speed;
+	Attitude = _attitude;
+	Orientation = Direction::Left;
+	IsDialogue = false;
+	Right = false;
+	Left = false;
+	Down = false;
+	Up = false;
+	dialogue = _dial;
+
+	if (Name == "Knucles")
+	{
+		Beat_Down = Animator(IntRect(5, 72, 54, 44), 8, 0.15f);
+		Beat_Right = Animator(IntRect(5, 121, 42, 45), 8, 0.15f);
+		Beat_Top = Animator(IntRect(5, 23, 50, 44), 8, 0.15f);
+
+		Walk_Down = Animator(IntRect(160, 189, 61, 43), 3, 0.15f);
+		Walk_Right = Animator(IntRect(348, 189, 40, 44), 3, 0.15f);
+		Walk_Top = Animator(IntRect(5, 189, 50, 42), 3, 0.15f);
+
+		Damage_Min = 1;
+		Damage_Max = 3;
+
+		Defense = 10;
+
+		getSprite(Name).setOrigin(Vector2f(21, 22.5));
+		getSprite(Name).setTextureRect(IntRect(5, 72, 54, 44));
+
+		Colision_Rect = IntRect(0, 0, 45, 22.5);
+	}
+	if (Name == "Fairy")
+	{
+		Beat_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Beat_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Beat_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Walk_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Walk_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Walk_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+
+		Damage_Min = 1;
+		Damage_Max = 1;
+
+		Defense = 0;
+
+		getSprite(Name).setOrigin(Vector2f(22, 23));
+		getSprite(Name).setTextureRect(IntRect(5, 99, 44, 46));
+
+		Colision_Rect = IntRect(0, 0, 44, 23);
+	}
 }
 
 void Npc::Set_Name(string _name)
