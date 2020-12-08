@@ -117,7 +117,7 @@ void Fight_System::Update()
 			int Rand_Damage = irandom(Enemy->Get_MinDamage(), Enemy->Get_MaxDamage());
 			Texte.setString(to_string(-Rand_Damage));
 			Texte.setPosition(Vector2f(getSprite("Hero").getPosition().x, getSprite("Hero").getPosition().y - 300));
-			Player->Set_Life(Player->Get_LifePoint() - Rand_Damage);
+			Player->Add_Life(-Rand_Damage);
 			timer = 0;
 		}
 		if (timer > 2.f && Texte.getString() != "")
