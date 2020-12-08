@@ -7,9 +7,7 @@
 #include "Dialogue_Container.h"
 #include "Views.h"
 
-State state = State::RTNULL;
 StateManager MState;
-bool Pause = false;
 
 StateManager::StateManager()
 {
@@ -18,11 +16,13 @@ StateManager::StateManager()
 	LoadFont();
 	LoadMap();
 	Dialogues.init();
+	ChangeState(State::MENU);
 }
 
 void StateManager::KeyboardEnter()
 {
-	if (App.Get_Event().text.unicode > 64 && App.Get_Event().text.unicode < 91 || App.Get_Event().text.unicode > 96 && App.Get_Event().text.unicode < 123)
+	if (App.Get_Event().text.unicode > 64 && App.Get_Event().text.unicode < 91 || 
+		App.Get_Event().text.unicode > 96 && App.Get_Event().text.unicode < 123)
 		Text_Received += App.Get_Event().text.unicode;
 	if (App.Get_Event().text.unicode > 47 && App.Get_Event().text.unicode < 58)
 		Text_Received += App.Get_Event().text.unicode;

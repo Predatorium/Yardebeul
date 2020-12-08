@@ -40,5 +40,3 @@ public:
 	void State_Fight(Hero* _player, Npc* _enemy);
 };
 extern StateManager MState;
-
-extern bool Pause;

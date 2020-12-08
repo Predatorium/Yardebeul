@@ -32,7 +32,7 @@ Menu::Menu(int _menutype)
 				if (i == 5)
 					name = "Quit";
 
-				Button.push_back(Button_Text(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, (1010 - (120 * 5)) + (i * 120)), Color(50, 120, 255, 255)));
+				Button.push_back(Button_Text(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, 410 + (i * 120)), Color(50, 120, 255, 255)));
 			}
 		}
 
