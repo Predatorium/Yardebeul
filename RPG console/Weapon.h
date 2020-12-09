@@ -22,5 +22,5 @@ public :
 	bool operator == (const Weapon& _w) const { return Name == _w.Name; }
 	bool operator != (const Weapon& _w) const { return !operator==(_w); }
 
-	virtual void Display();
+	virtual void Display(Vector2f _position);
 };

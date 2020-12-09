@@ -155,6 +155,8 @@ void Fight_System::Display()
 {
 	FixView.Display();
 
+	App.Get_Window().draw(getSprite("Fight"));
+
 	Player->Display_Fight(Vector2f(10, 10));
 	Enemy->Display_Fight(Vector2f(-10,10));
 

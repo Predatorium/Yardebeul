@@ -3,7 +3,7 @@
 
 class Consumable : public Item
 {
-protected :
+private :
 
 public :
 	Consumable() = default;
@@ -14,5 +14,5 @@ public :
 	bool operator == (const Consumable& _c) const { return Name == _c.Name; }
 	bool operator != (const Consumable& _c) const { return !operator==(_c); }
 
-	virtual void Display();
+	virtual void Display(Vector2f _position);
 };

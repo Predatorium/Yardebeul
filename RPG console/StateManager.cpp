@@ -82,7 +82,7 @@ void StateManager::DisplayManager()
 		Game_Menu.Display_Main();
 		break;
 	case State::EDITOR:
-		Edit_Niveau.Display();
+		Edit_Niveau.Display_editeur();
 		break;
 	case State::GAME:
 		Monde.Display();

@@ -1,6 +1,7 @@
 #include "Niveau.h"
 #include "SpriteManager.h"
 #include "Dialogue_Container.h"
+#include "Menu.h"
 
 bool Level::Get_Void(vector<Maps> _Layer, Vector2i _position)
 {
@@ -305,19 +306,30 @@ void Level::Destroy_Npc()
 		}
 }
 
-void Level::display()
+void Level::Display()
 {
+	Vue.Display();
+
 	for (Maps& Current_Map : Back_Layer)
-		Current_Map.display();
+		Current_Map.Display();
 
 	for (Maps& Current_Map : Deco_Layer)
-		Current_Map.display();
+		Current_Map.Display();
 
 	for (Maps& Current_Map : Player_Layer)
-		Current_Map.display();
+		Current_Map.Display();
 	
 	for (Npc& Current_Npc : NpcList)
 		Current_Npc.Display();
+
+	for (Weapon& Current_Weapon : WeaponList)
+		Current_Weapon.Display(Player.Get_Position());
+
+	for (Armor& Current_Armor : ArmorList)
+		Current_Armor.Display(Player.Get_Position());
+
+	for (Consumable& Current_Consumable : ConsumableList)
+		Current_Consumable.Display(Player.Get_Position());
 
 	Player.Display();
 
@@ -330,8 +342,16 @@ void Level::display()
 		else
 			getSprite(Current_Map.Get_Name()).setColor(Color::White);
 
-		Current_Map.display();
+		Current_Map.Display();
 
 		getSprite(Current_Map.Get_Name()).setColor(Color::White);
 	}
+
+	Screen.Display();
+
+	for (Npc& Current : NpcList)
+		Current.Display_Dialogue();
+
+	if (Pause == true)
+		Menu_Pause->Display_Pause();
 }

@@ -25,7 +25,7 @@ Views::Views(Vector2f _position, Vector2f _size, FloatRect _viewport)
 	view.setViewport(_viewport);
 }
 
-void Views::Update_Editor(Vector2i _limit, list<Button_Sprite> &_move, Vector2f _position)
+void Views::Update(Vector2i _limit, list<Button_Sprite> &_move, Vector2f _position)
 {
 	for (Button_Sprite& Current_Shape : _move)
 	{
@@ -78,7 +78,6 @@ void Views::Update_Editor(Vector2i _limit, list<Button_Sprite> &_move, Vector2f 
 		else
 		{
 			Position += last_Past - _position;
-
 			last_Past = _position;
 		}
 	}
@@ -104,12 +103,12 @@ void Views::Update_Editor(Vector2i _limit, list<Button_Sprite> &_move, Vector2f 
 	view.setCenter(Position);
 }
 
-void Views::Update_Game(Vector2i _limit, Hero _player)
+void Views::Update(Vector2i _limit, Hero _player)
 {
-	//if (_player.Get_Position().x > 960 && _player.Get_Position().x < (_limit.x * 32) - 960)
+	if (_player.Get_Position().x > 960 && _player.Get_Position().x < (_limit.x * 32) - 960)
 		Position.x = _player.Get_Position().x;
 
-	//if (_player.Get_Position().y > 540 && _player.Get_Position().y < (_limit.y * 32) - 540)
+	if (_player.Get_Position().y > 540 && _player.Get_Position().y < (_limit.y * 32) - 540)
 		Position.y = _player.Get_Position().y;
 
 	view.setCenter(Position);

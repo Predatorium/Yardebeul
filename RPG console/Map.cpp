@@ -16,7 +16,7 @@ Interface_Maps::Interface_Maps(int _rank, Vector2f _position, Vector2i _tile, st
 	Rank = _rank;
 }
 
-void Maps::display()
+void Maps::Display()
 {
 	getSprite(Name).setTextureRect(IntRect(Tile.x * Taille_tile, Tile.y * Taille_tile, Taille_tile, Taille_tile));
 	getSprite(Name).setPosition(Position);

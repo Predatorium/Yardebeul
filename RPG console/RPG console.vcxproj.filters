@@ -46,14 +46,8 @@
     <Filter Include="Fichiers sources\_Global\Manager">
       <UniqueIdentifier>{281ba836-f011-41d7-be63-093b1aa00d93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\_Global\Menu">
-      <UniqueIdentifier>{e9e19652-4e2b-45d9-ac38-b883493b2605}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\_Global\Manager">
       <UniqueIdentifier>{a6e8d220-1970-42ee-99af-853fa92a563c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\_Global\Menu">
-      <UniqueIdentifier>{a6dae019-5a66-4953-bf13-af6be4d34d9b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\_Global\Utility">
       <UniqueIdentifier>{d90ca840-d4b0-4c1c-b7b9-b1a6a2f4d0aa}</UniqueIdentifier>
@@ -78,6 +72,18 @@
     </Filter>
     <Filter Include="Fichiers d%27en-tête\Game\Dungeon\Event">
       <UniqueIdentifier>{2a14ca07-20ed-47de-87b7-2155e011f02d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\System">
+      <UniqueIdentifier>{340f587c-1d98-4734-84b0-d09beb039079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\System">
+      <UniqueIdentifier>{b4815823-8e59-4084-8369-e1b432be036f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\System\Menu">
+      <UniqueIdentifier>{a6dae019-5a66-4953-bf13-af6be4d34d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\System\Menu">
+      <UniqueIdentifier>{e9e19652-4e2b-45d9-ac38-b883493b2605}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -160,7 +166,7 @@
       <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Fichiers d%27en-tête\_Global\Menu</Filter>
+      <Filter>Fichiers d%27en-tête\System\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Map_Manager.h">
       <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
@@ -171,35 +177,35 @@
     <ClInclude Include="World.h">
       <Filter>Fichiers d%27en-tête\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Fight_System.h">
-      <Filter>Fichiers d%27en-tête\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Data.h">
-      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Erreur.h">
-      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Niveau.h">
       <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Tools.h">
       <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Views.h">
-      <Filter>Fichiers d%27en-tête\_Global\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Fichiers d%27en-tête\_Global\Menu</Filter>
+      <Filter>Fichiers d%27en-tête\System\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Dialogue_Container.h">
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Fichiers d%27en-tête\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Niveau.h">
+      <Filter>Fichiers d%27en-tête\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Fichiers d%27en-tête\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Views.h">
+      <Filter>Fichiers d%27en-tête\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Fight_System.h">
+      <Filter>Fichiers d%27en-tête\System</Filter>
+    </ClInclude>
     <ClInclude Include="Dialogue.h">
-      <Filter>Fichiers d%27en-tête\Game</Filter>
+      <Filter>Fichiers d%27en-tête\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,7 +291,7 @@
       <Filter>Fichiers sources\_Global\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Fichiers sources\_Global\Menu</Filter>
+      <Filter>Fichiers sources\System\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Map_Manager.cpp">
       <Filter>Fichiers sources\_Global\Manager</Filter>
@@ -296,35 +302,35 @@
     <ClCompile Include="World.cpp">
       <Filter>Fichiers sources\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Fight_System.cpp">
-      <Filter>Fichiers sources\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Fichiers sources\_Global\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Data.cpp">
-      <Filter>Fichiers sources\_Global\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="Erreur.cpp">
-      <Filter>Fichiers sources\_Global\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Niveau.cpp">
       <Filter>Fichiers sources\_Global\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Tools.cpp">
       <Filter>Fichiers sources\_Global\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Views.cpp">
-      <Filter>Fichiers sources\_Global\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Fichiers sources\_Global\Menu</Filter>
+      <Filter>Fichiers sources\System\Menu</Filter>
     </ClCompile>
     <ClCompile Include="Dialogue_Container.cpp">
       <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Views.cpp">
+      <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Niveau.cpp">
+      <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Fight_System.cpp">
+      <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
     <ClCompile Include="Dialogue.cpp">
-      <Filter>Fichiers sources\Game</Filter>
+      <Filter>Fichiers sources\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

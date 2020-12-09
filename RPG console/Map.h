@@ -27,7 +27,7 @@ public :
 	inline void Set_Biome(Biomes _biome) { Biome = _biome; };
 	inline void Set_Name(string _name) { Name = _name; };
 
-	void display();
+	void Display();
 };
 
 class Interface_Maps : public Maps

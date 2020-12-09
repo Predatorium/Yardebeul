@@ -35,12 +35,12 @@ public :
 	void Interaction_Map();
 	void Set_Map(vector<Maps> &_layer);
 	void Erase_Map();
-	void Update();
+	virtual void Update();
 
 	void Display_SaveAndLoad();
 	void Display_NewSave();
 	void Display_HUD();
 	void Display_Map();
 	void display_Etage();
-	void Display();
+	void Display_editeur();
 };

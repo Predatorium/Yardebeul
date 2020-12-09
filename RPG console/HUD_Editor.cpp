@@ -617,7 +617,7 @@ void HUD_Editor::Display_Tilemenu()
 {
 	for (Interface_Maps& Current_Tile : Tile_menu)
 		if (Current_Tile.Get_Rank() == Current_Rank || Current_Tile.Get_Rank() == Current_Rank + 1)
-			Current_Tile.display();
+			Current_Tile.Display();
 }
 
 void HUD_Editor::Display_NpcModif()
@@ -678,7 +678,7 @@ void HUD_Editor::Display_Selection(RectangleShape& _grille)
 		App.Get_Window().draw(_grille);
 	}
 	else if (Selection.Get_Name() != "NPC")
-		Selection.display();
+		Selection.Display();
 
 	if (IsSelect)
 		App.Get_Window().draw(Tile_Select);

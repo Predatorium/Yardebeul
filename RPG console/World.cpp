@@ -3,7 +3,6 @@
 #include "Map_Manager.h"
 #include "SpriteManager.h"
 #include "StateManager.h"
-#include "Menu.h"
 #include "Data.h"
 
 World::World()
@@ -14,6 +13,8 @@ World::World()
 		Load_Map(Get_PathMap("Map"));
 
 		Menu_Pause = new Menu(1);
+
+		WeaponList.push_back(Weapon(Weapons.Get_Weapon("Epee de feu"), Vector2f(200, 200)));
 
 		Save = false;
 		Load = true;
@@ -111,19 +112,5 @@ void World::Update()
 	if (Pause == true)
 		Menu_Pause->Update_Pause(*this, Pause);
 
-	Vue.Update_Game(Range_Niveau, Player);
-}
-
-void World::Display()
-{
-	Vue.Display();
-	display();
-
-	if (Pause == true)
-		Menu_Pause->Display_Pause();
-
-	Screen.Display();
-
-	for (Npc& Current : NpcList)
-		Current.Display_Dialogue();
+	Vue.Update(Range_Niveau, Player);
 }

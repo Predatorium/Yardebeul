@@ -1,6 +1,7 @@
 #pragma once
 #include "Tools.h"
 #include "Effect.h"
+#include "Animator.h"
 
 class Item
 {
@@ -8,6 +9,7 @@ protected :
 	Effect effect;
 	Vector2f Position;
 	string Name;
+	Animator Anim;
 	int Price;
 
 public :
@@ -25,5 +27,5 @@ public :
 	inline void Set_Name(string _name) { Name = _name; };
 	inline void Set_Price(int _price) { Price = _price; };
 
-	virtual void Display() = 0;
+	virtual void Display(Vector2f _position) = 0;
 };

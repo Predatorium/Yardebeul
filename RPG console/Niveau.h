@@ -21,7 +21,7 @@ protected :
 	Hero Player;
 
 	list<Npc> NpcList;
-	list<Weapon> WepaonList;
+	list<Weapon> WeaponList;
 	list<Armor> ArmorList;
 	list<Consumable> ConsumableList;
 
@@ -57,5 +57,6 @@ public :
 
 	void Destroy_Npc();
 
-	void display();
+	virtual void Update() = 0;
+	void Display();
 };

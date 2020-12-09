@@ -324,7 +324,7 @@ void Editeur::Update()
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
 		
 		Hud.Get_Selection().Set_Position(Vector2f(Mouse::getPosition(App.Get_Window())));
-		Vue.Update_Editor(Range_Niveau, Hud.Get_Move(), Mouse_Position);
+		Vue.Update(Range_Niveau, Hud.Get_Move(), Mouse_Position);
 	}
 	else if (Load)
 	{
@@ -356,7 +356,7 @@ void Editeur::Update()
 		}
 
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
-		Vue.Update_Game(Range_Niveau, Player);
+		Vue.Update(Range_Niveau, Player);
 	}
 
 	if(!Save && !Load)
@@ -411,10 +411,9 @@ void Editeur::Display_HUD()
 
 void Editeur::Display_Map()
 {
-	Vue.Display();
-
 	if (!PlayerIsPresent)
 	{
+		Vue.Display();
 		display_Etage();
 
 		if (App_Grille)
@@ -426,7 +425,7 @@ void Editeur::Display_Map()
 				}
 	}
 	else
-		display();
+		Display();
 }
 
 void Editeur::display_Etage()
@@ -438,7 +437,7 @@ void Editeur::display_Etage()
 		else
 			getSprite(Current_Map.Get_Name()).setColor(Color::White);
 
-		Current_Map.display();
+		Current_Map.Display();
 
 		getSprite(Current_Map.Get_Name()).setColor(Color::White);
 	}
@@ -450,7 +449,7 @@ void Editeur::display_Etage()
 		else
 			getSprite(Current_Map.Get_Name()).setColor(Color::White);
 
-		Current_Map.display();
+		Current_Map.Display();
 
 		getSprite(Current_Map.Get_Name()).setColor(Color::White);
 	}
@@ -462,7 +461,7 @@ void Editeur::display_Etage()
 		else
 			getSprite(Current_Map.Get_Name()).setColor(Color::White);
 
-		Current_Map.display();
+		Current_Map.Display();
 
 		getSprite(Current_Map.Get_Name()).setColor(Color::White);
 	}
@@ -477,13 +476,13 @@ void Editeur::display_Etage()
 		else
 			getSprite(Current_Map.Get_Name()).setColor(Color::White);
 
-		Current_Map.display();
+		Current_Map.Display();
 
 		getSprite(Current_Map.Get_Name()).setColor(Color::White);
 	}
 }
 
-void Editeur::Display()
+void Editeur::Display_editeur()
 {
 	Display_Map();
 

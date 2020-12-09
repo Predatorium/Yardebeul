@@ -2,8 +2,10 @@ Sprite Grass_lands ../Ressources/Sprite/Monde/Grasslands_Tiles.png
 Sprite Caverne ../Ressources/Sprite/Monde/Cave_Tiles.png
 Sprite Desert ../Ressources/Sprite/Monde/Desert_Tiles.png
 Sprite Montagne ../Ressources/Sprite/Monde/Mountain_Tiles.png
+Sprite Fight ../Ressources/Sprite/Monde/Fight.jpg
 Sprite Font ../Ressources/Sprite/Menu/menu_main.jpg
 Sprite Hero ../Ressources/Sprite/Joueur/Hero.png
+Sprite Epee ../Ressources/Sprite/Joueur/Epee.png
 Sprite Knucles ../Ressources/Sprite/Npc/Knucles.png
 Sprite Fairy ../Ressources/Sprite/Npc/Fairy.png
 Sprite Fleche ../Ressources/Sprite/Menu/Fleche.png

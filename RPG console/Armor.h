@@ -19,5 +19,5 @@ public :
 	bool operator == (const Armor& _a) const { return Name == _a.Name; }
 	bool operator != (const Armor& _a) const { return !operator==(_a); }
 
-	virtual void Display();
+	virtual void Display(Vector2f _position);
 };

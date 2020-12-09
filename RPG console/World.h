@@ -21,6 +21,5 @@ public :
 
 	void ScreenShot(int _party);
 
-	void Update();
-	void Display();
+	virtual void Update();
 };
