@@ -25,29 +25,20 @@ void RessourcesLoad(string _path)
 				string tmppath;
 				float tmpsound = 0;
 
-				bool done = false;
-				while (!done)
-				{
-					if (line.find(" "))
-					{
-						if (line.substr(0, line.find(" ")) == "Sprite")
-							tmptype = RessourceType::TEXTURE;
-						else if (line.substr(0, line.find(" ")) == "Font")
-							tmptype = RessourceType::FONT;
-						else if (line.substr(0, line.find(" ")) == "Map")
-							tmptype = RessourceType::MAP;
-						line.erase(0, line.find(" ") + 1);
+				if (line.substr(0, line.find(" ")) == "Sprite")
+					tmptype = RessourceType::TEXTURE;
+				else if (line.substr(0, line.find(" ")) == "Font")
+					tmptype = RessourceType::FONT;
+				else if (line.substr(0, line.find(" ")) == "Map")
+					tmptype = RessourceType::MAP;
+				line.erase(0, line.find(" ") + 1);
 
-						tmpname = line.substr(0, line.find(" "));
-						line.erase(0, line.find(" ") + 1);
+				tmpname = line.substr(0, line.find(" "));
+				line.erase(0, line.find(" ") + 1);
 
-						tmppath = line.substr(0, line.find(" "));
-						line.erase(0, line.find(" ") + 1);
+				tmppath = line.substr(0, line.find(" "));
+				line.erase(0, line.size());
 
-						if (line.find(" ") == -1)
-							done = true;
-					}
-				}
 				RessourcesList.push_back(RessourcesManager(tmptype, tmpname, tmppath, tmpsound));
 			}
 		}

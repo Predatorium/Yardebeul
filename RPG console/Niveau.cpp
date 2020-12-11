@@ -299,7 +299,7 @@ void Level::Save_Map(string _file)
 void Level::Destroy_Npc()
 {
 	for (Npc& Current_Npc : NpcList)
-		if (Current_Npc.Get_LifePoint() == 0)
+		if (Current_Npc.Get_LifePoint() <= 0)
 		{
 			NpcList.remove(Current_Npc);
 			break;

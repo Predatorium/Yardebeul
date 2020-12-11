@@ -143,7 +143,7 @@ void Fight_System::Update()
 	}
 
 	if (Enemy->Get_LifePoint() <= 0)
-		MState.ChangeState(State::GAME);
+		state = State::EDITOR;
 	if (Player->Get_LifePoint() <= 0)
 		MState.ChangeState(State::MENU);
 

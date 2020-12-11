@@ -14,6 +14,7 @@ enum class State
 	FIGHT,
 	OPTION,
 };
+extern State state;
 
 class StateManager
 {
@@ -22,7 +23,7 @@ private:
 	Editeur Edit_Niveau;
 	World Monde;
 	Fight_System Fight;
-	State state;
+	
 	string Text_Received;
 
 public:

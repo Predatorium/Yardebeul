@@ -8,6 +8,7 @@
 #include "Views.h"
 
 StateManager MState;
+State state;
 
 StateManager::StateManager()
 {

@@ -97,6 +97,16 @@ void Editeur::LoadNewMap()
 				Load = false;
 				break;
 			}
+
+		if (New_map.Get_Shape().getGlobalBounds().contains(Mouse_Position))
+		{
+			Back_Layer.clear();
+			Deco_Layer.clear();
+			Player_Layer.clear();
+			Front_Layer.clear();
+			NpcList.clear();
+			Load = false;
+		}
 	}
 }
 
@@ -344,6 +354,8 @@ void Editeur::Update()
 		if (IsDialogue == false)
 			Player.Update();
 
+		Destroy_Npc();
+
 		for (Npc& Current_Npc : NpcList)
 		{
 			Collision(Current_Npc);
@@ -368,8 +380,7 @@ void Editeur::Display_SaveAndLoad()
 	for (Button_Text& CurrentBouton : Dispo_Map)
 		CurrentBouton.Display();
 
-	if(!Load)
-		New_map.Display();
+	New_map.Display();
 }
 
 void Editeur::Display_NewSave()
