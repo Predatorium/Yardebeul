@@ -25,5 +25,5 @@ public :
 	bool operator != (const Weapon& _w) const { return !operator==(_w); }
 
 	virtual void Take_Item(Hero& _player);
-	virtual void Display(Vector2f _position);
+	virtual void Display(Vector2f _circlecol);
 };

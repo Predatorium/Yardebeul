@@ -213,6 +213,9 @@
     <ClInclude Include="Npc_Container.h">
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Fichiers d%27en-tête\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Room.cpp">
@@ -343,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="Npc_Container.cpp">
       <Filter>Fichiers sources\_Global\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Fichiers sources\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

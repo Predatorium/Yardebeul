@@ -19,7 +19,7 @@ void Consumable::Take_Item(Hero& _player)
 {
 	if (Circle_Collision(_player.Get_Position(), Position, 20, 20) && _player.Get_Interact())
 	{
-		_player.Add_Consumable(*this);
+		_player.Get_Inventory().Add_Consumable(*this);
 		PickUp = true;
 	}
 }
@@ -27,5 +27,6 @@ void Consumable::Take_Item(Hero& _player)
 void Consumable::Display(Vector2f _position)
 {
 	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
+	getSprite(Name.substr(0, Name.find(" "))).setScale(Vector2f(1, 1));
 	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
 }

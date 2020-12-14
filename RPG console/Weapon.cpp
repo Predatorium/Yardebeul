@@ -26,7 +26,7 @@ void Weapon::Take_Item(Hero& _player)
 {
 	if (Circle_Collision(_player.Get_Position(), Position, 20, 20) && _player.Get_Interact())
 	{
-		_player.Add_Weapon(*this);
+		_player.Get_Inventory().Add_Weapon(*this);
 		PickUp = true;
 	}
 }
@@ -36,6 +36,7 @@ void Weapon::Display(Vector2f _position)
 	Anim.Animation(getSprite(Name.substr(0, Name.find(" "))));
 	getSprite(Name.substr(0, Name.find(" "))).setOrigin(Vector2f(10.5, 15));
 	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
+	getSprite(Name.substr(0, Name.find(" "))).setScale(Vector2f(1,1));
 	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
 
 	if (Circle_Collision(Position, _position, 20, 20))

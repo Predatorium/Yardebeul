@@ -33,15 +33,12 @@ Fight_System::Fight_System(Hero* _player, Npc* _enemy, State _state)
 	Texte = Text("", getFont("Times"), 100);
 	int x = 0;
 	int y = 0;
-	for (Weapon* Current : Player->Get_Weapon())
+	Button.push_back(Button_Text(Player->Get_Weapon()->Get_Name(), "Times", 50, Vector2f(250, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 80)), Color(50, 120, 255, 255)));
+	y++;
+	if (y == 2)
 	{
-		Button.push_back(Button_Text(Current->Get_Name(), "Times", 50, Vector2f(250, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 80)), Color(50, 120, 255, 255)));
-		y++;
-		if (y == 2)
-		{
-			y = 0;
-			x++;
-		}
+		y = 0;
+		x++;
 	}
 	Button.push_back(Button_Text("Soin", "Times", 50, Vector2f(250, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 60)), Color(50, 120, 255, 255)));
 
@@ -85,9 +82,9 @@ void Fight_System::Hud_Update()
 	{
 		if (Selection == 0)
 		{
-			Texte.setString(to_string(-Player->Get_OneWeapon(Selection)->Get_Damage()));
+			Texte.setString(to_string(-Player->Get_Weapon()->Get_Damage()));
 			Texte.setPosition(Vector2f(getSprite(Enemy->Get_Name()).getPosition().x, getSprite(Enemy->Get_Name()).getPosition().y + 300));
-			Enemy->Set_Life(Enemy->Get_LifePoint() - Player->Get_OneWeapon(Selection)->Get_Damage());
+			Enemy->Set_Life(Enemy->Get_LifePoint() - Player->Get_Weapon()->Get_Damage());
 		}
 		if (Selection == 1)
 		{

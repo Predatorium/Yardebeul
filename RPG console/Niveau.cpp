@@ -315,7 +315,6 @@ void Level::Display()
 
 	for (Maps& Current_Map : Front_Layer)
 	{
-
 		if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_ColisionRect().height / 2.1f),
 			Vector2f(Current_Map.Get_Position().x + 16, Current_Map.Get_Position().y + 16), 30, Player.Get_ColisionRect().width))
 			getSprite(Current_Map.Get_Name()).setColor(Color(255,255,255,100));
@@ -331,6 +330,9 @@ void Level::Display()
 
 	for (Npc& Current : NpcList)
 		Current.Display_Dialogue();
+
+	if (Player.Get_IsInventory() == true)
+		Player.Get_Inventory().Display();
 
 	if (Pause == true)
 		Menu_Pause->Display_Pause();

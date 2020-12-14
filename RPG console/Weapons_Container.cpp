@@ -11,13 +11,9 @@ Weapons_Container::Weapons_Container()
 void Weapons_Container::init()
 {
 	Container.push_back(Weapon(2, 10, "Epee de feu", 100, Effects.Get_Effect("Embrassement")));
-	Container.push_back(Weapon(4, 20, "Epee de lave", 200, Effects.Get_Effect("Volcan")));
 	Container.push_back(Weapon(2, 10, "Epee d eau", 100, Effects.Get_Effect("Eclaboussure")));
-	Container.push_back(Weapon(4, 20, "Epee de glace", 200, Effects.Get_Effect("Engelure")));
 	Container.push_back(Weapon(2, 10, "Epee d air", 100, Effects.Get_Effect("Rafale")));
-	Container.push_back(Weapon(4, 20, "Epee de foudre", 200, Effects.Get_Effect("Electrocution")));
 	Container.push_back(Weapon(2, 10, "Epee de terre", 100, Effects.Get_Effect("Seisme")));
-	Container.push_back(Weapon(4, 20, "Epee de gravité", 200, Effects.Get_Effect("Trou noir")));
 }
 
 Weapon Weapons_Container::Get_Weapon(string _name)

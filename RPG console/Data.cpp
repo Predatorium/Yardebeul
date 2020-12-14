@@ -28,15 +28,15 @@ void Data::Save_Player(int _party, Hero _joueur)
 		Save_Hero << "XpTotal : " << _joueur.Get_Xptotal() << endl;
 		Save_Hero << "XpLevel : " << _joueur.Get_XpLevel() << endl;
 		Save_Hero << "Capacity : " << _joueur.Get_PointCapacity() << endl;
-		Save_Hero << "Gold : " << _joueur.Get_Gold();
+		Save_Hero << "Gold : " << _joueur.Get_Inventory().Get_Gold();
 
-		for (Weapon* Current : _joueur.Get_Weapon())
+		for (Weapon* Current : _joueur.Get_Inventory().Get_Weapon())
 		{
 			Save_Hero << endl;
 			Save_Hero << "Weapon : " << Current->Get_Name();
 		}
 
-		for (Armor* Current : _joueur.Get_Armor())
+		for (Armor* Current : _joueur.Get_Inventory().Get_Armor())
 		{
 			Save_Hero << endl;
 			Save_Hero << "Armor : " << Current->Get_Name();
@@ -105,13 +105,13 @@ void Data::Load_Player(int _party, Hero& _joueur)
 				_joueur.Set_CapacityPoint(stoi(line.substr(line.find(" : ") + 3)));
 
 			if (line.substr(0, line.find(" : ")) == "Gold")
-				_joueur.Set_Gold(stoi(line.substr(line.find(" : ") + 3)));
+				_joueur.Get_Inventory().Add_Gold(stoi(line.substr(line.find(" : ") + 3)));
 
 			if (line.substr(0, line.find(" : ")) == "Weapon")
-				_joueur.Add_Weapon(Weapon(Weapons.Get_Weapon(line.substr(line.find(" : ") + 3))));
+				_joueur.Get_Inventory().Add_Weapon(Weapon(Weapons.Get_Weapon(line.substr(line.find(" : ") + 3))));
 
 			if (line.substr(0, line.find(" : ")) == "Armor")
-				_joueur.Add_Armor(Armor(Armors.Get_Armor(line.substr(line.find(" : ") + 3))));
+				_joueur.Get_Inventory().Add_Armor(Armor(Armors.Get_Armor(line.substr(line.find(" : ") + 3))));
 			
 			if (line.substr(0, line.find(" : ")) == "Consumable")
 				_joueur.Add_Consumable(Consumable(Consumables.Get_Consumable(line.substr(line.find(" : ") + 3))));

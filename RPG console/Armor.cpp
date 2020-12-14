@@ -22,7 +22,7 @@ void Armor::Take_Item(Hero& _player)
 {
 	if (Circle_Collision(_player.Get_Position(), Position, 20, 20) && _player.Get_Interact())
 	{
-		_player.Add_Armor(*this);
+		_player.Get_Inventory().Add_Armor(*this);
 		PickUp = true;
 	}
 }
@@ -30,6 +30,7 @@ void Armor::Take_Item(Hero& _player)
 void Armor::Display(Vector2f _position)
 {
 	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
+	getSprite(Name.substr(0, Name.find(" "))).setScale(Vector2f(1, 1));
 	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(""))));
 
 	if (Circle_Collision(Position, _position, 20, 20))

@@ -29,6 +29,7 @@
     <ClInclude Include="Fight_System.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="HUD_Editor.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Map_Manager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Niveau.h" />
@@ -73,6 +74,7 @@
     <ClCompile Include="Fight_System.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="HUD_Editor.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Map_Manager.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Niveau.cpp" />

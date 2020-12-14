@@ -10,13 +10,9 @@ Effects_Container::Effects_Container()
 void Effects_Container::init()
 {
 	Container.push_back(Effect("Embrassement", Element::Feu, Range_Effect::AOE, Affect_Stat::LIFE_POINT, 10, 2));
-	Container.push_back(Effect("Volcan", Element::Lave, Range_Effect::AOE, Affect_Stat::LIFE_POINT, 20, 5));
 	Container.push_back(Effect("Eclaboussure", Element::Eau, Range_Effect::Multicible, Affect_Stat::SPEED, 5, 4));
-	Container.push_back(Effect("Engelure", Element::Glace, Range_Effect::Multicible, Affect_Stat::SPEED, 10, 8));
 	Container.push_back(Effect("Rafale", Element::Air, Range_Effect::AOE, Affect_Stat::ENDURANCE, 10, 1));
-	Container.push_back(Effect("Electrocution", Element::Foudre, Range_Effect::AOE, Affect_Stat::ENDURANCE, 20, 0.5));
 	Container.push_back(Effect("Seisme", Element::Terre, Range_Effect::Monocible, Affect_Stat::MENTAL_HEALTH, 5, 2));
-	Container.push_back(Effect("Trou noir", Element::Gravité, Range_Effect::Monocible, Affect_Stat::MENTAL_HEALTH, 10, 0.5));
 	Container.push_back(Effect("Soin", Element::Neutre, Range_Effect::Monocible, Affect_Stat::LIFE_POINT, -20, 0));
 }
 

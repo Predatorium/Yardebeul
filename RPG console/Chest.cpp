@@ -19,7 +19,7 @@ void Chest::Take_Objet(Hero& _hero, int x)
 				if (Objet_actuel == NULL)
 					throw Erreur(1, "L'objet est Null", 1);
 				else
-					_hero.Add_Weapon(*tmpweapon);
+					_hero.Set_Weapon(*tmpweapon);
 			}
 
 			Armor* tmpArmor = dynamic_cast<Armor*>(Objet_actuel);
@@ -28,7 +28,7 @@ void Chest::Take_Objet(Hero& _hero, int x)
 				if (Objet_actuel == NULL)
 					throw Erreur(1, "L'objet est Null", 1);
 				else
-					_hero.Add_Armor(*tmpArmor);
+					_hero.Set_Armor(*tmpArmor);
 			}
 
 			Consumable* tmpConsumable = dynamic_cast<Consumable*>(Objet_actuel);

@@ -22,7 +22,6 @@ void Animator::Animation(Sprite& _sprite)
 			Frame = 0;
 
 		Timer = 0;
-		
 	}
 
 	_sprite.setTextureRect(IntRect(Rect.left + (Frame * Rect.width), Rect.top, Rect.width, Rect.height));

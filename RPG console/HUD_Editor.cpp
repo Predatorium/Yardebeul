@@ -177,7 +177,13 @@ void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, Vector2i _limit)
 					if (Menu_Npc.getSize().x == 265)
 						Menu_Npc.setSize(Vector2f(130, 230));
 
-					Modif_Npc.push_back(Button_Text("Type", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 15), Color::White));
+					Modif_Npc.push_back(Button_Text("Change_Type", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 15), Color::White));
+					Modif_Npc.push_back(Button_Text("Life : " + to_string(Current.Get_LifeMax()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 45), Color::White));
+					Modif_Npc.push_back(Button_Text("Level : " + to_string(Current.Get_Level()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 75), Color::White));
+					Modif_Npc.push_back(Button_Text("Damage : " + to_string(Current.Get_Weapon().Get_Damage()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 105), Color::White));
+					Modif_Npc.push_back(Button_Text("Defense : " + to_string(Current.Get_Armor().Get_Defense()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 135), Color::White));
+					if (Current.Get_Dialogue() != Dialogue())
+						Modif_Npc.push_back(Button_Text("Dialogue : " + Current.Get_Dialogue().Get_Id(), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 165), Color::White));
 					Modif_Npc.push_back(Button_Text("Remove", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 265), Color::White));
 					NpcSelect = true;
 					findNpc = true;
@@ -199,14 +205,14 @@ void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, Vector2i _limit)
 					if (Menu_Npc.getSize().x == 130 && Current.Get_Name() != "Remove")
 						Menu_Npc.setSize(Vector2f(265, 280));
 
-					if (Current.Get_Name() == "Type")
+					if (Current.Get_Name() == "Change_Type")
 					{
 						Select_Stat.clear();
 						int i = 0;
 						for (Npc& Current : Npcs.Get_List())
 						{
+							Select_Stat.push_back(Button_Text(Current.Get_Name(), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 200, Menu_Npc.getPosition().y +  15 + (i * 30)), Color::White));
 							i++;
-							Select_Stat.push_back(Button_Text(Current.Get_Name(), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 200, Menu_Npc.getPosition().y + (i * 15)), Color::White));
 						}
 
 						i = 0;
@@ -256,6 +262,7 @@ void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, Vector2i _limit)
 
 			for (Button_Text& Current : Select_Stat)
 			{
+				bool Modif = false;
 				if (Current.Get_Shape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
 				{
 					int i = 0;
@@ -263,12 +270,46 @@ void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, Vector2i _limit)
 					{
 						if (Current_Npc == i)
 						{
-							_npc.push_back(Npc(Npcs.Get_Npc(Current.Get_Name()), Current_npc.Get_Position()));
-							_npc.remove(Current_npc);
+							Current_npc = Npc(Npcs.Get_Npc(Current.Get_Name()),Current_npc.Get_Position());
+							Select_Stat.clear();
+							int i = 0;
+							for (Npc& Current : Npcs.Get_List())
+							{
+								Select_Stat.push_back(Button_Text(Current.Get_Name(), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 200, Menu_Npc.getPosition().y + 15 + (i * 30)), Color::White));
+								i++;
+							}
+
+							i = 0;
+							for (Npc& Current_npc : _npc)
+							{
+								if (Current_Npc == i)
+								{
+									Modif_Npc.clear();
+									Modif_Npc.push_back(Button_Text("Change_Type", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 15), Color::White));
+									Modif_Npc.push_back(Button_Text("Life : " + to_string(Current_npc.Get_LifeMax()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 45), Color::White));
+									Modif_Npc.push_back(Button_Text("Level : " + to_string(Current_npc.Get_Level()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 75), Color::White));
+									Modif_Npc.push_back(Button_Text("Damage : " + to_string(Current_npc.Get_Weapon().Get_Damage()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 105), Color::White));
+									Modif_Npc.push_back(Button_Text("Defense : " + to_string(Current_npc.Get_Armor().Get_Defense()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 135), Color::White));
+									if (Current_npc.Get_Dialogue() != Dialogue())
+										Modif_Npc.push_back(Button_Text("Dialogue : " + Current_npc.Get_Dialogue().Get_Id(), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 165), Color::White));
+									Modif_Npc.push_back(Button_Text("Remove", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 265), Color::White));
+
+									for (Button_Text& Current_text : Select_Stat)
+										if (Current_npc.Get_Name() == Current_text.Get_Name())
+											Current_text.Set_Color(Color::Red);
+
+									break;
+								}
+
+								i++;
+							}
+							Modif = true;
 						}
 						i++;
 					}
 				}
+				if (Modif == true)
+					break;
 			}
 		}
 	}

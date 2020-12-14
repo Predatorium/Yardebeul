@@ -89,8 +89,10 @@ void World::Update()
 	if (Pause == false)
 	{
 		Collision(Player);
-		if (IsDialogue == false)
+		if (!IsDialogue && !Player.Get_IsInventory())
 			Player.Update();
+		if (Player.Get_IsInventory())
+			Player.Get_Inventory().Update(Player);
 
 		Destroy_List();
 
@@ -114,10 +116,10 @@ void World::Update()
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 			Pause = true;
+		
+		Vue.Update(Range_Niveau, Player);
 	}
 
 	if (Pause == true)
 		Menu_Pause->Update_Pause(*this, Pause);
-
-	Vue.Update(Range_Niveau, Player);
 }

@@ -7,54 +7,51 @@
 
 Menu::Menu(int _menutype)
 {
-	if (FontList.size() > 0)
+	Selection = 0;
+	timer = 0;
+	Option = false;
+	Menu_Load = false;
+
+	if (_menutype == 0)
 	{
-		Selection = 0;
-		timer = 0;
-		Option = false;
-		Menu_Load = false;
-
-		if (_menutype == 0)
+		for (int i = 0; i < 6; i++)
 		{
-			for (int i = 0; i < 6; i++)
-			{
-				string name = "";
-				if (i == 0)
-					name = "New Game";
-				if (i == 1)
-					name = "Load Game";
-				if (i == 2)
-					name = "Editor";
-				if (i == 3)
-					name = "Options";
-				if (i == 4)
-					name = "Credit";
-				if (i == 5)
-					name = "Quit";
+			string name = "";
+			if (i == 0)
+				name = "New Game";
+			if (i == 1)
+				name = "Load Game";
+			if (i == 2)
+				name = "Editor";
+			if (i == 3)
+				name = "Options";
+			if (i == 4)
+				name = "Credit";
+			if (i == 5)
+				name = "Quit";
 
-				Button.push_back(Button_Text(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, 410 + (i * 120)), Color(50, 120, 255, 255)));
-			}
+			Button.push_back(Button_Text(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, 410 + (i * 120)), Color(50, 120, 255, 255)));
 		}
-
-		if (_menutype == 1)
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				string name = "";
-				if (i == 0)
-					name = "Resume";
-				if (i == 1)
-					name = "Save Game";
-				if (i == 2)
-					name = "Quit";
-
-				Button.push_back(Button_Text(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, (1010 - (120 * 5)) + (i * 120)), Color(50, 120, 255, 255)));
-			}
-		}
-
-		Titre = Button_Text("Yardebeul Of Gardebeul", "Ethnocentric", 90, Vector2f(1910, 90), 5, Vector2f(960, 50), Color(50, 120, 255, 255));
-		Vue = Views();
 	}
+
+	if (_menutype == 1)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			string name = "";
+			if (i == 0)
+				name = "Resume";
+			if (i == 1)
+				name = "Save Game";
+			if (i == 2)
+				name = "Quit";
+
+			Button.push_back(Button_Text(name, "Ethnocentric", 70, Vector2f(600, 70), 3, Vector2f(480, (1010 - (120 * 5)) + (i * 120)), Color(50, 120, 255, 255)));
+		}
+	}
+
+	Titre = Button_Text("Yardebeul Of Gardebeul", "Ethnocentric", 90, Vector2f(1910, 90), 5, Vector2f(960, 50), Color(50, 120, 255, 255));
+	Vue = Views();
 }
 
 void Menu::Update_Select()
@@ -318,7 +315,6 @@ void Bouton_Load::Load()
 
 		Load.close();
 	}
-
 }
 
 void Bouton_Load::Display()

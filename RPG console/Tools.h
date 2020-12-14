@@ -4,7 +4,6 @@
 #include <string>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
-#include <sstream>
 #include <math.h>
 #include <vector>
 #include <list>
@@ -55,26 +54,18 @@ enum class State_Event : int
 enum class Element : int
 {
 	Feu,
-	Lave,
 	Eau,
-	Glace,
 	Air,
-	Foudre,
 	Terre,
-	Gravité,
 	Neutre
 };
 
-static float Affinité[9][9] = {
-0.5 ,0.25, 0.5,2   ,1   ,1   ,1   ,1   ,0,
-0.75,0.5 , 2  ,1.5 ,0.75,1   ,1.25,1   ,0,
-2   ,1.5 ,0.5 ,0.25,1   ,1   ,1   ,1   ,0,
-2   ,0.25,0.75,0.5 ,1.25,1   ,1   ,1   ,0,
-1.5 ,1.25,1   ,1   ,0.5 ,0.25,0.75,0.5 ,0,
-1   ,1   ,1   ,1   ,0.75,0.5 ,0.5 ,1   ,0,
-1   ,0.75,1   ,1   ,1.25,2   ,0.5 ,0.25,0,
-1   ,1   ,1   ,1   ,2   ,1   ,0.75,0.5 ,0,
-0   ,0   ,0   ,0   ,0   ,0   ,0   ,0   ,0
+static float Affinité[5][5] = {
+0.5 ,0.5 ,2   ,1   ,1,
+2   ,0.5 ,1   ,0.5 ,1,
+0.5 ,1   ,0.5 ,2   ,1,
+1   ,2   ,0.5 ,0.5 ,1,
+1   ,1   ,1   ,1   ,1
 };
 
 class Times
