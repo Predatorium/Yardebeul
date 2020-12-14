@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character(string _name)
+Character::Character(string _name, Armor _armor, Weapon _weapon)
 {
 	Name = _name;
 	Level = 1;
@@ -9,6 +9,8 @@ Character::Character(string _name)
 	Mana = 50;
 	Endurance = 50;
 	Mental_Health = 100;
+	*armor = _armor;
+	*weapon = _weapon;
 }
 
 void Character::Add_Life(int _life)

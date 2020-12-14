@@ -5,10 +5,8 @@
 #include "Map_Manager.h"
 #include "Controle.h"
 #include "Dialogue_Container.h"
+#include "Npc_Container.h"
 #include "Views.h"
-
-StateManager MState;
-State state;
 
 StateManager::StateManager()
 {
@@ -116,6 +114,6 @@ void StateManager::ChangeState(State NextState)
 
 void StateManager::State_Fight(Hero* _player, Npc *_enemy)
 {
-	Fight = Fight_System(_player, _enemy);
+	Fight = Fight_System(_player, _enemy, state);
 	state = State::FIGHT;
 }

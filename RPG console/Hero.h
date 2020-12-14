@@ -18,8 +18,8 @@ private :
 	float Time;
 	bool Interaction;
 
-	Weapon* weapon;
-	Armor* armor;
+	list<Weapon*> weapon;
+	list<Armor*> armor;
 	list<Consumable*> consumable;
 
 public :
@@ -39,13 +39,16 @@ public :
 	inline int Get_Gold() { return Gold; };
 	inline float Get_Time() { return Time; };
 	inline bool Get_Interact() { return Interaction; };
-	inline Weapon* Get_Weapon() { return weapon; };
-	inline Armor* Get_Armor() { return armor; };
+	inline list<Weapon*> Get_Weapon() { return weapon; };
+	inline list<Armor*> Get_Armor() { return armor; };
 	inline list<Consumable*> Get_Consumable() { return consumable; };
+	Weapon* Get_OneWeapon(int _select);
+	Armor* Get_OneArmor(int _select);
+	Consumable* Get_OneConsumable(int _select);
 
-	inline void Set_Weapon(Weapon _arme) { weapon = new Weapon(_arme); };
-	inline void Set_Armor(Armor _armure) { armor = new Armor(_armure); };
-	inline void Set_Consumable(Consumable _consomable) { consumable.push_back(new Consumable(_consomable)); };
+	inline void Add_Weapon(Weapon _arme) { weapon.push_back(new Weapon(_arme)); };
+	inline void Add_Armor(Armor _armure) { armor.push_back(new Armor(_armure)); };
+	inline void Add_Consumable(Consumable _consomable) { consumable.push_back(new Consumable(_consomable)); };
 	inline void Set_XpTotal(float _xp) { Xp_Total = _xp; };
 	inline void Set_XpLevel(float _xp) { Xp_Level = _xp; };
 	inline void Set_CapacityPoint(int _capacité) { Capacity_Point = _capacité; };

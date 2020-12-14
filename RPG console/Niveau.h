@@ -1,7 +1,7 @@
 #pragma once
 #include "Tools.h"
 #include "Hero.h"
-#include "Npc.h"
+#include "Npc_Container.h"
 #include "Weapon.h"
 #include "Armor.h"
 #include "Consumable.h"
@@ -55,7 +55,7 @@ public :
 	void Load_Map(string _file);
 	void Save_Map(string _file);
 
-	void Destroy_Npc();
+	void Destroy_List();
 
 	virtual void Update() = 0;
 	void Display();

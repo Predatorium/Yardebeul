@@ -61,16 +61,16 @@ void Editeur::SaveNewMap()
 
 		if (New_map.Get_Shape().getGlobalBounds().contains(Mouse_Position))
 		{
-			MState.Get_TextReceived().clear();
+			StateManager::Get_Singleton().Get_TextReceived().clear();
 			Save_New_Map = true;
 		}
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::Enter) && Save_New_Map && Save)
 	{
-		Map_List.push_back(new Map_Manager(MState.Get_TextReceived(), "../Ressources/Map/" + MState.Get_TextReceived() + ".txt"));
-		SaveMap(Get_Map(MState.Get_TextReceived()));
-		Save_Map(Get_PathMap(MState.Get_TextReceived()));
+		Map_List.push_back(new Map_Manager(StateManager::Get_Singleton().Get_TextReceived(), "../Ressources/Map/" + StateManager::Get_Singleton().Get_TextReceived() + ".txt"));
+		SaveMap(Get_Map(StateManager::Get_Singleton().Get_TextReceived()));
+		Save_Map(Get_PathMap(StateManager::Get_Singleton().Get_TextReceived()));
 		Dispo_Map.clear();
 
 		int i = 0;
@@ -80,7 +80,7 @@ void Editeur::SaveNewMap()
 			i++;
 		}
 
-		MState.Get_TextReceived().clear();
+		StateManager::Get_Singleton().Get_TextReceived().clear();
 		Save_New_Map = false;
 		Save = false;
 	}
@@ -354,7 +354,7 @@ void Editeur::Update()
 		if (IsDialogue == false)
 			Player.Update();
 
-		Destroy_Npc();
+		Destroy_List();
 
 		for (Npc& Current_Npc : NpcList)
 		{
@@ -389,7 +389,7 @@ void Editeur::Display_NewSave()
 	Name.setPosition(Vector2f(960, 540));
 	Name.setFillColor(Color::Blue);
 	Name.setOrigin(getMidle(Name));
-	Name.setString(MState.Get_TextReceived());
+	Name.setString(StateManager::Get_Singleton().Get_TextReceived());
 
 	App.Get_Window().draw(Name);
 }

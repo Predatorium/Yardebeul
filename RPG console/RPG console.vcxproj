@@ -33,6 +33,8 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Niveau.h" />
     <ClInclude Include="Data.h" />
+    <ClInclude Include="Npc_Container.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Armor.h" />
     <ClInclude Include="Chest.h" />
@@ -75,6 +77,8 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Niveau.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Npc_Container.cpp" />
+    <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Chest.cpp" />

@@ -3,7 +3,7 @@
 #include "SpriteManager.h"
 #include "StateManager.h"
 
-Fight_System::Fight_System(Hero* _player, Npc* _enemy)
+Fight_System::Fight_System(Hero* _player, Npc* _enemy, State _state)
 {
 	Player = _player;
 	Player->Set_Orientation(Direction::Right);
@@ -11,6 +11,7 @@ Fight_System::Fight_System(Hero* _player, Npc* _enemy)
 	Enemy = _enemy;
 	Enemy->Set_Orientation(Direction::Down);
 	getSprite(Enemy->Get_Name()).setPosition(1650, 250);
+	Previous_state = _state;
 
 	timer = 0;
 	Selection = 0;
@@ -30,9 +31,19 @@ Fight_System::Fight_System(Hero* _player, Npc* _enemy)
 		Turn_Enemy = true;
 
 	Texte = Text("", getFont("Times"), 100);
-
-	Button.push_back(Button_Text("Epee", "Times", 50, Vector2f(100, 50), 3, Vector2f(200, 950), Color(50, 120, 255, 255)));
-	Button.push_back(Button_Text("Soin", "Times", 50, Vector2f(100, 50), 3, Vector2f(200, 1020), Color(50, 120, 255, 255)));
+	int x = 0;
+	int y = 0;
+	for (Weapon* Current : Player->Get_Weapon())
+	{
+		Button.push_back(Button_Text(Current->Get_Name(), "Times", 50, Vector2f(200, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 80)), Color(50, 120, 255, 255)));
+		y++;
+		if (y == 2)
+		{
+			y = 0;
+			x++;
+		}
+	}
+	Button.push_back(Button_Text("Soin", "Times", 50, Vector2f(100, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 60)), Color(50, 120, 255, 255)));
 
 	FixView = Views();
 }
@@ -74,9 +85,9 @@ void Fight_System::Hud_Update()
 	{
 		if (Selection == 0)
 		{
-			Texte.setString(to_string(-Player->Get_Weapon()->Get_Damage()));
+			Texte.setString(to_string(-Player->Get_OneWeapon(Selection)->Get_Damage()));
 			Texte.setPosition(Vector2f(getSprite(Enemy->Get_Name()).getPosition().x, getSprite(Enemy->Get_Name()).getPosition().y + 300));
-			Enemy->Set_Life(Enemy->Get_LifePoint() - Player->Get_Weapon()->Get_Damage());
+			Enemy->Set_Life(Enemy->Get_LifePoint() - Player->Get_OneWeapon(Selection)->Get_Damage());
 		}
 		if (Selection == 1)
 		{
@@ -114,10 +125,9 @@ void Fight_System::Update()
 	{
 		if (timer > 1.f && Texte.getString() == "")
 		{
-			int Rand_Damage = irandom(Enemy->Get_MinDamage(), Enemy->Get_MaxDamage());
-			Texte.setString(to_string(-Rand_Damage));
+			Texte.setString(to_string(-Enemy->Get_Weapon().Get_Damage()));
 			Texte.setPosition(Vector2f(getSprite("Hero").getPosition().x, getSprite("Hero").getPosition().y - 300));
-			Player->Add_Life(-Rand_Damage);
+			Player->Add_Life(-Enemy->Get_Weapon().Get_Damage());
 			timer = 0;
 		}
 		if (timer > 2.f && Texte.getString() != "")
@@ -143,9 +153,9 @@ void Fight_System::Update()
 	}
 
 	if (Enemy->Get_LifePoint() <= 0)
-		state = State::EDITOR;
+		StateManager::Get_Singleton().state = Previous_state;
 	if (Player->Get_LifePoint() <= 0)
-		MState.ChangeState(State::MENU);
+		StateManager::Get_Singleton().ChangeState(State::MENU);
 
 	Player->Get_BeatRight().Animation(getSprite("Hero"));
 	Enemy->Get_BeatDown().Animation(getSprite(Enemy->Get_Name()));

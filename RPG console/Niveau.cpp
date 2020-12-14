@@ -1,6 +1,5 @@
 #include "Niveau.h"
 #include "SpriteManager.h"
-#include "Dialogue_Container.h"
 #include "Menu.h"
 
 bool Level::Get_Void(vector<Maps> _Layer, Vector2i _position)
@@ -163,12 +162,6 @@ void Level::Load_Map(string _file)
 			}
 			else if (layer == "Npc_List")
 			{
-				int tmpniveau = 0;
-				int tmppv = 0;
-				int tmpvitesse = 0;
-				Comportement tmpcomp;
-				string tmpIdDialogue;
-
 				name = line.substr(0, line.find(" "));
 				line.erase(0, line.find(" ") + 1);
 
@@ -176,33 +169,9 @@ void Level::Load_Map(string _file)
 				line.erase(0, line.find(" ") + 1);
 
 				tmpposY = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
+				line.erase(0, line.size());
 
-				tmpniveau = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
-
-				tmppv = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
-
-				tmpvitesse = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
-
-				if (line.size() > 1)
-				{
-					tmpcomp = static_cast<Comportement>(stoi(line.substr(0, line.find(" "))));
-					line.erase(0, line.find(" ") + 1);
-
-					tmpIdDialogue = line.substr(0, line.find(" "));
-					line.erase(0, line.size());
-
-					NpcList.push_back(Npc(name, Vector2f(tmpposX, tmpposY), tmpniveau, tmppv, tmpvitesse, tmpcomp, Dialogues.Get_Dialogue(tmpIdDialogue)));
-				}
-				else
-				{
-					tmpcomp = static_cast<Comportement>(stoi(line));
-					line.erase(0, line.size());
-					NpcList.push_back(Npc(name, Vector2f(tmpposX, tmpposY), tmpniveau, tmppv, tmpvitesse, tmpcomp));
-				}
+				NpcList.push_back(Npc(Npcs.Get_Npc(name), Vector2f(tmpposX, tmpposY)));
 			}
 		}
 		Read_Map.close();
@@ -280,28 +249,39 @@ void Level::Save_Map(string _file)
 			Write_Map << endl;
 			Write_Map << Current.Get_Name() << " ";
 			Write_Map << to_string(static_cast<int>(Current.Get_Position().x)) << " ";
-			Write_Map << to_string(static_cast<int>(Current.Get_Position().y)) << " ";
-			Write_Map << to_string(Current.Get_Level()) << " ";
-			Write_Map << to_string(Current.Get_LifePoint()) << " ";
-			Write_Map << to_string(Current.Get_Speed()) << " ";
-			if (Current.Get_Dialogue().Get_Id() != "")
-			{
-				Write_Map << to_string(static_cast<int>(Current.Get_Attitude())) << " ";
-				Write_Map << Current.Get_Dialogue().Get_Id();
-			}
-			else
-				Write_Map << to_string(static_cast<int>(Current.Get_Attitude()));
+			Write_Map << to_string(static_cast<int>(Current.Get_Position().y));
 		}
 		Write_Map.close();
 	}
 }
 
-void Level::Destroy_Npc()
+void Level::Destroy_List()
 {
 	for (Npc& Current_Npc : NpcList)
 		if (Current_Npc.Get_LifePoint() <= 0)
 		{
 			NpcList.remove(Current_Npc);
+			break;
+		}
+
+	for (Weapon& Current : WeaponList)
+		if (Current.Get_PickUp() == true)
+		{
+			WeaponList.remove(Current);
+			break;
+		}
+
+	for (Armor& Current : ArmorList)
+		if (Current.Get_PickUp() == true)
+		{
+			ArmorList.remove(Current);
+			break;
+		}
+
+	for (Consumable& Current : ConsumableList)
+		if (Current.Get_PickUp() == true)
+		{
+			ConsumableList.remove(Current);
 			break;
 		}
 }

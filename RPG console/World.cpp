@@ -92,7 +92,7 @@ void World::Update()
 		if (IsDialogue == false)
 			Player.Update();
 
-		Destroy_Npc();
+		Destroy_List();
 
 		for (Npc& Current_Npc : NpcList)
 		{
@@ -104,6 +104,13 @@ void World::Update()
 			if (Current_Npc.Get_Attitude() == Comportement::Amical)
 				Current_Npc.Update_Dialogue(IsDialogue, Player);
 		}
+
+		for (Weapon& Current : WeaponList)
+			Current.Take_Item(Player);
+		for (Armor& Current : ArmorList)
+			Current.Take_Item(Player);
+		for (Consumable& Current : ConsumableList)
+			Current.Take_Item(Player);
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 			Pause = true;

@@ -149,7 +149,7 @@ void Menu::Update_Main(World& _world)
 			if (Selection == 0)
 			{
 				_world = World();
-				MState.ChangeState(State::GAME);
+				StateManager::Get_Singleton().ChangeState(State::GAME);
 			}
 			if (Selection == 1)
 			{
@@ -161,7 +161,7 @@ void Menu::Update_Main(World& _world)
 				Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Load 3", 3));
 			}
 			if (Selection == 2)
-				MState.ChangeState(State::EDITOR);
+				StateManager::Get_Singleton().ChangeState(State::EDITOR);
 			if (Selection == 5)
 				App.Get_Window().close();
 		}
@@ -173,7 +173,7 @@ void Menu::Update_Main(World& _world)
 				if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f && Current_Button.Get_Name() != "Name : ----")
 				{
 					_world = World(Current_Button.Get_Num());
-					MState.ChangeState(State::GAME);
+					StateManager::Get_Singleton().ChangeState(State::GAME);
 				}
 	}
 }
@@ -201,7 +201,7 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 				Emplacement.push_back(Bouton_Load(Vector2f(960, 780), "Save 3", 3));
 			}
 			if (Selection == 2)
-				MState.ChangeState(State::MENU);
+				StateManager::Get_Singleton().ChangeState(State::MENU);
 
 			timer = 0;
 		}
@@ -212,7 +212,7 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 			if (Selection + 1 == Current_Button.Get_Num())
 				if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
 				{
-					Data::Save_Player(Selection + 1, MState.Get_World().Get_Hero());
+					Data::Save_Player(Selection + 1, StateManager::Get_Singleton().Get_World().Get_Hero());
 					_world.ScreenShot(Selection + 1);
 					Emplacement.clear();
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));

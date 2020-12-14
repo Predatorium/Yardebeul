@@ -21,8 +21,7 @@ Hero::Hero(Vector2f _position)
 		Xp_Total = 0;
 		Xp_Level = 0;
 		Next_Niveau = 0;
-		weapon = new Weapon(Weapons.Get_Weapon("Epee de feu"));
-		armor = NULL;
+		weapon.push_back(new Weapon(Weapons.Get_Weapon("Epee de feu")));
 		Gold = 0;
 		Time = 0;
 
@@ -167,8 +166,42 @@ void Hero::Amelioration_stat()
 		CinNumberCheck("Fait un effort");
 }
 
+Weapon* Hero::Get_OneWeapon(int _select)
+{
+	int i = 0;
+	for (Weapon* Current : weapon)
+	{
+		if (i == _select)
+			return Current;
+		i++;
+	}
+}
+
+Armor* Hero::Get_OneArmor(int _select)
+{
+	int i = 0;
+	for (Armor* Current : armor)
+	{
+		if (i == _select)
+			return Current;
+		i++;
+	}
+}
+
+Consumable* Hero::Get_OneConsumable(int _select)
+{
+	int i = 0;
+	for (Consumable* Current : consumable)
+	{
+		if (i == _select)
+			return Current;
+		i++;
+	}
+}
+
 void Hero::Update()
 {
+	Time += MainTime.GetTimeDeltaF();
 	//Passage_Niveau();
 	//Amelioration_stat();
 
@@ -230,8 +263,6 @@ void Hero::Display_Fight(Vector2f _scale)
 
 void Hero::Display()
 {
-	Time += MainTime.GetTimeDeltaF();
-
 	if (Right == false && Left == false && Up == false && Down == false)
 	{
 		if (Orientation == Direction::Right)

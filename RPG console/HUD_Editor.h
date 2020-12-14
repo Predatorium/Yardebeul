@@ -2,22 +2,11 @@
 #include "Tools.h"
 #include "Map.h"
 #include "Button.h"
-#include "Npc.h"
+#include "Npc_Container.h"
 
 class HUD_Editor
 {
 private:
-	enum class stat_modif
-	{
-		NONE,
-		NAME,
-		LIFE,
-		LEVEL,
-		ATTITUDE,
-		DIALOGUE,
-	};
-	stat_modif Modif;
-
 	RectangleShape Menu;
 	RectangleShape Menu_Npc;
 

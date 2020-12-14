@@ -10,16 +10,15 @@ void main()
 #endif //!DEBUG
 
 	srand(time(NULL));
-	MState.ChangeState(State::MENU);
 
 	while (App.Get_Window().isOpen())
 	{
 		try
 		{
-			MState.EventsManager();
+			StateManager::Get_Singleton().EventsManager();
 			if (App.Get_Window().hasFocus())
-				MState.UpdateManager();
-			MState.DisplayManager();
+				StateManager::Get_Singleton().UpdateManager();
+			StateManager::Get_Singleton().DisplayManager();
 		}
 		catch (exception const& e)
 		{

@@ -207,6 +207,12 @@
     <ClInclude Include="Dialogue.h">
       <Filter>Fichiers d%27en-tête\System</Filter>
     </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Fichiers d%27en-tête\_Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc_Container.h">
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Room.cpp">
@@ -331,6 +337,12 @@
     </ClCompile>
     <ClCompile Include="Dialogue.cpp">
       <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Fichiers sources\_Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc_Container.cpp">
+      <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

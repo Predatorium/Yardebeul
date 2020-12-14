@@ -1,5 +1,7 @@
 #pragma once
 #include "Tools.h"
+#include "Armor.h"
+#include "Weapon.h"
 #include "Animator.h"
 
 enum class Direction
@@ -20,6 +22,9 @@ protected :
 	bool Left;
 	bool Down;
 	bool Up;
+
+	Weapon* weapon;
+	Armor* armor;
 
 	Animator Walk_Right;
 	Animator Walk_Top;
@@ -42,7 +47,7 @@ protected :
 
 public :
 	Character() = default;
-	Character(string _name);
+	Character(string _name, Armor _armor, Weapon _weapon);
 	~Character() = default;
 
 	inline IntRect Get_ColisionRect() { return Colision_Rect; };
@@ -62,6 +67,8 @@ public :
 	inline bool Get_Down() { return Down; };
 	inline Animator& Get_BeatRight() { return Beat_Right; };
 	inline Animator& Get_BeatDown() { return Beat_Down; };
+	inline Weapon Get_Weapon() { return *weapon; };
+	inline Armor Get_Armor() { return *armor; };
 
 	inline void Set_Left(bool _bool) { Left = _bool; };
 	inline void Set_Right(bool _bool) { Right = _bool; };

@@ -2447,5 +2447,5 @@ Grass_lands 576 544 1 23 3
 Grass_lands 352 544 0 23 3
 Grass_lands 608 544 2 23 3
 Npc_List
-Fairy 1184 319 1 10 20 0 1_1
-Knucles 667 642 1 10 20 2
+Fairy 1184 319
+Knucles 667 642

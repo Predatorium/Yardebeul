@@ -1,18 +1,30 @@
 #include "Armor.h"
 #include "SpriteManager.h"
 #include "FontManager.h"
+#include "Hero.h"
 
 Armor::Armor(int _defense, int _durability, string _name, int _price, Effect _effect)
 	: Item(_name, _price, _effect)
 {
 	Defense = _defense;
 	Durability = _durability;
+	PickUp = false;
+
 }
 
 Armor::Armor(const Armor& _armor, Vector2f _position)
 {
 	*this = _armor;
 	Position = _position;
+}
+
+void Armor::Take_Item(Hero& _player)
+{
+	if (Circle_Collision(_player.Get_Position(), Position, 20, 20) && _player.Get_Interact())
+	{
+		_player.Add_Armor(*this);
+		PickUp = true;
+	}
 }
 
 void Armor::Display(Vector2f _position)

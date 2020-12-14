@@ -1,6 +1,8 @@
 #pragma once
 #include "Item.h"
 
+class Hero;
+
 class Weapon : public Item
 {
 private : 
@@ -22,5 +24,6 @@ public :
 	bool operator == (const Weapon& _w) const { return Name == _w.Name; }
 	bool operator != (const Weapon& _w) const { return !operator==(_w); }
 
+	virtual void Take_Item(Hero& _player);
 	virtual void Display(Vector2f _position);
 };

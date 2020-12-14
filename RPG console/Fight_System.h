@@ -5,6 +5,8 @@
 #include "Button.h"
 #include "Views.h"
 
+enum class State;
+
 class Fight_System
 {
 private :
@@ -13,6 +15,7 @@ private :
 	Box Pv_Enemy;
 	Hero* Player;
 	Npc* Enemy;
+	State Previous_state;
 
 	list<Button_Text> Button;
 	float timer;
@@ -25,7 +28,7 @@ private :
 
 public :
 	Fight_System() = default;
-	Fight_System(Hero* _player, Npc* _enemy);
+	Fight_System(Hero* _player, Npc* _enemy, State _state);
 	~Fight_System() = default;
 
 	void Capacity_Select();
