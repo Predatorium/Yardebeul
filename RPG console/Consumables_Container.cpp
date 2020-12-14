@@ -5,7 +5,10 @@ Consumables_Container Consumables;
 
 Consumables_Container::Consumables_Container()
 {
-	Container.push_back(Consumable());
+}
+
+void Consumables_Container::init()
+{
 }
 
 Consumable Consumables_Container::Get_Consumable(string _name)

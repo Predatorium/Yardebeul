@@ -5,7 +5,10 @@ Armors_Container Armors;
 
 Armors_Container::Armors_Container()
 {
-	Container.push_back(Armor());
+}
+
+void Armors_Container::init()
+{
 }
 
 Armor Armors_Container::Get_Armor(string _name)

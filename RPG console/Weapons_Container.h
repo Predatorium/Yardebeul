@@ -10,6 +10,8 @@ public :
 	Weapons_Container();
 	~Weapons_Container() = default;
 
+	void init();
+
 	Weapon Get_Weapon(string _name);
 
 	void Save();

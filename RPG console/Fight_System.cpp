@@ -35,7 +35,7 @@ Fight_System::Fight_System(Hero* _player, Npc* _enemy, State _state)
 	int y = 0;
 	for (Weapon* Current : Player->Get_Weapon())
 	{
-		Button.push_back(Button_Text(Current->Get_Name(), "Times", 50, Vector2f(200, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 80)), Color(50, 120, 255, 255)));
+		Button.push_back(Button_Text(Current->Get_Name(), "Times", 50, Vector2f(250, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 80)), Color(50, 120, 255, 255)));
 		y++;
 		if (y == 2)
 		{
@@ -43,7 +43,7 @@ Fight_System::Fight_System(Hero* _player, Npc* _enemy, State _state)
 			x++;
 		}
 	}
-	Button.push_back(Button_Text("Soin", "Times", 50, Vector2f(100, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 60)), Color(50, 120, 255, 255)));
+	Button.push_back(Button_Text("Soin", "Times", 50, Vector2f(250, 50), 3, Vector2f((x + 1) * 200, 950 + (y * 60)), Color(50, 120, 255, 255)));
 
 	FixView = Views();
 }

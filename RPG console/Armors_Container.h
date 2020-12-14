@@ -10,6 +10,8 @@ public :
 	Armors_Container();
 	~Armors_Container() = default;
 
+	void init();
+
 	Armor Get_Armor(string _name);
 	
 	void Save();

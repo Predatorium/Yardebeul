@@ -4,6 +4,11 @@ Effects_Container Effects;
 
 Effects_Container::Effects_Container()
 {
+
+}
+
+void Effects_Container::init()
+{
 	Container.push_back(Effect("Embrassement", Element::Feu, Range_Effect::AOE, Affect_Stat::LIFE_POINT, 10, 2));
 	Container.push_back(Effect("Volcan", Element::Lave, Range_Effect::AOE, Affect_Stat::LIFE_POINT, 20, 5));
 	Container.push_back(Effect("Eclaboussure", Element::Eau, Range_Effect::Multicible, Affect_Stat::SPEED, 5, 4));

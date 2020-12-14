@@ -2,6 +2,7 @@
 #include "StateManager.h"
 #include "FontManager.h"
 #include "SpriteManager.h"
+#include "Npc_Container.h"
 
 HUD_Editor::HUD_Editor()
 {

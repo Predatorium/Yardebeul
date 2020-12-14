@@ -6,6 +6,10 @@
 #include "Controle.h"
 #include "Dialogue_Container.h"
 #include "Npc_Container.h"
+#include "Effects_Container.h"
+#include "Armors_Container.h"
+#include "Weapons_Container.h"
+#include "Consumables_Container.h"
 #include "Views.h"
 
 StateManager::StateManager()
@@ -15,6 +19,11 @@ StateManager::StateManager()
 	LoadFont();
 	LoadMap();
 	Dialogues.init();
+	Effects.init();
+	Armors.init();
+	Weapons.init();
+	Consumables.init();
+	Npcs.init();
 	ChangeState(State::MENU);
 }
 

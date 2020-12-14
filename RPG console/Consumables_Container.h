@@ -10,6 +10,8 @@ public :
 	Consumables_Container();
 	~Consumables_Container() = default;
 
+	void init();
+
 	Consumable Get_Consumable(string _name);
 	
 	void Save();

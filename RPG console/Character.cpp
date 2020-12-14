@@ -9,8 +9,8 @@ Character::Character(string _name, Armor _armor, Weapon _weapon)
 	Mana = 50;
 	Endurance = 50;
 	Mental_Health = 100;
-	*armor = _armor;
-	*weapon = _weapon;
+	armor = new Armor(_armor);
+	weapon = new Weapon(_weapon);
 }
 
 void Character::Add_Life(int _life)
