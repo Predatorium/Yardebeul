@@ -26,4 +26,5 @@ public :
 
 	virtual void Take_Item(Hero& _player);
 	virtual void Display(Vector2f _circlecol);
+	virtual void Display_Inventory(Vector2f _scale);
 };

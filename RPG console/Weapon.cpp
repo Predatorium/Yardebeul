@@ -12,7 +12,7 @@ Weapon::Weapon(int _damage, int _durability, string _name, int _price, Effect _e
 
 	if (Name == "Epee de feu")
 	{
-		Anim = Animator(IntRect(2, 18, 21, 30), 13, 0.2f);
+		Anim = Animator(IntRect(2, 18, 21, 30), 13, 0.15f);
 	}
 }
 
@@ -47,4 +47,13 @@ void Weapon::Display(Vector2f _position)
 		My.setPosition(Vector2f (Position.x, Position.y - 20));
 		App.Get_Window().draw(My);
 	}
+}
+
+void Weapon::Display_Inventory(Vector2f _scale)
+{
+	Anim.Animation(getSprite(Name.substr(0, Name.find(" "))));
+	getSprite(Name.substr(0, Name.find(" "))).setOrigin(Vector2f(10.5, 15));
+	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
+	getSprite(Name.substr(0, Name.find(" "))).setScale(_scale);
+	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
 }

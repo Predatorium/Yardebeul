@@ -10,6 +10,7 @@ Editeur::Editeur()
 	{
 		Range_Niveau = Vector2i(5, 5);
 		Timer = 0;
+		Position_Set = 0;
 
 		App_Grille = true;
 		PlayerIsPresent = false;
@@ -231,7 +232,8 @@ void Editeur::Resize_Map()
 
 void Editeur::Interaction_Map()
 {
-	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
+	if (Mouse::isButtonPressed(Mouse::Left) && !Keyboard::isKeyPressed(Keyboard::LControl) && !Keyboard::isKeyPressed(Keyboard::LShift))
+	{
 		if (!(Hud.Get_MenuShape().getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window())))))
 		{
 			if (Hud.Get_Layer() == 1)
@@ -243,6 +245,45 @@ void Editeur::Interaction_Map()
 			if (Hud.Get_Layer() == 4)
 				Set_Map(Front_Layer);
 		}
+	}
+	else if (Mouse::isButtonPressed(Mouse::Left) && !Keyboard::isKeyPressed(Keyboard::LControl) && Keyboard::isKeyPressed(Keyboard::LShift) && Timer > 0.2f)
+	{
+		if (Position_Set == 0)
+			SizeMin = Mouse_Position;
+		if (Position_Set == 1)
+			SizeMax = Mouse_Position;
+
+		Position_Set++;
+
+		if (Position_Set == 2)
+		{
+			if (SizeMin.x > SizeMax.x)
+			{
+				int tmp = SizeMax.x;
+				SizeMax.x = SizeMin.x;
+				SizeMin.x = tmp;
+			}
+			if (SizeMin.y > SizeMax.y)
+			{
+				int tmp = SizeMax.y;
+				SizeMax.y = SizeMin.y;
+				SizeMin.y = tmp;
+			}
+
+			if (Hud.Get_Layer() == 1)
+				Set_MapSize(Back_Layer, SizeMin, SizeMax);
+			if (Hud.Get_Layer() == 2)
+				Set_MapSize(Deco_Layer, SizeMin, SizeMax);
+			if (Hud.Get_Layer() == 3)
+				Set_MapSize(Player_Layer, SizeMin, SizeMax);
+			if (Hud.Get_Layer() == 4)
+				Set_MapSize(Front_Layer, SizeMin, SizeMax);
+
+			Position_Set = 0;
+		}
+
+		Timer = 0;
+	}	
 
 	if (Keyboard::isKeyPressed(Keyboard::G) && Timer > 0.2f)
 	{
@@ -278,7 +319,39 @@ void Editeur::Set_Map(vector<Maps> &_layer)
 		Mouse_Position.y <= (Range_Niveau.y + 1) * Taille_tile && Mouse_Position.x >= -64 && Mouse_Position.y >= -64)
 		if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC")
 			_layer.push_back(Maps(Vector2f(static_cast<int>(Mouse_Position.x / Taille_tile) * Taille_tile, (static_cast<int>(Mouse_Position.y / Taille_tile) * Taille_tile)), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
+}
 
+void Editeur::Set_MapSize(vector<Maps>& _layer, Vector2f _min, Vector2f _max)
+{
+	for (float i = _min.x; i < _max.x; i += 32)
+		for (float j = _min.y; j < _max.y; j += 32)
+		{
+			bool FindMap = false;
+			for (Maps& Current_Map : _layer)
+				if (FloatRect(Current_Map.Get_Position().x, Current_Map.Get_Position().y, Taille_tile, Taille_tile).contains(Vector2f(i,j)))
+				{
+					if (Hud.Get_Selection().Get_Name() == "Rien")
+					{
+						Current_Map.Set_Actif(false);
+						Erase_Map();
+						FindMap = true;
+					}
+					else if (Hud.Get_Selection().Get_Name() != "NPC")
+					{
+						Current_Map.Set_Biome(Hud.Get_Selection().Get_Biome());
+						Current_Map.Set_Name(Hud.Get_Selection().Get_Name());
+						Current_Map.Set_Tile(Hud.Get_Selection().Get_Tile());
+						FindMap = true;
+					}
+				}
+
+			if (Hud.Get_Selection().Get_Name() != "Rien" && i <= (Range_Niveau.x + 1) * Taille_tile &&
+				j <= (Range_Niveau.y + 1) * Taille_tile && i >= -64 && j >= -64)
+				if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC")
+					_layer.push_back(Maps(Vector2f(static_cast<int>(i / Taille_tile) * Taille_tile,
+						(static_cast<int>(j / Taille_tile) * Taille_tile)), Hud.Get_Selection().Get_Tile(),
+						Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
+		}
 }
 
 void Editeur::Erase_Map()
@@ -334,7 +407,7 @@ void Editeur::Update()
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
 		
 		Hud.Get_Selection().Set_Position(Vector2f(Mouse::getPosition(App.Get_Window())));
-		Vue.Update(Range_Niveau, Hud.Get_Move(), Mouse_Position);
+		Vue.Update(Range_Niveau, Mouse_Position);
 	}
 	else if (Load)
 	{
@@ -403,7 +476,6 @@ void Editeur::Display_HUD()
 		Hud.Display_MenuShape();
 		Hud.Display_ButtonRank();
 		Hud.Display_LoadAndSave();
-		Hud.Display_Move();
 		Hud.Display_Tilemenu();
 		Hud.Display_NpcModif();
 	}

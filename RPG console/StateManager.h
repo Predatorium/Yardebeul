@@ -4,6 +4,7 @@
 #include "Menu.h"
 #include "Editeur.h"
 #include "Fight_System.h"
+#include "World.h"
 
 enum class State
 {

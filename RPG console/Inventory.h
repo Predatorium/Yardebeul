@@ -36,6 +36,7 @@ public :
 	inline void Add_Consumable(Consumable _consomable) { consumable.push_back(new Consumable(_consomable)); };
 	inline void Add_Gold(int _gold) { Gold += _gold; };
 
+	void Item_Load();
 	void Update(Hero& _player);
 	void Display();
 };

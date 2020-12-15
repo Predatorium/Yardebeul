@@ -2,6 +2,14 @@ Sprite Grass_lands ../Ressources/Sprite/Monde/Grasslands_Tiles.png
 Sprite Caverne ../Ressources/Sprite/Monde/Cave_Tiles.png
 Sprite Desert ../Ressources/Sprite/Monde/Desert_Tiles.png
 Sprite Montagne ../Ressources/Sprite/Monde/Mountain_Tiles.png
+Sprite Grass ../Ressources/Sprite/Monde/Grass_Tiles.png
+Sprite Beach ../Ressources/Sprite/Monde/Beach_Tiles.png
+Sprite Crypt ../Ressources/Sprite/Monde/Crypt_Tiles.png
+Sprite Dirt ../Ressources/Sprite/Monde/Dirt_Tiles.png
+Sprite Shop ../Ressources/Sprite/Monde/Shop_Tiles.png
+Sprite Tos_Inside ../Ressources/Sprite/Monde/ToS_Tiles_Inside.png
+Sprite Tos_Outside ../Ressources/Sprite/Monde/ToS_Tiles_Outside.png
+
 Sprite Fight ../Ressources/Sprite/Monde/Fight.jpg
 Sprite Font ../Ressources/Sprite/Menu/menu_main.jpg
 Sprite Hero ../Ressources/Sprite/Joueur/Hero.png
@@ -17,4 +25,3 @@ Font Ethnocentric ../Ressources/Fonts/Ethnocentric_rg.ttf
 Font Macabre ../Ressources/Fonts/MetalMacabre.ttf
 
 Map Map ../Ressources/Map/Map.txt
-Map Map2 ../Ressources/Map/Map2.txt

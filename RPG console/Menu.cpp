@@ -4,6 +4,7 @@
 #include "FontManager.h"
 #include "Controle.h"
 #include "Data.h"
+#include "World.h"
 
 Menu::Menu(int _menutype)
 {
@@ -132,7 +133,7 @@ void Menu::Switch_Mode()
 	}
 }
 
-void Menu::Update_Main(World& _world)
+void Menu::Update_Main(Level* _level)
 {
 	timer += MainTime.GetTimeDeltaF();
 
@@ -145,7 +146,7 @@ void Menu::Update_Main(World& _world)
 		{
 			if (Selection == 0)
 			{
-				_world = World();
+				*_level = World();
 				StateManager::Get_Singleton().ChangeState(State::GAME);
 			}
 			if (Selection == 1)
@@ -169,13 +170,13 @@ void Menu::Update_Main(World& _world)
 			if (Selection + 1 == Current_Button.Get_Num())
 				if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f && Current_Button.Get_Name() != "Name : ----")
 				{
-					_world = World(Current_Button.Get_Num());
+					*_level = World(Current_Button.Get_Num());
 					StateManager::Get_Singleton().ChangeState(State::GAME);
 				}
 	}
 }
 
-void Menu::Update_Pause(World& _world, bool& _pause)
+void Menu::Update_Pause(Level* _level, bool& _pause)
 {
 	timer += MainTime.GetTimeDeltaF();
 
@@ -210,7 +211,7 @@ void Menu::Update_Pause(World& _world, bool& _pause)
 				if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
 				{
 					Data::Save_Player(Selection + 1, StateManager::Get_Singleton().Get_World().Get_Hero());
-					_world.ScreenShot(Selection + 1);
+					_level->ScreenShot(Selection + 1);
 					Emplacement.clear();
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));

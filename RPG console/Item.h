@@ -32,5 +32,6 @@ public :
 	inline void Set_Price(int _price) { Price = _price; };
 
 	virtual void Take_Item(Hero& _player) = 0;
-	virtual void Display(Vector2f _position) = 0;
+	virtual void Display(Vector2f _circlecol) = 0;
+	virtual void Display_Inventory(Vector2f _scale);
 };

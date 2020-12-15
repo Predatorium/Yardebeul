@@ -22,7 +22,6 @@ Hero::Hero(Vector2f _position)
 		Xp_Level = 0;
 		Next_Niveau = 0;
 		weapon = new Weapon(Weapons.Get_Weapon("Epee de feu"));
-		inventory = Inventory();
 		IsInventory = false;
 		Time = 0;
 		timer = 0;
@@ -235,6 +234,7 @@ void Hero::Update()
 	if (Keyboard::isKeyPressed(Keyboard::I) && timer > 0.2f)
 	{
 		IsInventory = !IsInventory;
+		inventory.Item_Load();
 		timer = 0;
 	}
 

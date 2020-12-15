@@ -29,7 +29,7 @@ public :
 	inline void Set_Zoom(bool _zoom) { Zoom = _zoom; };
 	inline void Set_Dezoom(bool _dezoom) { Dezoom = _dezoom; };
 
-	void Update(Vector2i _limit, list<Button_Sprite> &_move, Vector2f _position);
+	void Update(Vector2i _limit, Vector2f _position);
 	void Update(Vector2i _limit, Hero _player);
 	void Display();
 };

@@ -18,8 +18,4 @@ public :
 	~World() = default;
 
 	inline list<Dungeon> Get_Dungeon() { return dungeon; };
-
-	void ScreenShot(int _party);
-
-	virtual void Update();
 };

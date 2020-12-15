@@ -40,6 +40,13 @@ enum class Biomes : int
 	Caverne,
 	Prairie,
 	Desert,
+	Grass,
+	Beach,
+	Crypt,
+	Dirt,
+	Shop,
+	Tos_Inside,
+	Tos_Outside,
 };
 
 enum class State_Event : int

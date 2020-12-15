@@ -64,7 +64,7 @@ void StateManager::UpdateManager()
 	switch (state)
 	{
 	case State::MENU:
-		Game_Menu.Update_Main(Monde);
+		Game_Menu.Update_Main(&Monde);
 		break;
 	case State::EDITOR:
 		Edit_Niveau.Update();

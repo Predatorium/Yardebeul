@@ -12,7 +12,6 @@ private:
 
 	list<Interface_Maps> Tile_menu;
 
-	list<Button_Sprite> Move;
 	list<Button_Sprite> Change_Rank;
 	list<Button_Sprite> sButton;
 
@@ -37,7 +36,6 @@ public:
 	~HUD_Editor() = default;
 
 	inline Maps& Get_Selection() { return Selection; };
-	inline list<Button_Sprite>& Get_Move() { return Move; };
 	inline RectangleShape Get_MenuShape() { return Menu; };
 	inline int Get_Rank() { return Current_Rank; };
 	inline int Get_Layer() { return Current_Layer; };
@@ -57,7 +55,6 @@ public:
 	void Display_Tilemenu();
 	void Display_NpcModif();
 	void Display_MenuShape();
-	void Display_Move();
 	void Display_LoadAndSave();
 	void Display_ButtonRank();
 	void Display_ButtonText(bool _player);

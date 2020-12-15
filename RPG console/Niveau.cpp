@@ -119,10 +119,10 @@ void Level::Load_Map(string _file)
 
 			if (line == "Back_Layer")
 				layer = "Back_Layer";
-			else if (line == "Deco_Layer")
-				layer = "Deco_Layer";
 			else if (line == "Player_Layer")
 				layer = "Player_Layer";
+			else if (line == "Deco_Layer")
+				layer = "Deco_Layer";
 			else if (line == "Front_Layer")
 				layer = "Front_Layer";
 			else if (line == "Npc_List")
@@ -153,10 +153,10 @@ void Level::Load_Map(string _file)
 
 				if (layer == "Back_Layer")
 					Back_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
-				if (layer == "Deco_Layer")
-					Deco_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
 				if (layer == "Player_Layer")
 					Player_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
+				if (layer == "Deco_Layer")
+					Deco_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
 				if (layer == "Front_Layer")
 					Front_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
 			}
@@ -173,6 +173,9 @@ void Level::Load_Map(string _file)
 
 				NpcList.push_back(Npc(Npcs.Get_Npc(name), Vector2f(tmpposX, tmpposY)));
 			}
+
+			if (!Read_Map)
+				Read_Map.close();
 		}
 		Read_Map.close();
 	}
@@ -206,30 +209,23 @@ void Level::Save_Map(string _file)
 
 				Write_Map << to_string(Actual_Map.Get_Tile().y) << " ";
 
-				if (Actual_Map.Get_Biome() == Biomes::Prairie)
-					Write_Map << "0";
-				if (Actual_Map.Get_Biome() == Biomes::Desert)
-					Write_Map << "1";
-				if (Actual_Map.Get_Biome() == Biomes::Caverne)
-					Write_Map << "2";
-				if (Actual_Map.Get_Biome() == Biomes::Montagne)
-					Write_Map << "3";
+				Write_Map << to_string(static_cast<int>(Actual_Map.Get_Biome()));
 			}
 			if (i == Back_Layer.size() && tmp == "Back_Layer")
-			{
-				Write_Map << endl;
-				Write_Map << "Deco_Layer";
-				tmp = "Deco_Layer";
-				tmpMaps = Deco_Layer;
-			}
-			if (i == Back_Layer.size() + Deco_Layer.size() && tmp == "Deco_Layer")
 			{
 				Write_Map << endl;
 				Write_Map << "Player_Layer";
 				tmp = "Player_Layer";
 				tmpMaps = Player_Layer;
 			}
-			if (i == Back_Layer.size() + Deco_Layer.size() + Player_Layer.size() && tmp == "Player_Layer")
+			if (i == Back_Layer.size() + Player_Layer.size() && tmp == "Player_Layer")
+			{
+				Write_Map << endl;
+				Write_Map << "Deco_Layer";
+				tmp = "Deco_Layer";
+				tmpMaps = Deco_Layer;
+			}
+			if (i == Back_Layer.size() + Player_Layer.size() + Deco_Layer.size() && tmp == "Deco_Layer")
 			{
 				Write_Map << endl;
 				Write_Map << "Front_Layer";
@@ -286,6 +282,90 @@ void Level::Destroy_List()
 		}
 }
 
+void Level::ScreenShot(int _party)
+{
+	RenderTexture texture;
+	string path = "../Ressources/Infos/Screen" + to_string(_party) + ".png";
+	View view(Player.Get_Position(), Vector2f(1920, 1080));
+	texture.create(1920, 1080);
+
+	texture.clear(Color::Black);
+	view.setCenter(Player.Get_Position());
+	texture.setView(view);
+	for (Maps Current_Maps : Back_Layer)
+	{
+		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
+		getSprite(Current_Maps.Get_Name()).setPosition(Current_Maps.Get_Position());
+		App.Get_Window().draw(getSprite(Current_Maps.Get_Name()));
+		texture.draw(getSprite(Current_Maps.Get_Name()));
+	}
+	for (Maps Current_Maps : Player_Layer)
+	{
+		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
+		getSprite(Current_Maps.Get_Name()).setPosition(Current_Maps.Get_Position());
+		App.Get_Window().draw(getSprite(Current_Maps.Get_Name()));
+		texture.draw(getSprite(Current_Maps.Get_Name()));
+	}
+	for (Maps Current_Maps : Deco_Layer)
+	{
+		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
+		getSprite(Current_Maps.Get_Name()).setPosition(Current_Maps.Get_Position());
+		App.Get_Window().draw(getSprite(Current_Maps.Get_Name()));
+		texture.draw(getSprite(Current_Maps.Get_Name()));
+	}
+	for (Maps Current_Maps : Front_Layer)
+	{
+		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
+		getSprite(Current_Maps.Get_Name()).setPosition(Current_Maps.Get_Position());
+		App.Get_Window().draw(getSprite(Current_Maps.Get_Name()));
+		texture.draw(getSprite(Current_Maps.Get_Name()));
+	}
+
+	texture.display();
+
+	texture.getTexture().copyToImage().saveToFile(path);
+}
+
+void Level::Update()
+{
+	if (Pause == false)
+	{
+		Collision(Player);
+		if (!IsDialogue && !Player.Get_IsInventory())
+			Player.Update();
+		if (Player.Get_IsInventory())
+			Player.Get_Inventory().Update(Player);
+
+		Destroy_List();
+
+		for (Npc& Current_Npc : NpcList)
+		{
+			Collision(Current_Npc);
+
+			if (Current_Npc.Get_Attitude() == Comportement::Agressif && IsDialogue == false)
+				Current_Npc.Update_Attack(Player);
+
+			if (Current_Npc.Get_Attitude() == Comportement::Amical)
+				Current_Npc.Update_Dialogue(IsDialogue, Player);
+		}
+
+		for (Weapon& Current : WeaponList)
+			Current.Take_Item(Player);
+		for (Armor& Current : ArmorList)
+			Current.Take_Item(Player);
+		for (Consumable& Current : ConsumableList)
+			Current.Take_Item(Player);
+
+		if (Keyboard::isKeyPressed(Keyboard::Escape))
+			Pause = true;
+
+		Vue.Update(Range_Niveau, Player);
+	}
+
+	if (Pause == true)
+		Menu_Pause->Update_Pause(this, Pause);
+}
+
 void Level::Display()
 {
 	Vue.Display();
@@ -293,10 +373,10 @@ void Level::Display()
 	for (Maps& Current_Map : Back_Layer)
 		Current_Map.Display();
 
-	for (Maps& Current_Map : Deco_Layer)
+	for (Maps& Current_Map : Player_Layer)
 		Current_Map.Display();
 
-	for (Maps& Current_Map : Player_Layer)
+	for (Maps& Current_Map : Deco_Layer)
 		Current_Map.Display();
 	
 	for (Npc& Current_Npc : NpcList)

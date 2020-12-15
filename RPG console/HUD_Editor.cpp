@@ -49,11 +49,6 @@ HUD_Editor::HUD_Editor()
 		Change_Rank.push_back(Button_Sprite("Fleche", 0, Vector2f(50, 26), 2, Vector2f(27, 16), Color::White));
 		Change_Rank.push_back(Button_Sprite("Fleche", 180, Vector2f(50, 26), 2, Vector2f(27, 49), Color::White));
 
-		Move.push_back(Button_Sprite("Fleche", 0, Vector2f(1916, 36), 2, Vector2f(960, 84), Color::White));
-		Move.push_back(Button_Sprite("Fleche", 270, Vector2f(36, 1012), 2, Vector2f(20, 572), Color::White));
-		Move.push_back(Button_Sprite("Fleche", 180, Vector2f(1916, 36), 2, Vector2f(960, 1060), Color::White));
-		Move.push_back(Button_Sprite("Fleche", 90, Vector2f(36, 1012), 2, Vector2f(1900, 572), Color::White));
-
 		Selection = Maps(Vector2f(Mouse::getPosition(App.Get_Window())), Vector2i(0, 0), "Rien", Current_Biome);
 
 		Load_MenuBiome();
@@ -90,6 +85,41 @@ void HUD_Editor::Load_MenuBiome()
 	{
 		Max = Vector2i(1, 27);
 		name = "Montagne";
+	}
+	else if (Current_Biome == Biomes::Grass)
+	{
+		Max = Vector2i(4, 15);
+		name = "Grass";
+	}
+	else if (Current_Biome == Biomes::Beach)
+	{
+		Max = Vector2i(4, 14);
+		name = "Beach";
+	}
+	else if (Current_Biome == Biomes::Crypt)
+	{
+		Max = Vector2i(3, 14);
+		name = "Crypt";
+	}
+	else if (Current_Biome == Biomes::Dirt)
+	{
+		Max = Vector2i(5, 9);
+		name = "Dirt";
+	}
+	else if (Current_Biome == Biomes::Tos_Inside)
+	{
+		Max = Vector2i(1, 15);
+		name = "Tos_Inside";
+	}
+	else if (Current_Biome == Biomes::Tos_Outside)
+	{
+		Max = Vector2i(1, 12);
+		name = "Tos_Outside";
+	}
+	else if (Current_Biome == Biomes::Shop)
+	{
+		Max = Vector2i(1, 8);
+		name = "Shop";
 	}
 
 	int i = 0;
@@ -332,7 +362,7 @@ void HUD_Editor::Interaction_Biome(Vector2f _mouse)
 					if (Current_Button.Get_Name() == "Next Biome" && Timer > 0.2f)
 					{
 						Current_Biome = Biomes((int)Current_Biome + 1);
-						if ((int)Current_Biome > 3)
+						if ((int)Current_Biome > 10)
 							Current_Biome = Biomes(0);
 						Load_MenuBiome();
 						Timer = 0;
@@ -341,7 +371,7 @@ void HUD_Editor::Interaction_Biome(Vector2f _mouse)
 					{
 						Current_Biome = Biomes((int)Current_Biome - 1);
 						if ((int)Current_Biome < 0)
-							Current_Biome = Biomes(3);
+							Current_Biome = Biomes(10);
 						Load_MenuBiome();
 						Timer = 0;
 					}
@@ -528,13 +558,6 @@ void HUD_Editor::Display_MenuShape()
 		App.Get_Window().draw(Menu_Npc);
 }
 
-void HUD_Editor::Display_Move()
-{
-	for (Button_Sprite& Current_Shape : Move)
-		if (Current_Shape.Get_Color() == Color::Red)
-			Current_Shape.Display();
-}
-
 void HUD_Editor::Display_LoadAndSave()
 {
 	for (Button_Sprite& Current_Button : sButton)
@@ -561,6 +584,9 @@ void HUD_Editor::Display_ButtonText(bool _player)
 
 void HUD_Editor::Display_Selection(RectangleShape& _grille)
 {
+	if (IsSelect)
+		App.Get_Window().draw(Tile_Select);
+
 	if (Selection.Get_Name() == "Rien")
 	{
 		_grille.setPosition(Selection.Get_Position());
@@ -568,7 +594,4 @@ void HUD_Editor::Display_Selection(RectangleShape& _grille)
 	}
 	else if (Selection.Get_Name() != "NPC")
 		Selection.Display();
-
-	if (IsSelect)
-		App.Get_Window().draw(Tile_Select);
 }

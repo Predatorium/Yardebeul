@@ -1,6 +1,6 @@
 #pragma once
 #include "Tools.h"
-#include "World.h"
+#include "Niveau.h"
 #include "Button.h"
 #include "Views.h"
 
@@ -49,8 +49,8 @@ public :
 
 	void Update_Select();
 	void Switch_Mode();
-	void Update_Main(World& _world);
-	void Update_Pause(World& _world, bool& _pause);
+	void Update_Main(Level* _level);
+	void Update_Pause(Level* _level, bool& _pause);
 	void Display_Main();
 	void Display_Pause();
 };

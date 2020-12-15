@@ -30,3 +30,12 @@ void Consumable::Display(Vector2f _position)
 	getSprite(Name.substr(0, Name.find(" "))).setScale(Vector2f(1, 1));
 	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
 }
+
+void Consumable::Display_Inventory(Vector2f _scale)
+{
+	Anim.Animation(getSprite(Name.substr(0, Name.find(" "))));
+	getSprite(Name.substr(0, Name.find(" "))).setOrigin(Vector2f(10.5, 15));
+	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
+	getSprite(Name.substr(0, Name.find(" "))).setScale(_scale);
+	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
+}

@@ -55,8 +55,9 @@ public :
 	void Load_Map(string _file);
 	void Save_Map(string _file);
 
+	void ScreenShot(int _party);
 	void Destroy_List();
 
-	virtual void Update() = 0;
+	void Update();
 	void Display();
 };
