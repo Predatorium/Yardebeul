@@ -33,8 +33,6 @@ Npc::Npc(string _name, Armor _armor, Weapon _weapon, int _level, int _hp, int _s
 
 		sprite.setOrigin(Vector2f(21, 22.5));
 		sprite.setTextureRect(IntRect(5, 72, 54, 44));
-
-		Colision_Rect = IntRect(0, 0, 45, 22.5);
 	}
 }
 
@@ -68,8 +66,6 @@ Npc::Npc(string _name, int _level, int _hp, int _speed, Dialogue &_dial)
 
 		sprite.setOrigin(Vector2f(22, 23));
 		sprite.setTextureRect(IntRect(5, 99, 44, 46));
-
-		Colision_Rect = IntRect(0, 0, 44, 23);
 	}
 }
 
@@ -77,6 +73,7 @@ Npc::Npc(const Npc& _npc, Vector2f _position)
 {
 	*this = _npc;
 	Position = _position;
+	sprite.setPosition(Position);
 }
 
 void Npc::Update_Attack(Hero& _player)
@@ -151,8 +148,6 @@ void Npc::Update_Attack(Hero& _player)
 		Up = false;
 		Down = false;
 	}
-	
-	Colision_Rect = IntRect(Vector2i(Position.x, Position.y - Colision_Rect.height), Vector2i(Colision_Rect.width, Colision_Rect.height));
 }
 
 void Npc::Update_Dialogue(bool& _dial, Hero _player)

@@ -58,8 +58,6 @@ Hero::Hero(Vector2f _position)
 		Walk_Right.Animation(sprite);
 		sprite.setOrigin(Vector2f(12, 16.5));
 		sprite.setTextureRect(IntRect(115, 54, 23, 31));
-
-		Colision_Rect = IntRect(0, 0, 26, 18);
 	}
 }
 
@@ -239,7 +237,6 @@ void Hero::Update()
 		timer = 0;
 	}
 
-	Colision_Rect = IntRect(Vector2i(Position.x, Position.y - Colision_Rect.height), Vector2i(Colision_Rect.width, Colision_Rect.height));
 	sprite.setPosition(Position);
 }
 
@@ -280,25 +277,21 @@ void Hero::Display()
 		{
 			Walk_Right.Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
-			sprite.setOrigin(Vector2f(12, 16.5));
 		}
 		else if (Orientation == Direction::Left)
 		{
 			Walk_Right.Animation(sprite);
 			sprite.setScale(Vector2f(-1, 1));
-			sprite.setOrigin(Vector2f(12, 16.5));
 		}
 		else if (Orientation == Direction::Down)
 		{
 			Walk_Down.Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
-			sprite.setOrigin(Vector2f(10.5, 17.5));
 		}
 		else if (Orientation == Direction::Up)
 		{
 			Walk_Top.Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
-			sprite.setOrigin(Vector2f(13, 18));
 		}
 	}
 

@@ -34,8 +34,6 @@ protected :
 	Animator Beat_Top;
 	Animator Beat_Down;
 
-	IntRect Colision_Rect;
-
 	int Level;
 	int Life_Point;
 	int Life_Max;
@@ -49,7 +47,6 @@ public :
 	Character(string _name, Armor _armor, Weapon _weapon);
 	~Character() = default;
 
-	inline IntRect Get_ColisionRect() { return Colision_Rect; };
 	inline Direction Get_Orientation() { return Orientation; };
 	inline int Get_Level() { return Level; };
 	inline int Get_LifePoint() { return Life_Point; };

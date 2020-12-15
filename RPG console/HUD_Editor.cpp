@@ -198,8 +198,8 @@ void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, Vector2i _limit)
 			NpcSelect = false;
 			for (Npc& Current : _npc)
 			{
-				if (FloatRect(Current.Get_Position().x - Current.Get_ColisionRect().width * 0.75, Current.Get_Position().y - Current.Get_ColisionRect().height * 1.5,
-					Current.Get_ColisionRect().width * 1.5, Current.Get_ColisionRect().height * 3).contains(_mouse))
+				if (FloatRect(Current.Get_Position().x - Current.Get_Sprite().getGlobalBounds().width * 0.75, Current.Get_Position().y - Current.Get_Sprite().getGlobalBounds().height * 1.5,
+					Current.Get_Sprite().getGlobalBounds().width * 1.5, Current.Get_Sprite().getGlobalBounds().height * 3).contains(_mouse))
 				{
 					Current_Npc = i;
 					Modif_Npc.clear();

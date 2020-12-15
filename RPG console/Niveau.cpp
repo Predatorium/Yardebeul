@@ -2,9 +2,9 @@
 #include "SpriteManager.h"
 #include "Menu.h"
 
-bool Level::Get_Void(vector<Maps> _Layer, Vector2i _position)
+bool Level::Get_Void(Vector2i _position)
 {
-	for (Maps& Current_Map : _Layer)
+	for (Maps& Current_Map : Back_Layer)
 	{
 		if ((int)Current_Map.Get_Position().x / Taille_tile == _position.x &&
 			(int)Current_Map.Get_Position().y / Taille_tile == _position.y)
@@ -23,7 +23,7 @@ bool Level::Get_MapsPos(Vector2i _position)
 			return true;
 	}
 
-	if (Get_Void(Back_Layer, _position) == false)
+	if (Get_Void(_position) == false)
 		return false;
 	else
 		return true;
@@ -38,54 +38,54 @@ void Level::Collision(Character& _Character)
 
 	if (_Character.Get_Right() == true)
 	{
-		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Right(false);
 
-		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(_Character.Get_Position().y + _Character.Get_ColisionRect().height) / Taille_tile;
+		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.y = (int)(_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 2)) / Taille_tile;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Right(false);
 	}
 	if (_Character.Get_Left() == true)
 	{
-		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
-		if ((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) < 0)
+		if ((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()) < 0)
 			NextPosOnMap.x--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Left(false);
 
-		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(_Character.Get_Position().y + _Character.Get_ColisionRect().height) / Taille_tile;
-		if ((_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 2) - 200 * MainTime.GetTimeDeltaF()) < 0)
+		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.y = (int)(_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 2)) / Taille_tile;
+		if ((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()) < 0)
 			NextPosOnMap.x--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Left(false);
 	}
 	if (_Character.Get_Down() == true)
 	{
-		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((_Character.Get_Position().y + _Character.Get_ColisionRect().height + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 4)) / Taille_tile;
+		NextPosOnMap.y = (int)((_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 1.75) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Down(false);
 
-		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((_Character.Get_Position().y + _Character.Get_ColisionRect().height + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 4)) / Taille_tile;
+		NextPosOnMap.y = (int)((_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 1.75) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Down(false);
 	}
 	if (_Character.Get_Up() == true)
 	{
-		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
+		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 4)) / Taille_tile;
 		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if ((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) < 0)
 			NextPosOnMap.y--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Up(false);
 
-		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_ColisionRect().width / 4)) / Taille_tile;
+		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 4)) / Taille_tile;
 		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
 		if ((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) < 0)
 			NextPosOnMap.y--;
@@ -404,8 +404,8 @@ void Level::Display()
 	{
 		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
 		{
-			if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_ColisionRect().height / 2.1f),
-				Vector2f(Current_Map.Get_Position().x + 16, Current_Map.Get_Position().y + 16), 30, Player.Get_ColisionRect().width))
+			if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_Sprite().getGlobalBounds().height / 2.1f),
+				Vector2f(Current_Map.Get_Position().x + 16, Current_Map.Get_Position().y + 16), 30, Player.Get_Sprite().getGlobalBounds().width))
 				Current_Map.Get_Sprite().setColor(Color(255,255,255,100));
 			else
 				Current_Map.Get_Sprite().setColor(Color::White);

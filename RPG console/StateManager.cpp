@@ -61,6 +61,9 @@ void StateManager::UpdateManager()
 {
 	MainTime.RestartClock();
 
+	static float timer = 0;
+	static int count = 0;
+
 	switch (state)
 	{
 	case State::MENU:
@@ -77,6 +80,15 @@ void StateManager::UpdateManager()
 		break;
 	default:
 		break;
+	}
+
+	timer += MainTime.GetTimeDeltaF();
+	count++;
+	if (timer > 1)
+	{
+		cout << count << endl;
+		count = 0;
+		timer = 0;
 	}
 }
 

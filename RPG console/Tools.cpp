@@ -8,7 +8,7 @@ Global::Global()
 	isVSync = true;
 	event;
 
-	window.setVerticalSyncEnabled(isVSync);
+	/*window.setVerticalSyncEnabled(isVSync);*/
 }
 
 float Get_Affinité(Element _attaque, Element _defense)

@@ -516,53 +516,66 @@ void Editeur::display_Etage()
 {
 	for (Maps& Current_Map : Back_Layer)
 	{
-		if (Hud.Get_Layer() != 1)
-			Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
-		else
+		if (Circle_Collision(Current_Map.Get_Position(), Vue.Get_Position(), 600, 600))
+		{
+			if (Hud.Get_Layer() != 1)
+				Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
+			else
+				Current_Map.Get_Sprite().setColor(Color::White);
+
+			Current_Map.Display();
+
 			Current_Map.Get_Sprite().setColor(Color::White);
-
-		Current_Map.Display();
-
-		Current_Map.Get_Sprite().setColor(Color::White);
-	}
-
-	for (Maps& Current_Map : Deco_Layer)
-	{
-		if (Hud.Get_Layer() != 2)
-			Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
-		else
-			Current_Map.Get_Sprite().setColor(Color::White);
-
-		Current_Map.Display();
-
-		Current_Map.Get_Sprite().setColor(Color::White);
+		}
 	}
 
 	for (Maps& Current_Map : Player_Layer)
 	{
-		if (Hud.Get_Layer() != 3)
-			Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
-		else
+		if (Circle_Collision(Current_Map.Get_Position(), Vue.Get_Position(), 600, 600))
+		{
+			if (Hud.Get_Layer() != 3)
+				Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
+			else
+				Current_Map.Get_Sprite().setColor(Color::White);
+
+			Current_Map.Display();
+
 			Current_Map.Get_Sprite().setColor(Color::White);
+		}
+	}
 
-		Current_Map.Display();
+	for (Maps& Current_Map : Deco_Layer)
+	{
+		if (Circle_Collision(Current_Map.Get_Position(), Vue.Get_Position(), 600, 600))
+		{
+			if (Hud.Get_Layer() != 2)
+				Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
+			else
+				Current_Map.Get_Sprite().setColor(Color::White);
 
-		Current_Map.Get_Sprite().setColor(Color::White);
+			Current_Map.Display();
+
+			Current_Map.Get_Sprite().setColor(Color::White);
+		}
 	}
 
 	for (Npc& Current : NpcList)
-		Current.Display();
+		if (Circle_Collision(Current.Get_Position(), Vue.Get_Position(), 600, 600))
+			Current.Display();
 
 	for (Maps& Current_Map : Front_Layer)
 	{
-		if (Hud.Get_Layer() != 4)
-			Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
-		else
+		if (Circle_Collision(Current_Map.Get_Position(), Vue.Get_Position(), 600, 600))
+		{
+			if (Hud.Get_Layer() != 4)
+				Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
+			else
+				Current_Map.Get_Sprite().setColor(Color::White);
+
+			Current_Map.Display();
+
 			Current_Map.Get_Sprite().setColor(Color::White);
-
-		Current_Map.Display();
-
-		Current_Map.Get_Sprite().setColor(Color::White);
+		}
 	}
 }
 
