@@ -497,6 +497,7 @@ void Editeur::Display_Map()
 	if (!PlayerIsPresent)
 	{
 		Vue.Display();
+
 		display_Etage();
 
 		if (App_Grille)
@@ -516,37 +517,37 @@ void Editeur::display_Etage()
 	for (Maps& Current_Map : Back_Layer)
 	{
 		if (Hud.Get_Layer() != 1)
-			getSprite(Current_Map.Get_Name()).setColor(Color(150, 150, 150, 160));
+			Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
 		else
-			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+			Current_Map.Get_Sprite().setColor(Color::White);
 
 		Current_Map.Display();
 
-		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+		Current_Map.Get_Sprite().setColor(Color::White);
 	}
 
 	for (Maps& Current_Map : Deco_Layer)
 	{
 		if (Hud.Get_Layer() != 2)
-			getSprite(Current_Map.Get_Name()).setColor(Color(150, 150, 150, 160));
+			Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
 		else
-			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+			Current_Map.Get_Sprite().setColor(Color::White);
 
 		Current_Map.Display();
 
-		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+		Current_Map.Get_Sprite().setColor(Color::White);
 	}
 
 	for (Maps& Current_Map : Player_Layer)
 	{
 		if (Hud.Get_Layer() != 3)
-			getSprite(Current_Map.Get_Name()).setColor(Color(150, 150, 150, 160));
+			Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
 		else
-			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+			Current_Map.Get_Sprite().setColor(Color::White);
 
 		Current_Map.Display();
 
-		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+		Current_Map.Get_Sprite().setColor(Color::White);
 	}
 
 	for (Npc& Current : NpcList)
@@ -555,13 +556,13 @@ void Editeur::display_Etage()
 	for (Maps& Current_Map : Front_Layer)
 	{
 		if (Hud.Get_Layer() != 4)
-			getSprite(Current_Map.Get_Name()).setColor(Color(150, 150, 150, 160));
+			Current_Map.Get_Sprite().setColor(Color(150, 150, 150, 160));
 		else
-			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+			Current_Map.Get_Sprite().setColor(Color::White);
 
 		Current_Map.Display();
 
-		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+		Current_Map.Get_Sprite().setColor(Color::White);
 	}
 }
 

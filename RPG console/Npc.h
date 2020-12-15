@@ -33,9 +33,10 @@ public :
 
 	bool operator == (const Npc& n) const { return Name == n.Name && Life_Point == n.Life_Point && Position.x == n.Position.x && Position.y == n.Position.y; }
 
+	virtual void Update() {};
 	void Update_Attack(Hero& _player);
 	void Update_Dialogue(bool& _dial, Hero _player);
 	void Display_Fight(Vector2f _scale);
 	void Display_Dialogue();
-	void Display();
+	virtual void Display();
 };

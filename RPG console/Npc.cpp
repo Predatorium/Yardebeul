@@ -31,8 +31,8 @@ Npc::Npc(string _name, Armor _armor, Weapon _weapon, int _level, int _hp, int _s
 		Walk_Right = Animator(IntRect(348, 189, 40, 44), 3, 0.15f);
 		Walk_Top = Animator(IntRect(5, 189, 50, 42), 3, 0.15f);
 
-		getSprite(Name).setOrigin(Vector2f(21, 22.5));
-		getSprite(Name).setTextureRect(IntRect(5, 72, 54, 44));
+		sprite.setOrigin(Vector2f(21, 22.5));
+		sprite.setTextureRect(IntRect(5, 72, 54, 44));
 
 		Colision_Rect = IntRect(0, 0, 45, 22.5);
 	}
@@ -66,8 +66,8 @@ Npc::Npc(string _name, int _level, int _hp, int _speed, Dialogue &_dial)
 		Walk_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
 		Walk_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
 
-		getSprite(Name).setOrigin(Vector2f(22, 23));
-		getSprite(Name).setTextureRect(IntRect(5, 99, 44, 46));
+		sprite.setOrigin(Vector2f(22, 23));
+		sprite.setTextureRect(IntRect(5, 99, 44, 46));
 
 		Colision_Rect = IntRect(0, 0, 44, 23);
 	}
@@ -86,7 +86,7 @@ void Npc::Update_Attack(Hero& _player)
 	if (Up == true || Down == true)
 		Position.y += 5 * Delta.y * MainTime.GetTimeDeltaF();
 
-	if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width * 4, getSprite("Hero").getGlobalBounds().width * 4))
+	if (Circle_Collision(Position, _player.Get_Position(), 200, 200))
 	{
 		Delta.x = 20 * cos(Angle_calc(Position, _player.Get_Position()));
 		Delta.y = 20 * sin(Angle_calc(Position, _player.Get_Position()));
@@ -141,7 +141,7 @@ void Npc::Update_Attack(Hero& _player)
 			Up = false;
 			Down = true;
 		}
-		if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width / 2, getSprite("Hero").getGlobalBounds().width / 2))
+		if (Circle_Collision(Position, _player.Get_Position(), 25, 25))
 			StateManager::Get_Singleton().State_Fight(&_player, this);
 	}
 	else
@@ -157,7 +157,7 @@ void Npc::Update_Attack(Hero& _player)
 
 void Npc::Update_Dialogue(bool& _dial, Hero _player)
 {
-	if (Circle_Collision(Position, _player.Get_Position(), getSprite(Name).getGlobalBounds().width, getSprite("Hero").getGlobalBounds().width)
+	if (Circle_Collision(Position, _player.Get_Position(), 50, 50)
 		&& _player.Get_Interact() == true && &dialogue != nullptr)
 		_dial = true;
 
@@ -169,8 +169,8 @@ void Npc::Update_Dialogue(bool& _dial, Hero _player)
 
 void Npc::Display_Fight(Vector2f _scale)
 {
-	getSprite(Name).setScale(_scale);
-	App.Get_Window().draw(getSprite(Name));
+	sprite.setScale(_scale);
+	App.Get_Window().draw(sprite);
 }
 
 void Npc::Display_Dialogue()
@@ -185,52 +185,52 @@ void Npc::Display()
 	{
 		if (Orientation == Direction::Right)
 		{
-			Beat_Right.Animation(getSprite(Name));
-			getSprite(Name).setScale(Vector2f(1, 1));
+			Beat_Right.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Left)
 		{
-			Beat_Right.Animation(getSprite(Name));
-			getSprite(Name).setScale(Vector2f(-1, 1));
+			Beat_Right.Animation(sprite);
+			sprite.setScale(Vector2f(-1, 1));
 		}
 		else if (Orientation == Direction::Down)
 		{
-			Beat_Down.Animation(getSprite(Name));
-			getSprite(Name).setScale(Vector2f(1, 1));
+			Beat_Down.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Up)
 		{
-			Beat_Top.Animation(getSprite(Name));
-			getSprite(Name).setScale(Vector2f(1, 1));
+			Beat_Top.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
 		}
 	}
 	else
 	{
 		if (Orientation == Direction::Right)
 		{
-			Walk_Right.Animation(getSprite(Name));
-			getSprite(Name).setScale(Vector2f(1, 1));
+			Walk_Right.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Left)
 		{
-			Walk_Right.Animation(getSprite(Name));
-			getSprite(Name).setScale(Vector2f(-1, 1));
+			Walk_Right.Animation(sprite);
+			sprite.setScale(Vector2f(-1, 1));
 		}
 		else if (Orientation == Direction::Down)
 		{
-			Walk_Down.Animation(getSprite(Name));
-			getSprite(Name).setScale(Vector2f(1, 1));
+			Walk_Down.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Up)
 		{
-			Walk_Top.Animation(getSprite(Name));
+			Walk_Top.Animation(sprite);
 			if (Delta.x > 0)
-				getSprite(Name).setScale(Vector2f(-1, 1));
+				sprite.setScale(Vector2f(-1, 1));
 			else
-				getSprite(Name).setScale(Vector2f(1, 1));
+				sprite.setScale(Vector2f(1, 1));
 		}
 	}
 
-	getSprite(Name).setPosition(Position);
-	App.Get_Window().draw(getSprite(Name));
+	sprite.setPosition(Position);
+	App.Get_Window().draw(sprite);
 }

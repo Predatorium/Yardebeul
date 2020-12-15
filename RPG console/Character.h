@@ -3,6 +3,7 @@
 #include "Armor.h"
 #include "Weapon.h"
 #include "Animator.h"
+#include "Entity.h"
 
 enum class Direction
 {
@@ -12,10 +13,9 @@ enum class Direction
 	Right,
 };
 
-class Character
+class Character : public Entity
 {
 protected :
-	Vector2f Position;
 	Direction Orientation;
 
 	bool Right;
@@ -36,7 +36,6 @@ protected :
 
 	IntRect Colision_Rect;
 
-	string Name;
 	int Level;
 	int Life_Point;
 	int Life_Max;
@@ -51,9 +50,7 @@ public :
 	~Character() = default;
 
 	inline IntRect Get_ColisionRect() { return Colision_Rect; };
-	inline Vector2f Get_Position() { return Position; };
 	inline Direction Get_Orientation() { return Orientation; };
-	inline string Get_Name() { return Name; };
 	inline int Get_Level() { return Level; };
 	inline int Get_LifePoint() { return Life_Point; };
 	inline int Get_LifeMax() { return Life_Max; };
@@ -67,16 +64,14 @@ public :
 	inline bool Get_Down() { return Down; };
 	inline Animator& Get_BeatRight() { return Beat_Right; };
 	inline Animator& Get_BeatDown() { return Beat_Down; };
-	inline Weapon Get_Weapon() { return *weapon; };
-	inline Armor Get_Armor() { return *armor; };
+	inline Weapon* Get_Weapon() { return weapon; };
+	inline Armor* Get_Armor() { return armor; };
 
 	inline void Set_Left(bool _bool) { Left = _bool; };
 	inline void Set_Right(bool _bool) { Right = _bool; };
 	inline void Set_Up(bool _bool) { Up = _bool; };
 	inline void Set_Down(bool _bool) { Down = _bool; };
 	inline void Set_Orientation(Direction _orientation) { Orientation = _orientation; };
-	inline void Set_Position(Vector2f _position) { Position = _position; };
-	inline virtual void Set_Name(string _name) { Name = _name; };
 	inline void Set_Level(int _level) { Level = _level; };
 	void Add_Life(int _life);
 	void Set_Life(int _life);
@@ -86,5 +81,6 @@ public :
 	inline void Set_MentalHealth(int _mentalhealth) { Mental_Health = _mentalhealth; };
 	inline void Set_Speed(int _speed) { Speed = _speed; };
 
+	virtual void Update() = 0;
 	virtual void Display() = 0;
 };

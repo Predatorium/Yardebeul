@@ -91,7 +91,6 @@ void Button_Text::Display()
 
 void Button_Sprite::Display()
 {
-
 	shape.setOutlineColor(color);
 	getSprite(Name).setColor(color);
 	App.Get_Window().draw(shape);
@@ -99,5 +98,4 @@ void Button_Sprite::Display()
 	getSprite(Name).setPosition(Vector2f(shape.getPosition().x, shape.getPosition().y));
 	getSprite(Name).setRotation(Rotate);
 	App.Get_Window().draw(getSprite(Name));
-
 }

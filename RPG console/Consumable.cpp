@@ -26,16 +26,16 @@ void Consumable::Take_Item(Hero& _player)
 
 void Consumable::Display(Vector2f _position)
 {
-	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
-	getSprite(Name.substr(0, Name.find(" "))).setScale(Vector2f(1, 1));
-	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
+	sprite.setPosition(Position);
+	sprite.setScale(Vector2f(1, 1));
+	App.Get_Window().draw(sprite);
 }
 
 void Consumable::Display_Inventory(Vector2f _scale)
 {
-	Anim.Animation(getSprite(Name.substr(0, Name.find(" "))));
-	getSprite(Name.substr(0, Name.find(" "))).setOrigin(Vector2f(10.5, 15));
-	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
-	getSprite(Name.substr(0, Name.find(" "))).setScale(_scale);
-	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
+	Anim.Animation(sprite);
+	sprite.setOrigin(Vector2f(10.5, 15));
+	sprite.setPosition(Position);
+	sprite.setScale(_scale);
+	App.Get_Window().draw(sprite);
 }

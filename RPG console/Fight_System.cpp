@@ -7,10 +7,10 @@ Fight_System::Fight_System(Hero* _player, Npc* _enemy, State _state)
 {
 	Player = _player;
 	Player->Set_Orientation(Direction::Right);
-	getSprite("Hero").setPosition(200, 700);
+	Player->Get_Sprite().setPosition(200, 700);
 	Enemy = _enemy;
 	Enemy->Set_Orientation(Direction::Down);
-	getSprite(Enemy->Get_Name()).setPosition(1650, 250);
+	Enemy->Get_Sprite().setPosition(1650, 250);
 	Previous_state = _state;
 
 	timer = 0;
@@ -83,13 +83,13 @@ void Fight_System::Hud_Update()
 		if (Selection == 0)
 		{
 			Texte.setString(to_string(-Player->Get_Weapon()->Get_Damage()));
-			Texte.setPosition(Vector2f(getSprite(Enemy->Get_Name()).getPosition().x, getSprite(Enemy->Get_Name()).getPosition().y + 300));
+			Texte.setPosition(Vector2f(Enemy->Get_Sprite().getPosition().x, Enemy->Get_Sprite().getPosition().y + 300));
 			Enemy->Set_Life(Enemy->Get_LifePoint() - Player->Get_Weapon()->Get_Damage());
 		}
 		if (Selection == 1)
 		{
 			Texte.setString("+" + to_string(5));
-			Texte.setPosition(Vector2f(getSprite("Hero").getPosition().x, getSprite("Hero").getPosition().y - 300));
+			Texte.setPosition(Vector2f(Player->Get_Sprite().getPosition().x, Player->Get_Sprite().getPosition().y - 300));
 			Player->Add_Life(5);
 		}
 		if (Selection == 2)
@@ -122,9 +122,9 @@ void Fight_System::Update()
 	{
 		if (timer > 1.f && Texte.getString() == "")
 		{
-			Texte.setString(to_string(-Enemy->Get_Weapon().Get_Damage()));
-			Texte.setPosition(Vector2f(getSprite("Hero").getPosition().x, getSprite("Hero").getPosition().y - 300));
-			Player->Add_Life(-Enemy->Get_Weapon().Get_Damage());
+			Texte.setString(to_string(-Enemy->Get_Weapon()->Get_Damage()));
+			Texte.setPosition(Vector2f(Player->Get_Sprite().getPosition().x, Player->Get_Sprite().getPosition().y - 300));
+			Player->Add_Life(-Enemy->Get_Weapon()->Get_Damage());
 			timer = 0;
 		}
 		if (timer > 2.f && Texte.getString() != "")
@@ -154,8 +154,8 @@ void Fight_System::Update()
 	if (Player->Get_LifePoint() <= 0)
 		StateManager::Get_Singleton().ChangeState(State::MENU);
 
-	Player->Get_BeatRight().Animation(getSprite("Hero"));
-	Enemy->Get_BeatDown().Animation(getSprite(Enemy->Get_Name()));
+	Player->Get_BeatRight().Animation(Player->Get_Sprite());
+	Enemy->Get_BeatDown().Animation(Enemy->Get_Sprite());
 }
 
 void Fight_System::Display()

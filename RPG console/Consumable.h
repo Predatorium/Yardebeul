@@ -16,7 +16,10 @@ public :
 	bool operator == (const Consumable& _c) const { return Name == _c.Name; }
 	bool operator != (const Consumable& _c) const { return !operator==(_c); }
 
+	virtual void Update() {};
+
 	virtual void Take_Item(Hero& _player);
 	virtual void Display(Vector2f _circlecol);
 	virtual void Display_Inventory(Vector2f _scale);
+	virtual void Display() {};
 };

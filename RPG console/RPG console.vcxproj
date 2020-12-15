@@ -26,6 +26,7 @@
     <ClInclude Include="Dialogue.h" />
     <ClInclude Include="Dialogue_Container.h" />
     <ClInclude Include="Dungeon_Container.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Fight_System.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="HUD_Editor.h" />
@@ -71,6 +72,7 @@
     <ClCompile Include="Dialogue.cpp" />
     <ClCompile Include="Dialogue_Container.cpp" />
     <ClCompile Include="Dungeon_Container.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Fight_System.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="HUD_Editor.cpp" />

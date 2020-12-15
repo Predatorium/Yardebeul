@@ -7,13 +7,14 @@ Item::Item(string _name, int _price, Effect _effect)
 	Price = _price;
 	effect = _effect;
 	PickUp = false;
+	sprite = getSprite(Name.substr(0, Name.find(" ")));
 }
 
 void Item::Display_Inventory(Vector2f _scale)
 {
-	Anim.Animation(getSprite(Name.substr(0, Name.find(" "))));
-	getSprite(Name.substr(0, Name.find(" "))).setOrigin(Vector2f(10.5, 15));
-	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
-	getSprite(Name.substr(0, Name.find(" "))).setScale(_scale);
-	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(""))));
+	Anim.Animation(sprite);
+	sprite.setOrigin(Vector2f(10.5, 15));
+	sprite.setPosition(Position);
+	sprite.setScale(_scale);
+	App.Get_Window().draw(sprite);
 }

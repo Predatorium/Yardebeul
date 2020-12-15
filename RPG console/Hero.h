@@ -58,7 +58,7 @@ public :
 	inline void Set_Time(float _time) { Time = _time; };
 	inline void Set_IsInventory(bool _bool) { IsInventory = _bool; };
 
-	void Update();
+	virtual void Update();
 	void Display_Fight(Vector2f _scale);
-	void Display();
+	virtual void Display();
 };

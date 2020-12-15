@@ -210,8 +210,8 @@ void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, Vector2i _limit)
 					Modif_Npc.push_back(Button_Text("Change_Type", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 15), Color::White));
 					Modif_Npc.push_back(Button_Text("Life : " + to_string(Current.Get_LifeMax()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 45), Color::White));
 					Modif_Npc.push_back(Button_Text("Level : " + to_string(Current.Get_Level()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 75), Color::White));
-					Modif_Npc.push_back(Button_Text("Damage : " + to_string(Current.Get_Weapon().Get_Damage()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 105), Color::White));
-					Modif_Npc.push_back(Button_Text("Defense : " + to_string(Current.Get_Armor().Get_Defense()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 135), Color::White));
+					Modif_Npc.push_back(Button_Text("Damage : " + to_string(Current.Get_Weapon()->Get_Damage()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 105), Color::White));
+					Modif_Npc.push_back(Button_Text("Defense : " + to_string(Current.Get_Armor()->Get_Defense()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 135), Color::White));
 					if (Current.Get_Dialogue() != Dialogue())
 						Modif_Npc.push_back(Button_Text("Dialogue : " + Current.Get_Dialogue().Get_Id(), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 165), Color::White));
 					Modif_Npc.push_back(Button_Text("Remove", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 265), Color::White));
@@ -318,8 +318,8 @@ void HUD_Editor::Set_Npc(Vector2f _mouse, list<Npc>& _npc, Vector2i _limit)
 									Modif_Npc.push_back(Button_Text("Change_Type", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 15), Color::White));
 									Modif_Npc.push_back(Button_Text("Life : " + to_string(Current_npc.Get_LifeMax()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 45), Color::White));
 									Modif_Npc.push_back(Button_Text("Level : " + to_string(Current_npc.Get_Level()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 75), Color::White));
-									Modif_Npc.push_back(Button_Text("Damage : " + to_string(Current_npc.Get_Weapon().Get_Damage()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 105), Color::White));
-									Modif_Npc.push_back(Button_Text("Defense : " + to_string(Current_npc.Get_Armor().Get_Defense()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 135), Color::White));
+									Modif_Npc.push_back(Button_Text("Damage : " + to_string(Current_npc.Get_Weapon()->Get_Damage()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 105), Color::White));
+									Modif_Npc.push_back(Button_Text("Defense : " + to_string(Current_npc.Get_Armor()->Get_Defense()), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 135), Color::White));
 									if (Current_npc.Get_Dialogue() != Dialogue())
 										Modif_Npc.push_back(Button_Text("Dialogue : " + Current_npc.Get_Dialogue().Get_Id(), "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 165), Color::White));
 									Modif_Npc.push_back(Button_Text("Remove", "Times", 20, Vector2f(126, 26), 2, Vector2f(Menu_Npc.getPosition().x + 65, Menu_Npc.getPosition().y + 265), Color::White));
@@ -489,6 +489,7 @@ void HUD_Editor::Interaction_Tile(Vector2f _mouse)
 
 					Selection.Set_Biome(Actual_Select.Get_Biome());
 					Selection.Set_Name(Actual_Select.Get_Name());
+					Selection.Get_Sprite() = getSprite(Selection.Get_Name());
 					Selection.Set_Tile(Actual_Select.Get_Tile());
 					Tile_Select.setPosition(Vector2f(Actual_Select.Get_Position().x + 2, Actual_Select.Get_Position().y + 2));
 					IsSelect = true;

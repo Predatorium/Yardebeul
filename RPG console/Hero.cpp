@@ -5,10 +5,11 @@
 #include "Weapons_Container.h"
 
 Hero::Hero(Vector2f _position)
+	: Character("Hero", Armor(), Weapon())
 {
 	if (SpriteList.size() > 0)
 	{
-		Name = "Francis";
+		Name = "Hero";
 		Level = 1;
 		Life_Point = 20;
 		Mana = 50;
@@ -54,9 +55,9 @@ Hero::Hero(Vector2f _position)
 		Beat_Right = Animator(IntRect(115, 54, 23, 31), 8, 0.15f);
 		Beat_Top = Animator(IntRect(115, 86, 24, 32), 8, 0.15f);
 
-		Walk_Right.Animation(getSprite("Hero"));
-		getSprite("Hero").setOrigin(Vector2f(12, 16.5));
-		getSprite("Hero").setTextureRect(IntRect(115, 54, 23, 31));
+		Walk_Right.Animation(sprite);
+		sprite.setOrigin(Vector2f(12, 16.5));
+		sprite.setTextureRect(IntRect(115, 54, 23, 31));
 
 		Colision_Rect = IntRect(0, 0, 26, 18);
 	}
@@ -239,13 +240,13 @@ void Hero::Update()
 	}
 
 	Colision_Rect = IntRect(Vector2i(Position.x, Position.y - Colision_Rect.height), Vector2i(Colision_Rect.width, Colision_Rect.height));
-	getSprite("Hero").setPosition(Position);
+	sprite.setPosition(Position);
 }
 
 void Hero::Display_Fight(Vector2f _scale)
 {
-	getSprite("Hero").setScale(_scale);
-	App.Get_Window().draw(getSprite("Hero"));
+	sprite.setScale(_scale);
+	App.Get_Window().draw(sprite);
 }
 
 void Hero::Display()
@@ -254,52 +255,52 @@ void Hero::Display()
 	{
 		if (Orientation == Direction::Right)
 		{
-			Beat_Right.Animation(getSprite("Hero"));
-			getSprite("Hero").setScale(Vector2f(1, 1));
+			Beat_Right.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Left)
 		{
-			Beat_Right.Animation(getSprite("Hero"));
-			getSprite("Hero").setScale(Vector2f(-1, 1));
+			Beat_Right.Animation(sprite);
+			sprite.setScale(Vector2f(-1, 1));
 		}
 		else if (Orientation == Direction::Down)
 		{
-			Beat_Down.Animation(getSprite("Hero"));
-			getSprite("Hero").setScale(Vector2f(1, 1));
+			Beat_Down.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Up)
 		{
-			Beat_Top.Animation(getSprite("Hero"));
-			getSprite("Hero").setScale(Vector2f(1, 1));
+			Beat_Top.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
 		}
 	}
 	else
 	{
 		if (Orientation == Direction::Right)
 		{
-			Walk_Right.Animation(getSprite("Hero"));
-			getSprite("Hero").setScale(Vector2f(1, 1));
-			getSprite("Hero").setOrigin(Vector2f(12, 16.5));
+			Walk_Right.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
+			sprite.setOrigin(Vector2f(12, 16.5));
 		}
 		else if (Orientation == Direction::Left)
 		{
-			Walk_Right.Animation(getSprite("Hero"));
-			getSprite("Hero").setScale(Vector2f(-1, 1));
-			getSprite("Hero").setOrigin(Vector2f(12, 16.5));
+			Walk_Right.Animation(sprite);
+			sprite.setScale(Vector2f(-1, 1));
+			sprite.setOrigin(Vector2f(12, 16.5));
 		}
 		else if (Orientation == Direction::Down)
 		{
-			Walk_Down.Animation(getSprite("Hero"));
-			getSprite("Hero").setScale(Vector2f(1, 1));
-			getSprite("Hero").setOrigin(Vector2f(10.5, 17.5));
+			Walk_Down.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
+			sprite.setOrigin(Vector2f(10.5, 17.5));
 		}
 		else if (Orientation == Direction::Up)
 		{
-			Walk_Top.Animation(getSprite("Hero"));
-			getSprite("Hero").setScale(Vector2f(1, 1));
-			getSprite("Hero").setOrigin(Vector2f(13, 18));
+			Walk_Top.Animation(sprite);
+			sprite.setScale(Vector2f(1, 1));
+			sprite.setOrigin(Vector2f(13, 18));
 		}
 	}
 
-	App.Get_Window().draw(getSprite("Hero"));
+	App.Get_Window().draw(sprite);
 }

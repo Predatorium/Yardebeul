@@ -33,27 +33,27 @@ void Weapon::Take_Item(Hero& _player)
 
 void Weapon::Display(Vector2f _position)
 {
-	Anim.Animation(getSprite(Name.substr(0, Name.find(" "))));
-	getSprite(Name.substr(0, Name.find(" "))).setOrigin(Vector2f(10.5, 15));
-	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
-	getSprite(Name.substr(0, Name.find(" "))).setScale(Vector2f(1,1));
-	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
+	Anim.Animation(sprite);
+	sprite.setOrigin(Vector2f(10.5, 15));
+	sprite.setPosition(Position);
+	sprite.setScale(Vector2f(1, 1));
+	App.Get_Window().draw(sprite);
 
 	if (Circle_Collision(Position, _position, 20, 20))
 	{
 		Text My(Name, getFont("Times"), 20);
 		My.setOrigin(getMidle(My));
 		My.setFillColor(Color::Black);
-		My.setPosition(Vector2f (Position.x, Position.y - 20));
+		My.setPosition(Vector2f(Position.x, Position.y - 20));
 		App.Get_Window().draw(My);
 	}
 }
 
 void Weapon::Display_Inventory(Vector2f _scale)
 {
-	Anim.Animation(getSprite(Name.substr(0, Name.find(" "))));
-	getSprite(Name.substr(0, Name.find(" "))).setOrigin(Vector2f(10.5, 15));
-	getSprite(Name.substr(0, Name.find(" "))).setPosition(Position);
-	getSprite(Name.substr(0, Name.find(" "))).setScale(_scale);
-	App.Get_Window().draw(getSprite(Name.substr(0, Name.find(" "))));
+	Anim.Animation(sprite);
+	sprite.setOrigin(Vector2f(10.5, 15));
+	sprite.setPosition(Position);
+	sprite.setScale(_scale);
+	App.Get_Window().draw(sprite);
 }

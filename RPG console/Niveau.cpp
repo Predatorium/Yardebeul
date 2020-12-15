@@ -294,31 +294,31 @@ void Level::ScreenShot(int _party)
 	texture.setView(view);
 	for (Maps Current_Maps : Back_Layer)
 	{
-		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
-		getSprite(Current_Maps.Get_Name()).setPosition(Current_Maps.Get_Position());
-		App.Get_Window().draw(getSprite(Current_Maps.Get_Name()));
-		texture.draw(getSprite(Current_Maps.Get_Name()));
-	}
-	for (Maps Current_Maps : Player_Layer)
-	{
-		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
-		getSprite(Current_Maps.Get_Name()).setPosition(Current_Maps.Get_Position());
-		App.Get_Window().draw(getSprite(Current_Maps.Get_Name()));
-		texture.draw(getSprite(Current_Maps.Get_Name()));
+		Current_Maps.Get_Sprite().setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
+		Current_Maps.Get_Sprite().setPosition(Current_Maps.Get_Position());
+		App.Get_Window().draw(Current_Maps.Get_Sprite());
+		texture.draw(Current_Maps.Get_Sprite());
 	}
 	for (Maps Current_Maps : Deco_Layer)
 	{
-		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
-		getSprite(Current_Maps.Get_Name()).setPosition(Current_Maps.Get_Position());
-		App.Get_Window().draw(getSprite(Current_Maps.Get_Name()));
-		texture.draw(getSprite(Current_Maps.Get_Name()));
+		Current_Maps.Get_Sprite().setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
+		Current_Maps.Get_Sprite().setPosition(Current_Maps.Get_Position());
+		App.Get_Window().draw(Current_Maps.Get_Sprite());
+		texture.draw(Current_Maps.Get_Sprite());
+	}
+	for (Maps Current_Maps : Player_Layer)
+	{
+		Current_Maps.Get_Sprite().setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
+		Current_Maps.Get_Sprite().setPosition(Current_Maps.Get_Position());
+		App.Get_Window().draw(Current_Maps.Get_Sprite());
+		texture.draw(Current_Maps.Get_Sprite());
 	}
 	for (Maps Current_Maps : Front_Layer)
 	{
-		getSprite(Current_Maps.Get_Name()).setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
-		getSprite(Current_Maps.Get_Name()).setPosition(Current_Maps.Get_Position());
-		App.Get_Window().draw(getSprite(Current_Maps.Get_Name()));
-		texture.draw(getSprite(Current_Maps.Get_Name()));
+		Current_Maps.Get_Sprite().setTextureRect(IntRect(Current_Maps.Get_Tile().x * Taille_tile, Current_Maps.Get_Tile().y * Taille_tile, Taille_tile, Taille_tile));
+		Current_Maps.Get_Sprite().setPosition(Current_Maps.Get_Position());
+		App.Get_Window().draw(Current_Maps.Get_Sprite());
+		texture.draw(Current_Maps.Get_Sprite());
 	}
 
 	texture.display();
@@ -371,45 +371,56 @@ void Level::Display()
 	Vue.Display();
 
 	for (Maps& Current_Map : Back_Layer)
-		Current_Map.Display();
+		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
+			Current_Map.Display();
 
 	for (Maps& Current_Map : Player_Layer)
-		Current_Map.Display();
+		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
+			Current_Map.Display();
 
 	for (Maps& Current_Map : Deco_Layer)
-		Current_Map.Display();
-	
+		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
+			Current_Map.Display();
+
 	for (Npc& Current_Npc : NpcList)
-		Current_Npc.Display();
+		if (Circle_Collision(Vue.Get_Position(), Current_Npc.Get_Position(), 560, 560))
+			Current_Npc.Display();
 
 	for (Weapon& Current_Weapon : WeaponList)
-		Current_Weapon.Display(Player.Get_Position());
+		if (Circle_Collision(Vue.Get_Position(), Current_Weapon.Get_Position(), 560, 560))
+			Current_Weapon.Display(Player.Get_Position());
 
 	for (Armor& Current_Armor : ArmorList)
-		Current_Armor.Display(Player.Get_Position());
+		if (Circle_Collision(Vue.Get_Position(), Current_Armor.Get_Position(), 560, 560))
+			Current_Armor.Display(Player.Get_Position());
 
 	for (Consumable& Current_Consumable : ConsumableList)
-		Current_Consumable.Display(Player.Get_Position());
+		if (Circle_Collision(Vue.Get_Position(), Current_Consumable.Get_Position(), 560, 560))
+			Current_Consumable.Display(Player.Get_Position());
 
 	Player.Display();
 
 	for (Maps& Current_Map : Front_Layer)
 	{
-		if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_ColisionRect().height / 2.1f),
-			Vector2f(Current_Map.Get_Position().x + 16, Current_Map.Get_Position().y + 16), 30, Player.Get_ColisionRect().width))
-			getSprite(Current_Map.Get_Name()).setColor(Color(255,255,255,100));
-		else
-			getSprite(Current_Map.Get_Name()).setColor(Color::White);
+		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
+		{
+			if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_ColisionRect().height / 2.1f),
+				Vector2f(Current_Map.Get_Position().x + 16, Current_Map.Get_Position().y + 16), 30, Player.Get_ColisionRect().width))
+				Current_Map.Get_Sprite().setColor(Color(255,255,255,100));
+			else
+				Current_Map.Get_Sprite().setColor(Color::White);
 
-		Current_Map.Display();
+			Current_Map.Display();
 
-		getSprite(Current_Map.Get_Name()).setColor(Color::White);
+			Current_Map.Get_Sprite().setColor(Color::White);
+		}
 	}
 
 	Screen.Display();
 
 	for (Npc& Current : NpcList)
-		Current.Display_Dialogue();
+		if (Circle_Collision(Vue.Get_Position(), Current.Get_Position(), 560, 560))
+			Current.Display_Dialogue();
 
 	if (Player.Get_IsInventory() == true)
 		Player.Get_Inventory().Display();

@@ -1,6 +1,7 @@
 #include "Character.h"
 
 Character::Character(string _name, Armor _armor, Weapon _weapon)
+	: Entity(_name)
 {
 	Name = _name;
 	Level = 1;

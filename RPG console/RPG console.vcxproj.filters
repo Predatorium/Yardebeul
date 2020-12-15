@@ -216,6 +216,9 @@
     <ClInclude Include="Inventory.h">
       <Filter>Fichiers d%27en-tête\System</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Fichiers d%27en-tête\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Room.cpp">
@@ -348,6 +351,9 @@
       <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
+      <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
       <Filter>Fichiers sources\System</Filter>
     </ClCompile>
   </ItemGroup>
