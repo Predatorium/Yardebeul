@@ -29,10 +29,10 @@ public :
 	inline void Set_Zoom(bool _zoom) { Zoom = _zoom; };
 	inline void Set_Dezoom(bool _dezoom) { Dezoom = _dezoom; };
 
-	bool occlusion_culling(Vector2f _position);
+	bool Occlusion_CullingRectangle(Vector2f _position);
+	bool Occlusion_CullingCircle(Vector2f _position);
 
 	void Update_Editeur(Vector2i _limit, Vector2f _position);
 	void Update(Vector2i _limit, Vector2f _player);
-	void Update_MiniMapEditor(Vector2i _limit);
 	void Display();
 };

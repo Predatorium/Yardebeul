@@ -47,17 +47,15 @@ Hero::Hero(Vector2f _position)
 
 		Orientation = Direction::Right;
 
-		Walk_Down = Animator(IntRect(1805, 21, 23, 35), 6, 0.15f);
-		Walk_Right = Animator(IntRect(1805, 57, 24, 33), 6, 0.15f);
-		Walk_Top = Animator(IntRect(1805, 91, 26, 36), 6, 0.15f);
+		Anim["Walk_Down"] = Animator(IntRect(1805, 21, 23, 35), 6, 0.15f);
+		Anim["Walk_Right"] = Animator(IntRect(1805, 57, 24, 33), 6, 0.15f);
+		Anim["Walk_Top"] = Animator(IntRect(1805, 91, 26, 36), 6, 0.15f);
+		Anim["Beat_Down"] = Animator(IntRect(1589, 21, 25, 32), 8, 0.15f);
+		Anim["Beat_Right"] = Animator(IntRect(1589, 54, 23, 31), 8, 0.15f);
+		Anim["Beat_Top"] = Animator(IntRect(1589, 86, 24, 32), 8, 0.15f);
 
-		Beat_Down = Animator(IntRect(1589, 21, 25, 32), 8, 0.15f);
-		Beat_Right = Animator(IntRect(1589, 54, 23, 31), 8, 0.15f);
-		Beat_Top = Animator(IntRect(1589, 86, 24, 32), 8, 0.15f);
-
-		Walk_Right.Animation(sprite);
-		sprite.setOrigin(Vector2f(12, 16.5));
-		sprite.setTextureRect(IntRect(115, 54, 23, 31));
+		Anim["Beat_Right"].Animation(sprite);
+		sprite.setPosition(Position);
 	}
 }
 
@@ -252,22 +250,22 @@ void Hero::Display()
 	{
 		if (Orientation == Direction::Right)
 		{
-			Beat_Right.Animation(sprite);
+			Anim["Beat_Right"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Left)
 		{
-			Beat_Right.Animation(sprite);
+			Anim["Beat_Right"].Animation(sprite);
 			sprite.setScale(Vector2f(-1, 1));
 		}
 		else if (Orientation == Direction::Down)
 		{
-			Beat_Down.Animation(sprite);
+			Anim["Beat_Down"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Up)
 		{
-			Beat_Top.Animation(sprite);
+			Anim["Beat_Top"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
 	}
@@ -275,22 +273,22 @@ void Hero::Display()
 	{
 		if (Orientation == Direction::Right)
 		{
-			Walk_Right.Animation(sprite);
+			Anim["Walk_Right"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Left)
 		{
-			Walk_Right.Animation(sprite);
+			Anim["Walk_Right"].Animation(sprite);
 			sprite.setScale(Vector2f(-1, 1));
 		}
 		else if (Orientation == Direction::Down)
 		{
-			Walk_Down.Animation(sprite);
+			Anim["Walk_Down"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
 		else if (Orientation == Direction::Up)
 		{
-			Walk_Top.Animation(sprite);
+			Anim["Walk_Top"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
 	}

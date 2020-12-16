@@ -44,8 +44,12 @@ Editeur::Editeur()
 		Player = Hero(Vector2f(50, 50));
 				
 		Vue = Views(Vector2f(840, 420), Vector2f(1920, 1080), FloatRect(0.f, 0.f, 1.f, 1.f));
-		MiniMap = Views(Vector2f(0, 0), Vector2f(1920, 1080), FloatRect(0.65f, 0.65f, 0.3f, 0.3f));
 		Screen = Views();
+
+		MiniMap = RectangleShape(Vector2f(384, 216));
+		MiniMap.setPosition(Vector2f(1526, 854));
+		MiniMap.setOutlineThickness(2);
+		MiniMap.setOutlineColor(Color::Blue);
 	}
 }
 
@@ -140,6 +144,23 @@ void Editeur::Move_Map(int _coloulig, int _ajoures)
 				Current_Map.Set_Position(Vector2f(Current_Map.Get_Position().x, Current_Map.Get_Position().y - Taille_tile));
 		}
 	}
+	for (Maps& Current_Map : Deco_Layer)
+	{
+		if (_ajoures == 0)
+		{
+			if (_coloulig == 0)
+				Current_Map.Set_Position(Vector2f(Current_Map.Get_Position().x + Taille_tile, Current_Map.Get_Position().y));
+			if (_coloulig == 1)
+				Current_Map.Set_Position(Vector2f(Current_Map.Get_Position().x, Current_Map.Get_Position().y + Taille_tile));
+		}
+		if (_ajoures == 1)
+		{
+			if (_coloulig == 0)
+				Current_Map.Set_Position(Vector2f(Current_Map.Get_Position().x - Taille_tile, Current_Map.Get_Position().y));
+			if (_coloulig == 1)
+				Current_Map.Set_Position(Vector2f(Current_Map.Get_Position().x, Current_Map.Get_Position().y - Taille_tile));
+		}
+	}
 	for (Maps& Current_Map : Player_Layer)
 	{
 		if (_ajoures == 0)
@@ -155,6 +176,23 @@ void Editeur::Move_Map(int _coloulig, int _ajoures)
 				Current_Map.Set_Position(Vector2f(Current_Map.Get_Position().x - Taille_tile, Current_Map.Get_Position().y));
 			if (_coloulig == 1)
 				Current_Map.Set_Position(Vector2f(Current_Map.Get_Position().x, Current_Map.Get_Position().y - Taille_tile));
+		}
+	}
+	for (Npc& Current : NpcList)
+	{
+		if (_ajoures == 0)
+		{
+			if (_coloulig == 0)
+				Current.Set_Position(Vector2f(Current.Get_Position().x + Taille_tile, Current.Get_Position().y));
+			if (_coloulig == 1)
+				Current.Set_Position(Vector2f(Current.Get_Position().x, Current.Get_Position().y + Taille_tile));
+		}
+		if (_ajoures == 1)
+		{
+			if (_coloulig == 0)
+				Current.Set_Position(Vector2f(Current.Get_Position().x - Taille_tile, Current.Get_Position().y));
+			if (_coloulig == 1)
+				Current.Set_Position(Vector2f(Current.Get_Position().x, Current.Get_Position().y - Taille_tile));
 		}
 	}
 	for (Maps& Current_Map : Front_Layer)
@@ -295,7 +333,7 @@ void Editeur::Interaction_Map()
 	Resize_Map();
 }
 
-void Editeur::Set_Map(vector<Maps>& _layer)
+void Editeur::Set_Map(list<Maps>& _layer)
 {
 	bool FindMap = false;
 	for (Maps& Current_Map : _layer)
@@ -303,9 +341,9 @@ void Editeur::Set_Map(vector<Maps>& _layer)
 		{
 			if (Hud.Get_Selection().Get_Name() == "Rien")
 			{
-				Current_Map.Set_Actif(false);
-				Erase_Map();
+				_layer.remove(Current_Map);
 				FindMap = true;
+				break;
 			}
 			else if (Hud.Get_Selection().Get_Name() != "NPC")
 			{
@@ -322,7 +360,7 @@ void Editeur::Set_Map(vector<Maps>& _layer)
 			_layer.push_back(Maps(Vector2f(static_cast<int>(Mouse_Position.x / Taille_tile) * Taille_tile, (static_cast<int>(Mouse_Position.y / Taille_tile) * Taille_tile)), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
 }
 
-void Editeur::Set_MapSize(vector<Maps>& _layer, Vector2f _min, Vector2f _max)
+void Editeur::Set_MapSize(list<Maps>& _layer, Vector2f _min, Vector2f _max)
 {
 	for (float i = _min.x; i < _max.x; i += 32)
 		for (float j = _min.y; j < _max.y; j += 32)
@@ -333,9 +371,9 @@ void Editeur::Set_MapSize(vector<Maps>& _layer, Vector2f _min, Vector2f _max)
 				{
 					if (Hud.Get_Selection().Get_Name() == "Rien")
 					{
-						Current_Map.Set_Actif(false);
-						Erase_Map();
+						_layer.remove(Current_Map);
 						FindMap = true;
+						break;
 					}
 					else if (Hud.Get_Selection().Get_Name() != "NPC")
 					{
@@ -355,37 +393,6 @@ void Editeur::Set_MapSize(vector<Maps>& _layer, Vector2f _min, Vector2f _max)
 		}
 }
 
-void Editeur::Erase_Map()
-{
-	for (int i = 0; i < Back_Layer.size(); i++)
-		if (Back_Layer[i].Get_Actif() == false)
-		{
-			Back_Layer.erase(Back_Layer.begin() + i);
-				i--;
-		}
-
-	for (int i = 0; i < Deco_Layer.size(); i++)
-		if (Deco_Layer[i].Get_Actif() == false)
-		{
-			Deco_Layer.erase(Deco_Layer.begin() + i);
-			i--;
-		}
-
-	for (int i = 0; i < Player_Layer.size(); i++)
-		if (Player_Layer[i].Get_Actif() == false)
-		{
-			Player_Layer.erase(Player_Layer.begin() + i);
-			i--;
-		}
-
-	for (int i = 0; i < Front_Layer.size(); i++)
-		if (Front_Layer[i].Get_Actif() == false)
-		{
-			Front_Layer.erase(Front_Layer.begin() + i);
-			i--;
-		}
-}
-
 void Editeur::Update()
 {
 	Timer += MainTime.GetTimeDeltaF();
@@ -398,8 +405,6 @@ void Editeur::Update()
 		Interaction_Map();
 		Hud.Set_Npc(Mouse_Position, NpcList, Range_Niveau);
 
-		Grille.setPosition(Vector2f(((int)Mouse_Position.x / Taille_tile) * Taille_tile, ((int)Mouse_Position.y / Taille_tile) * Taille_tile));
-
 		Set_MousePos(Vector2f(Mouse::getPosition(App.Get_Window())));
 
 		Hud.Interaction_Biome(Mouse_Position);
@@ -410,10 +415,10 @@ void Editeur::Update()
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
 
 		Vue.Update_Editeur(Range_Niveau, Mouse_Position);
-		if (Range_Niveau.x < 192 && Range_Niveau.y < 108)
-			MiniMap.Update_MiniMapEditor(Range_Niveau);
-		else
-			MiniMap.Update_Editeur(Range_Niveau, Mouse_Position);
+
+		//if (Range_Niveau.x < 96 && Range_Niveau.y < 54)
+		//	MiniMap.Update_MiniMapEditor(Range_Niveau);
+		//MiniMap.Update(Range_Niveau, Vue.Get_Position());
 	}
 	else if (Load)
 	{
@@ -507,8 +512,18 @@ void Editeur::Display_Map()
 		display_EtageforMap();
 
 		if (App_Grille)
-			if (Vue.occlusion_culling(Grille.getPosition()))
+		{
+			if (Back_Layer.size() == 0)
+			{
+				Grille.setPosition(0, 0);
 				App.Get_Window().draw(Grille);
+			}
+
+			Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue.Get_View()));
+			Grille.setPosition(Vector2f((static_cast<int>(Mouse_Position.x) / Taille_tile) * Taille_tile, (static_cast<int>(Mouse_Position.y) / Taille_tile) * Taille_tile));
+			if (Vue.Occlusion_CullingRectangle(Grille.getPosition()))
+				App.Get_Window().draw(Grille);
+		}
 	}
 	else
 		Display();
@@ -516,15 +531,15 @@ void Editeur::Display_Map()
 
 void Editeur::Display_MiniMap()
 {
-	MiniMap.Display();
-	display_EtageforMiniMap();
+	MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle));
+	App.Get_Window().draw(MiniMap);
 }
 
 void Editeur::display_EtageforMap()
 {
 	for (Maps& Current : Back_Layer)
 	{
-		if (Vue.occlusion_culling(Current.Get_Position()))
+		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
 		{
 			if (Hud.Get_Layer() != 1)
 				Current.Get_Sprite().setColor(Color(150, 150, 150, 160));
@@ -537,24 +552,9 @@ void Editeur::display_EtageforMap()
 		}
 	}
 
-	for (Maps& Current : Deco_Layer)
-	{
-		if (Vue.occlusion_culling(Current.Get_Position()))
-		{
-			if (Hud.Get_Layer() != 2)
-				Current.Get_Sprite().setColor(Color(150, 150, 150, 160));
-			else
-				Current.Get_Sprite().setColor(Color::White);
-
-			Current.Display();
-
-			Current.Get_Sprite().setColor(Color::White);
-		}
-	}
-
 	for (Maps& Current : Player_Layer)
 	{
-		if (Vue.occlusion_culling(Current.Get_Position()))
+		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
 		{
 			if (Hud.Get_Layer() != 3)
 				Current.Get_Sprite().setColor(Color(150, 150, 150, 160));
@@ -567,13 +567,28 @@ void Editeur::display_EtageforMap()
 		}
 	}
 
+	for (Maps& Current : Deco_Layer)
+	{
+		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
+		{
+			if (Hud.Get_Layer() != 2)
+				Current.Get_Sprite().setColor(Color(150, 150, 150, 160));
+			else
+				Current.Get_Sprite().setColor(Color::White);
+
+			Current.Display();
+
+			Current.Get_Sprite().setColor(Color::White);
+		}
+	}
+
 	for (Npc& Current : NpcList)
-		if (Vue.occlusion_culling(Current.Get_Position()))
+		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
 			Current.Display();
 
 	for (Maps& Current : Front_Layer)
 	{
-		if (Vue.occlusion_culling(Current.Get_Position()))
+		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
 		{
 			if (Hud.Get_Layer() != 4)
 				Current.Get_Sprite().setColor(Color(150, 150, 150, 160));
@@ -592,10 +607,10 @@ void Editeur::display_EtageforMiniMap()
 	for (Maps& Current : Back_Layer)
 			Current.Display();
 
-	for (Maps& Current : Deco_Layer)
+	for (Maps& Current : Player_Layer)
 			Current.Display();
 
-	for (Maps& Current : Player_Layer)
+	for (Maps& Current : Deco_Layer)
 			Current.Display();
 
 	for (Npc& Current : NpcList)

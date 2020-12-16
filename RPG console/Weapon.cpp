@@ -12,7 +12,7 @@ Weapon::Weapon(int _damage, int _durability, string _name, int _price, Effect _e
 
 	if (Name == "Epee de feu")
 	{
-		Anim = Animator(IntRect(2, 18, 21, 30), 13, 0.15f);
+		Anim[Name] = Animator(IntRect(2, 18, 21, 30), 13, 0.15f);
 	}
 }
 
@@ -33,7 +33,7 @@ void Weapon::Take_Item(Hero& _player)
 
 void Weapon::Display(Vector2f _position)
 {
-	Anim.Animation(sprite);
+	Anim[Name].Animation(sprite);
 	sprite.setOrigin(Vector2f(10.5, 15));
 	sprite.setPosition(Position);
 	sprite.setScale(Vector2f(1, 1));
@@ -51,7 +51,7 @@ void Weapon::Display(Vector2f _position)
 
 void Weapon::Display_Inventory(Vector2f _scale)
 {
-	Anim.Animation(sprite);
+	Anim[Name].Animation(sprite);
 	sprite.setOrigin(Vector2f(10.5, 15));
 	sprite.setPosition(Position);
 	sprite.setScale(_scale);

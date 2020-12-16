@@ -33,6 +33,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Map_Manager.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="My_Shape.h" />
     <ClInclude Include="Niveau.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Npc_Container.h" />
@@ -79,6 +80,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Map_Manager.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="My_Shape.cpp" />
     <ClCompile Include="Niveau.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Npc_Container.cpp" />

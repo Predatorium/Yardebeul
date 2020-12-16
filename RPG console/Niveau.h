@@ -13,10 +13,10 @@ class Menu;
 class Level
 {
 protected :
-	vector<Maps> Back_Layer;
-	vector<Maps> Deco_Layer;
-	vector<Maps> Player_Layer;
-	vector<Maps> Front_Layer;
+	list<Maps> Back_Layer;
+	list<Maps> Player_Layer;
+	list<Maps> Deco_Layer;
+	list<Maps> Front_Layer;
 	Vector2i Range_Niveau;
 	Hero Player;
 
@@ -26,6 +26,8 @@ protected :
 	list<Consumable> ConsumableList;
 
 	Menu* Menu_Pause;
+
+	RectangleShape MiniMap;
 
 	Views Vue;
 	Views Screen;
@@ -39,9 +41,10 @@ public :
 	Level() = default;
 	~Level() = default;
 
-	inline vector<Maps> Get_BaLayer() { return Back_Layer; };
-	inline vector<Maps> Get_PlLayer() { return Player_Layer; };
-	inline vector<Maps> Get_FrLayer() { return Front_Layer; };
+	inline list<Maps> Get_BaLayer() { return Back_Layer; };
+	inline list<Maps> Get_PlLayer() { return Player_Layer; };
+	inline list<Maps> Get_DcLayer() { return Deco_Layer; };
+	inline list<Maps> Get_FrLayer() { return Front_Layer; };
 	inline Vector2i Get_RangeNiveau() { return Range_Niveau; };
 	inline bool Get_Save() { return Save; };
 	inline bool Get_Load() { return Load; };
@@ -55,6 +58,7 @@ public :
 	void Load_Map(string _file);
 	void Save_Map(string _file);
 
+	const Texture& Get_TextureMap(function<bool(Views&, Vector2f)> f);
 	void ScreenShot(int _party);
 	void Destroy_List();
 

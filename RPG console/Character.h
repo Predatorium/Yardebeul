@@ -2,7 +2,6 @@
 #include "Tools.h"
 #include "Armor.h"
 #include "Weapon.h"
-#include "Animator.h"
 #include "Entity.h"
 
 enum class Direction
@@ -25,14 +24,6 @@ protected :
 
 	Weapon* weapon;
 	Armor* armor;
-
-	Animator Walk_Right;
-	Animator Walk_Top;
-	Animator Walk_Down;
-
-	Animator Beat_Right;
-	Animator Beat_Top;
-	Animator Beat_Down;
 
 	int Level;
 	int Life_Point;
@@ -59,8 +50,6 @@ public :
 	inline bool Get_Right() { return Right; };
 	inline bool Get_Up() { return Up; };
 	inline bool Get_Down() { return Down; };
-	inline Animator& Get_BeatRight() { return Beat_Right; };
-	inline Animator& Get_BeatDown() { return Beat_Down; };
 	inline Weapon* Get_Weapon() { return weapon; };
 	inline Armor* Get_Armor() { return armor; };
 

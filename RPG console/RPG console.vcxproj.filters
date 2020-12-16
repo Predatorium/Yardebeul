@@ -219,6 +219,9 @@
     <ClInclude Include="Entity.h">
       <Filter>Fichiers d%27en-tête\System</Filter>
     </ClInclude>
+    <ClInclude Include="My_Shape.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Room.cpp">
@@ -355,6 +358,9 @@
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Fichiers sources\System</Filter>
+    </ClCompile>
+    <ClCompile Include="My_Shape.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

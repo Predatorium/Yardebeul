@@ -154,8 +154,8 @@ void Fight_System::Update()
 	if (Player->Get_LifePoint() <= 0)
 		StateManager::Get_Singleton().ChangeState(State::MENU);
 
-	Player->Get_BeatRight().Animation(Player->Get_Sprite());
-	Enemy->Get_BeatDown().Animation(Enemy->Get_Sprite());
+	Player->Get_Anim("Beat_Right").Animation(Player->Get_Sprite());
+	Enemy->Get_Anim("Beat_Down").Animation(Enemy->Get_Sprite());
 }
 
 void Fight_System::Display()

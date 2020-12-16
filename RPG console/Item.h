@@ -1,7 +1,6 @@
 #pragma once
 #include "Tools.h"
 #include "Effect.h"
-#include "Animator.h"
 #include "Entity.h"
 
 class Hero;
@@ -10,7 +9,6 @@ class Item : public Entity
 {
 protected :
 	Effect effect;
-	Animator Anim;
 	int Price;
 	bool PickUp;
 

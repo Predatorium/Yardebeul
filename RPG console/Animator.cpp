@@ -25,4 +25,5 @@ void Animator::Animation(Sprite& _sprite)
 	}
 
 	_sprite.setTextureRect(IntRect(Rect.left + (Frame * Rect.width) + (Frame * Space), Rect.top, Rect.width, Rect.height));
+	_sprite.setOrigin(Rect.width / 2, Rect.height / 2);
 }

@@ -28,13 +28,21 @@ Views::Views(Vector2f _position, Vector2f _size, FloatRect _viewport)
 	view.setViewport(_viewport);
 }
 
-bool Views::occlusion_culling(Vector2f _position)
+bool Views::Occlusion_CullingRectangle(Vector2f _position)
 {
 	if (FloatRect(Position.x - Size.x / 2 - 32, Position.y - Size.y / 2 - 32, Size.x + 32, Size.y + 32).contains(_position))
 		return true;
 	else
 		return false;
 }
+
+bool Views::Occlusion_CullingCircle(Vector2f _position)
+{
+	if (Circle_Collision(Position, _position, Size.x / 4 , Size.x / 4))
+		return true;
+	else
+		return false;
+}		
 
 void Views::Update_Editeur(Vector2i _limit, Vector2f _position)
 {
@@ -97,26 +105,14 @@ void Views::Update(Vector2i _limit, Vector2f _player)
 	else if (_player.x > (_limit.x * 32) - 960)
 		Position.x = (_limit.x * 32) - 960;
 
-	if (_player.y > 508 && _player.y < (_limit.y * 32) - 540)
+	if (_player.y > 540 && _player.y < (_limit.y * 32) - 540)
 		Position.y = _player.y;
-	else if (_player.y < 508)
-		Position.y = 508;
+	else if (_player.y < 540)
+		Position.y = 540;
 	else if (_player.y > (_limit.y * 32) - 540)
 		Position.y = (_limit.y * 32) - 540;
 
 	view.setCenter(Position);
-}
-
-void Views::Update_MiniMapEditor(Vector2i _limit)
-{
-	if (_limit.x * 32 * MapSizeY > _limit.y * 32)
-		view.setSize(Vector2f(_limit.x * 32, _limit.x * 32 * MapSizeY));
-	else if (_limit.x * 32 < _limit.y * 32 * MapSizeX)
-		view.setSize(Vector2f(_limit.y * 32 * MapSizeX, _limit.y * 32));
-	else
-		view.setSize(Vector2f(_limit.x * 32, _limit.y * 32));
-
-	view.setCenter(Vector2f(view.getSize().x / 2, view.getSize().y / 2));
 }
 
 void Views::Display()

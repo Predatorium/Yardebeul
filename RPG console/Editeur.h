@@ -7,13 +7,9 @@ class Editeur : public Level
 {
 private :
 	HUD_Editor Hud;
-
 	list<Button_Text> Dispo_Map;
 	Button_Text New_map;
-
 	RectangleShape Grille;
-
-	Views MiniMap;
 
 	Vector2f Mouse_Position;
 	Vector2f SizeMin;
@@ -36,9 +32,8 @@ public :
 	void Move_Map(int _coloulig, int _ajoures);
 	void Resize_Map();
 	void Interaction_Map();
-	void Set_Map(vector<Maps>& _layer);
-	void Set_MapSize(vector<Maps>& _layer, Vector2f _min, Vector2f _max);
-	void Erase_Map();
+	void Set_Map(list<Maps>& _layer);
+	void Set_MapSize(list<Maps>& _layer, Vector2f _min, Vector2f _max);
 	virtual void Update();
 
 	void Display_SaveAndLoad();

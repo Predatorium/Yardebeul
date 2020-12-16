@@ -51,7 +51,7 @@ void Armor::Display(Vector2f _position)
 
 void Armor::Display_Inventory(Vector2f _scale)
 {
-	Anim.Animation(sprite);
+	Anim[Name].Animation(sprite);
 	sprite.setOrigin(Vector2f(10.5, 15));
 	sprite.setPosition(Position);
 	sprite.setScale(_scale);
