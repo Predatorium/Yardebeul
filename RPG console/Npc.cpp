@@ -23,13 +23,13 @@ Npc::Npc(string _name, Armor _armor, Weapon _weapon, int _level, int _hp, int _s
 
 	if (Name == "Knucles")
 	{
-		Beat_Down = Animator(IntRect(5, 72, 54, 44), 8, 0.15f);
-		Beat_Right = Animator(IntRect(5, 121, 42, 45), 8, 0.15f);
-		Beat_Top = Animator(IntRect(5, 23, 50, 44), 8, 0.15f);
+		Beat_Down = Animator(IntRect(5, 72, 54, 44), 8, 0.15f, 0);
+		Beat_Right = Animator(IntRect(5, 121, 42, 45), 8, 0.15f, 0);
+		Beat_Top = Animator(IntRect(5, 23, 50, 44), 8, 0.15f, 0);
 
-		Walk_Down = Animator(IntRect(160, 189, 61, 43), 3, 0.15f);
-		Walk_Right = Animator(IntRect(348, 189, 40, 44), 3, 0.15f);
-		Walk_Top = Animator(IntRect(5, 189, 50, 42), 3, 0.15f);
+		Walk_Down = Animator(IntRect(160, 189, 61, 43), 3, 0.15f, 0);
+		Walk_Right = Animator(IntRect(348, 189, 40, 44), 3, 0.15f, 0);
+		Walk_Top = Animator(IntRect(5, 189, 50, 42), 3, 0.15f, 0);
 
 		sprite.setOrigin(Vector2f(21, 22.5));
 		sprite.setTextureRect(IntRect(5, 72, 54, 44));
@@ -57,12 +57,12 @@ Npc::Npc(string _name, int _level, int _hp, int _speed, Dialogue &_dial)
 
 	if (Name == "Fairy")
 	{
-		Beat_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
-		Beat_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
-		Beat_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
-		Walk_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
-		Walk_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
-		Walk_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f);
+		Beat_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f, 0);
+		Beat_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f, 0);
+		Beat_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f, 0);
+		Walk_Down = Animator(IntRect(5, 99, 44, 46), 16, 0.15f, 0);
+		Walk_Right = Animator(IntRect(5, 99, 44, 46), 16, 0.15f, 0);
+		Walk_Top = Animator(IntRect(5, 99, 44, 46), 16, 0.15f, 0);
 
 		sprite.setOrigin(Vector2f(22, 23));
 		sprite.setTextureRect(IntRect(5, 99, 44, 46));
@@ -83,7 +83,7 @@ void Npc::Update_Attack(Hero& _player)
 	if (Up == true || Down == true)
 		Position.y += 5 * Delta.y * MainTime.GetTimeDeltaF();
 
-	if (Circle_Collision(Position, _player.Get_Position(), 200, 200))
+	if (Circle_Collision(Position, _player.Get_Position(), 130, 130))
 	{
 		Delta.x = 20 * cos(Angle_calc(Position, _player.Get_Position()));
 		Delta.y = 20 * sin(Angle_calc(Position, _player.Get_Position()));

@@ -474,11 +474,11 @@ void HUD_Editor::Interaction_MenuAndTest(Vector2f _mouse, bool& _player)
 void HUD_Editor::Interaction_Tile(Vector2f _mouse)
 {
 	if (Mouse::isButtonPressed(Mouse::Left) && !(Keyboard::isKeyPressed(Keyboard::LControl)))
-		if (Menu.getGlobalBounds().contains(Vector2f(_mouse)))
+		if (Menu.getGlobalBounds().contains(_mouse))
 		{
-			for (Interface_Maps& Actual_Select : Tile_menu)
-				if (FloatRect(Actual_Select.Get_Position().x, Actual_Select.Get_Position().y, Taille_tile, Taille_tile).contains(_mouse) &&
-					(Actual_Select.Get_Rank() == Current_Rank || Actual_Select.Get_Rank() == Current_Rank + 1))
+			for (Interface_Maps& Current : Tile_menu)
+				if (FloatRect(Current.Get_Position().x, Current.Get_Position().y, Taille_tile, Taille_tile).contains(_mouse) &&
+					(Current.Get_Rank() == Current_Rank || Current.Get_Rank() == Current_Rank + 1))
 				{
 					if (Selection.Get_Name() == "NPC")
 					{
@@ -487,11 +487,8 @@ void HUD_Editor::Interaction_Tile(Vector2f _mouse)
 						NpcSelect = false;
 					}
 
-					Selection.Set_Biome(Actual_Select.Get_Biome());
-					Selection.Set_Name(Actual_Select.Get_Name());
-					Selection.Get_Sprite() = getSprite(Selection.Get_Name());
-					Selection.Set_Tile(Actual_Select.Get_Tile());
-					Tile_Select.setPosition(Vector2f(Actual_Select.Get_Position().x + 2, Actual_Select.Get_Position().y + 2));
+					Selection = Maps(_mouse, Current.Get_Tile(), Current.Get_Name(), Current.Get_Biome());
+					Tile_Select.setPosition(Vector2f(Current.Get_Position().x + 2, Current.Get_Position().y + 2));
 					IsSelect = true;
 				}
 
@@ -531,6 +528,8 @@ void HUD_Editor::Interaction_Tile(Vector2f _mouse)
 		Selection.Set_Name("Rien");
 		IsSelect = false;
 	}
+
+	Selection.Set_Position(_mouse);
 }
 
 void HUD_Editor::Display_Tilemenu()

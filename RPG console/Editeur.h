@@ -1,7 +1,6 @@
 #pragma once
 #include "Tools.h"
 #include "Niveau.h"
-#include "Views.h"
 #include "HUD_Editor.h"
 
 class Editeur : public Level
@@ -13,6 +12,8 @@ private :
 	Button_Text New_map;
 
 	RectangleShape Grille;
+
+	Views MiniMap;
 
 	Vector2f Mouse_Position;
 	Vector2f SizeMin;
@@ -35,7 +36,7 @@ public :
 	void Move_Map(int _coloulig, int _ajoures);
 	void Resize_Map();
 	void Interaction_Map();
-	void Set_Map(vector<Maps> &_layer);
+	void Set_Map(vector<Maps>& _layer);
 	void Set_MapSize(vector<Maps>& _layer, Vector2f _min, Vector2f _max);
 	void Erase_Map();
 	virtual void Update();
@@ -44,6 +45,8 @@ public :
 	void Display_NewSave();
 	void Display_HUD();
 	void Display_Map();
-	void display_Etage();
+	void Display_MiniMap();
+	void display_EtageforMap();
+	void display_EtageforMiniMap();
 	void Display_editeur();
 };

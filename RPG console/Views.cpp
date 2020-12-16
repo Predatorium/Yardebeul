@@ -1,6 +1,9 @@
 #include "Views.h"
 #include "Editeur.h"
 
+#define MapSizeX 1920/1080
+#define MapSizeY 1080/1920
+
 Views::Views()
 {
 	Zoom = false;
@@ -25,7 +28,15 @@ Views::Views(Vector2f _position, Vector2f _size, FloatRect _viewport)
 	view.setViewport(_viewport);
 }
 
-void Views::Update(Vector2i _limit, Vector2f _position)
+bool Views::occlusion_culling(Vector2f _position)
+{
+	if (FloatRect(Position.x - Size.x / 2 - 32, Position.y - Size.y / 2 - 32, Size.x + 32, Size.y + 32).contains(_position))
+		return true;
+	else
+		return false;
+}
+
+void Views::Update_Editeur(Vector2i _limit, Vector2f _position)
 {
 	if (Keyboard::isKeyPressed(Keyboard::F2))
 	{
@@ -77,23 +88,35 @@ void Views::Update(Vector2i _limit, Vector2f _position)
 	view.setCenter(Position);
 }
 
-void Views::Update(Vector2i _limit, Hero _player)
+void Views::Update(Vector2i _limit, Vector2f _player)
 {
-	if (_player.Get_Position().x > 960 && _player.Get_Position().x < (_limit.x * 32) - 960)
-		Position.x = _player.Get_Position().x;
-	else if (_player.Get_Position().x < 960)
+	if (_player.x > 960 && _player.x < (_limit.x * 32) - 960)
+		Position.x = _player.x;
+	else if (_player.x < 960)
 		Position.x = 960;
-	else if (_player.Get_Position().x > (_limit.x * 32) - 960)
+	else if (_player.x > (_limit.x * 32) - 960)
 		Position.x = (_limit.x * 32) - 960;
 
-	if (_player.Get_Position().y > 508 && _player.Get_Position().y < (_limit.y * 32) - 540)
-		Position.y = _player.Get_Position().y;
-	else if (_player.Get_Position().y < 508)
+	if (_player.y > 508 && _player.y < (_limit.y * 32) - 540)
+		Position.y = _player.y;
+	else if (_player.y < 508)
 		Position.y = 508;
-	else if (_player.Get_Position().y > (_limit.y * 32) - 540)
+	else if (_player.y > (_limit.y * 32) - 540)
 		Position.y = (_limit.y * 32) - 540;
 
 	view.setCenter(Position);
+}
+
+void Views::Update_MiniMapEditor(Vector2i _limit)
+{
+	if (_limit.x * 32 * MapSizeY > _limit.y * 32)
+		view.setSize(Vector2f(_limit.x * 32, _limit.x * 32 * MapSizeY));
+	else if (_limit.x * 32 < _limit.y * 32 * MapSizeX)
+		view.setSize(Vector2f(_limit.y * 32 * MapSizeX, _limit.y * 32));
+	else
+		view.setSize(Vector2f(_limit.x * 32, _limit.y * 32));
+
+	view.setCenter(Vector2f(view.getSize().x / 2, view.getSize().y / 2));
 }
 
 void Views::Display()

@@ -47,13 +47,13 @@ Hero::Hero(Vector2f _position)
 
 		Orientation = Direction::Right;
 
-		Walk_Down = Animator(IntRect(331, 21, 23, 35), 6, 0.15f);
-		Walk_Right = Animator(IntRect(331, 57, 24, 33), 6, 0.15f);
-		Walk_Top = Animator(IntRect(331, 91, 26, 36), 6, 0.15f);
+		Walk_Down = Animator(IntRect(1805, 21, 23, 35), 6, 0.15f);
+		Walk_Right = Animator(IntRect(1805, 57, 24, 33), 6, 0.15f);
+		Walk_Top = Animator(IntRect(1805, 91, 26, 36), 6, 0.15f);
 
-		Beat_Down = Animator(IntRect(116, 21, 25, 32), 8, 0.15f);
-		Beat_Right = Animator(IntRect(115, 54, 23, 31), 8, 0.15f);
-		Beat_Top = Animator(IntRect(115, 86, 24, 32), 8, 0.15f);
+		Beat_Down = Animator(IntRect(1589, 21, 25, 32), 8, 0.15f);
+		Beat_Right = Animator(IntRect(1589, 54, 23, 31), 8, 0.15f);
+		Beat_Top = Animator(IntRect(1589, 86, 24, 32), 8, 0.15f);
 
 		Walk_Right.Animation(sprite);
 		sprite.setOrigin(Vector2f(12, 16.5));

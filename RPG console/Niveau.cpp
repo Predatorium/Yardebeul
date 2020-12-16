@@ -359,7 +359,7 @@ void Level::Update()
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 			Pause = true;
 
-		Vue.Update(Range_Niveau, Player);
+		Vue.Update(Range_Niveau, Player.Get_Position());
 	}
 
 	if (Pause == true)
@@ -370,56 +370,56 @@ void Level::Display()
 {
 	Vue.Display();
 
-	for (Maps& Current_Map : Back_Layer)
-		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
-			Current_Map.Display();
+	for (Maps& Current : Back_Layer)
+		if (Vue.occlusion_culling(Current.Get_Position()))
+			Current.Display();
 
-	for (Maps& Current_Map : Player_Layer)
-		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
-			Current_Map.Display();
+	for (Maps& Current : Player_Layer)
+		if (Vue.occlusion_culling(Current.Get_Position()))
+			Current.Display();
 
-	for (Maps& Current_Map : Deco_Layer)
-		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
-			Current_Map.Display();
+	for (Maps& Current : Deco_Layer)
+		if (Vue.occlusion_culling(Current.Get_Position()))
+			Current.Display();
 
-	for (Npc& Current_Npc : NpcList)
-		if (Circle_Collision(Vue.Get_Position(), Current_Npc.Get_Position(), 560, 560))
-			Current_Npc.Display();
+	for (Npc& Current : NpcList)
+		if (Vue.occlusion_culling(Current.Get_Position()))
+			Current.Display();
 
-	for (Weapon& Current_Weapon : WeaponList)
-		if (Circle_Collision(Vue.Get_Position(), Current_Weapon.Get_Position(), 560, 560))
-			Current_Weapon.Display(Player.Get_Position());
+	for (Weapon& Current : WeaponList)
+		if (Vue.occlusion_culling(Current.Get_Position()))
+			Current.Display(Player.Get_Position());
 
-	for (Armor& Current_Armor : ArmorList)
-		if (Circle_Collision(Vue.Get_Position(), Current_Armor.Get_Position(), 560, 560))
-			Current_Armor.Display(Player.Get_Position());
+	for (Armor& Current : ArmorList)
+		if (Vue.occlusion_culling(Current.Get_Position()))
+			Current.Display(Player.Get_Position());
 
-	for (Consumable& Current_Consumable : ConsumableList)
-		if (Circle_Collision(Vue.Get_Position(), Current_Consumable.Get_Position(), 560, 560))
-			Current_Consumable.Display(Player.Get_Position());
+	for (Consumable& Current : ConsumableList)
+		if (Vue.occlusion_culling(Current.Get_Position()))
+			Current.Display(Player.Get_Position());
 
 	Player.Display();
 
-	for (Maps& Current_Map : Front_Layer)
+	for (Maps& Current : Front_Layer)
 	{
-		if (Circle_Collision(Vue.Get_Position(), Current_Map.Get_Position(), 560, 560))
+		if (Vue.occlusion_culling(Current.Get_Position()))
 		{
 			if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_Sprite().getGlobalBounds().height / 2.1f),
-				Vector2f(Current_Map.Get_Position().x + 16, Current_Map.Get_Position().y + 16), 30, Player.Get_Sprite().getGlobalBounds().width))
-				Current_Map.Get_Sprite().setColor(Color(255,255,255,100));
+				Vector2f(Current.Get_Position().x + 16, Current.Get_Position().y + 16), 30, Player.Get_Sprite().getGlobalBounds().width))
+				Current.Get_Sprite().setColor(Color(255, 255, 255, 100));
 			else
-				Current_Map.Get_Sprite().setColor(Color::White);
+				Current.Get_Sprite().setColor(Color::White);
 
-			Current_Map.Display();
+			Current.Display();
 
-			Current_Map.Get_Sprite().setColor(Color::White);
+			Current.Get_Sprite().setColor(Color::White);
 		}
 	}
 
 	Screen.Display();
 
 	for (Npc& Current : NpcList)
-		if (Circle_Collision(Vue.Get_Position(), Current.Get_Position(), 560, 560))
+		if (Vue.occlusion_culling(Current.Get_Position()))
 			Current.Display_Dialogue();
 
 	if (Player.Get_IsInventory() == true)
