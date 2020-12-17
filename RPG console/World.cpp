@@ -20,9 +20,23 @@ World::World()
 		Load = true;
 		Pause = false;
 		IsDialogue = false;
+		Change_Minimap = false;
+		Change_ShapeMap = false;
+		Timer = 0;
 
-		Vue = Views(Vector2f(960, 540), Vector2f(1920, 1080), FloatRect(0.f, 0.f, 1.f, 1.f));
-		Screen = Views();
+		Vue = Views(Vector2f(480, 270), Vector2f(960, 540), FloatRect(0, 0, 1, 1));
+		Screen = Views(Vector2f(1440, 810), Vector2f(2880, 1620), FloatRect(0, 0, 1, 1));
+
+		C_MiniMap = CircleShape(200);/*
+		C_MiniMap.setScale(0.96f, 0.54f);*/
+		C_MiniMap.setPosition(Vector2f(1526, 2));
+		C_MiniMap.setOutlineThickness(2);
+		C_MiniMap.setOutlineColor(Color::Blue);
+
+		R_MiniMap = RectangleShape(Vector2f(384, 216));
+		R_MiniMap.setPosition(Vector2f(1526, 2));
+		R_MiniMap.setOutlineThickness(2);
+		R_MiniMap.setOutlineColor(Color::Blue);
 	}
 }
 
@@ -35,14 +49,23 @@ World::World(int _load)
 
 		Menu_Pause = new Menu(1);
 
-		App.Get_Window().setMouseCursorVisible(false);
+		WeaponList.push_back(Weapon(Weapons.Get_Weapon("Epee de feu"), Vector2f(200, 200)));
 
 		Save = false;
 		Load = false;
 		Pause = false;
 		IsDialogue = false;
+		Change_Minimap = false;
+		Change_ShapeMap = false;
+		Timer = 0;
 
-		Vue = Views(Vector2f(960, 540), Vector2f(1920, 1080), FloatRect(0.f, 0.f, 1.f, 1.f));
+		Vue = Views();
 		Screen = Views();
+
+		C_MiniMap = CircleShape(200);
+		C_MiniMap.setScale(0.96f, 0.54f);
+		C_MiniMap.setPosition(Vector2f(1526, 854));
+		C_MiniMap.setOutlineThickness(2);
+		C_MiniMap.setOutlineColor(Color::Blue);
 	}
 }

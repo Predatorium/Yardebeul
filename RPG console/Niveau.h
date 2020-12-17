@@ -26,8 +26,11 @@ protected :
 	list<Consumable> ConsumableList;
 
 	Menu* Menu_Pause;
+	bool Change_Minimap;
+	bool Change_ShapeMap;
 
-	RectangleShape MiniMap;
+	CircleShape C_MiniMap;
+	RectangleShape R_MiniMap;
 
 	Views Vue;
 	Views Screen;
@@ -36,6 +39,7 @@ protected :
 	bool Load;
 	bool Pause;
 	bool IsDialogue;
+	float Timer;
 
 public :
 	Level() = default;
@@ -58,7 +62,7 @@ public :
 	void Load_Map(string _file);
 	void Save_Map(string _file);
 
-	const Texture& Get_TextureMap(function<bool(Views&, Vector2f)> f);
+	const Texture& Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _view);
 	void ScreenShot(int _party);
 	void Destroy_List();
 

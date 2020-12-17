@@ -19,7 +19,6 @@ private :
 	bool Save_New_Map;
 	bool App_Grille;
 	bool PlayerIsPresent;
-	float Timer;
 
 public :
 	Editeur();

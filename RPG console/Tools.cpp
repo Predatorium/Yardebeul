@@ -47,7 +47,6 @@ float Angle_calc(Vector2f pointA, Vector2f pointB)
 {
 	float angle;
 
-
 	if (pointA.y < pointB.y)
 		angle = (float)acos(((double)pointB.x - pointA.x) / (sqrt(pow((double)pointB.x - pointA.x, 2) + pow((double)pointB.y - pointA.y, 2))));
 	else
@@ -87,8 +86,8 @@ Vector2f normalisation(Vector2f pos1, Vector2f pos2)
 	Vector2f dir;
 	float norme;
 
-	pos.x = pos2.x + pos1.x;
-	pos.y = pos2.y + pos1.y;
+	pos.x = pos2.x - pos1.x;
+	pos.y = pos2.y - pos1.y;
 
 	dir.x = pos.x / Norme(pos);
 	dir.y = pos.y / Norme(pos);

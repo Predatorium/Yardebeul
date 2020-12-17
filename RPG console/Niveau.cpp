@@ -282,75 +282,123 @@ void Level::Destroy_List()
 		}
 }
 
-const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f)
+const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _view)
 {
 	static RenderTexture texture;
 	texture.create(1920, 1080);
-	texture.setView(Vue.Get_View());
+	texture.setView(_view.Get_View());
+
+	CircleShape Info(30);
+	Info.setOrigin(Info.getGlobalBounds().width / 2, Info.getGlobalBounds().height / 2);
 
 	texture.clear(Color::Black);
 
 	for (Maps& Current : Back_Layer)
-		if (f(Vue,Current.Get_Position()))
+		if (f(_view,Current.Get_Position()))
 			texture.draw(Current.Get_Sprite());
 
 	for (Maps& Current : Player_Layer)
-		if (f(Vue, Current.Get_Position()))
+		if (f(_view, Current.Get_Position()))
 			texture.draw(Current.Get_Sprite());
 
 	for (Maps& Current : Deco_Layer)
-		if (f(Vue, Current.Get_Position()))
+		if (f(_view, Current.Get_Position()))
 			texture.draw(Current.Get_Sprite());
 
 	for (Npc& Current : NpcList)
 		if (Current.Get_Position().y < Player.Get_Position().y)
-			if (f(Vue, Current.Get_Position()))
-				texture.draw(Current.Get_Sprite());
+			if (f(_view, Current.Get_Position()))
+			{
+				if (Current.Get_Attitude() == Comportement::Agressif)
+					Info.setFillColor(Color::Red);
+				else
+					Info.setFillColor(Color::Green);
+				Info.setPosition(Current.Get_Position());
+				texture.draw(Info);
+			}
 
 	for (Weapon& Current : WeaponList)
 		if (Current.Get_Position().y < Player.Get_Position().y)
-			if (f(Vue, Current.Get_Position()))
-				texture.draw(Current.Get_Sprite());
+			if (f(_view, Current.Get_Position()))
+			{
+				Info.setFillColor(Color::Yellow);
+				Info.setPosition(Current.Get_Position());
+				texture.draw(Info);
+			}
+				
 
 	for (Armor& Current : ArmorList)
 		if (Current.Get_Position().y < Player.Get_Position().y)
-			if (f(Vue, Current.Get_Position()))
-				texture.draw(Current.Get_Sprite());
+			if (f(_view, Current.Get_Position()))
+			{
+				Info.setFillColor(Color::Yellow);
+				Info.setPosition(Current.Get_Position());
+				texture.draw(Info);
+			}
 
 	for (Consumable& Current : ConsumableList)
 		if (Current.Get_Position().y < Player.Get_Position().y)
-			if (f(Vue, Current.Get_Position()))
-				texture.draw(Current.Get_Sprite());
+			if (f(_view, Current.Get_Position()))
+			{
+				Info.setFillColor(Color::Yellow);
+				Info.setPosition(Current.Get_Position());
+				texture.draw(Info);
+			}
 
-	texture.draw(Player.Get_Sprite());
+	Info.setFillColor(Color::Blue);
+	Info.setPosition(Player.Get_Position());
+	texture.draw(Info);
 
 	for (Npc& Current : NpcList)
 		if (Current.Get_Position().y > Player.Get_Position().y)
-			if (f(Vue, Current.Get_Position()))
-				texture.draw(Current.Get_Sprite());
-
+			if (f(_view, Current.Get_Position()))
+			{
+				if (Current.Get_Attitude() == Comportement::Agressif)
+					Info.setFillColor(Color::Red);
+				else
+					Info.setFillColor(Color::Green);
+				Info.setPosition(Current.Get_Position());
+				texture.draw(Info);
+			}
+				
 	for (Weapon& Current : WeaponList)
 		if (Current.Get_Position().y > Player.Get_Position().y)
-			if (f(Vue, Current.Get_Position()))
-				texture.draw(Current.Get_Sprite());
+			if (f(_view, Current.Get_Position()))
+			{
+				Info.setFillColor(Color::Yellow);
+				Info.setPosition(Current.Get_Position());
+				texture.draw(Info);
+			}
 
 	for (Armor& Current : ArmorList)
 		if (Current.Get_Position().y > Player.Get_Position().y)
-			if (f(Vue, Current.Get_Position()))
-				texture.draw(Current.Get_Sprite());
+			if (f(_view, Current.Get_Position()))
+			{
+				Info.setFillColor(Color::Yellow);
+				Info.setPosition(Current.Get_Position());
+				texture.draw(Info);
+			}
 
 	for (Consumable& Current : ConsumableList)
 		if (Current.Get_Position().y > Player.Get_Position().y)
-			if (f(Vue, Current.Get_Position()))
-				texture.draw(Current.Get_Sprite());
+			if (f(_view, Current.Get_Position()))
+			{
+				Info.setFillColor(Color::Yellow);
+				Info.setPosition(Current.Get_Position());
+				texture.draw(Info);
+			}
 
 	for (Maps& Current : Front_Layer)
-		if (f(Vue, Current.Get_Position()))
+		if (f(_view, Current.Get_Position()))
 			texture.draw(Current.Get_Sprite());
 
+	
 	texture.display();
+	Sprite tmp;
+	tmp.setTexture(texture.getTexture());
+	tmp.setScale(1, 1080 / 1920);
 
-	return texture.getTexture();
+	return *tmp.getTexture();
 }
 
 void Level::ScreenShot(int _party)
@@ -396,6 +444,8 @@ void Level::ScreenShot(int _party)
 
 void Level::Update()
 {
+	Timer += MainTime.GetTimeDeltaF();
+
 	if (Pause == false)
 	{
 		Collision(Player);
@@ -428,10 +478,23 @@ void Level::Update()
 			Pause = true;
 
 		Vue.Update(Range_Niveau, Player.Get_Position());
+		Screen.Update_MiniMap(Range_Niveau, Player.Get_Position());
 	}
 
 	if (Pause == true)
 		Menu_Pause->Update_Pause(this, Pause);
+
+	if (Keyboard::isKeyPressed(Keyboard::F3) && Timer > 0.2f)
+	{
+		Change_Minimap = !Change_Minimap;
+		Timer = 0;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::F4) && Timer > 0.2f)
+	{
+		Change_ShapeMap = !Change_ShapeMap;
+		Timer = 0;
+	}
 }
 
 void Level::Display()
@@ -508,7 +571,7 @@ void Level::Display()
 		}
 	}
 
-	Screen.Display();
+	App.Get_Window().setView(App.Get_Window().getDefaultView());
 
 	for (Npc& Current : NpcList)
 		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
@@ -519,4 +582,23 @@ void Level::Display()
 
 	if (Pause == true)
 		Menu_Pause->Display_Pause();
+
+	if (Change_ShapeMap)
+	{
+		if (Change_Minimap)
+			R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Screen));
+		else
+			R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Screen));
+
+		App.Get_Window().draw(R_MiniMap);
+	}
+	if (!Change_ShapeMap)
+	{
+		if (Change_Minimap)
+			C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Screen));
+		else
+			C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Screen));
+
+		App.Get_Window().draw(C_MiniMap);
+	}
 }

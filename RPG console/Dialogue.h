@@ -25,6 +25,7 @@ private :
 	string Id;
 	Text text;
 	list<Dialogue_Button> Answer;
+	RectangleShape Dialogue_Box;
 	int Selection;
 	float timer;
 

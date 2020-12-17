@@ -29,6 +29,8 @@ public :
 	inline void Set_Tile(Vector2i _tile) { Tile = _tile; };
 	inline void Set_Biome(Biomes _biome) { Biome = _biome; };
 
+	bool operator()(const Maps& m) { return m.Name == "Rien"; };
+
 	virtual void Update() {};
 	virtual void Display();
 };

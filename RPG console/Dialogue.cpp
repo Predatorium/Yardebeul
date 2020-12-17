@@ -12,10 +12,17 @@ Dialogue::Dialogue(string _id, string _dialogue, float _sizeTexte, list<Dialogue
 	Selection = 0;
 	timer = 0;
 
+	Dialogue_Box = RectangleShape(Vector2f(1916, text.getCharacterSize() * 1.5));
+	Dialogue_Box.setPosition(2, text.getPosition().y - text.getGlobalBounds().height / 2 - 2);
+	Dialogue_Box.setFillColor(Color::Black);
+	Dialogue_Box.setOutlineThickness(2);
+	Dialogue_Box.setOutlineColor(Color(50, 120, 255, 255));
+
 	int i = 1;
 	for (Dialogue_Button& Current : Answer)
 	{
 		Current.Set_Position(Vector2f(text.getPosition().x, text.getPosition().y + (i * 40)));
+		Dialogue_Box.setSize(Vector2f(Dialogue_Box.getSize().x, Dialogue_Box.getSize().y + Current.Get_Texte().getCharacterSize()));
 		i++;
 	}
 }
@@ -113,6 +120,7 @@ void Dialogue::Update(bool& _dialogue)
 
 void Dialogue::Display()
 {
+	App.Get_Window().draw(Dialogue_Box);
 	App.Get_Window().draw(text);
 
 	for (Dialogue_Button Current_Button : Answer)

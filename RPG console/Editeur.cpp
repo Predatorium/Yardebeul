@@ -15,7 +15,7 @@ Editeur::Editeur()
 		App_Grille = true;
 		PlayerIsPresent = false;
 		IsDialogue = false;
-
+		Change_Minimap = false;
 		Save = false;
 		Save_New_Map = false;
 
@@ -46,10 +46,10 @@ Editeur::Editeur()
 		Vue = Views(Vector2f(840, 420), Vector2f(1920, 1080), FloatRect(0.f, 0.f, 1.f, 1.f));
 		Screen = Views();
 
-		MiniMap = RectangleShape(Vector2f(384, 216));
-		MiniMap.setPosition(Vector2f(1526, 854));
-		MiniMap.setOutlineThickness(2);
-		MiniMap.setOutlineColor(Color::Blue);
+		R_MiniMap = RectangleShape(Vector2f(384, 216));
+		R_MiniMap.setPosition(Vector2f(1526, 854));
+		R_MiniMap.setOutlineThickness(2);
+		R_MiniMap.setOutlineColor(Color::Blue);
 	}
 }
 
@@ -341,18 +341,18 @@ void Editeur::Set_Map(list<Maps>& _layer)
 		{
 			if (Hud.Get_Selection().Get_Name() == "Rien")
 			{
-				_layer.remove(Current_Map);
+				Current_Map.Set_Name("Rien");
 				FindMap = true;
 				break;
 			}
 			else if (Hud.Get_Selection().Get_Name() != "NPC")
 			{
-				Current_Map.Set_Biome(Hud.Get_Selection().Get_Biome());
-				Current_Map.Set_Name(Hud.Get_Selection().Get_Name());
-				Current_Map.Set_Tile(Hud.Get_Selection().Get_Tile());
+				Current_Map = Maps(Current_Map.Get_Position(), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome());
 				FindMap = true;
 			}
 		}
+
+	_layer.remove_if(Maps());
 
 	if (Hud.Get_Selection().Get_Name() != "Rien" && Mouse_Position.x <= (Range_Niveau.x + 1) * Taille_tile &&
 		Mouse_Position.y <= (Range_Niveau.y + 1) * Taille_tile && Mouse_Position.x >= -64 && Mouse_Position.y >= -64)
@@ -366,20 +366,17 @@ void Editeur::Set_MapSize(list<Maps>& _layer, Vector2f _min, Vector2f _max)
 		for (float j = _min.y; j < _max.y; j += 32)
 		{
 			bool FindMap = false;
-			for (Maps& Current_Map : _layer)
-				if (FloatRect(Current_Map.Get_Position().x, Current_Map.Get_Position().y, Taille_tile, Taille_tile).contains(Vector2f(i,j)))
+			for (auto Current = _layer.begin(); Current != _layer.end(); Current++)
+				if (FloatRect(Current->Get_Position().x, Current->Get_Position().y, Taille_tile, Taille_tile).contains(Vector2f(i,j)))
 				{
 					if (Hud.Get_Selection().Get_Name() == "Rien")
 					{
-						_layer.remove(Current_Map);
+						Current->Set_Name("Rien");
 						FindMap = true;
-						break;
 					}
 					else if (Hud.Get_Selection().Get_Name() != "NPC")
 					{
-						Current_Map.Set_Biome(Hud.Get_Selection().Get_Biome());
-						Current_Map.Set_Name(Hud.Get_Selection().Get_Name());
-						Current_Map.Set_Tile(Hud.Get_Selection().Get_Tile());
+						*Current = Maps(Current->Get_Position(), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome());
 						FindMap = true;
 					}
 				}
@@ -391,6 +388,8 @@ void Editeur::Set_MapSize(list<Maps>& _layer, Vector2f _min, Vector2f _max)
 						(static_cast<int>(j / Taille_tile) * Taille_tile)), Hud.Get_Selection().Get_Tile(),
 						Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
 		}
+
+	_layer.remove_if(Maps());
 }
 
 void Editeur::Update()
@@ -415,10 +414,6 @@ void Editeur::Update()
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
 
 		Vue.Update_Editeur(Range_Niveau, Mouse_Position);
-
-		//if (Range_Niveau.x < 96 && Range_Niveau.y < 54)
-		//	MiniMap.Update_MiniMapEditor(Range_Niveau);
-		//MiniMap.Update(Range_Niveau, Vue.Get_Position());
 	}
 	else if (Load)
 	{
@@ -457,6 +452,12 @@ void Editeur::Update()
 
 	if(!Save && !Load)
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
+
+	if (Keyboard::isKeyPressed(Keyboard::F3) && Timer > 0.2f)
+	{
+		Change_Minimap = !Change_Minimap;
+		Timer = 0;
+	}
 }
 
 void Editeur::Display_SaveAndLoad()
@@ -480,7 +481,7 @@ void Editeur::Display_NewSave()
 
 void Editeur::Display_HUD()
 {
-	Screen.Display();
+	App.Get_Window().setView(App.Get_Window().getDefaultView());
 
 	if (!PlayerIsPresent)
 	{
@@ -531,8 +532,11 @@ void Editeur::Display_Map()
 
 void Editeur::Display_MiniMap()
 {
-	MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle));
-	App.Get_Window().draw(MiniMap);
+	if (Change_Minimap)
+		R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Vue));
+	else
+		R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Vue));
+	App.Get_Window().draw(R_MiniMap);
 }
 
 void Editeur::display_EtageforMap()

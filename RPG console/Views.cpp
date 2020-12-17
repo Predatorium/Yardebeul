@@ -38,11 +38,11 @@ bool Views::Occlusion_CullingRectangle(Vector2f _position)
 
 bool Views::Occlusion_CullingCircle(Vector2f _position)
 {
-	if (Circle_Collision(Position, _position, Size.x / 4 , Size.x / 4))
+	if (Circle_Collision(Position, _position, Size.x / 4 + 32, Size.x / 4 + 32))
 		return true;
 	else
 		return false;
-}		
+}
 
 void Views::Update_Editeur(Vector2i _limit, Vector2f _position)
 {
@@ -98,19 +98,49 @@ void Views::Update_Editeur(Vector2i _limit, Vector2f _position)
 
 void Views::Update(Vector2i _limit, Vector2f _player)
 {
-	if (_player.x > 960 && _player.x < (_limit.x * 32) - 960)
+	if (_player.x > Size.x / 2 && _player.x < (_limit.x * 32) - Size.x / 2)
 		Position.x = _player.x;
-	else if (_player.x < 960)
-		Position.x = 960;
-	else if (_player.x > (_limit.x * 32) - 960)
-		Position.x = (_limit.x * 32) - 960;
+	else if (_player.x < Size.x / 2)
+		Position.x = Size.x / 2;
+	else if (_player.x > (_limit.x * 32) - Size.x / 2)
+		Position.x = (_limit.x * 32) - Size.x / 2;
 
-	if (_player.y > 540 && _player.y < (_limit.y * 32) - 540)
+	if (_player.y > Size.y / 2 && _player.y < (_limit.y * 32) - Size.y / 2)
 		Position.y = _player.y;
-	else if (_player.y < 540)
-		Position.y = 540;
-	else if (_player.y > (_limit.y * 32) - 540)
-		Position.y = (_limit.y * 32) - 540;
+	else if (_player.y < Size.y / 2)
+		Position.y = Size.y / 2;
+	else if (_player.y > (_limit.y * 32) - Size.y / 2)
+		Position.y = (_limit.y * 32) - Size.y / 2;
+
+	view.setCenter(Position);
+}
+
+void Views::Update_MiniMap(Vector2i _limit, Vector2f _player)
+{
+	Position.x = _player.x;
+	Position.y = _player.y;
+
+	if (Keyboard::isKeyPressed(Keyboard::Add) && Size.x > 576 && Size.y > 324)
+		Zoom = true;
+	else
+		Zoom = false;
+	if (Keyboard::isKeyPressed(Keyboard::Subtract) && Size.x < 3840 && Size.y < 2160)
+		Dezoom = true;
+	else
+		Dezoom = false;
+
+	if (Zoom)
+	{
+		Size.x -= 1920 * MainTime.GetTimeDeltaF();
+		Size.y -= 1080 * MainTime.GetTimeDeltaF();
+		view.setSize(Size);
+	}
+	if (Dezoom)
+	{
+		Size.x += 1920 * MainTime.GetTimeDeltaF();
+		Size.y += 1080 * MainTime.GetTimeDeltaF();
+		view.setSize(Size);
+	}
 
 	view.setCenter(Position);
 }

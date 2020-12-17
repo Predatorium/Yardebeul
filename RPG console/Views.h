@@ -20,7 +20,7 @@ public :
 	~Views() = default;
 
 	inline Vector2f Get_Position() { return Position; };
-	inline View Get_View() { return view; };
+	inline View& Get_View() { return view; };
 	inline Vector2f Get_Size() { return Size; };
 	inline bool Get_Zoom() { return Zoom; };
 	inline bool Get_Dezoom() { return Dezoom; };
@@ -34,5 +34,6 @@ public :
 
 	void Update_Editeur(Vector2i _limit, Vector2f _position);
 	void Update(Vector2i _limit, Vector2f _player);
+	void Update_MiniMap(Vector2i _limit, Vector2f _player);
 	void Display();
 };

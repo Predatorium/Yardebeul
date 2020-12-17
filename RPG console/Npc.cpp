@@ -73,14 +73,16 @@ Npc::Npc(const Npc& _npc, Vector2f _position)
 void Npc::Update_Attack(Hero& _player)
 {
 	if (Left == true || Right == true)
-		Position.x += 5 * Delta.x * MainTime.GetTimeDeltaF();
+		Position.x += 100 * Delta.x * MainTime.GetTimeDeltaF();
 	if (Up == true || Down == true)
-		Position.y += 5 * Delta.y * MainTime.GetTimeDeltaF();
+		Position.y += 100 * Delta.y * MainTime.GetTimeDeltaF();
 
 	if (Circle_Collision(Position, _player.Get_Position(), 130, 130))
 	{
-		Delta.x = 20 * cos(Angle_calc(Position, _player.Get_Position()));
-		Delta.y = 20 * sin(Angle_calc(Position, _player.Get_Position()));
+		Delta.x = normalisation(Position, _player.Get_Position()).x;
+		Delta.y = normalisation(Position, _player.Get_Position()).y;
+
+		cout << Delta.x << " " << Delta.y << endl;
 
 		if (Delta.x >= 0 && Delta.y >= 0)
 		{

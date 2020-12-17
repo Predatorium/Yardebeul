@@ -110,3 +110,5 @@ Vector2f lerp(Vector2f a, Vector2f b, float t);
 Vector2f getMidle(Sprite& _o);
 Vector2f getMidle(RectangleShape& _o);
 Vector2f getMidle(Text& _o);
+float Norme(Vector2f _vecteur);
+Vector2f normalisation(Vector2f pos1, Vector2f pos2);
