@@ -82,8 +82,6 @@ void Npc::Update_Attack(Hero& _player)
 		Delta.x = normalisation(Position, _player.Get_Position()).x;
 		Delta.y = normalisation(Position, _player.Get_Position()).y;
 
-		cout << Delta.x << " " << Delta.y << endl;
-
 		if (Delta.x >= 0 && Delta.y >= 0)
 		{
 			if (Delta.x > Delta.y)

@@ -20,6 +20,7 @@ Button_Text::Button_Text(string _name, string _nameFont, float _sizeTexte, Vecto
 }
 
 Button_Sprite::Button_Sprite(string _name, float _rotate, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
+	: sprite(getTexture(_name))
 {
 	Name = _name;
 	Rotate = _rotate;
@@ -31,7 +32,6 @@ Button_Sprite::Button_Sprite(string _name, float _rotate, Vector2f _sizeShape, f
 	shape.setFillColor(Color::Transparent);
 	shape.setOutlineThickness(_outlinesize);
 	shape.setOutlineColor(color);
-	SetSmooth(Name);
 }
 
 Box::Box(string _max, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
@@ -92,10 +92,10 @@ void Button_Text::Display()
 void Button_Sprite::Display()
 {
 	shape.setOutlineColor(color);
-	getSprite(Name).setColor(color);
+	sprite.setColor(color);
 	App.Get_Window().draw(shape);
-	getSprite(Name).setOrigin(getMidle(getSprite(Name)));
-	getSprite(Name).setPosition(Vector2f(shape.getPosition().x, shape.getPosition().y));
-	getSprite(Name).setRotation(Rotate);
-	App.Get_Window().draw(getSprite(Name));
+	sprite.setOrigin(getMidle(sprite));
+	sprite.setPosition(Vector2f(shape.getPosition().x, shape.getPosition().y));
+	sprite.setRotation(Rotate);
+	App.Get_Window().draw(sprite);
 }

@@ -7,7 +7,7 @@ Item::Item(string _name, int _price, Effect _effect)
 	Price = _price;
 	effect = _effect;
 	PickUp = false;
-	sprite = getSprite(Name.substr(0, Name.find(" ")));
+	sprite = Sprite(getTexture(Name.substr(0, Name.find(" "))));
 }
 
 void Item::Display_Inventory(Vector2f _scale)

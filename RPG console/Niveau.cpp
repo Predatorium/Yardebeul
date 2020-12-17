@@ -1,6 +1,6 @@
 #include "Niveau.h"
-#include "SpriteManager.h"
 #include "Menu.h"
+#include "Npc_Container.h"
 
 bool Level::Get_Void(Vector2i _position)
 {
@@ -286,10 +286,10 @@ const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _
 {
 	static RenderTexture texture;
 	texture.create(1920, 1080);
-	texture.setView(_view.Get_View());
+	texture.setView(_view);
 
 	CircleShape Info(30);
-	Info.setOrigin(Info.getGlobalBounds().width / 2, Info.getGlobalBounds().height / 2);
+	Info.setOrigin(Info.getRadius(), Info.getRadius());
 
 	texture.clear(Color::Black);
 
@@ -394,11 +394,9 @@ const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _
 
 	
 	texture.display();
-	Sprite tmp;
-	tmp.setTexture(texture.getTexture());
-	tmp.setScale(1, 1080 / 1920);
 
-	return *tmp.getTexture();
+	texture.getTexture().isSmooth();
+	return texture.getTexture();
 }
 
 void Level::ScreenShot(int _party)
@@ -478,7 +476,7 @@ void Level::Update()
 			Pause = true;
 
 		Vue.Update(Range_Niveau, Player.Get_Position());
-		Screen.Update_MiniMap(Range_Niveau, Player.Get_Position());
+		Screen.Update_MiniMap(Range_Niveau, Player.Get_Position()); 
 	}
 
 	if (Pause == true)
@@ -598,7 +596,8 @@ void Level::Display()
 			C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Screen));
 		else
 			C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Screen));
-
+		
+		C_MiniMap.setTextureRect(IntRect(420, 0, 1080, 1080));
 		App.Get_Window().draw(C_MiniMap);
 	}
 }

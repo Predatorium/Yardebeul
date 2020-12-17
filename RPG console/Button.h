@@ -31,7 +31,7 @@ private:
 	RectangleShape shape;
 	string Name;
 	Color color;
-	
+	Sprite sprite;
 	float Rotate;
 
 public:

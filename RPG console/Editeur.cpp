@@ -399,7 +399,7 @@ void Editeur::Update()
 
 	if (!PlayerIsPresent && !Save && !Load)
 	{
-		Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue.Get_View()));
+		Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue));
 
 		Interaction_Map();
 		Hud.Set_Npc(Mouse_Position, NpcList, Range_Niveau);
@@ -520,7 +520,7 @@ void Editeur::Display_Map()
 				App.Get_Window().draw(Grille);
 			}
 
-			Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue.Get_View()));
+			Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue));
 			Grille.setPosition(Vector2f((static_cast<int>(Mouse_Position.x) / Taille_tile) * Taille_tile, (static_cast<int>(Mouse_Position.y) / Taille_tile) * Taille_tile));
 			if (Vue.Occlusion_CullingRectangle(Grille.getPosition()))
 				App.Get_Window().draw(Grille);

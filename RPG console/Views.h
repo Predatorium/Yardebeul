@@ -3,29 +3,22 @@
 #include "Button.h"
 #include "Hero.h"
 
-class Views
+class Views : public View
 {
-private :
-	View view;
-	Vector2f Position;
+private:
 	Vector2f last_Past;
-	Vector2f Size;
 	bool Move;
 	bool Zoom;
 	bool Dezoom;
 
-public :
+public:
 	Views();
 	Views(Vector2f _position, Vector2f _size, FloatRect _viewport);
 	~Views() = default;
 
-	inline Vector2f Get_Position() { return Position; };
-	inline View& Get_View() { return view; };
-	inline Vector2f Get_Size() { return Size; };
 	inline bool Get_Zoom() { return Zoom; };
 	inline bool Get_Dezoom() { return Dezoom; };
 
-	inline void Set_Position(Vector2f _position) { Position = _position; };
 	inline void Set_Zoom(bool _zoom) { Zoom = _zoom; };
 	inline void Set_Dezoom(bool _dezoom) { Dezoom = _dezoom; };
 

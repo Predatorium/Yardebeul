@@ -16,7 +16,7 @@ private :
 	Hero* Player;
 	Npc* Enemy;
 	State Previous_state;
-
+	Sprite sprite;
 	list<Button_Text> Button;
 	float timer;
 	Views FixView;

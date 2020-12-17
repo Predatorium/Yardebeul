@@ -20,7 +20,7 @@ World::World()
 		Load = true;
 		Pause = false;
 		IsDialogue = false;
-		Change_Minimap = false;
+		Change_Minimap = true;
 		Change_ShapeMap = false;
 		Timer = 0;
 

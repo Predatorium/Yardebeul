@@ -36,6 +36,7 @@ private :
 	list<Button_Text> Button;
 	list<Bouton_Load> Emplacement;
 	Button_Text Titre;
+	Sprite sprite;
 	int Selection;
 	float timer;
 	bool Option;

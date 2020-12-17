@@ -1,7 +1,7 @@
 #pragma once
 #include "Tools.h"
 #include "Hero.h"
-#include "Npc_Container.h"
+#include "Npc.h"
 #include "Weapon.h"
 #include "Armor.h"
 #include "Consumable.h"

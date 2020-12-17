@@ -4,6 +4,7 @@
 #include "StateManager.h"
 
 Fight_System::Fight_System(Hero* _player, Npc* _enemy, State _state)
+	: sprite(getTexture("Fight"))
 {
 	Player = _player;
 	Player->Set_Orientation(Direction::Right);
@@ -162,7 +163,7 @@ void Fight_System::Display()
 {
 	FixView.Display();
 
-	App.Get_Window().draw(getSprite("Fight"));
+	App.Get_Window().draw(sprite);
 
 	Player->Display_Fight(Vector2f(10, 10));
 	Enemy->Display_Fight(Vector2f(-10,10));

@@ -7,6 +7,7 @@
 #include "World.h"
 
 Menu::Menu(int _menutype)
+	: sprite(getTexture("Font"))
 {
 	Selection = 0;
 	timer = 0;
@@ -226,7 +227,7 @@ void Menu::Display_Main()
 {
 	Vue.Display();
 
-	App.Get_Window().draw(getSprite("Font"));
+	App.Get_Window().draw(sprite);
 
 	for (Bouton_Load& Current_Button : Emplacement)
 		Current_Button.Display();
