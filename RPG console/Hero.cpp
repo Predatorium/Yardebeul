@@ -54,7 +54,6 @@ Hero::Hero(Vector2f _position)
 		Anim["Beat_Right"] = Animator(IntRect(1589, 54, 23, 31), 8, 0.15f);
 		Anim["Beat_Top"] = Animator(IntRect(1589, 86, 24, 32), 8, 0.15f);
 
-		Anim["Beat_Right"].Animation(sprite);
 		sprite.setPosition(Position);
 	}
 }
