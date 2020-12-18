@@ -305,8 +305,8 @@ const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _
 		if (f(_view, Current.Get_Position()))
 			texture.draw(Current.Get_Sprite());
 
+	Info.setPointCount(3);
 	for (Npc& Current : NpcList)
-		if (Current.Get_Position().y < Player.Get_Position().y)
 			if (f(_view, Current.Get_Position()))
 			{
 				if (Current.Get_Attitude() == Comportement::Agressif)
@@ -316,53 +316,8 @@ const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _
 				Info.setPosition(Current.Get_Position());
 				texture.draw(Info);
 			}
-
+	Info.setPointCount(5);
 	for (Weapon& Current : WeaponList)
-		if (Current.Get_Position().y < Player.Get_Position().y)
-			if (f(_view, Current.Get_Position()))
-			{
-				Info.setFillColor(Color::Yellow);
-				Info.setPosition(Current.Get_Position());
-				texture.draw(Info);
-			}
-				
-
-	for (Armor& Current : ArmorList)
-		if (Current.Get_Position().y < Player.Get_Position().y)
-			if (f(_view, Current.Get_Position()))
-			{
-				Info.setFillColor(Color::Yellow);
-				Info.setPosition(Current.Get_Position());
-				texture.draw(Info);
-			}
-
-	for (Consumable& Current : ConsumableList)
-		if (Current.Get_Position().y < Player.Get_Position().y)
-			if (f(_view, Current.Get_Position()))
-			{
-				Info.setFillColor(Color::Yellow);
-				Info.setPosition(Current.Get_Position());
-				texture.draw(Info);
-			}
-
-	Info.setFillColor(Color::Blue);
-	Info.setPosition(Player.Get_Position());
-	texture.draw(Info);
-
-	for (Npc& Current : NpcList)
-		if (Current.Get_Position().y > Player.Get_Position().y)
-			if (f(_view, Current.Get_Position()))
-			{
-				if (Current.Get_Attitude() == Comportement::Agressif)
-					Info.setFillColor(Color::Red);
-				else
-					Info.setFillColor(Color::Green);
-				Info.setPosition(Current.Get_Position());
-				texture.draw(Info);
-			}
-				
-	for (Weapon& Current : WeaponList)
-		if (Current.Get_Position().y > Player.Get_Position().y)
 			if (f(_view, Current.Get_Position()))
 			{
 				Info.setFillColor(Color::Yellow);
@@ -371,7 +326,6 @@ const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _
 			}
 
 	for (Armor& Current : ArmorList)
-		if (Current.Get_Position().y > Player.Get_Position().y)
 			if (f(_view, Current.Get_Position()))
 			{
 				Info.setFillColor(Color::Yellow);
@@ -380,7 +334,6 @@ const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _
 			}
 
 	for (Consumable& Current : ConsumableList)
-		if (Current.Get_Position().y > Player.Get_Position().y)
 			if (f(_view, Current.Get_Position()))
 			{
 				Info.setFillColor(Color::Yellow);
@@ -388,10 +341,14 @@ const Texture& Level::Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _
 				texture.draw(Info);
 			}
 
+	Info.setPointCount(30);
 	for (Maps& Current : Front_Layer)
 		if (f(_view, Current.Get_Position()))
 			texture.draw(Current.Get_Sprite());
 
+	Info.setFillColor(Color::Blue);
+	Info.setPosition(Player.Get_Position());
+	texture.draw(Info);
 	
 	texture.display();
 
@@ -551,7 +508,7 @@ void Level::Display()
 	{
 		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
 		{
-			if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_Sprite().getGlobalBounds().height / 2.1f),
+			if (Circle_Collision(Vector2f(Player.Get_Position().x, Player.Get_Position().y + Player.Get_Sprite().getGlobalBounds().height / 2.6f),
 				Vector2f(Current.Get_Position().x + 16, Current.Get_Position().y + 16), 30, Player.Get_Sprite().getGlobalBounds().width))
 				Current.Get_Sprite().setColor(Color(255, 255, 255, 100));
 			else

@@ -198,7 +198,10 @@ void Npc::Display()
 		else if (Orientation == Direction::Up && Anim["Beat_Top"] != Animator())
 		{
 			Anim["Beat_Top"].Animation(sprite);
-			sprite.setScale(Vector2f(1, 1));
+			if (Delta.x < 0)
+				sprite.setScale(Vector2f(1, 1));
+			else
+				sprite.setScale(Vector2f (-1, 1));
 		}
 		else
 			Anim["Beat"].Animation(sprite);
@@ -223,7 +226,10 @@ void Npc::Display()
 		else if (Orientation == Direction::Up && Anim["Walk_Top"] != Animator())
 		{
 			Anim["Walk_Top"].Animation(sprite);
-			sprite.setScale(Vector2f(1, 1));
+			if (Delta.x < 0)
+				sprite.setScale(Vector2f(1, 1));
+			else
+				sprite.setScale(Vector2f (-1, 1));
 		}
 		else
 		{
