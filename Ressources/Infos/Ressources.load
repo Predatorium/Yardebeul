@@ -15,6 +15,7 @@ Sprite Font ../Ressources/Sprite/Menu/menu_main.jpg
 Sprite Hero ../Ressources/Sprite/Joueur/Hero.png
 Sprite Epee ../Ressources/Sprite/Joueur/Epee.png
 Sprite Knucles ../Ressources/Sprite/Npc/Knucles.png
+Sprite Yves ../Ressources/Sprite/Npc/Yves.png
 Sprite Fairy ../Ressources/Sprite/Npc/Fairy.png
 Sprite Fleche ../Ressources/Sprite/Menu/Fleche.png
 Sprite Save ../Ressources/Sprite/Menu/Save.png

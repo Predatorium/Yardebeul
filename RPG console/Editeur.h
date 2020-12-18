@@ -12,8 +12,8 @@ private :
 	RectangleShape Grille;
 
 	Vector2f Mouse_Position;
-	Vector2f SizeMin;
-	Vector2f SizeMax;
+	Vector2i SizeMin;
+	Vector2i SizeMax;
 	int Position_Set;
 
 	bool Save_New_Map;
@@ -32,7 +32,7 @@ public :
 	void Resize_Map();
 	void Interaction_Map();
 	void Set_Map(list<Maps>& _layer);
-	void Set_MapSize(list<Maps>& _layer, Vector2f _min, Vector2f _max);
+	void Set_MapSize(list<Maps>& _layer, Vector2i _min, Vector2i _max);
 	virtual void Update();
 
 	void Display_SaveAndLoad();

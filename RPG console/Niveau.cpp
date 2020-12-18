@@ -482,12 +482,6 @@ void Level::Update()
 	if (Pause == true)
 		Menu_Pause->Update_Pause(this, Pause);
 
-	if (Keyboard::isKeyPressed(Keyboard::F3) && Timer > 0.2f)
-	{
-		Change_Minimap = !Change_Minimap;
-		Timer = 0;
-	}
-
 	if (Keyboard::isKeyPressed(Keyboard::F4) && Timer > 0.2f)
 	{
 		Change_ShapeMap = !Change_ShapeMap;
@@ -583,19 +577,13 @@ void Level::Display()
 
 	if (Change_ShapeMap)
 	{
-		if (Change_Minimap)
-			R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Screen));
-		else
-			R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Screen));
+		R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Screen));
 
 		App.Get_Window().draw(R_MiniMap);
 	}
 	if (!Change_ShapeMap)
 	{
-		if (Change_Minimap)
-			C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Screen));
-		else
-			C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Screen));
+		C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Screen));
 		
 		C_MiniMap.setTextureRect(IntRect(420, 0, 1080, 1080));
 		App.Get_Window().draw(C_MiniMap);

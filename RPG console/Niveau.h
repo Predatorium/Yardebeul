@@ -26,7 +26,6 @@ protected :
 	list<Consumable> ConsumableList;
 
 	Menu* Menu_Pause;
-	bool Change_Minimap;
 	bool Change_ShapeMap;
 
 	CircleShape C_MiniMap;

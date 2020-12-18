@@ -26,12 +26,20 @@ Npc::Npc(string _name, Armor _armor, Weapon _weapon, int _level, int _hp, int _s
 		Anim["Walk_Down"] = Animator(IntRect(160, 189, 61, 43), 3, 0.15f, 0);
 		Anim["Walk_Right"] = Animator(IntRect(348, 189, 40, 44), 3, 0.15f, 0);
 		Anim["Walk_Top"] = Animator(IntRect(5, 189, 50, 42), 3, 0.15f, 0);
+
 		Anim["Beat_Down"] = Animator(IntRect(5, 72, 54, 44), 8, 0.15f, 0);
 		Anim["Beat_Right"] = Animator(IntRect(5, 121, 42, 45), 8, 0.15f, 0);
 		Anim["Beat_Top"] = Animator(IntRect(5, 23, 50, 44), 8, 0.15f, 0);
+	}
+	if (Name == "Yves")
+	{
+		Anim["Walk_Down"] = Animator(IntRect(1057, 19, 24, 38), 6, 0.15f, 1);
+		Anim["Walk_Right"] = Animator(IntRect(1057, 58, 28, 37), 6, 0.15f, 1);
+		Anim["Walk_Top"] = Animator(IntRect(1057, 96, 24, 38), 6, 0.15f, 1);
 
-		sprite.setOrigin(Vector2f(21, 22.5));
-		sprite.setTextureRect(IntRect(5, 72, 54, 44));
+		Anim["Beat_Down"] = Animator(IntRect(941, 19, 24, 36), 4, 0.15f, 1);
+		Anim["Beat_Right"] = Animator(IntRect(941, 56, 26, 35), 4, 0.15f, 1);
+		Anim["Beat_Top"] = Animator(IntRect(941, 92, 24, 36), 4, 0.15f, 1);
 	}
 }
 
@@ -58,8 +66,8 @@ Npc::Npc(string _name, int _level, int _hp, int _speed, Dialogue &_dial)
 	{
 		Anim["Beat_Down"] = Animator(IntRect(5, 99, 44, 46), 16, 0.15f, 0);
 
-		sprite.setOrigin(Vector2f(22, 23));
 		sprite.setTextureRect(IntRect(5, 99, 44, 46));
+		sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 	}
 }
 
@@ -172,48 +180,57 @@ void Npc::Display()
 {
 	if (Right == false && Left == false && Up == false && Down == false)
 	{
-		if (Orientation == Direction::Right)
+		if (Orientation == Direction::Right && Anim["Beat_Right"] != Animator())
 		{
 			Anim["Beat_Right"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Left)
+		else if (Orientation == Direction::Left && Anim["Beat_Right"] != Animator())
 		{
 			Anim["Beat_Right"].Animation(sprite);
 			sprite.setScale(Vector2f(-1, 1));
 		}
-		else if (Orientation == Direction::Down)
+		else if (Orientation == Direction::Down && Anim["Beat_Down"] != Animator())
 		{
 			Anim["Beat_Down"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Up)
+		else if (Orientation == Direction::Up && Anim["Beat_Top"] != Animator())
 		{
 			Anim["Beat_Top"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
+		else
+			Anim["Beat"].Animation(sprite);
 	}
 	else
 	{
-		if (Orientation == Direction::Right)
+		if (Orientation == Direction::Right && Anim["Walk_Right"] != Animator())
 		{
 			Anim["Walk_Right"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Left)
+		else if (Orientation == Direction::Left && Anim["Walk_Right"] != Animator())
 		{
 			Anim["Walk_Right"].Animation(sprite);
 			sprite.setScale(Vector2f(-1, 1));
 		}
-		else if (Orientation == Direction::Down)
+		else if (Orientation == Direction::Down && Anim["Walk_Down"] != Animator())
 		{
 			Anim["Walk_Down"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
 		}
-		else if (Orientation == Direction::Up)
+		else if (Orientation == Direction::Up && Anim["Walk_Top"] != Animator())
 		{
 			Anim["Walk_Top"].Animation(sprite);
 			sprite.setScale(Vector2f(1, 1));
+		}
+		else
+		{
+			if (Anim["Walk"] != Animator())
+				Anim["Walk"].Animation(sprite);
+			else
+				Anim["Beat"].Animation(sprite);
 		}
 	}
 

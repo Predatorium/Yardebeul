@@ -15,7 +15,6 @@ Editeur::Editeur()
 		App_Grille = true;
 		PlayerIsPresent = false;
 		IsDialogue = false;
-		Change_Minimap = false;
 		Save = false;
 		Save_New_Map = false;
 
@@ -288,9 +287,15 @@ void Editeur::Interaction_Map()
 	else if (Mouse::isButtonPressed(Mouse::Left) && !Keyboard::isKeyPressed(Keyboard::LControl) && Keyboard::isKeyPressed(Keyboard::LShift) && Timer > 0.2f)
 	{
 		if (Position_Set == 0)
-			SizeMin = Mouse_Position;
+		{
+			SizeMin.x = (int)Mouse_Position.x / Taille_tile;
+			SizeMin.y = (int)Mouse_Position.y / Taille_tile;
+		}
 		if (Position_Set == 1)
-			SizeMax = Mouse_Position;
+		{
+			SizeMax.x = (int)Mouse_Position.x / Taille_tile;
+			SizeMax.y = (int)Mouse_Position.y / Taille_tile;
+		}
 
 		Position_Set++;
 
@@ -360,14 +365,14 @@ void Editeur::Set_Map(list<Maps>& _layer)
 			_layer.push_back(Maps(Vector2f(static_cast<int>(Mouse_Position.x / Taille_tile) * Taille_tile, (static_cast<int>(Mouse_Position.y / Taille_tile) * Taille_tile)), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
 }
 
-void Editeur::Set_MapSize(list<Maps>& _layer, Vector2f _min, Vector2f _max)
+void Editeur::Set_MapSize(list<Maps>& _layer, Vector2i _min, Vector2i _max)
 {
-	for (float i = _min.x; i < _max.x; i += 32)
-		for (float j = _min.y; j < _max.y; j += 32)
+	for (float i = _min.x; i < _max.x + 1; i++)
+		for (float j = _min.y; j < _max.y + 1; j++)
 		{
 			bool FindMap = false;
 			for (auto Current = _layer.begin(); Current != _layer.end(); Current++)
-				if (FloatRect(Current->Get_Position().x, Current->Get_Position().y, Taille_tile, Taille_tile).contains(Vector2f(i,j)))
+				if (FloatRect(Current->Get_Position().x, Current->Get_Position().y, Taille_tile, Taille_tile).contains(Vector2f(i * Taille_tile, j * Taille_tile)))
 				{
 					if (Hud.Get_Selection().Get_Name() == "Rien")
 					{
@@ -384,8 +389,7 @@ void Editeur::Set_MapSize(list<Maps>& _layer, Vector2f _min, Vector2f _max)
 			if (Hud.Get_Selection().Get_Name() != "Rien" && i <= (Range_Niveau.x + 1) * Taille_tile &&
 				j <= (Range_Niveau.y + 1) * Taille_tile && i >= -64 && j >= -64)
 				if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC")
-					_layer.push_back(Maps(Vector2f(static_cast<int>(i / Taille_tile) * Taille_tile,
-						(static_cast<int>(j / Taille_tile) * Taille_tile)), Hud.Get_Selection().Get_Tile(),
+					_layer.push_back(Maps(Vector2f(i * Taille_tile, j * Taille_tile), Hud.Get_Selection().Get_Tile(),
 						Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
 		}
 
@@ -452,12 +456,6 @@ void Editeur::Update()
 
 	if(!Save && !Load)
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
-
-	if (Keyboard::isKeyPressed(Keyboard::F3) && Timer > 0.2f)
-	{
-		Change_Minimap = !Change_Minimap;
-		Timer = 0;
-	}
 }
 
 void Editeur::Display_SaveAndLoad()
@@ -532,10 +530,7 @@ void Editeur::Display_Map()
 
 void Editeur::Display_MiniMap()
 {
-	if (Change_Minimap)
-		R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Vue));
-	else
-		R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Vue));
+	R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Vue));
 	App.Get_Window().draw(R_MiniMap);
 }
 

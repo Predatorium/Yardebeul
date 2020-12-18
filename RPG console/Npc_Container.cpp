@@ -13,6 +13,7 @@ Npc_Containers::Npc_Containers()
 void Npc_Containers::init()
 {
 	Container.push_back(Npc("Knucles", Armor(), Weapons.Get_Weapon("Epee de feu"), 1, 20, 25));
+	Container.push_back(Npc("Yves", Armor(), Weapons.Get_Weapon("Epee d eau"), 1, 20, 25));
 	Container.push_back(Npc("Fairy", 1, 20, 25, Dialogues.Get_Dialogue("1_1")));
 }
 
