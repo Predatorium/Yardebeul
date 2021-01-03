@@ -415,6 +415,11 @@ void Room::Update(Dungeon& _d)
 {
 	Level::Update();
 
+	int y = 0;
+	for (Npc& Current : NpcList)
+		if (Current.Get_Attitude() == Comportement::Amical)
+			y++;
+
 	if (Player.Get_Interact() == true)
 	{
 		if (Escalier[0].second.Get_Sprite().getGlobalBounds().intersects(Player.Get_Sprite().getGlobalBounds()))
@@ -425,28 +430,12 @@ void Room::Update(Dungeon& _d)
 
 		if (Escalier[1].second.Get_Sprite().getGlobalBounds().intersects(Player.Get_Sprite().getGlobalBounds()))
 		{
-			int y = 0;
-			for (Npc& Current : NpcList)
-				if (Current.Get_Attitude() == Comportement::Amical)
-					y++;
-
 			if (NpcList.size() == y)
 			{
 				_d.Add_CurrentRoom(Escalier[1].first);
 				Player.Set_Position(Vector2f((Range_Niveau.x * 32) / 2 + 50, (Range_Niveau.y * 32) / 2 + 50));
 			}
 		}
-	}
-
-	int y = 0;
-	for (Npc& Current : NpcList)
-		if (Current.Get_Attitude() == Comportement::Amical)
-			y++;
-
-	if (NpcList.size() == y)
-	{
-		_d.Add_CurrentRoom(Escalier[1].first);
-		Player.Set_Position(Vector2f((Range_Niveau.x * 32) / 2 + 50, (Range_Niveau.y * 32) / 2 + 50));
 	}
 
 	if (isBoss == true)
