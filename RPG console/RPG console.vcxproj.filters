@@ -28,14 +28,8 @@
     <Filter Include="Fichiers d%27en-tête\Game">
       <UniqueIdentifier>{f216b26b-5c17-433b-8f9e-532245256748}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\Game\Character">
-      <UniqueIdentifier>{e92d9236-b580-4fa6-8ae4-6f58be78422b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\Game\Dungeon">
       <UniqueIdentifier>{9ded3268-c72d-4cbc-8f5d-b5b0f78b1cc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Game\Item">
-      <UniqueIdentifier>{d32c760b-a25c-439b-b0d9-b4e8a5ea868e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers sources\_Global\Containers">
       <UniqueIdentifier>{4da488cf-1409-425d-8f3d-b1ef3c529fc8}</UniqueIdentifier>
@@ -58,20 +52,8 @@
     <Filter Include="Fichiers sources\Game">
       <UniqueIdentifier>{e294a76b-093b-4ed8-b6e9-01b342ac9dcf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\Game\Character">
-      <UniqueIdentifier>{d80de8c4-c4bb-4d25-8a17-421893c79ae7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\Game\Dungeon">
       <UniqueIdentifier>{f324d2b0-349c-4dcc-a662-3a60d4fbc024}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Game\Item">
-      <UniqueIdentifier>{1cdceccc-3f57-46d7-8ffd-5f54bc309dbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Game\Event">
-      <UniqueIdentifier>{12a7e8fc-378f-4af7-83d5-ef10b76c5a95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Game\Dungeon\Event">
-      <UniqueIdentifier>{2a14ca07-20ed-47de-87b7-2155e011f02d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\System">
       <UniqueIdentifier>{340f587c-1d98-4734-84b0-d09beb039079}</UniqueIdentifier>
@@ -85,16 +67,46 @@
     <Filter Include="Fichiers sources\System\Menu">
       <UniqueIdentifier>{e9e19652-4e2b-45d9-ac38-b883493b2605}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Game\ECS%28Entity, Component, System%29">
+      <UniqueIdentifier>{fa32f338-04e9-423a-9947-fb0b8f4c6442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29">
+      <UniqueIdentifier>{742c5824-db8d-4203-a8b5-b58a07e874b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity">
+      <UniqueIdentifier>{31b80618-edeb-42b3-8c35-e97d477285f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Item">
+      <UniqueIdentifier>{1cdceccc-3f57-46d7-8ffd-5f54bc309dbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Character">
+      <UniqueIdentifier>{d80de8c4-c4bb-4d25-8a17-421893c79ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\ECS%28Entity, Component, System%29\Component">
+      <UniqueIdentifier>{b29250cc-9c45-472a-9469-6b7e3e0ebb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Game\ECS%28Entity, Component, System%29\System">
+      <UniqueIdentifier>{8f1328cc-fb1d-4d22-9573-4585f9198784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity">
+      <UniqueIdentifier>{f2f0b87e-7b35-4090-9a88-cecbceaf5469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Item">
+      <UniqueIdentifier>{d32c760b-a25c-439b-b0d9-b4e8a5ea868e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Character">
+      <UniqueIdentifier>{e92d9236-b580-4fa6-8ae4-6f58be78422b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Component">
+      <UniqueIdentifier>{f3047b1a-022a-4b53-9959-464425e8c94e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\System">
+      <UniqueIdentifier>{afa33bb2-6025-42aa-8cf6-54eeb126d951}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Room.h">
       <Filter>Fichiers d%27en-tête\Game\Dungeon</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Fichiers d%27en-tête\Game\Dungeon\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Event_Type.h">
-      <Filter>Fichiers d%27en-tête\Game\Dungeon\Event</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.h">
       <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
@@ -124,28 +136,25 @@
       <Filter>Fichiers d%27en-tête\Game\Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
-      <Filter>Fichiers d%27en-tête\Game\Item</Filter>
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Item</Filter>
     </ClInclude>
     <ClInclude Include="Armor.h">
-      <Filter>Fichiers d%27en-tête\Game\Item</Filter>
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Item</Filter>
     </ClInclude>
     <ClInclude Include="Consumable.h">
-      <Filter>Fichiers d%27en-tête\Game\Item</Filter>
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Fichiers d%27en-tête\Game\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Effect.h">
-      <Filter>Fichiers d%27en-tête\Game\Item</Filter>
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Item</Filter>
     </ClInclude>
     <ClInclude Include="Hero.h">
-      <Filter>Fichiers d%27en-tête\Game\Character</Filter>
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Character</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>Fichiers d%27en-tête\Game\Character</Filter>
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Character</Filter>
     </ClInclude>
     <ClInclude Include="Npc.h">
-      <Filter>Fichiers d%27en-tête\Game\Character</Filter>
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity\Character</Filter>
     </ClInclude>
     <ClInclude Include="Weapons_Container.h">
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
@@ -157,9 +166,6 @@
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Effects_Container.h">
-      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Dungeon_Container.h">
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
     <ClInclude Include="FontManager.h">
@@ -189,13 +195,7 @@
     <ClInclude Include="Dialogue_Container.h">
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Data.h">
-      <Filter>Fichiers d%27en-tête\System</Filter>
-    </ClInclude>
     <ClInclude Include="Niveau.h">
-      <Filter>Fichiers d%27en-tête\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
       <Filter>Fichiers d%27en-tête\System</Filter>
     </ClInclude>
     <ClInclude Include="Views.h">
@@ -204,37 +204,49 @@
     <ClInclude Include="Fight_System.h">
       <Filter>Fichiers d%27en-tête\System</Filter>
     </ClInclude>
-    <ClInclude Include="Dialogue.h">
-      <Filter>Fichiers d%27en-tête\System</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Fichiers d%27en-tête\_Global</Filter>
     </ClInclude>
     <ClInclude Include="Npc_Container.h">
       <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Fichiers d%27en-tête\System</Filter>
+    <ClInclude Include="Sort_Container.h">
+      <Filter>Fichiers d%27en-tête\_Global\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Manager.h">
+      <Filter>Fichiers d%27en-tête\_Global\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Fichiers d%27en-tête\System</Filter>
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="My_Shape.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="Effect.h">
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.h">
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogue.h">
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Fichiers d%27en-tête\Game\ECS%28Entity, Component, System%29\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Fichiers d%27en-tête\Game\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Room.cpp">
       <Filter>Fichiers sources\Game\Dungeon</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Fichiers sources\Game\Event</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources\_Global</Filter>
-    </ClCompile>
-    <ClCompile Include="Event_Type.cpp">
-      <Filter>Fichiers sources\Game\Event</Filter>
     </ClCompile>
     <ClCompile Include="StateManager.cpp">
       <Filter>Fichiers sources\_Global\Manager</Filter>
@@ -264,28 +276,25 @@
       <Filter>Fichiers sources\Game\Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
-      <Filter>Fichiers sources\Game\Item</Filter>
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Item</Filter>
     </ClCompile>
     <ClCompile Include="Armor.cpp">
-      <Filter>Fichiers sources\Game\Item</Filter>
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Item</Filter>
     </ClCompile>
     <ClCompile Include="Consumable.cpp">
-      <Filter>Fichiers sources\Game\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Effect.cpp">
-      <Filter>Fichiers sources\Game\Item</Filter>
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Fichiers sources\Game\Item</Filter>
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Item</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
-      <Filter>Fichiers sources\Game\Character</Filter>
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Character</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>Fichiers sources\Game\Character</Filter>
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Character</Filter>
     </ClCompile>
     <ClCompile Include="Npc.cpp">
-      <Filter>Fichiers sources\Game\Character</Filter>
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity\Character</Filter>
     </ClCompile>
     <ClCompile Include="Weapons_Container.cpp">
       <Filter>Fichiers sources\_Global\Containers</Filter>
@@ -297,9 +306,6 @@
       <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Armors_Container.cpp">
-      <Filter>Fichiers sources\_Global\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Dungeon_Container.cpp">
       <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
     <ClCompile Include="FontManager.cpp">
@@ -329,22 +335,13 @@
     <ClCompile Include="Dialogue_Container.cpp">
       <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Fichiers sources\System</Filter>
-    </ClCompile>
     <ClCompile Include="Views.cpp">
       <Filter>Fichiers sources\System</Filter>
     </ClCompile>
     <ClCompile Include="Niveau.cpp">
       <Filter>Fichiers sources\System</Filter>
     </ClCompile>
-    <ClCompile Include="Data.cpp">
-      <Filter>Fichiers sources\System</Filter>
-    </ClCompile>
     <ClCompile Include="Fight_System.cpp">
-      <Filter>Fichiers sources\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Dialogue.cpp">
       <Filter>Fichiers sources\System</Filter>
     </ClCompile>
     <ClCompile Include="Singleton.cpp">
@@ -353,14 +350,35 @@
     <ClCompile Include="Npc_Container.cpp">
       <Filter>Fichiers sources\_Global\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Fichiers sources\System</Filter>
+    <ClCompile Include="Sort_Container.cpp">
+      <Filter>Fichiers sources\_Global\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Manager.cpp">
+      <Filter>Fichiers sources\_Global\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Component</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Fichiers sources\System</Filter>
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="My_Shape.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Dialogue.cpp">
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Sort.cpp">
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>Fichiers sources\Game\ECS%28Entity, Component, System%29\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Fichiers sources\Game\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

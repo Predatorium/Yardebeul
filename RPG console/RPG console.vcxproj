@@ -25,19 +25,20 @@
     <ClInclude Include="Consumables_Container.h" />
     <ClInclude Include="Dialogue.h" />
     <ClInclude Include="Dialogue_Container.h" />
-    <ClInclude Include="Dungeon_Container.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Fight_System.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="Game_Manager.h" />
     <ClInclude Include="HUD_Editor.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Map_Manager.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="My_Shape.h" />
     <ClInclude Include="Niveau.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Npc_Container.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Sort.h" />
+    <ClInclude Include="Sort_Container.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Armor.h" />
     <ClInclude Include="Chest.h" />
@@ -49,7 +50,6 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Erreur.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="Event_Type.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="RessourcesManager.h" />
     <ClInclude Include="Room.h" />
@@ -72,19 +72,20 @@
     <ClCompile Include="Consumables_Container.cpp" />
     <ClCompile Include="Dialogue.cpp" />
     <ClCompile Include="Dialogue_Container.cpp" />
-    <ClCompile Include="Dungeon_Container.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Fight_System.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="Game_Manager.cpp" />
     <ClCompile Include="HUD_Editor.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Map_Manager.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="My_Shape.cpp" />
     <ClCompile Include="Niveau.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Npc_Container.cpp" />
     <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="Sort.cpp" />
+    <ClCompile Include="Sort_Container.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Chest.cpp" />
@@ -96,7 +97,6 @@
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Erreur.cpp" />
     <ClCompile Include="Event.cpp" />
-    <ClCompile Include="Event_Type.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="RessourcesManager.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -225,6 +225,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

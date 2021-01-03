@@ -3,13 +3,13 @@
 #include "SoundManager.h"
 #include "FontManager.h"
 #include "Map_Manager.h"
-#include "Controle.h"
 #include "Dialogue_Container.h"
 #include "Npc_Container.h"
 #include "Effects_Container.h"
 #include "Armors_Container.h"
 #include "Weapons_Container.h"
 #include "Consumables_Container.h"
+#include "Sort_Container.h"
 #include "Views.h"
 
 StateManager::StateManager()
@@ -24,6 +24,7 @@ StateManager::StateManager()
 	Weapons.init();
 	Consumables.init();
 	Npcs.init();
+	Sorts.init();
 	ChangeState(State::MENU);
 }
 
@@ -67,16 +68,13 @@ void StateManager::UpdateManager()
 	switch (state)
 	{
 	case State::MENU:
-		Game_Menu.Update_Main(&Monde);
+		Game_Menu.Update_Main();
 		break;
 	case State::EDITOR:
 		Edit_Niveau.Update();
 		break;
 	case State::GAME:
-		Monde.Update();
-		break;
-	case State::FIGHT:
-		Fight.Update();
+		Game_Manager::Get_Singleton().Update();
 		break;
 	default:
 		break;
@@ -105,10 +103,7 @@ void StateManager::DisplayManager()
 		Edit_Niveau.Display_editeur();
 		break;
 	case State::GAME:
-		Monde.Display();
-		break;
-	case State::FIGHT:
-		Fight.Display();
+		Game_Manager::Get_Singleton().Display();
 		break;
 	default:
 		break;
@@ -131,10 +126,4 @@ void StateManager::ChangeState(State NextState)
 	}
 	else
 		App.Get_Window().setMouseCursorVisible(false);
-}
-
-void StateManager::State_Fight(Hero* _player, Npc *_enemy)
-{
-	Fight = Fight_System(_player, _enemy, state);
-	state = State::FIGHT;
 }

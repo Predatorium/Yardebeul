@@ -348,20 +348,20 @@ void Editeur::Set_Map(list<Maps>& _layer)
 			{
 				Current_Map.Set_Name("Rien");
 				FindMap = true;
-				break;
 			}
-			else if (Hud.Get_Selection().Get_Name() != "NPC")
+			else if (Hud.Get_Selection().Get_Name() != "NPC" && Hud.Get_Selection().Get_Name() != "Dungeon")
 			{
 				Current_Map = Maps(Current_Map.Get_Position(), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome());
 				FindMap = true;
 			}
+			break;
 		}
 
 	_layer.remove_if(Maps());
 
 	if (Hud.Get_Selection().Get_Name() != "Rien" && Mouse_Position.x <= (Range_Niveau.x + 1) * Taille_tile &&
 		Mouse_Position.y <= (Range_Niveau.y + 1) * Taille_tile && Mouse_Position.x >= -64 && Mouse_Position.y >= -64)
-		if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC")
+		if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC" && Hud.Get_Selection().Get_Name() != "Dungeon")
 			_layer.push_back(Maps(Vector2f(static_cast<int>(Mouse_Position.x / Taille_tile) * Taille_tile, (static_cast<int>(Mouse_Position.y / Taille_tile) * Taille_tile)), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
 }
 
@@ -379,7 +379,7 @@ void Editeur::Set_MapSize(list<Maps>& _layer, Vector2i _min, Vector2i _max)
 						Current->Set_Name("Rien");
 						FindMap = true;
 					}
-					else if (Hud.Get_Selection().Get_Name() != "NPC")
+					else if (Hud.Get_Selection().Get_Name() != "NPC" && Hud.Get_Selection().Get_Name() != "Dungeon")
 					{
 						*Current = Maps(Current->Get_Position(), Hud.Get_Selection().Get_Tile(), Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome());
 						FindMap = true;
@@ -388,7 +388,7 @@ void Editeur::Set_MapSize(list<Maps>& _layer, Vector2i _min, Vector2i _max)
 
 			if (Hud.Get_Selection().Get_Name() != "Rien" && i <= (Range_Niveau.x + 1) * Taille_tile &&
 				j <= (Range_Niveau.y + 1) * Taille_tile && i >= -64 && j >= -64)
-				if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC")
+				if (!FindMap && Hud.Get_Selection().Get_Name() != "NPC" && Hud.Get_Selection().Get_Name() != "Dungeon")
 					_layer.push_back(Maps(Vector2f(i * Taille_tile, j * Taille_tile), Hud.Get_Selection().Get_Tile(),
 						Hud.Get_Selection().Get_Name(), Hud.Get_Selection().Get_Biome()));
 		}
@@ -406,6 +406,7 @@ void Editeur::Update()
 		Set_MousePos(App.Get_Window().mapPixelToCoords(Mouse::getPosition(App.Get_Window()), Vue));
 
 		Interaction_Map();
+		Hud.Set_Dungeon(Mouse_Position, dungeon);
 		Hud.Set_Npc(Mouse_Position, NpcList, Range_Niveau);
 
 		Set_MousePos(Vector2f(Mouse::getPosition(App.Get_Window())));
@@ -413,6 +414,7 @@ void Editeur::Update()
 		Hud.Interaction_Biome(Mouse_Position);
 		Hud.Interaction_Tile(Mouse_Position);
 		Hud.Interaction_NPC(Mouse_Position);
+		Hud.Interaction_Dungeon(Mouse_Position);
 		Hud.Interaction_SaveAndLoad(Mouse_Position, Save, Load);
 		Hud.Interaction_Layer(Mouse_Position);
 		Hud.Interaction_MenuAndTest(Mouse_Position, PlayerIsPresent);
@@ -580,6 +582,10 @@ void Editeur::display_EtageforMap()
 			Current.Get_Sprite().setColor(Color::White);
 		}
 	}
+
+	for (Dungeon& Current : dungeon)
+		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
+			Current.Display_World();
 
 	for (Npc& Current : NpcList)
 		if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))

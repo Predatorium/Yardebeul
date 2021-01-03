@@ -5,7 +5,14 @@
 #include "Button.h"
 #include "Views.h"
 
-enum class State;
+enum class Game_State;
+
+enum class Etat
+{
+	IsMyTurn,
+	WaitMyTurn,
+	Finish,
+};
 
 class Fight_System
 {
@@ -15,20 +22,26 @@ private :
 	Box Pv_Enemy;
 	Hero* Player;
 	Npc* Enemy;
-	State Previous_state;
+	Game_State Previous_state;
 	Sprite sprite;
 	list<Button_Text> Button;
 	float timer;
-	Views FixView;
 	Text Texte;
+	enum class Etape
+	{
+		Attack,
+		AfDamage,
+		AfEffect,
+	};
+	Etape etape;
 
-	bool Turn_Player;
-	bool Turn_Enemy;
+	Etat Turn_Player;
+	Etat Turn_Enemy;
 	int Selection;
 
 public :
 	Fight_System() = default;
-	Fight_System(Hero* _player, Npc* _enemy, State _state);
+	Fight_System(Hero* _player, Npc* _enemy, Game_State _state);
 	~Fight_System() = default;
 
 	void Capacity_Select();

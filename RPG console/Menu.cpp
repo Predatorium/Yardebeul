@@ -5,6 +5,7 @@
 #include "Controle.h"
 #include "Data.h"
 #include "World.h"
+#include "Game_Manager.h"
 
 Menu::Menu(int _menutype)
 	: sprite(getTexture("Font"))
@@ -134,7 +135,7 @@ void Menu::Switch_Mode()
 	}
 }
 
-void Menu::Update_Main(Level* _level)
+void Menu::Update_Main()
 {
 	timer += MainTime.GetTimeDeltaF();
 
@@ -147,7 +148,7 @@ void Menu::Update_Main(Level* _level)
 		{
 			if (Selection == 0)
 			{
-				*_level = World();
+				Game_Manager::Get_Singleton().Get_World() = World();
 				StateManager::Get_Singleton().ChangeState(State::GAME);
 			}
 			if (Selection == 1)
@@ -171,20 +172,20 @@ void Menu::Update_Main(Level* _level)
 			if (Selection + 1 == Current_Button.Get_Num())
 				if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f && Current_Button.Get_Name() != "Name : ----")
 				{
-					*_level = World(Current_Button.Get_Num());
+					Game_Manager::Get_Singleton().Get_World() = World(Current_Button.Get_Num());
 					StateManager::Get_Singleton().ChangeState(State::GAME);
 				}
 	}
 }
 
-void Menu::Update_Pause(Level* _level, bool& _pause)
+void Menu::Update_Pause(bool& _pause)
 {
 	timer += MainTime.GetTimeDeltaF();
 
 	Update_Select();
 	Switch_Mode();
 
-	if (!Menu_Load && !Option)
+	if (!Menu_Load && !Option && Game_Manager::Get_Singleton().state != Game_State::DUNGEON)
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
 		{
@@ -205,14 +206,29 @@ void Menu::Update_Pause(Level* _level, bool& _pause)
 			timer = 0;
 		}
 	}
+	else if (!Menu_Load && !Option)
+	{
+		if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
+		{
+			if (Selection == 0)
+				_pause = false;
+			if (Selection == 1)
+			{
+				StateManager::Get_Singleton().ChangeState(State::MENU);
+				Game_Manager::Get_Singleton().ChangeState(Game_State::WORLD);
+			}
+
+			timer = 0;
+		}
+	}
 	else if (Menu_Load)
 	{
 		for (Bouton_Load& Current_Button : Emplacement)
 			if (Selection + 1 == Current_Button.Get_Num())
 				if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
 				{
-					Data::Save_Player(Selection + 1, StateManager::Get_Singleton().Get_World().Get_Hero());
-					_level->ScreenShot(Selection + 1);
+					Data::Save_Player(Selection + 1, Game_Manager::Get_Singleton().Get_World().Get_Hero(), Game_Manager::Get_Singleton().Get_World());
+					Game_Manager::Get_Singleton().Get_World().ScreenShot(Selection + 1);
 					Emplacement.clear();
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 300), "Save 1", 1));
 					Emplacement.push_back(Bouton_Load(Vector2f(960, 540), "Save 2", 2));

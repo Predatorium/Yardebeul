@@ -1,74 +1,38 @@
 #include "Chest.h"
+#include "Consumables_Container.h"
+#include "Room.h"
 
-Chest::Chest()
+Chest::Chest(Vector2f _position)
+	: Entity("Chest")
 {
-	Probabilité = 0;
+	Position = _position;
+	Probabilité = irandom(1, 3);
+
+	string object;
+	if (Probabilité == 1)
+		object = "Potion Soin";
+	if (Probabilité == 2)
+		object = "Potion Mana";
+	if (Probabilité == 3)
+		object = "Potion Endu";
+
+	int rand = irandom(3, 3);
+
+	Objet = new Consumable(Consumables.Get_Consumable(object), rand);
+
+	sprite.setPosition(Position);
 }
 
-void Chest::Take_Objet(Hero& _hero, int x)
+void Chest::Take_Objet(Room& _room, Vector2f _player)
 {
-	int i = 0;
-	for (Item* Objet_actuel : Objet)
+	if (Keyboard::isKeyPressed(Keyboard::E) && Circle_Collision(Position, _player, 30, 30) && Objet != nullptr)
 	{
-		i++;
-		if (i == x)
-		{
-			Weapon* tmpweapon = dynamic_cast<Weapon*>(Objet_actuel);
-			if (tmpweapon)
-			{
-				if (Objet_actuel == NULL)
-					throw Erreur(1, "L'objet est Null", 1);
-				else
-					_hero.Set_Weapon(*tmpweapon);
-			}
-
-			Armor* tmpArmor = dynamic_cast<Armor*>(Objet_actuel);
-			if (tmpArmor)
-			{
-				if (Objet_actuel == NULL)
-					throw Erreur(1, "L'objet est Null", 1);
-				else
-					_hero.Set_Armor(*tmpArmor);
-			}
-
-			Consumable* tmpConsumable = dynamic_cast<Consumable*>(Objet_actuel);
-			if (tmpConsumable)
-			{
-				if (Objet_actuel == NULL)
-					throw Erreur(1, "L'objet est Null", 1);
-				else
-					_hero.Add_Consumable(*tmpConsumable);
-			}
-
-			break;
-		}
+		_room.Add_Consumable(*Objet, Position);
+		Objet = nullptr;
 	}
 }
 
-void Chest::display_coffre()
+void Chest::Display()
 {
-	cout << "Dans le Coffre il y a" << endl;
-	for (Item* Objet_actuel : Objet)
-	{
-		Weapon* tmpweapon = dynamic_cast<Weapon*>(Objet_actuel);
-		if (tmpweapon)
-		{
-			cout << "Epee :" << endl;
-		}
-
-		Armor* tmpArmor = dynamic_cast<Armor*>(Objet_actuel);
-		if (tmpArmor)
-		{
-			cout << "armor :" << endl;
-		}
-
-		Consumable* tmpConsumable = dynamic_cast<Consumable*>(Objet_actuel);
-		if (tmpConsumable)
-		{
-			cout << "Consommable :" << endl;
-		}
-		cout << endl;
-	}
-	system("pause");
-	system("CLS");
+	App.Get_Window().draw(sprite);
 }

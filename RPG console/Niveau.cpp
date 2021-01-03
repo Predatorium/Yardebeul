@@ -2,26 +2,20 @@
 #include "Menu.h"
 #include "Npc_Container.h"
 
-bool Level::Get_Void(Vector2i _position)
+bool Level::Get_Void(Vector2f _position)
 {
 	for (Maps& Current_Map : Back_Layer)
-	{
-		if ((int)Current_Map.Get_Position().x / Taille_tile == _position.x &&
-			(int)Current_Map.Get_Position().y / Taille_tile == _position.y)
+		if (FloatRect(Current_Map.Get_Position().x, Current_Map.Get_Position().y, Taille_tile, Taille_tile).contains(_position))
 			return false;
-	}
 
 	return true;
 }
 
-bool Level::Get_MapsPos(Vector2i _position)
+bool Level::Get_MapsPos(Vector2f _position)
 {
 	for (Maps& Current_Map : Player_Layer)
-	{
-		if ((int)Current_Map.Get_Position().x / Taille_tile == _position.x &&
-			(int)Current_Map.Get_Position().y / Taille_tile == _position.y)
+		if (FloatRect(Current_Map.Get_Position().x, Current_Map.Get_Position().y,Taille_tile,Taille_tile).contains(_position))
 			return true;
-	}
 
 	if (Get_Void(_position) == false)
 		return false;
@@ -31,34 +25,34 @@ bool Level::Get_MapsPos(Vector2i _position)
 
 void Level::Collision(Character& _Character)
 {
-	Vector2i NextPosOnMap;
+	Vector2f NextPosOnMap;
 
-	NextPosOnMap.x = (int)_Character.Get_Position().x / Taille_tile;
-	NextPosOnMap.y = (int)_Character.Get_Position().y / Taille_tile;
+	NextPosOnMap.x = _Character.Get_Position().x;
+	NextPosOnMap.y = _Character.Get_Position().y;
 
 	if (_Character.Get_Right() == true)
 	{
-		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
+		NextPosOnMap.x = ((_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 2) + 200 * MainTime.GetTimeDeltaF()));
+		NextPosOnMap.y = (_Character.Get_Position().y);
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Right(false);
 
-		NextPosOnMap.x = (int)((_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 2) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 2)) / Taille_tile;
+		NextPosOnMap.x = ((_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 2) + 200 * MainTime.GetTimeDeltaF()));
+		NextPosOnMap.y = (_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 2));
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Right(false);
 	}
 	if (_Character.Get_Left() == true)
 	{
-		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(_Character.Get_Position().y) / Taille_tile;
+		NextPosOnMap.x = ((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()));
+		NextPosOnMap.y = (_Character.Get_Position().y);
 		if ((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()) < 0)
 			NextPosOnMap.x--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Left(false);
 
-		NextPosOnMap.x = (int)((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
-		NextPosOnMap.y = (int)(_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 2)) / Taille_tile;
+		NextPosOnMap.x = ((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()));
+		NextPosOnMap.y = (_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 2));
 		if ((_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 2) - 200 * MainTime.GetTimeDeltaF()) < 0)
 			NextPosOnMap.x--;
 		if (Get_MapsPos(NextPosOnMap) == true)
@@ -66,188 +60,31 @@ void Level::Collision(Character& _Character)
 	}
 	if (_Character.Get_Down() == true)
 	{
-		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 1.75) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 4));
+		NextPosOnMap.y = ((_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 1.75) + 200 * MainTime.GetTimeDeltaF()));
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Down(false);
 
-		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 1.75) + 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 4));
+		NextPosOnMap.y = ((_Character.Get_Position().y + (_Character.Get_Sprite().getGlobalBounds().height / 1.75) + 200 * MainTime.GetTimeDeltaF()));
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Down(false);
 	}
 	if (_Character.Get_Up() == true)
 	{
-		NextPosOnMap.x = (int)(_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (_Character.Get_Position().x - (_Character.Get_Sprite().getGlobalBounds().width / 4));
+		NextPosOnMap.y = ((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()));
 		if ((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) < 0)
 			NextPosOnMap.y--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Up(false);
 
-		NextPosOnMap.x = (int)(_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 4)) / Taille_tile;
-		NextPosOnMap.y = (int)((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) / Taille_tile);
+		NextPosOnMap.x = (_Character.Get_Position().x + (_Character.Get_Sprite().getGlobalBounds().width / 4));
+		NextPosOnMap.y = ((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()));
 		if ((_Character.Get_Position().y - 200 * MainTime.GetTimeDeltaF()) < 0)
 			NextPosOnMap.y--;
 		if (Get_MapsPos(NextPosOnMap) == true)
 			_Character.Set_Up(false);
-	}
-}
-
-void Level::Load_Map(string _file)
-{
-	Back_Layer.clear();
-	Deco_Layer.clear();
-	Player_Layer.clear();
- 	Front_Layer.clear();
-	NpcList.clear();
-
-	ifstream Read_Map(_file);
-	if (Read_Map.is_open())
-	{
-		string line;
-		string layer;
-
-		Read_Map >> Range_Niveau.x;
-		Read_Map >> Range_Niveau.y;
-
-		while (getline(Read_Map, line))
-		{
-			string name = "----";
-			int tmpposX = 0;
-			int tmpposY = 0;
-
-			if (line == "Back_Layer")
-				layer = "Back_Layer";
-			else if (line == "Player_Layer")
-				layer = "Player_Layer";
-			else if (line == "Deco_Layer")
-				layer = "Deco_Layer";
-			else if (line == "Front_Layer")
-				layer = "Front_Layer";
-			else if (line == "Npc_List")
-				layer = "Npc_List";
-			else if (layer == "Back_Layer" || layer == "Player_Layer" || layer == "Front_Layer" || layer == "Deco_Layer")
-			{
-				int tmpX = 0;
-				int tmpY = 0;
-				Biomes tmpbiome;
-
-				name = line.substr(0, line.find(" "));
-				line.erase(0, line.find(" ") + 1);
-
-				tmpposX = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
-
-				tmpposY = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
-
-				tmpX = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
-
-				tmpY = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
-
-				tmpbiome = static_cast<Biomes>(stoi(line));
-				line.erase(0, line.size());
-
-				if (layer == "Back_Layer")
-					Back_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
-				if (layer == "Player_Layer")
-					Player_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
-				if (layer == "Deco_Layer")
-					Deco_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
-				if (layer == "Front_Layer")
-					Front_Layer.push_back(Maps(Vector2f(tmpposX, tmpposY), Vector2i(tmpX, tmpY), name, tmpbiome));
-			}
-			else if (layer == "Npc_List")
-			{
-				name = line.substr(0, line.find(" "));
-				line.erase(0, line.find(" ") + 1);
-
-				tmpposX = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.find(" ") + 1);
-
-				tmpposY = stoi(line.substr(0, line.find(" ")));
-				line.erase(0, line.size());
-
-				NpcList.push_back(Npc(Npcs.Get_Npc(name), Vector2f(tmpposX, tmpposY)));
-			}
-
-			if (!Read_Map)
-				Read_Map.close();
-		}
-		Read_Map.close();
-	}
-}
-
-void Level::Save_Map(string _file)
-{
-	ofstream Write_Map(_file);
-	if (Write_Map.is_open())
-	{
-		list<Maps> tmpMaps = Back_Layer;
-		Write_Map << Range_Niveau.x << endl;
-		Write_Map << Range_Niveau.y << endl;
-		int i = 0;
-		Write_Map << "Back_Layer";
-		string tmp = "Back_Layer";
-		bool done = true;
-		while (done)
-		{
-			for (Maps& Actual_Map : tmpMaps)
-			{
-				i++;
-				Write_Map << endl;
-				Write_Map << Actual_Map.Get_Name() << " ";
-
-				Write_Map << to_string(static_cast<int>(Actual_Map.Get_Position().x)) << " ";
-
-				Write_Map << to_string(static_cast<int>(Actual_Map.Get_Position().y)) << " ";
-
-				Write_Map << to_string(Actual_Map.Get_Tile().x) << " ";
-
-				Write_Map << to_string(Actual_Map.Get_Tile().y) << " ";
-
-				Write_Map << to_string(static_cast<int>(Actual_Map.Get_Biome()));
-			}
-			if (i == Back_Layer.size() && tmp == "Back_Layer")
-			{
-				Write_Map << endl;
-				Write_Map << "Player_Layer";
-				tmp = "Player_Layer";
-				tmpMaps = Player_Layer;
-			}
-			if (i == Back_Layer.size() + Player_Layer.size() && tmp == "Player_Layer")
-			{
-				Write_Map << endl;
-				Write_Map << "Deco_Layer";
-				tmp = "Deco_Layer";
-				tmpMaps = Deco_Layer;
-			}
-			if (i == Back_Layer.size() + Player_Layer.size() + Deco_Layer.size() && tmp == "Deco_Layer")
-			{
-				Write_Map << endl;
-				Write_Map << "Front_Layer";
-				tmp = "Front_Layer";
-				tmpMaps = Front_Layer;
-			}
-			if (i == Back_Layer.size() + Deco_Layer.size() + Player_Layer.size() + Front_Layer.size() && tmp == "Front_Layer")
-			{
-				Write_Map << endl;
-				Write_Map << "Npc_List";
-				done = false;
-			}
-		}
-
-		for (Npc& Current : NpcList)
-		{
-			Write_Map << endl;
-			Write_Map << Current.Get_Name() << " ";
-			Write_Map << to_string(static_cast<int>(Current.Get_Position().x)) << " ";
-			Write_Map << to_string(static_cast<int>(Current.Get_Position().y));
-		}
-		Write_Map.close();
 	}
 }
 
@@ -437,13 +274,7 @@ void Level::Update()
 	}
 
 	if (Pause == true)
-		Menu_Pause->Update_Pause(this, Pause);
-
-	if (Keyboard::isKeyPressed(Keyboard::F4) && Timer > 0.2f)
-	{
-		Change_ShapeMap = !Change_ShapeMap;
-		Timer = 0;
-	}
+		Menu_Pause->Update_Pause(Pause);
 }
 
 void Level::Display()
@@ -527,22 +358,15 @@ void Level::Display()
 			Current.Display_Dialogue();
 
 	if (Player.Get_IsInventory() == true)
+	{
 		Player.Get_Inventory().Display();
+		Player.Get_Inventory().Display_CurrentItem(Player);
+	}
 
 	if (Pause == true)
 		Menu_Pause->Display_Pause();
 
-	if (Change_ShapeMap)
-	{
-		R_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingRectangle, Screen));
-
-		App.Get_Window().draw(R_MiniMap);
-	}
-	if (!Change_ShapeMap)
-	{
-		C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Screen));
-		
-		C_MiniMap.setTextureRect(IntRect(420, 0, 1080, 1080));
-		App.Get_Window().draw(C_MiniMap);
-	}
+	C_MiniMap.setTexture(&Get_TextureMap(&Views::Occlusion_CullingCircle, Screen));
+	C_MiniMap.setTextureRect(IntRect(420, 0, 1080, 1080));
+	App.Get_Window().draw(C_MiniMap);
 }

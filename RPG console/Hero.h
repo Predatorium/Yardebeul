@@ -21,9 +21,7 @@ private :
 	bool Interaction;
 	bool IsInventory;
 
-	Weapon* weapon;
-	Armor* armor;
-	list<Consumable*> consumable;
+	Consumable* consumable;
 
 public :
 	Hero() = default;
@@ -33,7 +31,6 @@ public :
 	int Pourcentage_Niveau();
 	void Gain_Xp(float _gainxp);
 	void Passage_Niveau();
-	void Affectation_Stat(Effect _effet);
 	void Amelioration_stat();
 
 	inline int Get_Xptotal() { return Xp_Total; };
@@ -42,16 +39,11 @@ public :
 
 	inline float Get_Time() { return Time; };
 	inline bool Get_Interact() { return Interaction; };
-	inline Weapon* Get_Weapon() { return weapon; };
-	inline Armor* Get_Armor() { return armor; };
-	inline list<Consumable*> Get_Consumable() { return consumable; };
-	Consumable* Get_OneConsumable(int _select);
+	inline Consumable* Get_Consumable() { return consumable; };
 	inline bool Get_IsInventory() { return IsInventory; };
 	inline Inventory& Get_Inventory() { return inventory; };
 
-	inline void Set_Weapon(Weapon _arme) { weapon = new Weapon(_arme); };
-	inline void Set_Armor(Armor _armure) { armor = new Armor(_armure); };
-	inline void Add_Consumable(Consumable _consomable) { consumable.push_back(new Consumable(_consomable)); };
+	void Set_Consumable(Consumable _consomable);
 	inline void Set_XpTotal(float _xp) { Xp_Total = _xp; };
 	inline void Set_XpLevel(float _xp) { Xp_Level = _xp; };
 	inline void Set_CapacityPoint(int _capacité) { Capacity_Point = _capacité; };
@@ -59,6 +51,8 @@ public :
 	inline void Set_IsInventory(bool _bool) { IsInventory = _bool; };
 
 	virtual void Update();
+	int Use_Consumable(Button_Text& _b);
 	void Display_Fight(Vector2f _scale);
+	void Display_HUD();
 	virtual void Display();
 };

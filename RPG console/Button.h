@@ -61,8 +61,10 @@ private:
 
 public:
 	Box() = default;
-	Box(string _max, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color);
+	Box(int _max, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color);
 	~Box() = default;
+
+	inline RectangleShape& Get_Shape() { return Outline; };
 
 	void Display(string _currentstat);
 };

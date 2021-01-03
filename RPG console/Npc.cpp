@@ -1,74 +1,63 @@
 #include "Npc.h"
 #include "SpriteManager.h"
 #include "Dialogue_Container.h"
-#include "StateManager.h"
+#include "Game_Manager.h"
 
-Npc::Npc(string _name, Armor _armor, Weapon _weapon, int _level, int _hp, int _speed)
-	: Character(_name, _armor, _weapon)
+Npc::Npc(string _name, Armor _armor, Weapon _weapon, int _level, int _hp, int _speed, int _skin)
+	: Character(_name, _hp, 50, 25, _speed, _armor, _weapon)
 {
 	Level = _level;
-	Life_Point = _hp;
-	Life_Max = Life_Point;
-	Mana = 50;
-	Endurance = 25;
-	Mental_Health = 100;
-	Speed = _speed;
 	Attitude = Comportement::Agressif;
 	Orientation = Direction::Left;
 	IsDialogue = false;
-	Right = false;
-	Left = false;
-	Down = false;
-	Up = false;
 
 	if (Name == "Knucles")
 	{
-		Anim["Walk_Down"] = Animator(IntRect(160, 189, 61, 43), 3, 0.15f, 0);
-		Anim["Walk_Right"] = Animator(IntRect(348, 189, 40, 44), 3, 0.15f, 0);
-		Anim["Walk_Top"] = Animator(IntRect(5, 189, 50, 42), 3, 0.15f, 0);
+		Anim["Walk_Down"] = Animator(IntRect(160, 189 + (_skin * 490), 61, 43), 3, 0.15f, 0);
+		Anim["Walk_Right"] = Animator(IntRect(348, 189 + (_skin * 490), 40, 44), 3, 0.15f, 0);
+		Anim["Walk_Top"] = Animator(IntRect(5, 189 + (_skin * 490), 50, 42), 3, 0.15f, 0);
 
-		Anim["Beat_Down"] = Animator(IntRect(5, 72, 54, 44), 8, 0.15f, 0);
-		Anim["Beat_Right"] = Animator(IntRect(5, 121, 42, 45), 8, 0.15f, 0);
-		Anim["Beat_Top"] = Animator(IntRect(5, 23, 50, 44), 8, 0.15f, 0);
+		Anim["Beat_Down"] = Animator(IntRect(5, 72 + (_skin * 490), 54, 44), 8, 0.15f, 0);
+		Anim["Beat_Right"] = Animator(IntRect(5, 121 + (_skin * 490), 42, 45), 8, 0.15f, 0);
+		Anim["Beat_Top"] = Animator(IntRect(5, 23 + (_skin * 490), 50, 44), 8, 0.15f, 0);
 	}
 	if (Name == "Yves")
 	{
-		Anim["Walk_Down"] = Animator(IntRect(1057, 19, 24, 38), 6, 0.15f, 1);
-		Anim["Walk_Right"] = Animator(IntRect(1057, 58, 28, 37), 6, 0.15f, 1);
-		Anim["Walk_Top"] = Animator(IntRect(1057, 96, 24, 38), 6, 0.15f, 1);
+		Anim["Walk_Down"] = Animator(IntRect(365 + (_skin * 692), 19, 24, 38), 6, 0.15f);
+		Anim["Walk_Right"] = Animator(IntRect(365 + (_skin * 692), 58, 28, 37), 6, 0.15f);
+		Anim["Walk_Top"] = Animator(IntRect(365 + (_skin * 692), 96, 24, 38), 6, 0.15f);
 
-		Anim["Beat_Down"] = Animator(IntRect(941, 19, 24, 36), 4, 0.15f, 1);
-		Anim["Beat_Right"] = Animator(IntRect(941, 56, 26, 35), 4, 0.15f, 1);
-		Anim["Beat_Top"] = Animator(IntRect(941, 92, 24, 36), 4, 0.15f, 1);
+		Anim["Beat_Down"] = Animator(IntRect(249 + (_skin * 692), 19, 24, 36), 4, 0.15f);
+		Anim["Beat_Right"] = Animator(IntRect(249 + (_skin * 692), 56, 26, 35), 4, 0.15f);
+		Anim["Beat_Top"] = Animator(IntRect(249  + (_skin * 692), 92, 24, 36), 4, 0.15f);
 	}
+
+	if (Name == "Boss") 
+	{
+		Anim["Walk_Down"] = Animator(IntRect(190, 134 + (_skin * 543), 33, 39), 5, 0.15f, 0);
+		Anim["Walk_Right"] = Animator(IntRect(360, 134 + (_skin * 543), 35, 37), 5, 0.15f, 0);
+		Anim["Walk_Top"] = Animator(IntRect(5, 134 + (_skin * 543), 36, 39), 5, 0.15f, 0);
+
+		Anim["Beat_Down"] = Animator(IntRect(5, 71 + (_skin * 543), 33 , 39 ), 10, 0.15f, 0);
+		Anim["Beat_Right"] = Animator(IntRect(340, 71 + (_skin * 543), 33 , 40 ), 10, 0.15f, 0);
+		Anim["Beat_Top"] = Animator(IntRect(5, 23 + (_skin * 543), 36, 43), 10, 0.15f, 0);
+	}
+
+	Name += to_string(_skin + 1);
 }
 
-Npc::Npc(string _name, int _level, int _hp, int _speed, Dialogue &_dial)
-	: Character(_name, Armor(), Weapon())
+Npc::Npc(string _name, int _level, int _hp, int _speed, int _skin)
+	: Character(_name, _hp, 50, 25, _speed, Armor(), Weapon())
 {
 	Level = _level;
-	Life_Point = _hp;
-	Life_Max = Life_Point;
-	Mana = 50;
-	Endurance = 25;
-	Mental_Health = 100;
-	Speed = _speed;
 	Attitude = Comportement::Amical;
 	Orientation = Direction::Down;
 	IsDialogue = false;
-	Right = false;
-	Left = false;
-	Down = false;
-	Up = false;
-	dialogue = _dial;
 
 	if (Name == "Fairy")
-	{
-		Anim["Beat_Down"] = Animator(IntRect(5, 99, 44, 46), 16, 0.15f, 0);
+		Anim["Beat_Down"] = Animator(IntRect(5, 99 + (_skin * 286), 44, 46), 16, 0.15f, 0);
 
-		sprite.setTextureRect(IntRect(5, 99, 44, 46));
-		sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
-	}
+	Name += to_string(_skin + 1);
 }
 
 Npc::Npc(const Npc& _npc, Vector2f _position)
@@ -141,7 +130,7 @@ void Npc::Update_Attack(Hero& _player)
 			Down = true;
 		}
 		if (Circle_Collision(Position, _player.Get_Position(), 25, 25))
-			StateManager::Get_Singleton().State_Fight(&_player, this);
+			Game_Manager::Get_Singleton().State_Fight(&_player, this);
 	}
 	else
 	{
@@ -155,8 +144,11 @@ void Npc::Update_Attack(Hero& _player)
 void Npc::Update_Dialogue(bool& _dial, Hero _player)
 {
 	if (Circle_Collision(Position, _player.Get_Position(), 50, 50)
-		&& _player.Get_Interact() == true && &dialogue != nullptr)
+		&& _player.Get_Interact() == true && &dialogue != nullptr && IsDialogue == false)
+	{
+		dialogue = Dialogues.Random_Dialogue();
 		_dial = true;
+	}
 
 	if (IsDialogue)
 		dialogue.Update(_dial);

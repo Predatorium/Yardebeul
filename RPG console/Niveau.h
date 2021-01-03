@@ -1,12 +1,12 @@
 #pragma once
 #include "Tools.h"
 #include "Hero.h"
-#include "Npc.h"
-#include "Weapon.h"
-#include "Armor.h"
-#include "Consumable.h"
 #include "Map.h"
 #include "Views.h"
+#include "Weapons_Container.h"
+#include "Armors_Container.h"
+#include "Consumables_Container.h"
+#include "Npc_Container.h"
 
 class Menu;
 
@@ -26,7 +26,6 @@ protected :
 	list<Consumable> ConsumableList;
 
 	Menu* Menu_Pause;
-	bool Change_ShapeMap;
 
 	CircleShape C_MiniMap;
 	RectangleShape R_MiniMap;
@@ -51,20 +50,18 @@ public :
 	inline Vector2i Get_RangeNiveau() { return Range_Niveau; };
 	inline bool Get_Save() { return Save; };
 	inline bool Get_Load() { return Load; };
-	inline Hero Get_Hero() { return Player; };
+	inline Hero& Get_Hero() { return Player; };
 
 	inline void Set_Hero(Hero _hero) { Player = _hero; };
 
-	bool Get_Void(Vector2i _position);
-	bool Get_MapsPos(Vector2i _position);
+	bool Get_Void(Vector2f _position);
+	bool Get_MapsPos(Vector2f _position);
 	void Collision(Character& _Character);
-	void Load_Map(string _file);
-	void Save_Map(string _file);
 
 	const Texture& Get_TextureMap(function<bool(Views&, Vector2f)> f, Views _view);
 	void ScreenShot(int _party);
 	void Destroy_List();
 
 	void Update();
-	void Display();
+	virtual void Display() = 0;
 };

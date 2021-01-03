@@ -82,14 +82,14 @@ void Views::Update_Editeur(Vector2i _limit, Vector2f _position)
 void Views::Update(Vector2i _limit, Vector2f _player)
 {
 	if (_player.x > getSize().x / 2 && _player.x < (_limit.x * 32) - getSize().x / 2)
-		setCenter(_player.x, getSize().y);
+		this->setCenter(_player.x, getSize().y);
 	else if (_player.x < getSize().x / 2)
 		setCenter(getSize().x / 2, getSize().y);
 	else if (_player.x > (_limit.x * 32) - getSize().x / 2)
 		setCenter((_limit.x * 32) - getSize().x / 2, getSize().y);
 
 	if (_player.y > getSize().y / 2 && _player.y < (_limit.y * 32) - getSize().y / 2)
-		setCenter(getCenter().x, _player.y);
+		this->setCenter(getCenter().x, _player.y);
 	else if (_player.y < getSize().y / 2)
 		setCenter(getCenter().x, getSize().y / 2);
 	else if (_player.y > (_limit.y * 32) - getSize().y / 2)

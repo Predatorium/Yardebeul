@@ -14,6 +14,7 @@ public :
 	void init();
 
 	Dialogue& Get_Dialogue(string _id);
+	Dialogue& Random_Dialogue();
 };
 
 extern Dialogue_Container Dialogues;

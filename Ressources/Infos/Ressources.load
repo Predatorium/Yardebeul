@@ -2,7 +2,8 @@ Sprite Grass_lands ../Ressources/Sprite/Monde/Grasslands_Tiles.png
 Sprite Caverne ../Ressources/Sprite/Monde/Cave_Tiles.png
 Sprite Desert ../Ressources/Sprite/Monde/Desert_Tiles.png
 Sprite Montagne ../Ressources/Sprite/Monde/Mountain_Tiles.png
-Sprite Grass ../Ressources/Sprite/Monde/Grass_Tiles.png
+Sprite Castle1 ../Ressources/Sprite/Monde/HyruleCastleBase.png
+Sprite Castle2 ../Ressources/Sprite/Monde/DW_HCOutsideTiles.png
 Sprite Beach ../Ressources/Sprite/Monde/Beach_Tiles.png
 Sprite Crypt ../Ressources/Sprite/Monde/Crypt_Tiles.png
 Sprite Dirt ../Ressources/Sprite/Monde/Dirt_Tiles.png
@@ -10,13 +11,29 @@ Sprite Shop ../Ressources/Sprite/Monde/Shop_Tiles.png
 Sprite Tos_Inside ../Ressources/Sprite/Monde/ToS_Tiles_Inside.png
 Sprite Tos_Outside ../Ressources/Sprite/Monde/ToS_Tiles_Outside.png
 
+Sprite Chest ../Ressources/Sprite/Monde/barrel1.png
+Sprite First ../Ressources/Sprite/Monde/First.png
+Sprite Second ../Ressources/Sprite/Monde/Second.png
+Sprite Third ../Ressources/Sprite/Monde/Third.png
+
+Sprite Soin ../Ressources/Sprite/Joueur/Soin.png
+Sprite Immolation ../Ressources/Sprite/Joueur/Immolation.png
+Sprite Gel ../Ressources/Sprite/Joueur/Gel.png
+Sprite Rafale ../Ressources/Sprite/Joueur/Rafale.png
+Sprite Choc ../Ressources/Sprite/Joueur/Choc.png
+
 Sprite Fight ../Ressources/Sprite/Monde/Fight.jpg
 Sprite Font ../Ressources/Sprite/Menu/menu_main.jpg
 Sprite Hero ../Ressources/Sprite/Joueur/Hero.png
 Sprite Epee ../Ressources/Sprite/Joueur/Epee.png
+Sprite Armor ../Ressources/Sprite/Joueur/Armor.png
+Sprite Potion ../Ressources/Sprite/Joueur/Potion.png
+
 Sprite Knucles ../Ressources/Sprite/Npc/Knucles.png
+Sprite Boss ../Ressources/Sprite/Npc/Boss.png
 Sprite Yves ../Ressources/Sprite/Npc/Yves.png
 Sprite Fairy ../Ressources/Sprite/Npc/Fairy.png
+
 Sprite Fleche ../Ressources/Sprite/Menu/Fleche.png
 Sprite Save ../Ressources/Sprite/Menu/Save.png
 Sprite Load ../Ressources/Sprite/Menu/Load.png

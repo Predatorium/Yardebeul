@@ -50,8 +50,8 @@ public :
 
 	void Update_Select();
 	void Switch_Mode();
-	void Update_Main(Level* _level);
-	void Update_Pause(Level* _level, bool& _pause);
+	void Update_Main();
+	void Update_Pause(bool& _pause);
 	void Display_Main();
 	void Display_Pause();
 };

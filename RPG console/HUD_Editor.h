@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "Button.h"
 #include "Npc_Container.h"
+#include "Dungeon.h"
 
 class HUD_Editor
 {
@@ -45,7 +46,9 @@ public:
 
 	void Load_MenuBiome();
 	void Interaction_NPC(Vector2f _mouse);
+	void Interaction_Dungeon(Vector2f _mouse);
 	void Set_Npc(Vector2f _mouse, list<Npc>& _npc, Vector2i _limit);
+	void Set_Dungeon(Vector2f _mouse, list<Dungeon>& _d);
 	void Interaction_Biome(Vector2f _mouse);
 	void Interaction_SaveAndLoad(Vector2f _mouse, bool& _save, bool& _load);
 	void Interaction_Layer(Vector2f _mouse);

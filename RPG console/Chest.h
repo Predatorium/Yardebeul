@@ -3,23 +3,22 @@
 #include "Weapons_Container.h"
 #include "Armors_Container.h"
 #include "Consumables_Container.h"
-#include "Hero.h"
 
-class Chest
+class Room;
+
+class Chest : public Entity
 {
 private :
 	int Probabilité;
-	list<Item*> Objet;
+	Consumable* Objet;
 
 public :
-	Chest();
+	Chest() = default;
+	Chest(Vector2f _position);
 	~Chest() = default;
 
-	void Take_Objet(Hero& _hero, int x);
-	
-	inline void Add_Arme(Weapon& _arme) { Objet.push_back(new Weapon(_arme)); };
-	inline void Add_Armure(Armor& _armure) { Objet.push_back(new Armor(_armure)); };
-	inline void Add_Consommable(Consumable& _consommable) { Objet.push_back(new Consumable(_consommable)); };
+	void Take_Objet(Room& _room, Vector2f _player);
 
-	void display_coffre();
+	virtual void Update() {};
+	void Display();
 };

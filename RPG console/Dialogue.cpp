@@ -86,7 +86,7 @@ void Dialogue::Update(bool& _dialogue)
 				if (Current_Button.Get_Dial() == nullptr)
 				{
 					Id.pop_back();
-					*this = Dialogues.Get_Dialogue(Id + to_string(1));
+					*this = Dialogues.Random_Dialogue();
 					_dialogue = false;
 				}
 				else

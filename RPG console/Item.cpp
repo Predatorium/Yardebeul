@@ -1,10 +1,9 @@
-#include "Item.h"
+ #include "Item.h"
 #include "SpriteManager.h"
 
-Item::Item(string _name, int _price, Effect _effect)
+Item::Item(string _name, Effect _effect)
 {
 	Name = _name;
-	Price = _price;
 	effect = _effect;
 	PickUp = false;
 	sprite = Sprite(getTexture(Name.substr(0, Name.find(" "))));
@@ -12,7 +11,8 @@ Item::Item(string _name, int _price, Effect _effect)
 
 void Item::Display_Inventory(Vector2f _scale)
 {
-	Anim[Name].Animation(sprite);
+	if (Anim[Name] != Animator())
+		Anim[Name].Animation(sprite);
 	sprite.setOrigin(Vector2f(10.5, 15));
 	sprite.setPosition(Position);
 	sprite.setScale(_scale);

@@ -3,6 +3,7 @@
 #include "Armor.h"
 #include "Weapon.h"
 #include "Entity.h"
+#include "Sort.h"
 
 enum class Direction
 {
@@ -17,6 +18,8 @@ class Character : public Entity
 protected :
 	Direction Orientation;
 
+	list<Sort*> Spell;
+
 	bool Right;
 	bool Left;
 	bool Down;
@@ -25,17 +28,21 @@ protected :
 	Weapon* weapon;
 	Armor* armor;
 
+	list<Effect> Current_Effect;
+
 	int Level;
 	int Life_Point;
 	int Life_Max;
 	int Mana;
+	int Mana_Max;
 	int Endurance;
-	int Mental_Health;
+	int Endurance_Max;
 	int Speed;
+	int Speed_Max;
 
 public :
 	Character() = default;
-	Character(string _name, Armor _armor, Weapon _weapon);
+	Character(string _name, int _life, int _mana, int _endurance, int _speed, Armor _armor, Weapon _weapon);
 	~Character() = default;
 
 	inline Direction Get_Orientation() { return Orientation; };
@@ -44,7 +51,6 @@ public :
 	inline int Get_LifeMax() { return Life_Max; };
 	inline int Get_Mana() { return Mana; };
 	inline int Get_Endurance() { return Endurance; };
-	inline int Get_MentalHealth() { return Mental_Health; };
 	inline int Get_Speed() { return Speed; };
 	inline bool Get_Left() { return Left; };
 	inline bool Get_Right() { return Right; };
@@ -52,7 +58,12 @@ public :
 	inline bool Get_Down() { return Down; };
 	inline Weapon* Get_Weapon() { return weapon; };
 	inline Armor* Get_Armor() { return armor; };
+	Sort* Get_OneSpell(string _name);
+	Sort* Get_OneSpell(int _it);
+	list<Sort*> Get_Spell() { return Spell; };
 
+	inline void Set_Weapon(Weapon _arme) { weapon = new Weapon(_arme); };
+	inline void Set_Armor(Armor _armure) { armor = new Armor(_armure); };
 	inline void Set_Left(bool _bool) { Left = _bool; };
 	inline void Set_Right(bool _bool) { Right = _bool; };
 	inline void Set_Up(bool _bool) { Up = _bool; };
@@ -62,10 +73,21 @@ public :
 	void Add_Life(int _life);
 	void Set_Life(int _life);
 	inline void Set_LifeMax(int _lifemax) { Life_Max = _lifemax; };
-	inline void Set_Mana(int _mana) { Mana = _mana; };
-	inline void Set_Endurance(int _endurance) { Endurance = _endurance; };
-	inline void Set_MentalHealth(int _mentalhealth) { Mental_Health = _mentalhealth; };
-	inline void Set_Speed(int _speed) { Speed = _speed; };
+	void Add_Mana(int _mana);
+	inline void Set_Mana(int _mana) { Mana = _mana; Mana_Max = _mana; };
+	void Add_Endurance(int _endurance);
+	inline void Set_Endurance(int _endurance) { Endurance = _endurance; Endurance_Max = _endurance; };
+	void Add_Speed(int _speed);
+	inline void Set_Speed(int _speed) { Speed = _speed; Speed_Max = _speed; };
+
+	inline void Reset_Speed() { Speed = Speed_Max; };
+
+	void Add_Effect(Effect _effect) { Current_Effect.push_back(_effect); };
+	int Attack(Character* _c);
+	pair<string, int> Use_Spell(Character* _c, Sort _s);
+
+	map<string, int> Effect_Update();
+	void Effect_Received(Effect _effect);
 
 	virtual void Update() = 0;
 	virtual void Display() = 0;

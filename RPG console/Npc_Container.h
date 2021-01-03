@@ -13,6 +13,8 @@ public :
 	void init();
 
 	Npc Get_Npc(string _name);
+	Npc Random_Npc(Comportement _attitude);
+	Npc Random_Boss();
 
 	inline list<Npc> Get_List() { return Container; };
 };

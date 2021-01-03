@@ -42,7 +42,7 @@ enum class Biomes : int
 	Caverne,
 	Prairie,
 	Desert,
-	Grass,
+	Castle,
 	Beach,
 	Crypt,
 	Dirt,
@@ -55,26 +55,25 @@ enum class State_Event : int
 {
 	Combat,
 	Rencontre,
+	Coffre,
 	Rien,
-	Environnement,
-	Puzzle
 };
 
 enum class Element : int
 {
+	Neutre,
 	Feu,
 	Eau,
 	Air,
 	Terre,
-	Neutre
 };
 
 static float Affinité[5][5] = {
-0.5 ,0.5 ,2   ,1   ,1,
-2   ,0.5 ,1   ,0.5 ,1,
-0.5 ,1   ,0.5 ,2   ,1,
-1   ,2   ,0.5 ,0.5 ,1,
-1   ,1   ,1   ,1   ,1
+1   ,1   ,1   ,1   ,1	,
+1	,0.5 ,0.5 ,2   ,1	,
+1	,2   ,0.5 ,1   ,0.5	,
+1	,0.5 ,1   ,0.5 ,2	,
+1	,1   ,2   ,0.5 ,0.5	,
 };
 
 class Times

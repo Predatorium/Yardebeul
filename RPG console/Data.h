@@ -1,6 +1,8 @@
 #pragma once
 #include "Tools.h"
-#include "Hero.h"
+
+class Hero;
+class World;
 
 class Data
 {
@@ -10,6 +12,6 @@ public :
 	Data() = default;
 	~Data() = default;
 
-	static void Save_Player(int _party, Hero _joueur);
-	static void Load_Player(int _party, Hero& _joueur);
+	static void Save_Player(int _party, Hero _joueur, World _w);
+	static void Load_Player(int _party, Hero& _joueur, World &_w);
 };

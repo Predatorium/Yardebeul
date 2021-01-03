@@ -1,9 +1,9 @@
 #pragma once
 #include "Tools.h"
-#include "Niveau.h"
+#include "World.h"
 #include "HUD_Editor.h"
 
-class Editeur : public Level
+class Editeur : public World
 {
 private :
 	HUD_Editor Hud;

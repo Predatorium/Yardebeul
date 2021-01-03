@@ -1,9 +1,6 @@
 #include "Event.h"
 
-Events::Events()
+Events::Events(State_Event _type)
 {
-}
-
-Events::~Events()
-{
+	Type = _type;
 }

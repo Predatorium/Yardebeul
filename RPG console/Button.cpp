@@ -34,12 +34,12 @@ Button_Sprite::Button_Sprite(string _name, float _rotate, Vector2f _sizeShape, f
 	shape.setOutlineColor(color);
 }
 
-Box::Box(string _max, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
+Box::Box(int _max, string _nameFont, float _sizeTexte, Vector2f _sizeShape, float _outlinesize, Vector2f _Position, Color _color)
 {
 	Texte = Text("", getFont(_nameFont), _sizeTexte);
 	Position = _Position;
 	Texte.setFillColor(Color::White);
-	Max = stoi(_max);
+	Max = _max;
 
 	Size = _sizeShape;
 
@@ -60,12 +60,18 @@ Box::Box(string _max, string _nameFont, float _sizeTexte, Vector2f _sizeShape, f
 
 void Box::Display(string _currentstat)
 {
-	Texte.setString(_currentstat + to_string(Max));
+	if (Max > 0)
+		Texte.setString(_currentstat + to_string(Max));
+	else
+		Texte.setString(_currentstat);
 	Texte.setOrigin(getMidle(Texte));
 	Texte.setPosition(Position);
 	App.Get_Window().draw(Outline);
 
-	Rod.setSize(Vector2f((Outline.getSize().x / Max) * stoi(_currentstat), Size.y));
+	if (Max > 0)
+		Rod.setSize(Vector2f((Outline.getSize().x / Max) * stoi(_currentstat), Size.y));
+	else
+		Rod.setSize(Vector2f((Outline.getSize().x / 100) * stoi(_currentstat.substr(0, _currentstat.find(" "))), Size.y));
 
 	App.Get_Window().draw(Rod);
 	App.Get_Window().draw(Texte);

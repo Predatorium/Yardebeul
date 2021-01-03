@@ -20,8 +20,8 @@ private :
 
 public :
 	Npc() = default;
-	Npc(string _name, Armor _armor, Weapon _weapon, int _level, int _hp, int _speed);
-	Npc(string _name, int _level, int _hp, int _speed, Dialogue &_dial);
+	Npc(string _name, Armor _armor, Weapon _weapon, int _level, int _hp, int _speed, int _skin);
+	Npc(string _name, int _level, int _hp, int _speed, int _skin);
 	Npc(const Npc& _npc, Vector2f _position);
 	~Npc() = default;
 

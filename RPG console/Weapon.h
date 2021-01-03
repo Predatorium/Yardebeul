@@ -6,20 +6,20 @@ class Hero;
 class Weapon : public Item
 {
 private : 
-	int Damage;
-	int Durability;
+	int MaxDamage;
+	int MinDamage;
 
 public :
 	Weapon() = default;
-	Weapon(int _damage, int _durability, string _name, int _price, Effect _effect);
+	Weapon(int _damage, string _name, Effect _effect);
 	Weapon(const Weapon& _weapon, Vector2f _position);
 	~Weapon() = default;
 
-	inline int Get_Damage() { return Damage; };
-	inline int Get_Durability() { return Durability; };
+	inline int Damage() { return irandom(MinDamage, MaxDamage - MinDamage + 1); };
+	inline int Get_MaxDamage() { return MaxDamage; };
+	inline int Get_Mindamage() { return MinDamage; };
 
-	inline void Set_Damage(int _damage) { Damage = _damage; };
-	inline void Set_Durability(int _durability) { Durability = _durability; };
+	inline void Set_Damage(int _damage) { MaxDamage = _damage * 1.2; MinDamage = _damage * 0.8; };
 
 	bool operator == (const Weapon& _w) const { return Name == _w.Name; }
 	bool operator != (const Weapon& _w) const { return !operator==(_w); }

@@ -3,13 +3,12 @@
 #include "FontManager.h"
 #include "Hero.h"
 
-Armor::Armor(int _defense, int _durability, string _name, int _price, Effect _effect)
-	: Item(_name, _price, _effect)
+Armor::Armor(int _defense, string _name, Effect _effect)
+	: Item(_name, _effect)
 {
 	Defense = _defense;
-	Durability = _durability;
 	PickUp = false;
-
+	sprite.setOrigin(getMidle(sprite));
 }
 
 Armor::Armor(const Armor& _armor, Vector2f _position)
@@ -27,32 +26,26 @@ void Armor::Take_Item(Hero& _player)
 	}
 }
 
-void Armor::Display(Vector2f _position)
+void Armor::Display(Vector2f _circlecol)
 {
 	sprite.setPosition(Position);
 	sprite.setScale(Vector2f(1, 1));
 	App.Get_Window().draw(sprite);
 
-	if (Circle_Collision(Position, _position, 20, 20))
+	if (Circle_Collision(Position, _circlecol, 20, 20))
 	{
 		Text My(Name, getFont("Times"), 20);
-		My.setPosition(Position);
-
-		RectangleShape Shape(getMidle(My));
-		Shape.setFillColor(Color::Black);
-		Shape.setOutlineThickness(3);
-		Shape.setOutlineColor(Color::White);
-		Shape.setPosition(Position);
-
-		App.Get_Window().draw(Shape);
+		My.setOrigin(getMidle(My));
+		My.setFillColor(Color::Black);
+		My.setPosition(Vector2f(Position.x, Position.y - 20));
 		App.Get_Window().draw(My);
 	}
 }
 
 void Armor::Display_Inventory(Vector2f _scale)
 {
-	Anim[Name].Animation(sprite);
-	sprite.setOrigin(Vector2f(10.5, 15));
+	if (Anim[Name] != Animator())
+		Anim[Name].Animation(sprite);
 	sprite.setPosition(Position);
 	sprite.setScale(_scale);
 	App.Get_Window().draw(sprite);
