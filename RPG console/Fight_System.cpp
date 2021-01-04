@@ -168,6 +168,9 @@ void Fight_System::Hud_Update()
 		Turn_Player = Etat::Finish;
 		timer = 0;
 	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Numpad1))
+		Player->Add_Life(50);
 }
 
 void Fight_System::Hud_Display()

@@ -200,7 +200,7 @@ void HUD_Editor::Interaction_Dungeon(Vector2f _mouse)
 						Selection.Set_Name("Dungeon");
 						Current_Layer = 3;
 					}
-					else
+					else if(Current_Button.Get_Name() != "NPC")
 					{
 						IsSelect = false;
 						Selection.Set_Name("Rien");
@@ -447,17 +447,13 @@ void HUD_Editor::Set_Dungeon(Vector2f _mouse, list<Dungeon>& _d)
 					_d.push_back(Dungeon(State_Event::Combat, "Second", 2, _mouse));
 				else if (_d.size() == 2)
 					_d.push_back(Dungeon(State_Event::Combat, "Third", 3, _mouse));
-				else if (_d.size() == 3)
-					_d.push_back(Dungeon(State_Event::Combat, "Fourth", 4, _mouse));
-				else if (_d.size() == 4)
-					_d.push_back(Dungeon(State_Event::Combat, "Final", 5, _mouse));
 			}
 		}
 
 	if (Mouse::isButtonPressed(Mouse::Right))
 		if (!Menu.getGlobalBounds().contains(Vector2f(Mouse::getPosition(App.Get_Window()))))
 			for (Dungeon& Current : _d)
-				if (!FloatRect(Current.Get_Position().x - Current.Get_Sprite().getGlobalBounds().width * 0.75, Current.Get_Position().y - Current.Get_Sprite().getGlobalBounds().height * 1.5,
+				if (FloatRect(Current.Get_Position().x - Current.Get_Sprite().getGlobalBounds().width * 0.75, Current.Get_Position().y - Current.Get_Sprite().getGlobalBounds().height * 1.5,
 					Current.Get_Sprite().getGlobalBounds().width * 1.5, Current.Get_Sprite().getGlobalBounds().height * 3).contains(_mouse))
 				{
 					_d.remove(Current);

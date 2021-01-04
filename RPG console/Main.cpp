@@ -16,10 +16,7 @@ void main()
 		try
 		{
 			StateManager::Get_Singleton().EventsManager();
-			if (App.Get_Window().hasFocus())
-			{
-				StateManager::Get_Singleton().UpdateManager();
-			}
+			StateManager::Get_Singleton().UpdateManager();
 			StateManager::Get_Singleton().DisplayManager();
 		}
 		catch (exception const& e)
