@@ -37,17 +37,16 @@ World::World(int _load)
 	Menu_Pause = new Menu(1);
 
 	Save = false;
-	Load = false;
+	Load = true;
 	Pause = false;
 	IsDialogue = false;
 	Timer = 0;
 
-	Vue = Views();
-	Screen = Views();
+	Vue = Views(Vector2f(480, 270), Vector2f(960, 540), FloatRect(0, 0, 1, 1));
+	Screen = Views(Vector2f(1440, 810), Vector2f(2880, 1620), FloatRect(0, 0, 1, 1));
 
-	C_MiniMap = CircleShape(200);
-	C_MiniMap.setScale(0.96f, 0.54f);
-	C_MiniMap.setPosition(Vector2f(1526, 854));
+	C_MiniMap = CircleShape(150);
+	C_MiniMap.setPosition(Vector2f(1918 - C_MiniMap.getGlobalBounds().width, 2));
 	C_MiniMap.setOutlineThickness(2);
 	C_MiniMap.setOutlineColor(Color::Blue);
 }
@@ -58,6 +57,7 @@ void World::Load_Map(string _file)
 	Deco_Layer.clear();
 	Player_Layer.clear();
 	Front_Layer.clear();
+	dungeon.clear();
 	NpcList.clear();
 
 	ifstream Read_Map(_file);

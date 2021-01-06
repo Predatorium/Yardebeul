@@ -185,7 +185,7 @@ void Menu::Update_Pause(bool& _pause)
 	Update_Select();
 	Switch_Mode();
 
-	if (!Menu_Load && !Option && Game_Manager::Get_Singleton().state != Game_State::DUNGEON)
+	if (!Menu_Load && !Option)
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
 		{
@@ -202,21 +202,6 @@ void Menu::Update_Pause(bool& _pause)
 			}
 			if (Selection == 2)
 				StateManager::Get_Singleton().ChangeState(State::MENU);
-
-			timer = 0;
-		}
-	}
-	else if (!Menu_Load && !Option)
-	{
-		if (Keyboard::isKeyPressed(Keyboard::Enter) && timer > 0.2f)
-		{
-			if (Selection == 0)
-				_pause = false;
-			if (Selection == 1)
-			{
-				StateManager::Get_Singleton().ChangeState(State::MENU);
-				Game_Manager::Get_Singleton().ChangeState(Game_State::WORLD);
-			}
 
 			timer = 0;
 		}

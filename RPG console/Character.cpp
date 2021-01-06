@@ -110,15 +110,15 @@ pair<string, int> Character::Use_Spell(Character* _c, Sort _s)
 {
 	if (_s.Get_Affectation() == Target::Passif)
 	{
-		static pair<string, int> Calcul = pair("0", 0);
-		Calcul = pair("Buff", _s.Get_Effect().Get_Power());
+		static pair<string, int> Calcul = pair<string, int>("0", 0);
+		Calcul = pair<string, int>("Buff", _s.Get_Effect().Get_Power() * _s.Get_Effect().Get_Level());
 		Effect_Received(_s.Get_Effect());
 		return Calcul;
 	}
 	if (_s.Get_Affectation() == Target::Actif)
 	{
-		static pair<string, int> Calcul = pair("0",0);
-		Calcul = pair("Damage", (_s.Get_Damage() * Get_Affinité(_s.Get_Effect().Get_Element(), _c->Get_Armor()->Get_Effect().Get_Element())) * (1 - (_c->Get_Armor()->Get_Defense() / 100)));
+		static pair<string, int> Calcul = pair<string, int>("0",0);
+		Calcul = pair<string, int>("Damage", (_s.Get_Damage() * Get_Affinité(_s.Get_Effect().Get_Element(), _c->Get_Armor()->Get_Effect().Get_Element())) * (1 - (_c->Get_Armor()->Get_Defense() / 100)));
 		_c->Add_Life(-Calcul.second);
 		_c->Add_Effect(_s.Get_Effect());
 		return Calcul;

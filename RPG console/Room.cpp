@@ -499,11 +499,6 @@ void Room::Display()
 			if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
 				Current.Display();
 
-	for (Chest& Current : Coffre)
-		if (Current.Get_Position().y < Player.Get_Position().y)
-			if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
-				Current.Display();
-
 	for (Weapon& Current : WeaponList)
 		if (Current.Get_Position().y < Player.Get_Position().y)
 			if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
@@ -522,11 +517,6 @@ void Room::Display()
 	Player.Display();
 
 	for (Npc& Current : NpcList)
-		if (Current.Get_Position().y > Player.Get_Position().y)
-			if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
-				Current.Display();
-
-	for (Chest& Current : Coffre)
 		if (Current.Get_Position().y > Player.Get_Position().y)
 			if (Vue.Occlusion_CullingRectangle(Current.Get_Position()))
 				Current.Display();
